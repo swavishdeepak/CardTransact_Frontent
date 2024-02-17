@@ -48,28 +48,28 @@ const MainHeader: React.FC = () => {
     console.log("Search value:", searchValue);
   };
 
-  // const notifications = [
-  //   {
-  //     id: 1,
-  //     title: "Delete Request",
-  //     description: "Request to delete a user (employees)",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Delete Request",
-  //     description: "Request to delete a user (employees)",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Delete Request",
-  //     description: "Request to delete a user (employees)",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Delete Request",
-  //     description: "Request to delete a user (employees)",
-  //   },
-  // ];
+  const notifications = [
+    {
+      id: 1,
+      title: "Delete Request",
+      description: "Request to delete a user (employees)",
+    },
+    {
+      id: 2,
+      title: "Delete Request",
+      description: "Request to delete a user (employees)",
+    },
+    {
+      id: 3,
+      title: "Delete Request",
+      description: "Request to delete a user (employees)",
+    },
+    {
+      id: 4,
+      title: "Delete Request",
+      description: "Request to delete a user (employees)",
+    },
+  ];
 
   return (
     <Box
@@ -121,7 +121,7 @@ const MainHeader: React.FC = () => {
           onClick={handleClick}
         />
       </Box>
-      {/* <Menu
+      <Menu
         id="basic-menu"
         anchorEl={openNotification}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
@@ -161,7 +161,7 @@ const MainHeader: React.FC = () => {
               />
            
         </Notification>
-      </Menu> */}
+      </Menu>
 
       <Menu
         id="basic-menu"

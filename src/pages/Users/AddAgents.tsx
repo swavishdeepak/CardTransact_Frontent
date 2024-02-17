@@ -26,6 +26,7 @@ export const AddAgents = () => {
           </Box>
           <CustomButton
             label={"Back"}
+            hoverColor= "#898989"
             style={{
               backgroundColor: "#898989",
               color: "#fff",

@@ -7,18 +7,26 @@ import CustomButton from "../../components/CustomButton";
 import CustomAccordion from "../../components/MyCustom/CustomAccordian";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
+import { useSearchParams } from "react-router-dom";
 import { LoadButton } from "../../components/LoadButton";
+import { useNavigate } from "react-router-dom";
 
 export const AddEmployees = () => {
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams();
+  const type = searchParams.get("type");
+  const id = searchParams.get("id");
+  
 
   const handleSubmit = ()=>{
      console.log("submit")
   }
+
+  const handleBack = ()=>{
+    navigate("/viewEmployees")
+  }
  
-
-
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -34,6 +42,7 @@ export const AddEmployees = () => {
           </Box>
           <CustomButton
             label={"Back"}
+            onClick={handleBack}
             hoverColor="#898989"
             style={{
               backgroundColor: "#898989",

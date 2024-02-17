@@ -1,15 +1,14 @@
-import React, { ReactNode } from "react";
+import * as React from "react";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
-import DialogContent, { DialogContentProps } from "@mui/material/DialogContent";
-import DialogTitle, { DialogTitleProps } from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 
-interface BasicDialogProps {
-  children: ReactNode;
+interface BasicDialogProps extends Omit<DialogProps, 'onClose'> {
   title: string;
   open: boolean;
   handleClose: () => void;
   fullScreen?: boolean;
-  sx?: DialogProps["sx"];
+  sx?: object;
 }
 
 const BasicDialog: React.FC<BasicDialogProps> = ({
@@ -23,11 +22,12 @@ const BasicDialog: React.FC<BasicDialogProps> = ({
   return (
     <Dialog
       fullScreen={fullScreen}
+      sx={sx}
+      
       open={open}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
-      sx={sx}
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>{children}</DialogContent>

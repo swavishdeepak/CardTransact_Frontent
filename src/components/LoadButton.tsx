@@ -2,7 +2,7 @@ import { Button, CircularProgress, ButtonProps } from '@mui/material';
 import React, { FC } from 'react';
 
 interface LoadButtonProps extends ButtonProps {
-  loading: boolean;
+  loading?: boolean;
   style?: React.CSSProperties;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }

@@ -23,37 +23,37 @@ export const MessageList: React.FC<Message> = ({
 }) => {
   const messageData: Message[] = [
     {
-      serialNo: "0",
+   
       icon: messageIcon,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy...",
     },
     {
-      serialNo: "1",
+     
       icon: messageIcon,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy...",
     },
     {
-      serialNo: "2",
+     
       icon: messageIcon,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy...",
     },
     {
-      serialNo: "3",
+      
       icon: messageIcon,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy...",
     },
     {
-        serialNo: "4",
+        
         icon: messageIcon,
         senderName: "Deepak Kumar",
         messageText: "Lorem Ipsum is simply dummy...",
       },
       {
-        serialNo: "5",
+        
         icon: messageIcon,
         senderName: "Deepak Kumar",
         messageText: "Lorem Ipsum is simply dummy...",
@@ -77,8 +77,8 @@ export const MessageList: React.FC<Message> = ({
         {messageData?.length > 0 &&
           messageData?.map((item, index) => {
             return (
-              <>
-                <Box sx={{ display: "flex", gap: 1, marginTop: "10px" }} key={index}>
+              <Box key={index}>
+                <Box sx={{ display: "flex", gap: 1, marginTop: "10px" }} >
                   <ListItemAvatar>
                     <Avatar>
                       <img src={item?.icon} alt=""></img>
@@ -106,7 +106,7 @@ export const MessageList: React.FC<Message> = ({
                   </Box>
                 </Box>
                 <Divider />
-              </>
+              </Box>
             );
           })}
       </Box>

@@ -1,7 +1,5 @@
 import React from 'react';
-//import logo from './logo.svg';
 import {RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { BrowserRouter as  Routes, Route } from 'react-router-dom';
 import { Login } from './pages/Auth/Login';
 import { GoogleAuthentication } from './pages/Auth/GoogleAuthentication';
 import { ForgetPassword } from './pages/Auth/ForgetPassword';
@@ -11,13 +9,26 @@ import { AddEmployees } from './pages/Users/AddEmployees';
 import { MainLayout } from './layouts/MainLayout';
 import { ViewAgents } from './pages/Users/ViewAgents';
 import { ViewEmployees } from './pages/Users/ViewEmployees';
-import { Commission } from './pages/Commission/Commission';
 import { Merchant } from './pages/Merchant/Merchant';
 import { ViewApplication } from './pages/Applications/ViewApplication';
 import './App.css';
 import { Addapplication } from './pages/Applications/Addapplication';
 import { VerifyOtp } from './pages/Auth/VerifyOtp';
-import { ResetPassword } from './pages/Auth/ResetPassword';
+import { ResetPassword } from './pages/Auth/ResetPassword'
+import { EmployeesDetails } from './pages/Users/EmployeesDetails';
+
+// Commission
+import { AllCommission } from './pages/Commission/AllCommission';
+import { CommissionStructure } from './pages/Commission/CommissionStructure';
+import { ViewStructure } from './pages/Commission/ViewStructure';
+
+// Reports
+import { Overview } from './pages/Reports/Overview';
+import { WorldPay } from './pages/Reports/WorldPay';
+import { Evo } from './pages/Reports/Evo';
+import { Fdms } from './pages/Reports/Fdms';
+import { Elavon } from './pages/Reports/Elavon';
+import { AgentDetails } from './pages/Users/AgentDetails';
 
 function App() {
   const router = createBrowserRouter([
@@ -56,17 +67,31 @@ function App() {
           element: <AddAgents />
         },
         {
-          path: "/addEmployees",
-          element: <AddEmployees />
-        },
-        {
           path: "/viewAgents",
           element: <ViewAgents/>
         },
         {
+          path: "/agentDetails/:id",
+          element: <AgentDetails/>
+
+        },
+        
+        // for Employees
+        {
+          path: "/addEmployees",
+          element: <AddEmployees />
+        },
+       
+        {
           path: "/viewEmployees",
           element: <ViewEmployees />
         },
+        {
+          path: "/employeesDetails/:id",
+          element: <EmployeesDetails />
+        },
+
+        // for Application
         {
 
           path: "/addApplication",
@@ -82,21 +107,37 @@ function App() {
           element: <Merchant/>
         },
         {
-          path: "/commission",
-          element: <Commission />
+          path: "/allCommission",
+          element: <AllCommission />
         },
-        // {
-        //   path: "/All Commission",
-        //   element: <Commission />
-        // },
-        // {
-        //   path: "/Commission Structure",
-        //   element: <Commission />
-        // },
-        // {
-        //   path: "/View Structure",
-        //   element: <Commission />
-        // }
+        {
+          path: "/commissionStructure",
+          element: <CommissionStructure />
+        },
+        {
+          path: "/viewStructure",
+          element: <ViewStructure />
+        },
+        {
+          path: "/overView",
+          element: <Overview />
+        },
+        {
+          path: "/worldPay",
+          element: <WorldPay />
+        },
+        {
+          path: "/evo",
+          element: <Evo />
+        },
+        {
+          path: "/fdms",
+          element: <Fdms />
+        },
+        {
+          path: "/elavon",
+          element: <Elavon/>
+        },
       ]
     },
     
@@ -104,23 +145,12 @@ function App() {
 
   ]);
 
-   // export const Commission = [
-  //    {
-  //     text: "All Commission"
-  //     icon: PersonIcon,
-  //     link: "/All Commission"
-  //    },
-  //    {
-  //     text: "commission Structure"
-  //     icon: PersonIcon,
-  //     link: "/Commission Structure"
-  //    },
-  //    {
-  //     text: "View Structure"
-  //     icon: PersonIcon,
-  //     link: "/View Structure"
-  //    },
-  // ]
+ 
+  
+
+  
+
+  
 
   return <RouterProvider router={router} />
 }

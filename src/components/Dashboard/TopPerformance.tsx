@@ -76,6 +76,16 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
       company: "company",
       successRate: "90",
     },
+    {
+      serialNo: "5",
+      image: messageIcon,
+      name: "Deepak",
+      icon: Vector,
+      message: "message",
+      sale: "39",
+      company: "company",
+      successRate: "90",
+    },
   ];
 
   return (
@@ -136,7 +146,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
         </Typography>
       </Box>
       <Divider sx={{ marginTop: "8px", color: "#DCDCDC" }} />
-      {performanceData?.length > 0 &&
+      {performanceData.length > 0 &&
         performanceData.map((item) => {
           return (
             <Box
@@ -156,12 +166,12 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                     fontSize: "12px",
                   }}
                 >
-                  {item?.serialNo}
+                  {item.serialNo}
                 </Typography>
                 <Box sx={{ display: "flex", gap: 0 }}>
                   <ListItemAvatar>
                     <Avatar>
-                      <img src={item?.image} alt="" />
+                      <img src={item.image} alt="" />
                     </Avatar>
                   </ListItemAvatar>
                   <Box>
@@ -172,11 +182,11 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                         fontSize: "12px",
                       }}
                     >
-                      {item?.name}
+                      {item.name}
                     </Typography>
                     <Box sx={{ display: "flex" }}>
                       <img
-                        src={item?.icon}
+                        src={item.icon}
                         alt=""
                         style={{
                           width: "12%",
@@ -192,7 +202,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                           fontSize: "10px",
                         }}
                       >
-                        {item?.message}
+                        {item.message}
                       </Typography>
                     </Box>
                   </Box>
@@ -204,27 +214,28 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                   fontWeight: "400",
                   fontSize: "10px",
                   display: "flex",
+                  marginTop: "10px",
                   justifyContent: "center",
                 }}
               >
-                {item?.sale}
+                {item.sale}
               </Typography>
               <Typography
-                sx={{ color: "#898989", fontWeight: "400", fontSize: "10px" }}
+                sx={{ color: "#898989", fontWeight: "400", fontSize: "10px", marginTop: "10px", }}
               >
-                {item?.company}
+                {item.company}
               </Typography>
-              <Box sx={{display:"flex", gap:1}}>
+              <Box sx={{display:"flex", gap:1, marginTop: "10px",}}>
                 <CircularProgress
                   style={{width: "14px", height: "14px"}}
                   variant="determinate"
-                  value={parseInt(item?.successRate)}
+                  value={parseInt(item.successRate)}
                 />
                 <Typography
                   sx={{ color: "#898989", fontWeight: "400", fontSize: "10px" }}
                 >
                   {/* {item?.successRate} */}
-                  {`${Math.round(parseInt(item?.successRate))}%`}
+                  {`${Math.round(parseInt(item.successRate))}%`}
                 </Typography>
               </Box>
             </Box>

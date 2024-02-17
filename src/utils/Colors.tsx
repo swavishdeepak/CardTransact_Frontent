@@ -6,6 +6,7 @@ export const Colors = {
     LinkColor: "#77D177",
     Textcolor: "#202020",
     InputBorderColor: "#DCDCDC",
-    NotificationColor: "#F9837C"
+    NotificationColor: "#F9837C",
+    deletebtnColor: "#C10404"
 
 }
