@@ -85,7 +85,7 @@ export default function BasicTable() {
     >
       <DataGrid
         sx={{
-          height: 400,
+          height: "100%",
           width: "100%",
           bgcolor: "#FCFAFA",
           display: "flex",

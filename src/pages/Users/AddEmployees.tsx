@@ -144,7 +144,6 @@ export const AddEmployees = () => {
           onClick={handleSubmit}
           loading={loading}
           style={{
-            width: "25%",
             marginTop: 3,
           }}
         >

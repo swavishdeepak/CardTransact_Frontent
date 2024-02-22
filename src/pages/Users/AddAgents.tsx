@@ -127,7 +127,6 @@ export const AddAgents = () => {
           type="submit"
           loading={loading}
           style={{
-            width: "25%",
             marginTop: 3,
           }}
         >

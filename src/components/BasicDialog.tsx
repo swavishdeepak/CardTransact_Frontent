@@ -2,6 +2,7 @@ import * as React from "react";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { Colors } from "../utils/Colors";
 
 interface BasicDialogProps extends Omit<DialogProps, 'onClose'> {
   title: string;
@@ -22,8 +23,15 @@ const BasicDialog: React.FC<BasicDialogProps> = ({
   return (
     <Dialog
       fullScreen={fullScreen}
-      sx={sx}
-      
+      sx={{
+        '& .MuiDialog-paper': {
+           border: `1px solid ${Colors.successColor}`,
+           borderRadius: "7.5px",
+           boxShadow: "2.8125px 2.8125px 8.4375px 0px #0000002E",
+
+        },
+        ...sx
+      }}
       open={open}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"

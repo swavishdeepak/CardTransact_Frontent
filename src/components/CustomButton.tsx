@@ -22,7 +22,9 @@ const CustomButton: React.FC<CustomButtonProps> = ({
        backgroundColor: "#fff",
         textTransform: "none",
         height: "1.6rem",
-        fontWeight: "500",
+        borderRadius: "8px",
+        fontWeight: "700",
+        fontSize: "12px",
         '&:hover':{
           backgroundColor: hoverColor
         },

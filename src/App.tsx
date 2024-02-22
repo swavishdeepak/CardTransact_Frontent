@@ -11,6 +11,7 @@ import { ViewAgents } from './pages/Users/ViewAgents';
 import { ViewEmployees } from './pages/Users/ViewEmployees';
 import { Merchant } from './pages/Merchant/Merchant';
 import { ViewApplication } from './pages/Applications/ViewApplication';
+import { ApplicationDetails } from './pages/Applications/ApplicationDetails';
 import './App.css';
 import { Addapplication } from './pages/Applications/Addapplication';
 import { VerifyOtp } from './pages/Auth/VerifyOtp';
@@ -29,6 +30,8 @@ import { Evo } from './pages/Reports/Evo';
 import { Fdms } from './pages/Reports/Fdms';
 import { Elavon } from './pages/Reports/Elavon';
 import { AgentDetails } from './pages/Users/AgentDetails';
+import { ReEvaluation } from './pages/Applications/ReEvaluation';
+import EditApplication from './pages/Applications/EditApplication';
 
 function App() {
   const router = createBrowserRouter([
@@ -100,6 +103,21 @@ function App() {
         {
           path: "/viewApplications",
           element: <ViewApplication/>
+
+        },
+        {
+          path: "/viewApplications/editApplication/:id",
+          element: <EditApplication/>
+
+        },
+        {
+           path: "/appicationDetails/:id",
+           element: <ApplicationDetails/>
+
+        },
+        {
+           path: "/Re-evaluation",
+           element: <ReEvaluation/>
 
         },
         {

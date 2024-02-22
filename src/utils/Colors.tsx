@@ -7,6 +7,9 @@ export const Colors = {
     Textcolor: "#202020",
     InputBorderColor: "#DCDCDC",
     NotificationColor: "#F9837C",
-    deletebtnColor: "#C10404"
+    deletebtnColor: "#C10404",
+    editColor: "#898989",
+    successColor: "#048519",
+    blackColor: "#000000"
 
 }

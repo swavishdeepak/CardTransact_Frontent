@@ -5,13 +5,13 @@ import { Box,Typography } from "@mui/material";
 
 
 interface ConfirmDialogProps {
-  open?: boolean;
-  title?: string | "";
+  open: boolean;
+  title?: string | ReactNode;
   desc?: string;
   handleConfirm?: () => void;
-  handleClose: () => void;
+  handleClose?: () => void;
   customButton?: ReactNode;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
@@ -24,9 +24,9 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   return (
     <BasicDialog
       open={open}
-      sx={{ padding: "10px 10px" }}
+      sx={{ padding: "10px 10px"}}
     >
-      <Box>
+      <Box >
         <Typography
           sx={{
             textAlign: "center",
@@ -42,7 +42,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           sx={{
             textAlign: "center",
             color: "#000000",
-            fontWeight: "500",
+            fontWeight: "700",
             fontSize: "12px",
           }}
         >

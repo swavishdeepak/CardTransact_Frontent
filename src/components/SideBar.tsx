@@ -30,7 +30,7 @@ import { Dashboard } from "../utils/SideBarItem";
 import { Commission } from "../utils/SideBarItem";
 import { Reports } from "../utils/SideBarItem";
 
-const drawerWidth = 225;
+const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -173,9 +173,7 @@ export default function SideBar() {
                 <Box sx={{ display: "flex",alignItems: "center"}}>
                   <MenuIcon />
                   <ListItem sx={{ display: "flex"}}>
-                    <Typography>
                       <img src={dashboardIcon} alt="icon" />
-                    </Typography>
                     <Typography
                       sx={{
                         color: "#2E2C34",
@@ -193,10 +191,10 @@ export default function SideBar() {
         </DrawerHeader>
         <Link
           to="/dashboard"
-          style={{ textDecoration: "none", color: "inherit" }}
+          style={{ textDecoration: "none", color: "inherit", padding: "0px 10px 0px" }}
         >
           <ListItem
-            disablePadding={true}
+            disablePadding
             sx={{
               display: "block",
               fontSize: "15px",
@@ -204,11 +202,11 @@ export default function SideBar() {
               fontWeight: "700",
               backgroundColor:
                 location.pathname === "/dashboard"
-                  ? Colors?.SideBarItembgcolor
+                  ? Colors.SideBarItembgcolor
                   : "#fff",
               color:
                 location.pathname === "/dashboard"
-                  ? Colors?.SibarItemcolor
+                  ? Colors.SibarItemcolor
                   : "",
             }}
           >
@@ -229,7 +227,7 @@ export default function SideBar() {
                   sx={{
                     color:
                       location.pathname === "/dashboard"
-                        ? Colors?.SibarItemcolor
+                        ? Colors.SibarItemcolor
                         : "",
                   }}
                 />
@@ -241,44 +239,46 @@ export default function SideBar() {
             </ListItemButton>
           </ListItem>
         </Link>
-        <List sx={{ marginTop: "-0.5rem" }}>
+        <List sx={{ padding: "0px 10px 0px"}}>
           {SidebarUserItems.map((item, index) => (
             <React.Fragment key={index}>
               <List
                 style={{
+                  borderRadius: "10px",
                   backgroundColor: isCollapse
-                    ? Colors?.SideBarItembgcolor
+                    ? Colors.SideBarItembgcolor
                     : "#fff",
                 }}
               >
                 <ListItem
-                  disablePadding={true}
+                  disablePadding
                   onClick={handleCollapse}
                   style={{
                     backgroundColor: isCollapse
-                      ? Colors?.SideBarItembgcolor
+                      ? Colors.SideBarItembgcolor
                       : "#fff",
                   }}
                   sx={{
                     display: "block",
                     fontSize: "15px",
                     fontWeight: "700",
-                    marginBottom: "0rem",
+                   
                     backgroundColor:
                       location.pathname === item.link
-                        ? Colors?.SideBarItembgcolor
+                        ? Colors.SideBarItembgcolor
                         : "#fff",
                     color:
                       location.pathname === item.link
-                        ? Colors?.SibarItemcolor
+                        ? Colors.SibarItemcolor
                         : "",
                   }}
                 >
                   <ListItemButton
                     sx={{
-                      minHeight: 30,
+                      
+                      minHeight: 48,
                       justifyContent: open ? "initial" : "center",
-                      px: 2.5,
+                      
                     }}
                   >
                     <ListItemIcon
@@ -290,8 +290,8 @@ export default function SideBar() {
                       <item.icon
                         sx={{
                           color:
-                            location.pathname === item?.link
-                              ? Colors?.SibarItemcolor
+                            location.pathname === item.link
+                              ? Colors.SibarItemcolor
                               : "",
                         }}
                       />
@@ -303,22 +303,24 @@ export default function SideBar() {
                     {isCollapse ? (
                       <ExpandMoreIcon
                         sx={{
+                          marginLeft: "-25px",
                           opacity: open ? 1 : 0,
-                          color: Colors?.ExpandMoreColor,
+                          color: Colors.ExpandMoreColor,
                         }}
                       />
                     ) : (
                       <ChevronRightIcon
                         sx={{
+                          marginLeft: "-25px",
                           opacity: open ? 1 : 0,
-                          color: Colors?.ExpandMoreColor,
+                          color: Colors.ExpandMoreColor,
                         }}
                       />
                     )}
                   </ListItemButton>
                 </ListItem>
 
-                {item?.subItems && (
+                {item.subItems && (
                   <Collapse in={isCollapse} timeout="auto" unmountOnExit>
                     {item.subItems.map((subItem, subIndex) => (
                       <Link
@@ -327,18 +329,16 @@ export default function SideBar() {
                         key={subIndex}
                       >
                         <ListItem
-                          disablePadding
+                           disablePadding
                           sx={{
-                            marginTop: "-0.5rem",
-                            marginLeft: "3px",
                             display: "block",
-                            backgroundColor:
-                              location.pathname === subItem.link
-                                ? "#F9F9F9"
-                                : "#fff",
+                            // backgroundColor:
+                            //   location.pathname === subItem.link
+                            //     ? "#F9F9F9"
+                            //     : "",
                             color:
                               location.pathname === subItem.link
-                                ? Colors?.SibarItemcolor
+                                ? Colors.SibarItemcolor
                                 : "",
                           }}
                         >
@@ -352,14 +352,14 @@ export default function SideBar() {
                             <ListItemIcon
                               sx={{
                                 minWidth: 0,
-                                mr: open ? 3 : "auto",
+                                mr: open ? 2 : "auto",
                               }}
                             >
                               <subItem.icon
                                 sx={{
                                   fontSize: "1rem",
                                   color:
-                                    location.pathname === subItem?.link
+                                    location.pathname === subItem.link
                                       ? "#589E58"
                                       : "",
                                 }}
@@ -379,23 +379,32 @@ export default function SideBar() {
             </React.Fragment>
           ))}
         </List>
-        <List sx={{ marginTop: "-1.5rem" }}>
+        <List sx={{padding: "0px 10px 0px" }}>
           {ApplicationItems.map((item, index) => (
             <React.Fragment key={index}>
-              <ListItem
+               <List
+                  style={{
+                    borderRadius: "10px",
+                    backgroundColor: isCollapseApplication
+                      ? Colors.SideBarItembgcolor
+                      : "#fff",
+                  }}
+               >
+               <ListItem
                 disablePadding
                 onClick={handleCollapseApplication}
+               
                 sx={{
                   display: "block",
                   fontSize: "15px",
                   fontWeight: "700",
                   backgroundColor:
                     location.pathname === item.link
-                      ? Colors?.SideBarItembgcolor
-                      : "#fff",
+                      ? Colors.SideBarItembgcolor
+                      : "",
                   color:
                     location.pathname === item.link
-                      ? Colors?.SibarItemcolor
+                      ? Colors.SibarItemcolor
                       : "",
                 }}
               >
@@ -415,8 +424,8 @@ export default function SideBar() {
                     <item.icon
                       sx={{
                         color:
-                          location.pathname === item?.link
-                            ? Colors?.SibarItemcolor
+                          location.pathname === item.link
+                            ? Colors.SibarItemcolor
                             : "",
                       }}
                     />
@@ -428,22 +437,24 @@ export default function SideBar() {
                   {isCollapseApplication ? (
                     <ExpandMoreIcon
                       sx={{
+                        // marginLeft: "-25px",
                         opacity: open ? 1 : 0,
-                        color: Colors?.ExpandMoreColor,
+                        color: Colors.ExpandMoreColor,
                       }}
                     />
                   ) : (
                     <ChevronRightIcon
                       sx={{
+                        // marginLeft: "-25px",
                         opacity: open ? 1 : 0,
-                        color: Colors?.ExpandMoreColor,
+                        color: Colors.ExpandMoreColor,
                       }}
                     />
                   )}
                 </ListItemButton>
               </ListItem>
 
-              {item?.subItems && (
+              {item.subItems && (
                 <Collapse
                   in={isCollapseApplication}
                   timeout="auto"
@@ -456,18 +467,18 @@ export default function SideBar() {
                       key={subIndex}
                     >
                       <ListItem
-                        disablePadding
+                         disablePadding
                         sx={{
-                          marginTop: "-0.5rem",
-                          marginLeft: "4px",
+                         
+                        
                           display: "block",
                           backgroundColor:
                             location.pathname === subItem.link
-                              ? Colors?.SideBarItembgcolor
-                              : "#fff",
+                              ? Colors.SideBarItembgcolor
+                              : "",
                           color:
                             location.pathname === subItem.link
-                              ? Colors?.SibarItemcolor
+                              ? Colors.SibarItemcolor
                               : "",
                         }}
                       >
@@ -481,15 +492,15 @@ export default function SideBar() {
                           <ListItemIcon
                             sx={{
                               minWidth: 0,
-                              mr: open ? 3 : "auto",
+                              mr: open ? 2 : "auto",
                             }}
                           >
                             <subItem.icon
                               sx={{
                                 fontSize: "1rem",
                                 color:
-                                  location.pathname === subItem?.link
-                                    ? Colors?.SibarItemcolor
+                                  location.pathname === subItem.link
+                                    ? Colors.SibarItemcolor
                                     : "",
                               }}
                             />
@@ -504,26 +515,27 @@ export default function SideBar() {
                   ))}
                 </Collapse>
               )}
+               </List>
             </React.Fragment>
           ))}
         </List>
 
           <Link
             to= "/merchants"
-            style={{ textDecoration: "none", color: "inherit" }}
+            style={{ textDecoration: "none", color: "inherit", padding: "0px 10px 0px" }}
            
 
           >
             <ListItem
               disablePadding
               sx={{
-                marginTop: "-0.5rem",
+                
                 display: "block",
                 backgroundColor:
                   location.pathname === "/merchnats" ? "#F9F9F9" : "#fff",
                 color:
                   location.pathname === "/merchnats"
-                    ? Colors?.SibarItemcolor
+                    ? Colors.SibarItemcolor
                     : "",
               }}
             >
@@ -555,8 +567,8 @@ export default function SideBar() {
             </ListItem>
           </Link>
        
-        <List sx={{ marginTop: "-0.5rem" }}>
-          {Commission?.map((item, index) => (
+        <List sx={{ padding: "0px 10px 0px" }}>
+          {Commission.map((item, index) => (
             <React.Fragment key={index}>
               <ListItem
                 disablePadding
@@ -567,11 +579,11 @@ export default function SideBar() {
                   fontWeight: "700",
                   backgroundColor:
                     location.pathname === item.link
-                      ? Colors?.SideBarItembgcolor
+                      ? Colors.SideBarItembgcolor
                       : "#fff",
                   color:
                     location.pathname === item.link
-                      ? Colors?.SibarItemcolor
+                      ? Colors.SibarItemcolor
                       : "",
                 }}
               >
@@ -591,8 +603,8 @@ export default function SideBar() {
                     <item.icon
                       sx={{
                         color:
-                          location.pathname === item?.link
-                            ? Colors?.SibarItemcolor
+                          location.pathname === item.link
+                            ? Colors.SibarItemcolor
                             : "",
                       }}
                     />
@@ -605,21 +617,21 @@ export default function SideBar() {
                     <ExpandMoreIcon
                       sx={{
                         opacity: open ? 1 : 0,
-                        color: Colors?.ExpandMoreColor,
+                        color: Colors.ExpandMoreColor,
                       }}
                     />
                   ) : (
                     <ChevronRightIcon
                       sx={{
                         opacity: open ? 1 : 0,
-                        color: Colors?.ExpandMoreColor,
+                        color: Colors.ExpandMoreColor,
                       }}
                     />
                   )}
                 </ListItemButton>
               </ListItem>
 
-              {item?.subItems && (
+              {item.subItems && (
                 <Collapse
                   in={isCollapseCommission}
                   timeout="auto"
@@ -635,16 +647,15 @@ export default function SideBar() {
                         disablePadding
                         
                         sx={{
-                          marginTop: "-0.5rem",
-                          marginLeft: "4px",
+                         
                           display: "block",
                           backgroundColor:
                             location.pathname === subItem.link
-                              ? Colors?.SideBarItembgcolor
+                              ? Colors.SideBarItembgcolor
                               : "#fff",
                           color:
                             location.pathname === subItem.link
-                              ? Colors?.SibarItemcolor
+                              ? Colors.SibarItemcolor
                               : "",
                         }}
                       >
@@ -665,8 +676,8 @@ export default function SideBar() {
                               sx={{
                                 fontSize: "1rem",
                                 color:
-                                  location.pathname === subItem?.link
-                                    ? Colors?.SibarItemcolor
+                                  location.pathname === subItem.link
+                                    ? Colors.SibarItemcolor
                                     : "",
                               }}
                             />
@@ -684,8 +695,8 @@ export default function SideBar() {
             </React.Fragment>
           ))}
         </List>
-        <List sx={{ marginTop: "-1rem" }}>
-          {Reports?.map((item, index) => (
+        <List sx={{ padding: "0px 10px 0px" }}>
+          {Reports.map((item, index) => (
             <React.Fragment key={index}>
               <ListItem
                 disablePadding
@@ -696,11 +707,11 @@ export default function SideBar() {
                   fontWeight: "700",
                   backgroundColor:
                     location.pathname === item.link
-                      ? Colors?.SideBarItembgcolor
+                      ? Colors.SideBarItembgcolor
                       : "#fff",
                   color:
                     location.pathname === item.link
-                      ? Colors?.SibarItemcolor
+                      ? Colors.SibarItemcolor
                       : "",
                 }}
               >
@@ -720,8 +731,8 @@ export default function SideBar() {
                     <item.icon
                       sx={{
                         color:
-                          location.pathname === item?.link
-                            ? Colors?.SibarItemcolor
+                          location.pathname === item.link
+                            ? Colors.SibarItemcolor
                             : "",
                       }}
                     />
@@ -734,21 +745,21 @@ export default function SideBar() {
                     <ExpandMoreIcon
                       sx={{
                         opacity: open ? 1 : 0,
-                        color: Colors?.ExpandMoreColor,
+                        color: Colors.ExpandMoreColor,
                       }}
                     />
                   ) : (
                     <ChevronRightIcon
                       sx={{
                         opacity: open ? 1 : 0,
-                        color: Colors?.ExpandMoreColor,
+                        color: Colors.ExpandMoreColor,
                       }}
                     />
                   )}
                 </ListItemButton>
               </ListItem>
 
-              {item?.subItems && (
+              {item.subItems && (
                 <Collapse
                   in={isCollapseReport}
                   timeout="auto"
@@ -763,16 +774,14 @@ export default function SideBar() {
                       <ListItem
                         disablePadding
                         sx={{
-                          marginTop: "-0.5rem",
-                          marginLeft: "4px",
                           display: "block",
                           backgroundColor:
                             location.pathname === subItem.link
-                              ? Colors?.SideBarItembgcolor
+                              ? Colors.SideBarItembgcolor
                               : "#fff",
                           color:
                             location.pathname === subItem.link
-                              ? Colors?.SibarItemcolor
+                              ? Colors.SibarItemcolor
                               : "",
                         }}
                       >
@@ -793,8 +802,8 @@ export default function SideBar() {
                               sx={{
                                 fontSize: "1rem",
                                 color:
-                                  location.pathname === subItem?.link
-                                    ? Colors?.SibarItemcolor
+                                  location.pathname === subItem.link
+                                    ? Colors.SibarItemcolor
                                     : "",
                               }}
                             />
