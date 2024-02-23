@@ -59,7 +59,7 @@ export const Commission = [
         link: "/allCommission",
       },
       {
-        text: "commission Structure",
+        text: "Commission Structure",
         icon: PersonIcon,
         link: "/commissionStructure",
       },

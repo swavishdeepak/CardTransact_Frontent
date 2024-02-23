@@ -39,8 +39,8 @@ function getSteps(): string[] {
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 10,
-    left: "calc(-50% + 16px)",
-    right: "calc(50% + 16px)",
+    left: "calc(-50% + 25px)",
+    right: "calc(50% + 25px)",
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
@@ -55,9 +55,9 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`& .${stepConnectorClasses.line}`]: {
     borderColor:
       theme.palette.mode === "dark" ? theme.palette.grey[800] : "#ECECEC",
-    borderTopWidth: 10,
-    borderRadius: 5,
-    boxShadow: "0px 0.9375px 3.75px 0px #00000040",
+    borderTopWidth: 12,
+    borderRadius: 0,
+    boxShadow: "0px 0.9375px 61.75px 3px #00000040",
   },
 }));
 
@@ -66,7 +66,7 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
     color:
       theme.palette.mode === "dark" ? theme.palette.divider[700] : "#D9D9D9",
     display: "flex",
-    height: 22,
+    height: 35,
     alignItems: "center",
     ...(ownerState.active && {
       color: "#77D177",
@@ -82,10 +82,10 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
     "& .QontoStepIcon-circle": {
       width: 30,
       height: 30,
-      border: "5px solid #D9D9D9",
+      //border: "5px solid #D9D9D9",
       alignItem: "center",
       textAlign: "center",
-      fontSize: "17px",
+      fontSize: "21px",
       fontWeight: "700",
       color: "#fff",
       borderRadius: "50%",
@@ -97,7 +97,7 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
 
 function QontoStepIcon(props: { step: number } & StepIconProps) {
   const { active, completed, className, step } = props;
-  console.log("step", step);
+  
 
   return (
     <QontoStepIconRoot ownerState={{ active }} className={className}>
@@ -105,6 +105,7 @@ function QontoStepIcon(props: { step: number } & StepIconProps) {
         <Box
           sx={{
             boxShadow: "0px 5px 5px 0px rgba(0, 0, 0, 0.25) inset",
+            backgroundColor: "rgba(240, 240, 240, 1)",
             width: "50px",
             height: "50px",
             alignItem: "center",
@@ -124,6 +125,7 @@ function QontoStepIcon(props: { step: number } & StepIconProps) {
         <Box
           sx={{
             boxShadow: "0px 5px 5px 0px rgba(0, 0, 0, 0.25) inset",
+            backgroundColor: "rgba(240, 240, 240, 1)",
             width: "50px",
             height: "50px",
             alignItem: "center",
@@ -143,34 +145,23 @@ function getStepContent(step: number): JSX.Element | string {
   switch (step) {
     case 0:
       return (
-        <>
           <SelectAquirer />
-        </>
       );
-
     case 1:
       return (
-        <>
           <MerchantInformation />
-        </>
       );
     case 2:
       return (
-        <>
           <MerchantDetails />
-        </>
       );
     case 3:
       return (
-        <>
           <BankInformation />
-        </>
       );
     case 4:
       return (
-        <>
           <ApplicationInformation />
-        </>
       );
     default:
       return "";
@@ -262,8 +253,8 @@ export const Addapplication = () => {
                   )}
                   sx={{
                     "& .MuiStepLabel-label": {
-                      backgroundColor: "#ECECEC",
-                      color: "#8C8C8C",
+                      backgroundColor: activeStep > steps.indexOf(step) ? "rgba(120, 175, 129, 1)" : "#ECECEC",
+                      color: activeStep > steps.indexOf(step) ? "#fff" : "#8C8C8C",
                       boxShadow: "0px 0.9375px 3.75px 0px #00000040",
                       borderRadius: "2rem",
                       padding: "6px",

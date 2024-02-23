@@ -32,6 +32,7 @@ import { Elavon } from './pages/Reports/Elavon';
 import { AgentDetails } from './pages/Users/AgentDetails';
 import { ReEvaluation } from './pages/Applications/ReEvaluation';
 import EditApplication from './pages/Applications/EditApplication';
+import { MerchantDetail } from './pages/Merchant/MerchantDetails';
 
 function App() {
   const router = createBrowserRouter([
@@ -120,9 +121,14 @@ function App() {
            element: <ReEvaluation/>
 
         },
+        // for merchant
         {
           path: "/merchants",
           element: <Merchant/>
+        },
+        {
+          path: "/merchantDetail",
+          element: <MerchantDetail/>
         },
         {
           path: "/allCommission",

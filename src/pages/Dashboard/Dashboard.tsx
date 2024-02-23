@@ -23,7 +23,7 @@ export const Dashboard = () => {
   // ];
 
   return (
-    
+    <Box sx={{ width: "100%"}}>
       <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
         <Grid item xs={12} md={12}>
         <Header />
@@ -91,6 +91,7 @@ export const Dashboard = () => {
           <MessageList/>
         </Grid>
       </Grid>
+      </Box>
   
   );
 };
