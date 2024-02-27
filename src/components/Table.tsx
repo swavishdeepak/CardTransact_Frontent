@@ -19,29 +19,34 @@ interface Row {
 interface BasicTableProps {
   columns?: Column[];
   rows?: Row[];
+  children?: React.ReactNode;
   pageSize?: number;
   sx?: object;
   title?: string;
   exportHide?: boolean;
   customButtons?: React.ReactNode;
   getRowId?: (row: Row) => string | number;
+  includeSlots?: boolean;
 }
 
 const Table: React.FC<BasicTableProps> = ({
   columns = [],
   rows = [],
   pageSize,
+  children,
   sx,
   title,
   exportHide,
   customButtons,
-  getRowId
+  getRowId,
+  includeSlots = true
 }) => {
     
   return (
     <CustomBox
       style={{marginTop: "1rem"}}
     >
+      {children}
       <DataGrid
         // checkboxSelection
         autoHeight
@@ -78,9 +83,7 @@ const Table: React.FC<BasicTableProps> = ({
             exportHide,
           },
         }}
-        slots={{
-          toolbar: CustomToolbar,
-        }}
+        slots={includeSlots ? { toolbar: CustomToolbar } : {}}
       />
     </CustomBox>
   );

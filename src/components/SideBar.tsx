@@ -27,6 +27,7 @@ import { SidebarUserItems } from "../utils/SideBarItem";
 import { ApplicationItems } from "../utils/SideBarItem";
 import { Commission } from "../utils/SideBarItem";
 import { Reports } from "../utils/SideBarItem";
+import { makeStyles } from '@mui/styles';
 
 
 const drawerWidth = 260;
@@ -99,7 +100,16 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
+const sideBarStyle = makeStyles((theme) => ({
+  listStyleMain:{
+      color: "#2E2C34",
+      fontWeight: "700 !important",
+      fontSize: "1rem !important"
+     }
+}));
+
 export default function SideBar() {
+  const classes = sideBarStyle()
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [isCollapse, setIsCollapse] = React.useState(false);
@@ -135,10 +145,10 @@ export default function SideBar() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
-        elevation={3}
+        // elevation={3}
         position="fixed"
         open={open}
-        sx={{ borderBottom: "1px solid #DCDCDC", backgroundColor: "#FFFFFF" }}
+        sx={{ borderBottom: "1px solid #DCDCDC", backgroundColor: "#FFFFFF",boxShadow: "0 3px 10px #0000001a" }}
       >
         <Toolbar
           sx={{
@@ -173,12 +183,8 @@ export default function SideBar() {
                   <MenuIcon />
                   <ListItem sx={{ display: "flex", flexDirection: "row" }}>
                     <img src={dashboardIcon} alt="icon" />
-                    <Typography
-                      sx={{
-                        color: "#2E2C34",
-                        fontWeight: "700",
-                        fontSize: "1rem",
-                      }}
+                    <Typography className={classes.listStyleMain}
+                     
                     >
                       Card Transact
                     </Typography>
@@ -290,6 +296,7 @@ export default function SideBar() {
                       sx={{
                         minWidth: 0,
                         mr: open ? 2 : "auto",
+                        color: isCollapse? "#589E58": ""
                       }}
                     >
                       <item.icon
@@ -304,6 +311,7 @@ export default function SideBar() {
                     <ListItemText
                       primary={item.text}
                       sx={{
+                        color: isCollapse? "#589E58": "",
                         opacity: open ? 1 : 0,
                         "& .MuiTypography-root": {
                           fontWeight: 600,
@@ -316,7 +324,6 @@ export default function SideBar() {
                         sx={{
                           marginLeft: "-25px",
                           opacity: open ? 1 : 0,
-
                           color: Colors.ExpandMoreColor,
                         }}
                       />

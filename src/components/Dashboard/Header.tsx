@@ -12,7 +12,7 @@ export const Header = () => {
         <Typography
           sx={{ color: "#202020",
            fontWeight: "600", 
-           fontSize: "2.1rem",
+           fontSize: "2rem",
            "@media(max-width: 600px)": {
             fontSize: "1rem",
           },

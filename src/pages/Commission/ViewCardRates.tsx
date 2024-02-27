@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
@@ -6,7 +6,9 @@ import { CommonHeader } from "../../components/CommonHeader";
 import { Grid } from "@mui/material";
 import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
 import Table from "../../components/Table";
+import BasicSelect from "../../components/BasicSelect";
 import CustomTextInput from "../../components/CustomInput";
+import { LoadButton } from "../../components/LoadButton";
 
 interface Column {
   field: string;
@@ -26,7 +28,23 @@ interface Row {
   commission: string;
 }
 
-export const ViewStructure = () => {
+export const ViewCardRates = () => {
+  const [selectedValue, setSelectedValue] = useState("aquirer");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const handleChange = (event: any) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
+  const aquirer = [
+    { value: "aquirer", label: "aquirer" },
+    { value: "aquirer1", label: "aquirer1" },
+    { value: "aquirer2", label: "aquirer2" },
+  ];
   const columns: Column[] = [
     {
       field: "id",
@@ -105,7 +123,7 @@ export const ViewStructure = () => {
     },
   ];
 
-  const aquirerData: {type: string}[] = [
+  const aquirerData: { type: string }[] = [
     { type: "Overall" },
     { type: "World Pay" },
     { type: "EVO" },
@@ -116,7 +134,7 @@ export const ViewStructure = () => {
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
       <CustomBox>
-        <CommonHeader header="Commission Structure" />
+        <CommonHeader header="Card Rates" />
         <Grid
           container
           rowSpacing={2}
@@ -139,8 +157,7 @@ export const ViewStructure = () => {
                       alignItems: "center",
                       padding: 1,
                       cursor: "pointer",
-                      marginTop: "1rem"
-                     
+                      marginTop: "1rem",
                     }}
                   >
                     {data.type}
@@ -154,7 +171,48 @@ export const ViewStructure = () => {
               includeSlots={false}
               rows={rows}
               getRowId={(row: any) => row.id}
-            />
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "end",
+                  width: "50%",
+                  gap: 1,
+                  justifyItems: "right",
+                  marginBottom: "2rem",
+                  justifyContent: "end",
+                }}
+              >
+                <BasicSelect
+                  sx={{
+                    borderRadius: 1,
+                    backgroundColor: "#FCFAFA",
+                    border: "1px solid #898989",
+                    height: "2rem",
+                    padding: 2,
+                    width: "100%",
+                    fontSize: 12,
+                  }}
+                  placeholder="Select Aquirer"
+                  name={"selectedValue"}
+                  value={selectedValue}
+                  handleChange={handleChange}
+                  size="small"
+                  items={aquirer}
+                />
+                <CustomTextInput/>
+                
+                <LoadButton
+                  style={{
+                    height: "2rem",
+                    fontSize: "12px",
+                  }}
+                >
+                  Apply
+                </LoadButton>
+              </Box>
+            </Table>
           </Grid>
         </Grid>
       </CustomBox>

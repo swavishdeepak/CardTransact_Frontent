@@ -68,6 +68,16 @@ export const Commission = [
         icon: PersonIcon,
         link: "/viewStructure",
       },
+      {
+        text: "All Card rates",
+        icon: PersonIcon,
+        link: "/allCardRates",
+      },
+      {
+        text: "View Card Rates",
+        icon: PersonIcon,
+        link: "/viewCardRates",
+      },
     ],
   },
 ];

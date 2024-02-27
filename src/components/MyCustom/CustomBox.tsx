@@ -3,12 +3,15 @@ import { Box, BoxProps } from "@mui/material";
 
 interface CustomBoxProps extends BoxProps {
   style?: React.CSSProperties;
+  
 }
 
 export const CustomBox: React.FC<CustomBoxProps> = ({ children, style, ...rest }) => {
   return (
     <Box
+      
       sx={{
+
         p: 3,
         "@media(max-width: 600px)":{
           p:1

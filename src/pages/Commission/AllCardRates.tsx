@@ -12,7 +12,6 @@ import DatePickerPicker from "../../components/MyCustom/DatePickerInput";
 import Table from "../../components/Table";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import ConfirmDialog from "../../components/ConfirmDialog";
 
 interface Column {
   field: string;
@@ -32,8 +31,8 @@ interface Row {
   action: string;
 }
 
-export const CommissionStructure = () => {
-  const navigate = useNavigate();
+export const AllCardRates = () => {
+  const navigate = useNavigate()
   const [selectedValue, setSelectedValue] = useState("aquirer");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -127,17 +126,24 @@ export const CommissionStructure = () => {
     },
   ];
 
-  const handleRedirect = () => {
-    navigate("/commission/addCommissionStructure");
-  };
+  const handleRedirect = ()=>{
+    navigate("/commission/addCommissionStructure")
+  }
+
+
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
       <CustomBox>
-        <CommonHeader header="Commission Structure">
-          <LoadButton onClick={handleRedirect}>Add Structure</LoadButton>
-        </CommonHeader>
+        <CommonHeader header="All Card Rates Structure" >
+            <LoadButton 
+             onClick={handleRedirect}
+              
+            >
+               Add Structure
+              </LoadButton>
+          </CommonHeader>
         <Box
           sx={{
             display: "flex",
@@ -170,7 +176,7 @@ export const CommissionStructure = () => {
           <LoadButton
             style={{
               height: "2rem",
-              fontSize: "12px",
+              fontSize: "12px"
             }}
           >
             Apply
@@ -190,27 +196,10 @@ export const CommissionStructure = () => {
 };
 
 const More = (params: any) => {
-  const [deleteOpen, setDeleteOpen] = useState(false);
-  const [openRequest, setOpenRequest] = useState(false);
-
-  const handleDeleteOpen = () => {
-    setDeleteOpen(true);
-  };
-  const handleCloseRequest = () => {
-    setOpenRequest(false);
-  };
-
-  const handleDeleteClose = ()=>{
-    setDeleteOpen(false)
-  }
-  const handleDelete = () => {
-    setOpenRequest(true);
-  };
-
   return (
     <Box sx={{ display: "flex", gap: 1 }}>
       <Link
-        to="/viewStructure"
+        to="/viewCardRates"
         style={{
           textDecoration: "none",
           color: Colors.LinkColor,
@@ -221,7 +210,7 @@ const More = (params: any) => {
         View
         <Box sx={{ borderBottom: `0.4px solid ${Colors.LinkColor}` }} />
       </Link>
-      <Box onClick={handleDeleteOpen}>
+      <Box>
         <Typography
           sx={{
             color: Colors.LinkColor,
@@ -234,90 +223,6 @@ const More = (params: any) => {
         </Typography>
         <Box sx={{ borderBottom: `1px solid ${Colors.LinkColor}` }} />
       </Box>
-      <ConfirmDialog
-        title={"Confirmation"}
-        desc="Are You Sure Want "
-        open={deleteOpen}
-      >
-        <Box sx={{ display: "flex", gap:"3px" }}>
-          <Typography>To</Typography>
-          <Typography  sx={{ color: "#202020", fontSize: "15px", fontWeight: "600" }}>Delete This Commission Structure</Typography>
-        </Box>
-        <Box
-            sx={{
-              display: "flex",
-              gap: 2,
-              justifyContent: "center",
-              marginTop: "10px",
-            }}
-          >
-            <CustomButton
-              label="cancel"
-              onClick={handleDeleteClose}
-              hoverColor="#898989"
-              style={{
-                backgroundColor: "#898989",
-                color: "#fff",
-                borderRadius: "10px",
-              }}
-            />
-            <CustomButton
-              label="Delete"
-             onClick={handleDelete}
-              hoverColor="#C10404"
-              style={{
-                backgroundColor: "#C10404",
-                color: "#fff",
-                borderRadius: "10px",
-              }}
-            />
-          </Box>
-        
-      </ConfirmDialog>
-      <ConfirmDialog
-        open={openRequest}
-        handleClose={() => setOpenRequest(false)}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            gap: 2,
-            justifyContent: "center",
-          }}
-        >
-          <Typography
-            sx={{ color: "#202020", fontSize: "15px", fontWeight: "600" }}
-          >
-            Send Request To Delete Structure
-          </Typography>
-          <CustomButton
-            label="Cancel"
-            onClick={handleCloseRequest}
-            hoverColor="#C10404"
-            style={{
-              backgroundColor: "#C10404",
-              color: "#fff",
-              borderRadius: "10px",
-            }}
-          />
-        </Box>
-        <CustomBox style={{ marginTop: "2rem", border: "1px solid #77D177" }}>
-          <CustomTextInput
-            label="Remarks"
-            rows={4}
-            palceholder="Tyle Here..."
-            multiline={true}
-          />
-        </CustomBox>
-        <LoadButton
-          style={{
-            marginTop: "2rem",
-            width: "60%",
-          }}
-        >
-          Submit
-        </LoadButton>
-      </ConfirmDialog>
     </Box>
   );
 };
