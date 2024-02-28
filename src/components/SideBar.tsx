@@ -25,6 +25,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import dashboardIcon from "../assets/dashboardIcon.svg";
 import { SidebarUserItems } from "../utils/SideBarItem";
 import { ApplicationItems } from "../utils/SideBarItem";
+import { Notification } from "../utils/SideBarItem";
 import { Commission } from "../utils/SideBarItem";
 import { Reports } from "../utils/SideBarItem";
 import { makeStyles } from '@mui/styles';
@@ -113,10 +114,10 @@ export default function SideBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [isCollapse, setIsCollapse] = React.useState(false);
-  const [isCollapseApplication, setIsCollapseApplication] =
-    React.useState(false);
+  const [isCollapseApplication, setIsCollapseApplication] = React.useState(false);
   const [isCollapseCommission, setIsCollapseCommission] = React.useState(false);
   const [isCollapseReport, setIsCollapseReport] = React.useState(false);
+  const [isCollapseNtf, setIsCollapseNtf] = React.useState(false);
   const location = useLocation();
 
   const handleDrawerOpen = () => {
@@ -140,6 +141,10 @@ export default function SideBar() {
   const handleCollapseReport = () => {
     setIsCollapseReport(!isCollapseReport);
   };
+
+  const handleCollapseNotification = ()=>{
+    setIsCollapseNtf(!isCollapseNtf)
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -823,6 +828,145 @@ export default function SideBar() {
 
               {item.subItems && (
                 <Collapse in={isCollapseReport} timeout="auto" unmountOnExit>
+                  {item.subItems.map((subItem, subIndex) => (
+                    <Link
+                      to={subItem.link}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      key={subIndex}
+                    >
+                      <ListItem
+                        disablePadding
+                        sx={{
+                          display: "block",
+                          backgroundColor:
+                            location.pathname === subItem.link
+                              ? Colors.SideBarItembgcolor
+                              : "",
+                          color:
+                            location.pathname === subItem.link
+                              ? Colors.SibarItemcolor
+                              : "",
+                        }}
+                      >
+                        <ListItemButton
+                          sx={{
+                            minHeight: 48,
+                            justifyContent: open ? "initial" : "center",
+                            px: 2.5,
+                          }}
+                        >
+                          <ListItemIcon
+                            sx={{
+                              minWidth: 0,
+                              mr: open ? 2 : "auto",
+                            }}
+                          >
+                            <subItem.icon
+                              sx={{
+                                fontSize: "1rem",
+                                color:
+                                  location.pathname === subItem.link
+                                    ? Colors.SibarItemcolor
+                                    : "",
+                              }}
+                            />
+                          </ListItemIcon>
+                          <ListItemText
+                            primary={subItem.text}
+                            sx={{ opacity: open ? 1 : 0, "& .MuiTypography-root": {
+                              fontWeight: 600,
+                              fontSize: "14px",
+                            },}}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    </Link>
+                  ))}
+                </Collapse>
+              )}
+              </List>
+            </React.Fragment>
+          ))}
+        </List>
+        <List sx={{ padding: "0px 10px 0px" }}>
+          {Notification.map((item, index) => (
+            <React.Fragment key={index}>
+              <List
+                  style={{
+                    borderRadius: "10px",
+                    backgroundColor: isCollapseNtf
+                      ? Colors.SideBarItembgcolor
+                      : "#fff",
+                  }}
+              >
+              <ListItem
+                disablePadding
+                onClick={handleCollapseNotification}
+                sx={{
+                  display: "block",
+                  fontSize: "15px",
+                  fontWeight: "700",
+                  backgroundColor:
+                    location.pathname === item.link
+                      ? Colors.SideBarItembgcolor
+                      : "",
+                  color:
+                    location.pathname === item.link
+                      ? Colors.SibarItemcolor
+                      : "",
+                }}
+              >
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 2 : "auto",
+                    }}
+                  >
+                    <item.icon
+                      sx={{
+                        color:
+                          location.pathname === item.link
+                            ? Colors.SibarItemcolor
+                            : "",
+                      }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={item.text}
+                    sx={{ opacity: open ? 1 : 0, "& .MuiTypography-root": {
+                      fontWeight: 600,
+                      fontSize: "15px",
+                    }, }}
+                  />
+                  {isCollapseNtf ? (
+                    <ExpandMoreIcon
+                      sx={{
+                        opacity: open ? 1 : 0,
+                        marginLeft: "-25px",
+                        color: Colors.ExpandMoreColor,
+                      }}
+                    />
+                  ) : (
+                    <ChevronRightIcon
+                      sx={{
+                        marginLeft: "-25px",
+                        opacity: open ? 1 : 0,
+                        color: Colors.ExpandMoreColor,
+                      }}
+                    />
+                  )}
+                </ListItemButton>
+              </ListItem>
+
+              {item.subItems && (
+                <Collapse in={isCollapseNtf} timeout="auto" unmountOnExit>
                   {item.subItems.map((subItem, subIndex) => (
                     <Link
                       to={subItem.link}

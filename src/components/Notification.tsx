@@ -23,7 +23,7 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
           sx={{
             textAlign: "center",
             color: "#202020",
-            fontSize: "20px",
+            fontSize: {sm: "15px", md: "20px"},
             fontWeight: "600",
           }}
         >
@@ -32,9 +32,9 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
         <Divider />
         {notifications && (
           <React.Fragment>
-            {notifications?.map((notification) => (
+            {notifications.map((notification) => (
               <Box
-                key={notification?.id}
+                key={notification.id}
                 sx={{
                   display: "flex",
                   gap: 1,
@@ -50,13 +50,21 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
                   sx={{
                     width: 30,
                     height: 30,
-                    borderRadius: "50px",
+                    "@media(max-width: 600px)":{
+                      width: 20,
+                      height: 20,
+                      borderRadius: "50%",
+                      padding: "5px",
+                    },
+                    borderRadius: "50%",
                     backgroundColor: "#F9837C",
                     textAlign: "center",
                   }}
                 >
-                  <Typography>
-                    {notification?.title ? notification?.title?.charAt(0) : ""}
+                  <Typography sx={{"@media(max-width: 600px)":{
+                      fontSize: "10px"
+                  }}}>
+                    {notification.title ? notification.title.charAt(0) : ""}
                   </Typography>
                 </Box>
                 <Box sx={{textAlign: "left"}}>
@@ -64,19 +72,27 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
                     sx={{
                       color: "#202020",
                       fontSize: "12px",
+                      "@media(max-width: 600px)":{
+                        fontSize: "9px"
+
+                      },
                       fontWeight: "700",
                     }}
                   >
-                    {notification?.title || ""}
+                    {notification.title || ""}
                   </Typography>
                   <Typography
                     sx={{
                       color: "#898989",
                       fontSize: "10px",
+                      "@media(max-width: 600px)":{
+                        fontSize: "8px"
+
+                      },
                       fontWeight: "400",
                     }}
                   >
-                    {notification?.description || ""}
+                    {notification.description || ""}
                   </Typography>
                 </Box>
                <Box sx={{display: "flex", gap:1}}>

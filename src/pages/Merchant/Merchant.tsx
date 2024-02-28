@@ -97,7 +97,7 @@ export const Merchant: React.FC = () => {
   
 
   return (
-    <Box sx={{ marginTop: "2rem", width: "100%"}}>
+    <Box sx={{ marginTop: "2rem", width: "100%" }} >
       <Header />
       <Table
         columns={columns}

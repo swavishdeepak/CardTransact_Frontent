@@ -1,43 +1,52 @@
 import React from "react";
+import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+/* auth */
 import { Login } from "./pages/Auth/Login";
 import { GoogleAuthentication } from "./pages/Auth/GoogleAuthentication";
 import { ForgetPassword } from "./pages/Auth/ForgetPassword";
-import { Dashboard } from "./pages/Dashboard/Dashboard";
-import { AddAgents } from "./pages/Users/AddAgents";
-import { AddEmployees } from "./pages/Users/AddEmployees";
-import { MainLayout } from "./layouts/MainLayout";
-import { ViewAgents } from "./pages/Users/ViewAgents";
-import { ViewEmployees } from "./pages/Users/ViewEmployees";
-import { Merchant } from "./pages/Merchant/Merchant";
-import { ViewApplication } from "./pages/Applications/ViewApplication";
-import { ApplicationDetails } from "./pages/Applications/ApplicationDetails";
-import "./App.css";
-import { Addapplication } from "./pages/Applications/Addapplication";
 import { VerifyOtp } from "./pages/Auth/VerifyOtp";
 import { ResetPassword } from "./pages/Auth/ResetPassword";
+/* main */
+import { Dashboard } from "./pages/Dashboard/Dashboard";
+import { MainLayout } from "./layouts/MainLayout";
+/* Users */
+import { AddAgents } from "./pages/Users/AddAgents";
+import { AddEmployees } from "./pages/Users/AddEmployees";
+import { ViewAgents } from "./pages/Users/ViewAgents";
+import { AgentDetails } from "./pages/Users/AgentDetails";
+import { ViewEmployees } from "./pages/Users/ViewEmployees";
 import { EmployeesDetails } from "./pages/Users/EmployeesDetails";
 
-// Commission
-import { AllCommission } from "./pages/Commission/AllCommission";
-import { CommissionStructure } from "./pages/Commission/CommissionStructure";
-import { ViewStructure } from "./pages/Commission/ViewStructure";
-
-// Reports
+/* applications */
+import { ApplicationDetails } from "./pages/Applications/ApplicationDetails";
+import { Addapplication } from "./pages/Applications/Addapplication";
+import { ViewApplication } from "./pages/Applications/ViewApplication";
+import EditApplication from "./pages/Applications/EditApplication";
+/* reports */
 import { Overview } from "./pages/Reports/Overview";
 import { WorldPay } from "./pages/Reports/WorldPay";
 import { Evo } from "./pages/Reports/Evo";
 import { Fdms } from "./pages/Reports/Fdms";
 import { Elavon } from "./pages/Reports/Elavon";
-import { AgentDetails } from "./pages/Users/AgentDetails";
 import { ReEvaluation } from "./pages/Applications/ReEvaluation";
-import EditApplication from "./pages/Applications/EditApplication";
+/* merchants */
+import { Merchant } from "./pages/Merchant/Merchant";
 import { MerchantDetail } from "./pages/Merchant/MerchantDetails";
+/* commissions */
+import { AllCommission } from "./pages/Commission/AllCommission";
+import { CommissionStructure } from "./pages/Commission/CommissionStructure";
+import { ViewStructure } from "./pages/Commission/ViewStructure";
 import CommissionDetails from "./pages/Commission/CommissionDetails";
 import { AddCommissionStructure } from "./pages/Commission/AddCommissionStructure";
 import { ViewCommissionStructure } from "./pages/Commission/ViewCommissionStructure";
 import { AllCardRates } from "./pages/Commission/AllCardRates";
 import { ViewCardRates } from "./pages/Commission/ViewCardRates";
+/* notifications */
+import { AllNotification } from "./pages/Notifications/AllNotification";
+import { CreateNotification } from "./pages/Notifications/CreateNotication";
+import { ReceivedNotification } from "./pages/Notifications/ReceivedNotification";
+import { NotificationDetails } from "./pages/Notifications/NotificationDetails";
 
 function App() {
   const router = createBrowserRouter([
@@ -70,6 +79,7 @@ function App() {
           path: "/dashboard",
           element: <Dashboard />,
         },
+        /*User SideBar List***************************/
         {
           path: "/addAgents",
           element: <AddAgents />,
@@ -82,13 +92,11 @@ function App() {
           path: "/agentDetails/:id",
           element: <AgentDetails />,
         },
-
-        // for Employees
+        /*Employees SideBar List************************/
         {
           path: "/addEmployees",
           element: <AddEmployees />,
         },
-
         {
           path: "/viewEmployees",
           element: <ViewEmployees />,
@@ -97,8 +105,7 @@ function App() {
           path: "/employeesDetails/:id",
           element: <EmployeesDetails />,
         },
-
-        // for Application
+        /*Application SideBar List************************/
         {
           path: "/addApplication",
           element: <Addapplication />,
@@ -119,7 +126,7 @@ function App() {
           path: "/Re-evaluation",
           element: <ReEvaluation />,
         },
-        // for merchant
+        /*Merchant SideBar List************************/
         {
           path: "/merchants",
           element: <Merchant />,
@@ -128,7 +135,7 @@ function App() {
           path: "/merchantDetail",
           element: <MerchantDetail />,
         },
-        //for Commission
+        /*Commission SideBar List************************/
         {
           path: "/commission/addCommissionStructure",
           element: <AddCommissionStructure />,
@@ -143,7 +150,7 @@ function App() {
         },
         {
           path: "/allCardRates",
-          element: <AllCardRates/>
+          element: <AllCardRates />,
         },
         {
           path: "/commissionStructure",
@@ -159,10 +166,9 @@ function App() {
         },
         {
           path: "/viewCardRates",
-          element: <ViewCardRates/>
+          element: <ViewCardRates />,
         },
-
-        
+        /*Reports SideBar List************************/
         {
           path: "/overView",
           element: <Overview />,
@@ -182,6 +188,23 @@ function App() {
         {
           path: "/elavon",
           element: <Elavon />,
+        },
+        /*Notification SideBar List************************/
+        {
+          path: "/notificationList",
+          element: <AllNotification />,
+        },
+        {
+          path: "/notificationList/ViewDetails",
+          element: <NotificationDetails/>
+        },
+        {
+          path: "/createNotication",
+          element: <CreateNotification />,
+        },
+        {
+          path: "/receivedNotification",
+          element: <ReceivedNotification />,
         },
       ],
     },

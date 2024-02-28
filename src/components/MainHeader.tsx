@@ -135,7 +135,7 @@ const MainHeader: React.FC = () => {
         <Notification notifications={notifications}>
               <CustomButton 
               label="Edit"
-              style={{
+               style={{
                 border: "1px solid #898989",
                 color: "#898989",
                 fontSize: "10px"

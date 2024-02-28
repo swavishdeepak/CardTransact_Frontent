@@ -109,7 +109,7 @@ export const ApplicationDetails = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
-            <Grid item xs={3}>
+            <Grid item xs={3} >
               <DetailsSubTitle title={"Status"} />
             </Grid>
             <Grid item xs={9}>
@@ -138,29 +138,29 @@ export const ApplicationDetails = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Legal Name"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"Merchnat01"} />
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Trading Name"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid  item xs={7} md={9}>
               <DetailsSubTitleName name={"Merchant01"} />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Mobile Number"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"+44 730091234"} />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Email Address"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"merchnats@gmail.com"} />
             </Grid>
           </Grid>
@@ -179,35 +179,35 @@ export const ApplicationDetails = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"House/Flat Address"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"1 Charter Way"} />
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"City"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"Liskeared"} />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"County"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"Devon"} />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Country"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"United Kingdom"} />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Post Code"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"PI24 4HX"} />
             </Grid>
           </Grid>
@@ -274,10 +274,10 @@ export const ApplicationDetails = () => {
               <DetailsSubTitleName name={"Agent01"} />
             </Grid>
 
-            <Grid item xs={3}>
+            <Grid item xs={6} md={3}>
               <DetailsSubTitle title={"Company/Individual"} />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={6} md={9}>
               <DetailsSubTitleName name={"Individual"} />
             </Grid>
             <Grid item xs={3}>

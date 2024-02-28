@@ -32,11 +32,14 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   return (
     <>
       <Typography
-        style={{
+        sx={{
           marginBottom: "4px",
           color: "#000000",
           fontWeight: "500",
           fontSize: "15px",
+          "@media(max-width:600px)":{
+            fontSize: "13px"
+          },
           ...labelStyle,
         }}
       >

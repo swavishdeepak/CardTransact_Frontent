@@ -69,19 +69,19 @@ export const MessageList: React.FC<Message> = ({
             justifyContent: "left",
             color: "#202020",
             fontWeight: "600",
-            fontSize: "20px",
+            fontSize: { xs: "14px", md: "20px" },
           }}
         >
           Message
         </Typography>
-        {messageData?.length > 0 &&
-          messageData?.map((item, index) => {
+        {messageData.length > 0 &&
+          messageData.map((item, index) => {
             return (
               <Box key={index}>
                 <Box sx={{ display: "flex", gap: 1, marginTop: "10px" }} >
                   <ListItemAvatar>
                     <Avatar>
-                      <img src={item?.icon} alt=""></img>
+                      <img src={item.icon} alt=""></img>
                     </Avatar>
                   </ListItemAvatar>
                   <Box>
@@ -92,7 +92,7 @@ export const MessageList: React.FC<Message> = ({
                         fontSize: "12px",
                       }}
                     >
-                      {item?.senderName}
+                      {item.senderName}
                     </Typography>
                     <Typography
                       sx={{
@@ -101,7 +101,7 @@ export const MessageList: React.FC<Message> = ({
                         fontSize: "10px",
                       }}
                     >
-                      {item?.messageText}
+                      {item.messageText}
                     </Typography>
                   </Box>
                 </Box>

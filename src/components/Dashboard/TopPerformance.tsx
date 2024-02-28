@@ -90,10 +90,10 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
 
   return (
     <CustomBox>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between",alignItems: "end" }}>
         <Box>
           <Typography
-            sx={{ color: "#202020", fontWeight: "600", fontSize: "18px" }}
+            sx={{ color: "#202020", fontWeight: "600",fontSize: { xs: "14px", md: "18px" }, }}
           >
             Top Performance
           </Typography>
@@ -106,10 +106,8 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
         <BasicSelect
           sx={{
             borderRadius: 1,
-            position: "relative",
             backgroundColor: "#FCFAFA",
             border: "1px solid #898989",
-            fontSize: 12,
             padding: "0px 6px 0px 8px",
           }}
           name={"selectedValue"}
@@ -124,24 +122,25 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
           display: "flex",
           justifyContent: "space-between",
           color: "#202020",
-          marginTop: "10px",
+          marginTop: "1.2rem",
+
         }}
       >
-        <Box sx={{ display: "flex", gap: 4 }}>
-          <Typography sx={{ fontSize: "12px", fontWeight: "500" }}>
+        <Box sx={{ display: "flex", gap: {xs:2, md:4} }}>
+          <Typography sx={{ fontSize: { xs: "10px", md: "12px" }, fontWeight: "500" }}>
             No
           </Typography>
-          <Typography sx={{ fontSize: "12px", fontWeight: "500" }}>
+          <Typography sx={{ fontSize: { xs: "10px", md: "12px" }, fontWeight: "500" }}>
             Employees Name
           </Typography>
         </Box>
-        <Typography sx={{ fontSize: "12px", fontWeight: "500" }}>
+        <Typography sx={{ fontSize: { xs: "10px", md: "12px" }, fontWeight: "500" }}>
           Sale
         </Typography>
-        <Typography sx={{ fontSize: "12px", fontWeight: "500" }}>
+        <Typography sx={{ fontSize: { xs: "10px", md: "12px" }, fontWeight: "500" }}>
           Company/Individual
         </Typography>
-        <Typography sx={{ fontSize: "12px", fontWeight: "500" }}>
+        <Typography sx={{ fontSize: { xs: "10px", md: "12px" }, fontWeight: "500" }}>
           Success Rate
         </Typography>
       </Box>
@@ -158,7 +157,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                 justifyContent: "space-between",
               }}
             >
-              <Box sx={{ display: "flex", gap: 4 }}>
+              <Box sx={{ display: "flex", gap: {xs:2, md:4} }}>
                 <Typography
                   sx={{
                     color: "#202020",
@@ -191,6 +190,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                         style={{
                           width: "12%",
                           height: "12%",
+                         
                           color: "#898989",
                           marginTop: "2px",
                         }}

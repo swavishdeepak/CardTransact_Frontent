@@ -44,7 +44,7 @@ export const MerchantItem = [
     text: "Merchants",
     icon: PersonIcon,
     link: "/merchants",
-  }
+  },
 ];
 
 export const Commission = [
@@ -120,6 +120,31 @@ export const Reports = [
         text: "ELAVON",
         icon: PersonIcon,
         link: "/elavon",
+      },
+    ],
+  },
+];
+
+export const Notification = [
+  {
+    text: "Notification",
+    icon: PersonIcon,
+    link: "/notification",
+    subItems: [
+      {
+        text: "List",
+        link: "/notificationList",
+        icon: DashboardIcon,
+      },
+      {
+        text: "Create",
+        link: "/createNotication",
+        icon: DashboardIcon,
+      },
+      {
+        text: "Recieved Notification",
+        icon: PersonIcon,
+        link: "/receivedNotification",
       },
     ],
   },

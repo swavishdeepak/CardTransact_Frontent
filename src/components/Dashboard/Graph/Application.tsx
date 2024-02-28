@@ -21,9 +21,9 @@ export default function Application() {
     >
       <Box>
         <Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", justifyContent: "space-between",alignItems: "end" }}>
             <Typography
-              sx={{ color: "#202020", fontWeight: "600", fontSize: "18px" }}
+              sx={{ color: "#202020", fontWeight: "600", fontSize: { xs: "16px", md: "18px" } }}
             >
               Applications
             </Typography>

@@ -258,6 +258,10 @@ export const Addapplication = () => {
                       boxShadow: "0px 0.9375px 3.75px 0px #00000040",
                       borderRadius: "2rem",
                       padding: "6px",
+                      "@media(max-width: 600px)":{
+                        padding: 0,
+                        fontSize: "8px"
+                      }
                     },
                   }}
                 >

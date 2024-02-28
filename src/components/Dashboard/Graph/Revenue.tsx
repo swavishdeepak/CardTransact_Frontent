@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CustomText from "../../CustomText";
 import { LineChart } from "@mui/x-charts/LineChart";
 import Vector from "../../../assets/Vector.svg";
@@ -23,11 +23,11 @@ export const Revenue = () => {
     <CustomBox
     >
       <Box>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <CustomText
-            style={{ color: "#202020", fontWeight: "600", fontSize: "18px" }}
-            text={"Revenue"}
-          ></CustomText>
+        <Box sx={{ display: "flex", justifyContent: "space-between",alignItems: "end" }}>
+          <Typography
+            sx={{ color: "#202020", fontWeight: "600", fontSize: { xs: "14px", md: "18px" },  }}
+           
+          > Revenue</Typography>
           <BasicSelect
             sx={{
               borderRadius: 1,

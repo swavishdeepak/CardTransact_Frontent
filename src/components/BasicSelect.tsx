@@ -52,6 +52,7 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
             <InputBase
               sx={{
                 marginTop: "4px",
+                borderRadius: 1,
                 ...sx,
                 ...placeholderStyle,
               }}

@@ -18,14 +18,17 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 }) => {
   return (
     <Button
-     
       sx={{
-       backgroundColor: "#fff",
+        backgroundColor: "#fff",
         textTransform: "none",
-        height: "1.6rem",
         borderRadius: "8px",
         fontWeight: "700",
         fontSize: "12px",
+        "@media(max-width: 600px)":{
+          fontSize: "9px",
+          height: "1.3rem",
+          
+        },
         '&:hover':{
           backgroundColor: hoverColor
         },

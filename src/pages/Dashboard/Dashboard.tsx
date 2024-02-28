@@ -6,14 +6,13 @@ import Grid from "@mui/material/Grid"; // Correct import
 import Vector from "../../assets/Vector.svg";
 import Vector1 from "../../assets/balancewalletIcon.svg";
 import Vector2 from "../../assets/dealsIcons.svg";
-import Vector3 from "../../assets/Shape.svg"
+import Vector3 from "../../assets/Shape.svg";
 //import { Application,SeriesData } from "../../components/Graph/Application";
 import Application from "../../components/Dashboard/Graph/Application";
 import { Sales } from "../../components/Dashboard/Graph/Sales";
 import { Revenue } from "../../components/Dashboard/Graph/Revenue";
 import { MessageList } from "../../components/Dashboard/MessageList";
 import TopPerformance from "../../components/Dashboard/TopPerformance";
-
 
 export const Dashboard = () => {
   // const seriesData: SeriesData[] = [
@@ -23,11 +22,13 @@ export const Dashboard = () => {
   // ];
 
   return (
-    <Box sx={{ width: "100%"}}>
-      <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
-        <Grid item xs={12} md={12}>
-        <Header />
-        </Grid>
+    <Box sx={{ marginTop: "2rem", width: "100%" }}>
+      <Header />
+      <Grid
+        container
+        rowSpacing={4}
+        columnSpacing={2}
+      >
         <Grid item xs={6} md={2.4}>
           <Card
             value={22880.12}
@@ -45,7 +46,6 @@ export const Dashboard = () => {
             iconRight={<img src={Vector1} alt="" />}
             description="Total Residual Received"
             percent={70}
-
           />
         </Grid>
         <Grid item xs={6} md={2.4}>
@@ -69,29 +69,27 @@ export const Dashboard = () => {
         <Grid item xs={6} md={2.4}>
           <Card
             value={300}
-           
             iconRight={<img src={Vector1} alt="" />}
             description="Total Residual Received"
             percent={100}
           />
         </Grid>
         <Grid item xs={12} md={4}>
-         <Application  />
+          <Application />
         </Grid>
         <Grid item xs={12} md={4}>
-         <Sales/>
+          <Sales />
         </Grid>
         <Grid item xs={12} md={4}>
-         <Revenue/>
+          <Revenue />
         </Grid>
         <Grid item xs={12} md={8} mt={2}>
-          <TopPerformance/>
+          <TopPerformance />
         </Grid>
         <Grid item xs={12} md={4} mt={2}>
-          <MessageList/>
+          <MessageList />
         </Grid>
       </Grid>
-      </Box>
-  
+    </Box>
   );
 };
