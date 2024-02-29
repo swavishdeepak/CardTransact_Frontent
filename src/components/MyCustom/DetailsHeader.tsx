@@ -4,6 +4,7 @@ import { Colors } from "../../utils/Colors";
 
 interface DetailsHeaderProps {
   heading: string;
+
 }
 
 const DetailsHeader: React.FC<DetailsHeaderProps> = ({ heading }) => {

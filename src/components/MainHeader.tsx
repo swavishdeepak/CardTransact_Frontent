@@ -8,11 +8,13 @@ import InputAdornment from "@mui/material/InputAdornment";
 import profileIcon from "../assets/profileIcon.svg";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { Colors } from "../utils/Colors";
 
 import logoutIcon from "../assets/logout.svg";
 import profileIcon1 from "../assets/profileIcon1.svg";
 import Notification from "./Notification";
 import CustomButton from "./CustomButton";
+import { Link } from "react-router-dom";
 
 const MainHeader: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>("");
@@ -123,6 +125,14 @@ const MainHeader: React.FC = () => {
       </Box>
       <Menu
         id="basic-menu"
+        PaperProps={{
+          style: {
+            borderRadius: "1rem", 
+            border: "1px solid rgba(236, 236, 236, 1)",
+            boxShadow:" -4px 4px 8px 0.5px rgba(0, 0, 0, 0.3)"
+
+          },
+        }}
         anchorEl={openNotification}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
@@ -134,28 +144,33 @@ const MainHeader: React.FC = () => {
       >
         <Notification notifications={notifications}>
               <CustomButton 
-              label="Edit"
+               label="Edit"
                style={{
                 border: "1px solid #898989",
                 color: "#898989",
-                fontSize: "10px"
+                fontSize: "10px",
+                height: "1.5rem",
               }}
 
               />
               <CustomButton 
               label="Approved"
+              hoverColor={Colors.successColor}
               style={{
-                backgroundColor: "#048519",
+                backgroundColor: Colors.successColor,
                 color: "#fff",
+                height: "1.5rem",
                 fontSize: "10px"
               }}
 
               />
               <CustomButton 
               label="Reject"
+              hoverColor={Colors.deletebtnColor}
               style={{
-                backgroundColor: "#C10404",
+                backgroundColor: Colors.deletebtnColor,
                 color: "#fff",
+                height: "1.5rem",
                 fontSize: "10px"
               }}
               />
@@ -174,23 +189,23 @@ const MainHeader: React.FC = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <Box>
-          <MenuItem sx={{ display: "flex", gap: 1 }} onClick={handleClose}>
+        <Box sx={{p:1, display: "flex", flexDirection: "column", gap:2}}>
+          <Link to="/userProfile" style={{ display: "flex", gap: "7px", textDecoration: "none" }}>
             <img src={profileIcon1} alt="" />
             <Typography
-              sx={{ color: "#898989", fontWeight: "400", fontSize: "12px" }}
+              sx={{ color: "#898989", fontWeight: "400", fontSize: "14px" }}
             >
               View Profile
             </Typography>
-          </MenuItem>
-          <MenuItem sx={{ display: "flex", gap: 1 }} onClick={handleClose}>
+          </Link>
+          <Box sx={{ display: "flex", gap:  "7px"}}>
             <img src={logoutIcon} alt="" />
             <Typography
-              sx={{ color: "#898989", fontWeight: "400", fontSize: "12px" }}
+              sx={{ color: "#898989", fontWeight: "400", fontSize: "14px" }}
             >
               Logout
             </Typography>
-          </MenuItem>
+          </Box>
         </Box>
       </Menu>
     </Box>

@@ -47,6 +47,7 @@ import { AllNotification } from "./pages/Notifications/AllNotification";
 import { CreateNotification } from "./pages/Notifications/CreateNotication";
 import { ReceivedNotification } from "./pages/Notifications/ReceivedNotification";
 import { NotificationDetails } from "./pages/Notifications/NotificationDetails";
+import { UserProfile } from "./pages/Auth/UserProfile";
 
 function App() {
   const router = createBrowserRouter([
@@ -78,6 +79,11 @@ function App() {
         {
           path: "/dashboard",
           element: <Dashboard />,
+        },
+        /* User Profile */
+        {
+          path: "/userProfile",
+          element: <UserProfile/>
         },
         /*User SideBar List***************************/
         {

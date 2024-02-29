@@ -149,3 +149,18 @@ export const Notification = [
     ],
   },
 ];
+
+export  const Messages = [
+  {
+    text: "Messages",
+    icons: DashboardIcon,
+    link: "/messages"
+  }
+]
+export  const DeleteData = [
+  {
+    text: "Delete Data",
+    icons: DashboardIcon,
+    link: "/DeleteData"
+  }
+]

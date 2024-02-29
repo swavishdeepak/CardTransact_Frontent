@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 import React, { ReactNode } from "react";
-import { CustomBox } from "./MyCustom/CustomBox";
 import Divider from "@mui/material/Divider";
 
 interface NotificationData {
@@ -15,10 +14,9 @@ interface NotificationProps {
 }
 
 const Notification: React.FC<NotificationProps> = ({ notifications, children }) => {
-    console.log("notification", notifications)
+  
   return (
-    <CustomBox>
-      <Box sx={{ display: "column", gap: 1 }}>
+      <Box sx={{ display: "column", gap: 1, p:2 }}>
         <Typography
           sx={{
             textAlign: "center",
@@ -29,7 +27,7 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
         >
           Notification
         </Typography>
-        <Divider />
+        <Divider textAlign="center" sx={{fontSize: "12px", marginTop: "0.8rem"}}>Today</Divider>
         {notifications && (
           <React.Fragment>
             {notifications.map((notification) => (
@@ -56,6 +54,7 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
                       borderRadius: "50%",
                       padding: "5px",
                     },
+                    p: "3px",
                     borderRadius: "50%",
                     backgroundColor: "#F9837C",
                     textAlign: "center",
@@ -95,7 +94,7 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
                     {notification.description || ""}
                   </Typography>
                 </Box>
-               <Box sx={{display: "flex", gap:1}}>
+               <Box sx={{display: "flex", gap:1, flexDirection: "row"}}>
                  {children}
                </Box>
               </Box>
@@ -103,7 +102,7 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
           </React.Fragment>
         )}
       </Box>
-    </CustomBox>
+    
   );
 };
 

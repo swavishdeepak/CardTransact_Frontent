@@ -10,7 +10,18 @@ interface BpCheckboxProps extends CheckboxProps {
 }
 
 
-const BpIcon = styled("span")(({ theme, iconStyle,labelStyle }) => ({
+// const BpIcon = styled("span")(({ theme, iconStyle,labelStyle }) => ({
+//   borderRadius: "50%",
+//   width: 16,
+//   height: 16,
+//   border: "1px solid #DCDCDC",
+//   backgroundColor: theme.palette.mode === "dark" ? "" : "#fff",
+//   ...iconStyle,
+//   ...labelStyle
+
+// }));
+
+const BpIcon = styled("span", { shouldForwardProp: (prop) => prop !== "iconStyle" && prop !== "labelStyle" })<{iconStyle?: React.CSSProperties, labelStyle?: React.CSSProperties}>(({ theme, iconStyle, labelStyle }) => ({
   borderRadius: "50%",
   width: 16,
   height: 16,
@@ -18,7 +29,6 @@ const BpIcon = styled("span")(({ theme, iconStyle,labelStyle }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "" : "#fff",
   ...iconStyle,
   ...labelStyle
-
 }));
 
 const BpCheckedIcon = styled(BpIcon)({
@@ -44,7 +54,7 @@ const CheckBox = (props: BpCheckboxProps) => {
           inputProps={{ "aria-label": "Checkbox demo" }}
         />
       }
-      label={<span style={labelStyle}>{label}</span>}
+      label={<span style={{...labelStyle, color: "rgba(137, 137, 137, 1)"}}>{label}</span>}
     />
   );
 };

@@ -25,6 +25,8 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     <BasicDialog
       open={open}
       sx={{ padding: "10px 10px"}}
+      
+
     >
       <Box >
         <Typography
