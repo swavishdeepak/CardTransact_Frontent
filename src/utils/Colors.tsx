@@ -10,6 +10,8 @@ export const Colors = {
     deletebtnColor: "#C10404",
     editColor: "#898989",
     successColor: "#048519",
-    blackColor: "#000000"
+    blackColor: "#000000",
+    moreColor: "rgba(137, 137, 137, 1)",
+    graphBoxShadow: "2.468177556991577px 2.468177556991577px 2.468177556991577px 0px rgba(0, 0, 0, 0.1)",
 
 }
