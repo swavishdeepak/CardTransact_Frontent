@@ -7,7 +7,7 @@ export const Header = () => {
   let path = location.pathname;
   let formattedPath = path.charAt(1).toUpperCase() + path.slice(2);
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box>
       <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
         <Typography
           sx={{ color: "#202020",

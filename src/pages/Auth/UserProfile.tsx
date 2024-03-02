@@ -96,7 +96,6 @@ export const UserProfile = () => {
           </Box>
         </CommonHeader>
         <ListItem
-          onClick={handleImageClick}
           sx={{
             marginTop: "1rem",
             justifyContent: { xs: "center", md: "flex-start" },
@@ -127,6 +126,7 @@ export const UserProfile = () => {
           )}
 
           <Box
+          onClick={handleImageClick}
             sx={{
               width: 25,
               height: 25,

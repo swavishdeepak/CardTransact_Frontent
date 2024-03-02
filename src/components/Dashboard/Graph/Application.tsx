@@ -17,7 +17,7 @@ const data: DataItem[] = [
 ];
 
 const size = {
-  width: 300,
+  width: 200,
   height: 150,
 };
 
@@ -38,6 +38,8 @@ const Application: React.FC = () => {
               arcLabel: (item: DefaultizedPieValueType) =>
                 `${((item.value / total) * 100).toFixed(0)}%`,
               data,
+              cx: 100,
+              cy: 100,
             },
           ]}
           sx={{

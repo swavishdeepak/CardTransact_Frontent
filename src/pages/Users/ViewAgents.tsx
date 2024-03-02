@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box,Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Menu, MenuItem, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import Table from "../../components/Table";
 import MoreVert from "@mui/icons-material/MoreVert";
@@ -95,7 +95,6 @@ export const ViewAgents: React.FC = () => {
       banks: "Monzo",
       action: "Edit",
     },
-  
   ];
 
   const handleOpenDelete = () => {
@@ -103,14 +102,19 @@ export const ViewAgents: React.FC = () => {
   };
 
   return (
-    <Box sx={{ marginTop: "2rem", width: "100%" }}>
+    <Box
+      sx={{
+        marginTop: "2rem",
+        width: "100%",
+      }}
+    >
       <Header />
+      
       <Table
         columns={columns}
         rows={rows}
         title="All Agents"
         getRowId={(row: any) => row.id}
-       
       />
     </Box>
   );

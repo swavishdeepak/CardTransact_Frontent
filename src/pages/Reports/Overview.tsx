@@ -19,6 +19,7 @@ import { Colors } from "../../utils/Colors";
 import CustomText from "../../components/CustomText";
 import saleIcon from "../../assets/saleIcon.svg";
 import Application from "../../components/Dashboard/Graph/Application";
+import { SalesPerson } from "../../components/Reports/TopSalesPersonList/SalesPerson";
 
 export const Overview = () => {
   const data = [
@@ -338,6 +339,9 @@ export const Overview = () => {
             
             </CustomGraph>
           </GraphCustomBox>
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <SalesPerson/>
         </Grid>
       </Grid>
     </Box>

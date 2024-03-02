@@ -9,9 +9,7 @@ interface CustomBoxProps extends BoxProps {
 export const CustomBox: React.FC<CustomBoxProps> = ({ children, style, ...rest }) => {
   return (
     <Box
-      
       sx={{
-
         p: 3,
         "@media(max-width: 600px)":{
           p:1

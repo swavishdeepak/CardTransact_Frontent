@@ -49,9 +49,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 25px)`,
-  [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 25px)`,
+  width: `calc(${theme.spacing(7)} + 32px)`,
+  [theme.breakpoints.down("xs")]: {
+    width: `calc(${theme.spacing(2)} + 1px)`,
   },
 });
 
@@ -206,19 +206,26 @@ export default function SideBar() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton>
             {theme.direction === "rtl" ? (
-              <MenuIcon />
+              <MenuIcon onClick={handleDrawerClose} />
             ) : (
               <>
-                <List sx={{ display: "flex", alignItems: "center" }}>
-                  <MenuIcon />
-                  <ListItem sx={{ display: "flex", flexDirection: "row" }}>
+                <List sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <MenuIcon onClick={handleDrawerClose} />
+                  <Link
+                    to="/dashboard"
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      textDecoration: "none",
+                    }}
+                  >
                     <img src={dashboardIcon} alt="icon" />
                     <Typography className={classes.listStyleMain}>
                       Card Transact
                     </Typography>
-                  </ListItem>
+                  </Link>
                 </List>
               </>
             )}
@@ -249,7 +256,7 @@ export default function SideBar() {
           >
             <ListItemButton
               sx={{
-                minHeight: 48,
+                //minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
@@ -286,7 +293,7 @@ export default function SideBar() {
           {SidebarUserItems.map((item, index) => (
             <React.Fragment key={index}>
               <List
-                style={{
+                sx={{
                   borderRadius: "10px",
                   backgroundColor: isCollapse
                     ? Colors.SideBarItembgcolor
@@ -305,7 +312,7 @@ export default function SideBar() {
                     display: "block",
                     fontSize: "15px",
                     fontWeight: "700",
-
+                    ":hover": { backgroundColor: "lightgray" },
                     backgroundColor:
                       location.pathname === item.link
                         ? Colors.SideBarItembgcolor
@@ -318,7 +325,7 @@ export default function SideBar() {
                 >
                   <ListItemButton
                     sx={{
-                      minHeight: 48,
+                      //minHeight: 48,
                       justifyContent: open ? "initial" : "center",
                     }}
                   >
@@ -393,7 +400,7 @@ export default function SideBar() {
                         >
                           <ListItemButton
                             sx={{
-                              minHeight: 48,
+                              // minHeight: 48,
                               justifyContent: open ? "initial" : "center",
                               px: 2.5,
                             }}
@@ -464,7 +471,7 @@ export default function SideBar() {
                 >
                   <ListItemButton
                     sx={{
-                      minHeight: 48,
+                      // minHeight: 48,
                       justifyContent: open ? "initial" : "center",
                       px: 2,
                     }}
@@ -542,7 +549,7 @@ export default function SideBar() {
                         >
                           <ListItemButton
                             sx={{
-                              minHeight: 48,
+                              //minHeight: 48,
                               justifyContent: open ? "initial" : "center",
                               px: 2.5,
                             }}
@@ -669,7 +676,7 @@ export default function SideBar() {
                 >
                   <ListItemButton
                     sx={{
-                      minHeight: 48,
+                      // minHeight: 48,
                       justifyContent: open ? "initial" : "center",
                       px: 2,
                     }}
@@ -747,7 +754,7 @@ export default function SideBar() {
                         >
                           <ListItemButton
                             sx={{
-                              minHeight: 48,
+                              //minHeight: 48,
                               justifyContent: open ? "initial" : "center",
                               px: 2.5,
                             }}
@@ -818,7 +825,7 @@ export default function SideBar() {
                 >
                   <ListItemButton
                     sx={{
-                      minHeight: 48,
+                      //minHeight: 48,
                       justifyContent: open ? "initial" : "center",
                       px: 2,
                     }}
@@ -963,7 +970,7 @@ export default function SideBar() {
                 >
                   <ListItemButton
                     sx={{
-                      minHeight: 48,
+                      //minHeight: 48,
                       justifyContent: open ? "initial" : "center",
                       px: 2,
                     }}
@@ -1037,7 +1044,7 @@ export default function SideBar() {
                         >
                           <ListItemButton
                             sx={{
-                              minHeight: 48,
+                              //minHeight: 48,
                               justifyContent: open ? "initial" : "center",
                               px: 2.5,
                             }}
@@ -1131,6 +1138,9 @@ export default function SideBar() {
                   },
                 }}
               />
+              <Box sx={{width: 15, height: 15, borderRadius: "50%", backgroundColor: "#C10404", p:"2px", textAlign: "center"}}>
+                <Typography sx={{color: "#fff", fontSize: "8px", fontWeight: "700"}}>02</Typography>
+              </Box>
             </ListItemButton>
           </ListItem>
         </Link>

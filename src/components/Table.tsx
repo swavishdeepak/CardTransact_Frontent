@@ -27,6 +27,7 @@ interface BasicTableProps {
   customButtons?: React.ReactNode;
   getRowId?: (row: Row) => string | number;
   includeSlots?: boolean;
+  includesPagination?: boolean;
 }
 
 const Table: React.FC<BasicTableProps> = ({
@@ -39,7 +40,9 @@ const Table: React.FC<BasicTableProps> = ({
   exportHide,
   customButtons,
   getRowId,
-  includeSlots = true
+  includeSlots = true,
+  includesPagination = true
+
 }) => {
     
   return (
@@ -68,11 +71,11 @@ const Table: React.FC<BasicTableProps> = ({
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: pageSize || 5,
+              pageSize:  pageSize || 5,
             },
           },
         }}
-        pageSizeOptions={[pageSize || 5]}
+         pageSizeOptions={[pageSize || 5]}
         slotProps={{
           baseButton: {
             sx: {},

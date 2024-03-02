@@ -136,7 +136,7 @@ export const CommissionStructure = () => {
       <Header />
       <CustomBox>
         <CommonHeader header="Commission Structure">
-          <LoadButton onClick={handleRedirect} style={{width: "100%"}}>Add Structure</LoadButton>
+          <LoadButton onClick={handleRedirect} >Add Structure</LoadButton>
         </CommonHeader>
         <Box
           sx={{

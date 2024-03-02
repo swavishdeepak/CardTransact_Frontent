@@ -9,7 +9,7 @@ export const MainLayout = () => {
     <Box
       component="main"
       sx={{
-        flexGrow: 1,
+       flexGrow: 1,
         p: "3rem 1.5rem",
         display: "flex",
         "@media(max-width: 600px)": {

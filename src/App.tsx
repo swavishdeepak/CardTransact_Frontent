@@ -7,6 +7,7 @@ import { GoogleAuthentication } from "./pages/Auth/GoogleAuthentication";
 import { ForgetPassword } from "./pages/Auth/ForgetPassword";
 import { VerifyOtp } from "./pages/Auth/VerifyOtp";
 import { ResetPassword } from "./pages/Auth/ResetPassword";
+import { UserProfile } from "./pages/Auth/UserProfile";
 /* main */
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { MainLayout } from "./layouts/MainLayout";
@@ -47,7 +48,10 @@ import { AllNotification } from "./pages/Notifications/AllNotification";
 import { CreateNotification } from "./pages/Notifications/CreateNotication";
 import { ReceivedNotification } from "./pages/Notifications/ReceivedNotification";
 import { NotificationDetails } from "./pages/Notifications/NotificationDetails";
-import { UserProfile } from "./pages/Auth/UserProfile";
+/* Message */
+import { Message } from "./pages/Messages/Message";
+
+
 
 function App() {
   const router = createBrowserRouter([
@@ -212,6 +216,11 @@ function App() {
           path: "/receivedNotification",
           element: <ReceivedNotification />,
         },
+         /*Notification SideBar List************************/
+         {
+          path: "/messages",
+          element: <Message/>
+         }
       ],
     },
   ]);

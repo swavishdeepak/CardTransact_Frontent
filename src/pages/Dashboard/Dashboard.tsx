@@ -13,6 +13,7 @@ import { Sales } from "../../components/Dashboard/Graph/Sales";
 import { Revenue } from "../../components/Dashboard/Graph/Revenue";
 import { MessageList } from "../../components/Dashboard/MessageList";
 import TopPerformance from "../../components/Dashboard/TopPerformance";
+import { CustomBox } from "../../components/MyCustom/CustomBox";
 
 export const Dashboard = () => {
   // const seriesData: SeriesData[] = [
@@ -24,12 +25,13 @@ export const Dashboard = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
+      <Box>
       <Grid
         container
-        rowSpacing={4}
+        rowSpacing={{ xs: 2, md: 4 }}
         columnSpacing={2}
       >
-        <Grid item xs={6} md={2.4}>
+        <Grid item xs={6}sm={4} md={2.4}>
           <Card
             value={22880.12}
             iconLeft={<img src={Vector} alt="" />}
@@ -39,48 +41,48 @@ export const Dashboard = () => {
             linearProgressColor={"#775DA6"}
           />
         </Grid>
-        <Grid item xs={6} md={2.4}>
+        <Grid item xs={6}sm={4} md={2.4}>
           <Card
             value={22880.12}
             iconLeft={<img src={Vector} alt="" />}
             iconRight={<img src={Vector1} alt="" />}
-            description="Total Residual Received"
+            description="Total Residual Paid"
             percent={70}
           />
         </Grid>
-        <Grid item xs={6} md={2.4}>
+        <Grid item xs={6} sm={4} md={2.4}>
           <Card
             value={22880.12}
             iconLeft={<img src={Vector} alt="" />}
             iconRight={<img src={Vector3} alt="" />}
-            description="Total Residual Received"
+            description="Commission Paid"
             percent={30}
             linearProgressColor={"red"}
           />
         </Grid>
-        <Grid item xs={6} md={2.4}>
+        <Grid item xs={6} sm={4} md={2.4}>
           <Card
             value={1247}
             iconRight={<img src={Vector1} alt="" />}
-            description="Total Residual Received"
+            description="Total Application"
             percent={90}
           />
         </Grid>
-        <Grid item xs={6} md={2.4}>
+        <Grid item xs={6}sm={4} md={2.4}>
           <Card
             value={300}
             iconRight={<img src={Vector1} alt="" />}
-            description="Total Residual Received"
+            description="Total Employees"
             percent={100}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <Application />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3.5}>
           <Sales />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={3.5}>
           <Revenue />
         </Grid>
         <Grid item xs={12} md={8} mt={2}>
@@ -90,6 +92,8 @@ export const Dashboard = () => {
           <MessageList />
         </Grid>
       </Grid>
+      </Box>
+     
     </Box>
   );
 };

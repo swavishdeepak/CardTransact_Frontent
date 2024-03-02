@@ -28,9 +28,9 @@ const Card: React.FC<CardProps> = ({
     >
       <Box >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: "5px", alignItems: "baseline" }}>
             <Typography sx={{color: "#000000"}}>{iconLeft}</Typography>
-            <Typography sx={{color: "#202020",fontWeight: "600", fontSize: "1rem"}}>{value}</Typography>
+            <Typography sx={{color: "#202020",fontWeight: "600", fontSize: "1.1rem"}}>{value}</Typography>
           </Box>
           <Typography>{iconRight}</Typography>
         </Box>

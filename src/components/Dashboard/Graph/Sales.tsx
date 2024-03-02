@@ -3,6 +3,7 @@ import React from "react";
 import { BarChart, CartesianGrid, Bar, XAxis,Label } from "recharts";
 import { GraphCustomBox } from "../../GraphCustomBox";
 import { CustomGraph } from "../../Reports/Graph/CustomGraph";
+import { Typography } from "@mui/material";
 
 const data1 = [
   {
@@ -50,7 +51,6 @@ export const Sales = () => {
           }}
         >
           <XAxis
-          
             dataKey="name"
             tick={{
               fill: "#202020",
@@ -59,14 +59,17 @@ export const Sales = () => {
             }}
             
           >
-             {/* <Label value="Pages of my website" offset={0} position="insideBottom" /> */}
-            </XAxis>
+             
+           
+          </XAxis>
           <CartesianGrid strokeDasharray="" style={{ display: "none" }} />
           <Bar dataKey="uv" fill="rgba(119, 93, 166, 1)" />
           <Bar dataKey="pv" fill="rgba(119, 93, 166, 1)" />
           <Bar dataKey="pt" fill="rgba(119, 93, 166, 1)" />
           <Bar dataKey="pw" fill="rgba(119, 93, 166, 1)" />
+          
         </BarChart>
+       
       </CustomGraph>
     </GraphCustomBox>
   );
