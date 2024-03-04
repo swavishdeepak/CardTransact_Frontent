@@ -10,6 +10,7 @@ interface CustomTextInputProps {
   labelStyle?: React.CSSProperties;
   palceholder?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   value?: string;
   multiline?: boolean;
   rows?: number
@@ -22,6 +23,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   labelStyle,
   palceholder,
   onClick,
+  onChange,
   value,
   multiline,
   rows,
@@ -49,6 +51,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         placeholder={palceholder}
         size="small"
         onClick={onClick}
+        onChange={onChange}
         multiline={multiline}
         rows={rows}
         value={value}

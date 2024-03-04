@@ -7,6 +7,7 @@ import dashboardIcon from "../../assets/dashboardIcon.svg";
 import OtpInput from "react-otp-input";
 import CustomText from "../../components/CustomText";
 import CustomTextInput from "../../components/CustomInput";
+import AuthCustomBox from "../../components/AuthCustomBox";
 import Divider from "@mui/material/Divider";
 
 export const VerifyOtp = () => {
@@ -41,7 +42,7 @@ export const VerifyOtp = () => {
                 height: "500px",
                 width: "350px",
                 top: 30,
-                left: 20,
+                left: "13rem",
                 zIndex: 1,
                 border: "0.5px solid #77D177",
                 boxShadow: "5.625px 6.5625px 9.375px 0px #00000052",
@@ -97,7 +98,7 @@ export const VerifyOtp = () => {
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    padding: "0px 20px",
+                    
                   }}
                 >
                  <OtpInput
@@ -192,6 +193,7 @@ export const VerifyOtp = () => {
           </Box>
         </Box>
       </Box>
+      
     </>
   );
 };

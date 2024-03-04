@@ -4,11 +4,17 @@ import AuthBack from "./AuthBack";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
 import dashboardIcon from "../../assets/dashboardIcon.svg";
+import OtpInput from "react-otp-input";
 import CustomText from "../../components/CustomText";
 import CustomTextInput from "../../components/CustomInput";
 import Divider from "@mui/material/Divider";
+import AuthCustomBox from "../../components/AuthCustomBox";
 
 export const ForgetPassword = () => {
+  const [otp, setOtp] = useState("");
+  const [email, setEmail] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [emailValidated, setEmailValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -23,137 +29,142 @@ export const ForgetPassword = () => {
     navigate("/auth/verifyOtp");
   };
 
+  const handleEmailChange = (event: any) => {
+    setEmail(event.target.value);
+  };
+
+  const handleEmailValidation = () => {
+    const isValid = /\S+@\S+\.\S+/.test(email);
+    setIsEmailValid(isValid);
+    if (isValid) {
+      setEmailValidated(true); 
+    }
+  };
+
   return (
     <>
-      <Box sx={{ height: "100vh" }}>
-        <AuthBack />
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Box sx={{ position: "relative" }}>
-            <Box
-              sx={{
-                position: "absolute",
-                height: "500px",
-                width: "350px",
-                top: 30,
-                left: 20,
-                zIndex: 1,
-                border: "0.5px solid #77D177",
-                boxShadow: "5.625px 6.5625px 9.375px 0px #00000052",
-                borderRadius: 5,
-                backgroundColor: "#fff",
+      <AuthCustomBox header="Forgot Password">
+        <Box sx={{ padding: "0px 20px" }}>
+          <Typography
+            sx={{
+              color: "#000000",
+              fontSize: "0.9rem",
+              fontWeight: "500",
+              textAlign: "center",
+            }}
+          >
+            Kindly Enter your Registered Email Address To recieve An OTP For
+            Varification
+          </Typography>
+        </Box>
+        <Box sx={{ marginTop: "2rem" }}>
+          <form
+            style={{
+              display: "flex",
+              flexDirection: "column",
+            
+            }}
+          >
+            <CustomTextInput
+              labelStyle={{
+                color: "#000000",
+                fontWeight: "600",
+                fontSize: "15px",
+                marginBottom: "2px",
               }}
-            >
-              <Box sx={{ padding: "36px 31px" }}>
+              label={"Register Email Address"}
+              palceholder="Enter Your Email Address"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            {emailValidated && (
+              <>
+                <OtpInput
+                  containerStyle={{
+                    display: "flex",
+                    gap: 10,
+                    justifyContent: "center",
+                    marginTop: 6,
+                  }}
+                  inputStyle={{
+                    width: "30px",
+                    height: "30px",
+                    fontSize: "15px",
+                    border: "0.9px solid #DCDCDC",
+                    borderRadius: "7.5px",
+                  }}
+                  value={otp}
+                  onChange={setOtp}
+                  numInputs={6}
+                  renderInput={(props) => <input {...props} />}
+                />
                 <Box
                   sx={{
                     display: "flex",
                     justifyContent: "center",
-                    textAlign: "center",
-                    gap: 1,
+                    gap: "5px",
                   }}
                 >
-                  <img src={dashboardIcon} alt="" />
-                  <Typography
-                    sx={{
-                      color: "#2E2C34",
-                      fontWeight: "700",
-                      fontSize: "26px",
-                    }}
-                  >
-                    Card Transact
-                  </Typography>
-                </Box>
-                <Typography
-                  sx={{
-                    marginTop: "1rem",
-                    textAlign: "center",
-                    color: "#000000",
-                    fontSize: "30px",
-                    fontWeight: "700",
-                    fontFamily: "serif",
-                  }}
-                >
-                  Forget Password
-                </Typography>
-                <CustomText
-                  style={{
-                    color: "#000000",
-                    fontSize: "0.6rem",
-                    fontWeight: "600",
-                    textAlign: "center",
-                    marginTop: "4rem",
-                  }}
-                  text=" Kindly Enter your Registered Email Address To recieve An OTP For Varification"
-                ></CustomText>
-              </Box>
-              <Box>
-                <form
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    padding: "0px 20px",
-                  }}
-                >
-                  <CustomTextInput
-                    labelStyle={{
-                      color: "#000000",
-                      fontWeight: "600",
-                      fontSize: "15px",
-                      marginBottom: "2px",
-                    }}
-                    label={"Register Email Address"}
-                    palceholder="Enter Your Email Address"
-                  />
-
-                  <LoadButton
-                    type="submit"
-                    loading={loading}
-                    onClick={redirectVerifyOtp}
-                    variant="contained"
+                  <CustomText
+                    text="Resend"
                     style={{
-                      width: "100%",
-                      marginTop: 5,
-                      textTransform: "none",
+                      color: "#589E58",
+                      fontWeight: "500",
+                      fontSize: "0.7rem",
+                      marginTop: "0.5rem",
                     }}
-                  >
-                    Submit
-                  </LoadButton>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      flexDirection: "column",
-                      alignItems: "center",
-                     
-                      marginTop: "1rem",
+                  ></CustomText>
+                  <CustomText
+                    text="in 00:45"
+                    style={{
+                      color: "#000000",
+                      fontWeight: "500",
+                      fontSize: "0.7rem",
+                      marginTop: "0.5rem",
                     }}
-                  >
-                    <CustomText
-                      text="Return To Login"
-                      onClick={redirectLogin}
-                      style={{
-                        color: "#589E58",
-                        width: "30%",
-                        cursor: "pointer",
-                        fontSize: "12px",
-                      }}
-                    />
-                    <Divider
-                      sx={{ width: "30%", border: "0.1px solid #589E58" }}
-                    />
-                  </Box>
-                </form>
-              </Box>
+                  ></CustomText>
+                </Box>
+              </>
+            )}
+
+            <LoadButton
+              type="submit"
+              loading={loading}
+              onClick={handleEmailValidation}
+              variant="contained"
+              style={{
+                width: "100%",
+                marginTop: 5,
+                textTransform: "none",
+              }}
+            >
+              Submit
+            </LoadButton>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                alignItems: "center",
+
+                marginTop: "1rem",
+              }}
+            >
+              <CustomText
+                text="Return To Login"
+                onClick={redirectLogin}
+                style={{
+                  color: "#589E58",
+                  width: "30%",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                }}
+              />
+              <Divider sx={{ width: "30%", border: "0.1px solid #589E58" }} />
             </Box>
-          </Box>
+          </form>
         </Box>
-      </Box>
+      </AuthCustomBox>
     </>
   );
 };
