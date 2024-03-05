@@ -5,7 +5,7 @@ import messageIcon from "../../assets/messageIcon.svg"
 
 interface headerProps {
     style?: React.CSSProperties
-    name?: string
+    name?: string;
 }
 
 const MessageHeader: React.FC<headerProps> = ({style, name}) => {

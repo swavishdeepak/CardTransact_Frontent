@@ -116,41 +116,41 @@ export const AgentDetails = () => {
             <DetailsSubTitleName name={"P12 4Hk"} />
           </Grid>
         </Grid>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-          <Grid item xs={12}>
-            <DetailsHeader heading={"Bank Details"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Bank Name"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"Lloyds"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Name on Bank A/c"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"Heena"} />
-          </Grid>
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            mt={3}
+          >
+            <Grid item xs={12}>
+              <DetailsHeader heading={"Bank Details"} />
+            </Grid>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Bank Name"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={"Lloyds"} />
+            </Grid>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Name on Bank A/c"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={"Heena"} />
+            </Grid>
 
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Sort Code"} />
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Sort Code"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={"01-02-3"} />
+            </Grid>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Account Number"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={"12345678"} />
+            </Grid>
           </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"01-02-3"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Account Number"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"12345678"} />
-          </Grid>
-        </Grid>
 
         <Grid></Grid>
       </CustomBox>

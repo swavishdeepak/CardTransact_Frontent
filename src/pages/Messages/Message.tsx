@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box} from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
 import { Chat } from "../../components/Messages/Chat";
@@ -11,35 +11,55 @@ export const Message = () => {
 
   const handleUserClick = (userId: any, userName: string) => {
     setSelectedUserId({ userId, userName });
-    console.log("sjfjs", selectedUserId);
+    
   };
+
+  let user = selectedUserId.userName;
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
       <CustomBox style={{ padding: 0 }}>
-        <Box sx={{ width: "100%", display: "flex", height: "68vh" }}>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            height: "68vh",
+            "@media(max-width: 900px)": {
+              flexDirection: "column",
+              "@media(max-width: 600px)": {
+                flexDirection: "column",
+
+              },
+            },
+          }}
+        >
           <MeessageSideBar
             onClick={handleUserClick}
             style={{
               overflowY: "auto",
+
             }}
           />
 
-          <Box
+         {selectedUserId && <Box
             sx={{
               width: "75%",
+              "@media(max-width: 600px)": {
+                width: "100%",
+                height: "100vh"
+              },
             }}
           >
-            <Chat >
+            <Chat>
               <MessageHeader
-                name={selectedUserId.userName}
+                name={user}
                 style={{
                   position: "relative",
                   zIndex: "100",
                 }}
               />
             </Chat>
-          </Box>
+          </Box>}
         </Box>
       </CustomBox>
     </Box>

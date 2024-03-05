@@ -1,7 +1,14 @@
 import React, { useState } from "react";
-import { Box, Typography, Stack, Avatar,InputAdornment,IconButton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  Avatar,
+  InputAdornment,
+  IconButton,
+} from "@mui/material";
 import messageIcon from "../../assets/messageIcon.svg";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import CustomTextInput from "../CustomInput";
 
 interface sideBarProps {
@@ -94,6 +101,12 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
         sx={{
           width: "25%",
           borderRight: "1px solid #ECECEC",
+          "@media(max-width: 900px)": {
+            width: "100%",
+            "@media(max-width: 600px)": {
+              width: "100%",
+            },
+          },
           ...style,
         }}
       >
@@ -105,7 +118,6 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
             textAlign: "center",
           }}
         >
-         
           <CustomTextInput
             palceholder={"Search..."}
             value={searchUser}
@@ -130,7 +142,6 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
                 },
               },
             }}
-            
           />
         </Stack>
         {filteredUsers.map((v) => {
@@ -142,7 +153,7 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
               spacing={2}
               style={{
                 borderBottom: "1px solid #ECECEC",
-                padding: "0.6rem 10px 1px",
+                padding: "0.6rem 12px 6px",
                 alignItems: "center",
                 cursor: "pointer",
               }}
@@ -169,12 +180,35 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
                     fontWeight: "400",
                     whiteSpace: "nowrap",
                     overflow: "hidden",
-                    maxWidth: "150px",
+                    maxWidth: "120px",
+                    "@media(max-width: 900px)": {
+                      maxWidth: "100%",
+                      "@media(max-width: 600px)": {
+                        maxWidth: "160px",
+                      },
+                    },
                   }}
                 >
                   {v.messageHeader}
                 </Typography>
               </Stack>
+              <Box
+                sx={{
+                  width: 15,
+                  height: 15,
+                  borderRadius: "50%",
+                  backgroundColor: "#C10404",
+                  p: "2px",
+                  justifyItems: "self-start",
+                  textAlign: "center",
+                }}
+              >
+                <Typography
+                  sx={{ color: "#fff", fontSize: "8px", fontWeight: "600" }}
+                >
+                  0
+                </Typography>
+              </Box>
             </Stack>
           );
         })}

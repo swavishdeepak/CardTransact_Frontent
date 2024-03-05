@@ -21,9 +21,12 @@ export const CommonHeader: React.FC<CommonHeaderProps> = ({
           sx={{
             color: "#202020",
             fontWeight: "600",
-            fontSize: "16px",
-            "@media(max-width: 600px)":{
-              fontSize: "12px"
+            fontSize: "20px",
+            "@media(max-width: 900px)":{
+              fontSize: "16px",
+              "@media(max-width: 600px)":{
+                fontSize: "12px"
+              },
             },
             ...headerStyle,
           }}

@@ -62,10 +62,13 @@ const Table: React.FC<BasicTableProps> = ({
             color: "#202020",
             fontWeight: "500",
             fontSize: "15px",
+           
             
           },
           ...sx,
         }}
+        
+
         disableColumnMenu
         disableRowSelectionOnClick
         initialState={{
@@ -119,7 +122,10 @@ const CustomToolbar: React.FC<{ title?: string }> = ({ title }) => {
       </Box>
 
       <Box>
-        <GridToolbarQuickFilter variant="outlined" size="small" />
+        <GridToolbarQuickFilter 
+        variant="outlined"
+         size="small"
+         />
       </Box>
     </GridToolbarContainer>
   );

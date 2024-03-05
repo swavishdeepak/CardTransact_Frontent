@@ -50,6 +50,8 @@ import { ReceivedNotification } from "./pages/Notifications/ReceivedNotification
 import { NotificationDetails } from "./pages/Notifications/NotificationDetails";
 /* Message */
 import { Message } from "./pages/Messages/Message";
+import { DeleteData } from "./pages/DeleteData/DeleteData";
+import { DeleteDataDetails } from "./pages/DeleteData/DeleteDataDetails";
 
 
 
@@ -220,6 +222,14 @@ function App() {
          {
           path: "/messages",
           element: <Message/>
+         },
+         /* Delete Data SideBar List**************************/
+         {
+          path: "/deleteData",
+          element: <DeleteData/>
+         },{
+          path: "/deleteDataDetails",
+          element: <DeleteDataDetails/>
          }
       ],
     },
