@@ -1,20 +1,22 @@
-
 import React from "react";
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
+import { Typography,Box } from "@mui/material";
+import { Colors } from "../utils/Colors";
 
 interface CustomTextInputProps {
   label?: string;
   style?: React.CSSProperties;
   borderRadius?: string | number;
   labelStyle?: React.CSSProperties;
-  palceholder?: string;
+  placeholder?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onKeyPress?: React.KeyboardEventHandler<HTMLElement>;
   value?: string;
+  name?: string;
+  error?: string | undefined;
   multiline?: boolean;
-  rows?: number
+  rows?: number;
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -22,27 +24,28 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   style,
   borderRadius,
   labelStyle,
-  palceholder,
+  placeholder,
   onClick,
   onChange,
   onKeyPress,
+  name,
+  error,
   value,
   multiline,
   rows,
   ...props
 }) => {
-  
-
+  const isError = !!error;
   return (
-    <>
+    <Box>
       <Typography
         sx={{
-          marginBottom: "4px",
           color: "#000000",
-          fontWeight: "500",
+          fontWeight: "600",
           fontSize: "15px",
-          "@media(max-width:600px)":{
-            fontSize: "13px"
+          marginBottom: "2px",
+          "@media(max-width:600px)": {
+            fontSize: "13px",
           },
           ...labelStyle,
         }}
@@ -50,7 +53,8 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         {label}
       </Typography>
       <TextField
-        placeholder={palceholder}
+        placeholder={placeholder}
+        name={name}
         size="small"
         onClick={onClick}
         onChange={onChange}
@@ -59,16 +63,16 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         rows={rows}
         value={value}
         sx={{
-           width: "100%",
-           "& .MuiOutlinedInput-root": {
+          width: "100%",
+          "& .MuiOutlinedInput-root": {
             "&:hover fieldset": {
-              border: "1px solid #DCDCDC", 
+              border: "1px solid #DCDCDC",
             },
             "&.Mui-focused fieldset": {
-              border: "1px solid #DCDCDC", 
+              border: isError?"1px solid red": "1px solid #DCDCDC",
             },
-          }
-          }}
+          },
+        }}
         InputProps={{
           style: {
             borderRadius: "7.5px",
@@ -76,16 +80,23 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
             fontWeight: "400",
             "&::placeholder": {
               color: "#898989",
-              
             },
-            
-          } as React.CSSProperties
-         
+          } as React.CSSProperties,
         }}
         {...props}
-        
       />
-    </>
+      {error && (
+        <Typography
+          sx={{
+            color: Colors.deletebtnColor,
+            marginTop: "0px",
+            fontSize: "14px",
+          }}
+        >
+          {error}
+        </Typography>
+      )}
+    </Box>
   );
 };
 

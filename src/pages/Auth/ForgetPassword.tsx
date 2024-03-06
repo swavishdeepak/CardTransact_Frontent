@@ -1,84 +1,138 @@
 import React, { useState } from "react";
-import { Box, TextField, Typography } from "@mui/material";
-import AuthBack from "./AuthBack";
+import { Box,Typography } from "@mui/material";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
-import dashboardIcon from "../../assets/dashboardIcon.svg";
 import OtpInput from "react-otp-input";
 import CustomText from "../../components/CustomText";
 import CustomTextInput from "../../components/CustomInput";
 import Divider from "@mui/material/Divider";
 import AuthCustomBox from "../../components/AuthCustomBox";
+import { Formik } from "formik";
+import { forgetSchema } from "../../utils/Validation";
 
 export const ForgetPassword = () => {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState();
   const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(true);
   const [emailValidated, setEmailValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const pageRedirect = () => {
-    navigate("/auth/GoogleAuthentication");
-  };
+  const [values, setValues] = useState({
+    email: "",
+  });
+
+  
   const redirectLogin = () => {
     navigate("/auth/login");
   };
 
-  const redirectVerifyOtp = () => {
-    navigate("/auth/verifyOtp");
+  const handleOtpChange = (otpValue: any) => {
+    setOtp(otpValue); 
   };
 
-  const handleEmailChange = (event: any) => {
-    setEmail(event.target.value);
-  };
 
   const handleEmailValidation = () => {
-    const isValid = /\S+@\S+\.\S+/.test(email);
-    setIsEmailValid(isValid);
-    if (isValid) {
-      setEmailValidated(true); 
-    }
+    setEmailValidated(true);
   };
+
+  const handleVerify = ()=>{
+    navigate("/resetPassword");
+  }
+
+ 
+
 
   return (
     <>
       <AuthCustomBox header="Forgot Password">
-        <Box sx={{ padding: "0px 20px" }}>
+        <Box
+          sx={{ padding: "0px 20px", marginTop: "2rem", textAlign: "center" }}
+        >
+          {emailValidated && (
+            <Typography
+              sx={{ color: "#000000", fontSize: "20px", fontWeight: "600" }}
+            >
+              OTP
+            </Typography>
+          )}
           <Typography
             sx={{
               color: "#000000",
               fontSize: "0.9rem",
               fontWeight: "500",
-              textAlign: "center",
             }}
           >
             Kindly Enter your Registered Email Address To recieve An OTP For
             Varification
           </Typography>
         </Box>
-        <Box sx={{ marginTop: "2rem" }}>
-          <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            
-            }}
-          >
-            <CustomTextInput
-              labelStyle={{
-                color: "#000000",
-                fontWeight: "600",
-                fontSize: "15px",
-                marginBottom: "2px",
-              }}
-              label={"Register Email Address"}
-              palceholder="Enter Your Email Address"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            {emailValidated && (
-              <>
+        <Box sx={{ marginTop: "1.5rem" }}>
+          {!emailValidated && (
+            <Formik
+              initialValues={values}
+             validationSchema={forgetSchema}
+              onSubmit={handleEmailValidation}
+            >
+              {({ values, errors, handleSubmit, handleChange }) => (
+                <form
+                  onSubmit={handleSubmit}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CustomTextInput
+                    label={"Register Email Address"}
+                    placeholder="Enter Your Email Address"
+                    name="email"
+                    value={values.email}
+                    error={errors.email}
+                    onChange={handleChange}
+                  />
+                  <LoadButton
+                    type="submit"
+                    loading={loading}
+                    variant="contained"
+                    style={{
+                      width: "100%",
+                      marginTop: 5,
+                      textTransform: "none",
+                    }}
+                  >
+                    Submit
+                  </LoadButton>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      flexDirection: "column",
+                      alignItems: "center",
+
+                      marginTop: "1rem",
+                    }}
+                  >
+                    <CustomText
+                      text="Return To Login"
+                      onClick={redirectLogin}
+                      style={{
+                        color: "#589E58",
+                        width: "30%",
+                        cursor: "pointer",
+                        fontSize: "12px",
+                      }}
+                    />
+                    <Divider
+                      sx={{ width: "30%", border: "0.1px solid #589E58" }}
+                    />
+                  </Box>
+                </form>
+              )}
+            </Formik>
+          )}
+
+          {emailValidated && (
+           
+              <form>
                 <OtpInput
                   containerStyle={{
                     display: "flex",
@@ -94,7 +148,7 @@ export const ForgetPassword = () => {
                     borderRadius: "7.5px",
                   }}
                   value={otp}
-                  onChange={setOtp}
+                  onChange={handleOtpChange}
                   numInputs={6}
                   renderInput={(props) => <input {...props} />}
                 />
@@ -124,45 +178,45 @@ export const ForgetPassword = () => {
                     }}
                   ></CustomText>
                 </Box>
-              </>
-            )}
+                <LoadButton
+                  //type="submit"
+                  onClick={handleVerify}
+                  loading={loading}
+                  variant="contained"
+                  style={{
+                    width: "100%",
+                    marginTop: 5,
+                    textTransform: "none",
+                  }}
+                >
+                  Verify
+                </LoadButton>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    alignItems: "center",
 
-            <LoadButton
-              type="submit"
-              loading={loading}
-              onClick={handleEmailValidation}
-              variant="contained"
-              style={{
-                width: "100%",
-                marginTop: 5,
-                textTransform: "none",
-              }}
-            >
-              Submit
-            </LoadButton>
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                alignItems: "center",
-
-                marginTop: "1rem",
-              }}
-            >
-              <CustomText
-                text="Return To Login"
-                onClick={redirectLogin}
-                style={{
-                  color: "#589E58",
-                  width: "30%",
-                  cursor: "pointer",
-                  fontSize: "12px",
-                }}
-              />
-              <Divider sx={{ width: "30%", border: "0.1px solid #589E58" }} />
-            </Box>
-          </form>
+                    marginTop: "1rem",
+                  }}
+                >
+                  <CustomText
+                    text="Return To Login"
+                    onClick={redirectLogin}
+                    style={{
+                      color: "#589E58",
+                      width: "30%",
+                      cursor: "pointer",
+                      fontSize: "12px",
+                    }}
+                  />
+                  <Divider
+                    sx={{ width: "30%", border: "0.1px solid #589E58" }}
+                  />
+                </Box>
+              </form>
+          )}
         </Box>
       </AuthCustomBox>
     </>

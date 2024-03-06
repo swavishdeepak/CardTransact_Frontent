@@ -5,7 +5,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Login } from "./pages/Auth/Login";
 import { GoogleAuthentication } from "./pages/Auth/GoogleAuthentication";
 import { ForgetPassword } from "./pages/Auth/ForgetPassword";
-import { VerifyOtp } from "./pages/Auth/VerifyOtp";
 import { ResetPassword } from "./pages/Auth/ResetPassword";
 import { UserProfile } from "./pages/Auth/UserProfile";
 /* main */
@@ -69,12 +68,9 @@ function App() {
       path: "/auth/ForgetPassword",
       element: <ForgetPassword />,
     },
+   
     {
-      path: "/auth/verifyOtp",
-      element: <VerifyOtp />,
-    },
-    {
-      path: "/auth/resetPassword",
+      path: "/resetPassword",
       element: <ResetPassword />,
     },
 

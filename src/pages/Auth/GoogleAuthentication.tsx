@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
 import CustomText from "../../components/CustomText";
@@ -17,53 +17,74 @@ export const GoogleAuthentication = () => {
   };
 
   const redirectforgetPassword = () => {
-    navigate("/auth/ForgetPassword");
+    navigate("/dashboard");
   };
 
   return (
     <>
-      <AuthCustomBox header="google">
-        <Box sx={{textAlign: "center"}}>
-          <CustomText
-            style={{
-              color: "#04609A",
-              fontWeight: "700",
-              fontFamily: "sans-serif",
-              fontSize: "2rem",
-            }}
-            text="Authentications"
-          ></CustomText>
-          <CustomText
-            style={{ color: "#000000", fontWeight: "600" }}
-            text="OTP"
-          ></CustomText>
-          <CustomText
-            style={{ color: "#000000", fontSize: "0.8rem", fontWeight: "500" }}
-            text=" Kindly Enter The Varification code Sent to your Registered
+      <AuthCustomBox header="Google">
+        <Box sx={{ textAlign: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "baseline", justifyContent: "center" }}>
+            <Typography
+              style={{
+                color: "#04609A",
+                fontWeight: "700",
+                fontFamily: "sans-serif",
+                fontSize: "2rem",
+              }}
+            >
+              Authentication
+            </Typography>
+            <Typography sx={{color: "#04609A",fontSize: "2rem"}}>/</Typography>
+            <Typography
+              style={{
+                color: "#04609A",
+                fontWeight: "700",
+                fontFamily: "sans-serif",
+                fontSize: "2rem",
+              }}
+            >
+              OTP
+            </Typography>
+          </Box>
+          <Box sx={{ padding: "11px 53px 0px" }}>
+            <CustomText
+              style={{ color: "#000000", fontWeight: "600" }}
+              text="OTP"
+            ></CustomText>
+            <CustomText
+              style={{
+                color: "#000000",
+                fontSize: "0.8rem",
+                fontWeight: "500",
+                marginTop: "0.5rem",
+              }}
+              text=" Kindly Enter The Varification code Sent to your Registered
                   Email Id"
-          ></CustomText>
-          <OtpInput
-            containerStyle={{
-              display: "flex",
-              gap: 10,
-              justifyContent: "center",
-              marginTop: 6,
-            }}
-            inputStyle={{
-              width: "30px",
-              height: "30px",
-              fontSize: "15px",
-              border: "0.9px solid #DCDCDC",
-              borderRadius: "7.5px",
-            }}
-            value={otp}
-            onChange={setOtp}
-            numInputs={6}
-            // onChange={(otp) =>
-            //   handleChange({ target: { name: "otp", value: otp } })
-            // }
-            renderInput={(props) => <input {...props} />}
-          />
+            ></CustomText>
+            <OtpInput
+              containerStyle={{
+                display: "flex",
+                gap: 10,
+                justifyContent: "center",
+                marginTop: 6,
+              }}
+              inputStyle={{
+                width: "30px",
+                height: "30px",
+                fontSize: "15px",
+                border: "0.9px solid #DCDCDC",
+                borderRadius: "7.5px",
+              }}
+              value={otp}
+              onChange={setOtp}
+              numInputs={6}
+              // onChange={(otp) =>
+              //   handleChange({ target: { name: "otp", value: otp } })
+              // }
+              renderInput={(props) => <input {...props} />}
+            />
+          </Box>
           <Box
             sx={{
               display: "flex",

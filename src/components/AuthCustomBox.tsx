@@ -32,16 +32,27 @@ const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
               boxShadow: "5.625px 6.5625px 9.375px 0px #00000052",
               borderRadius: 5,
               backgroundColor: "#fff",
-              p:"20px 30px"
+              "@media(max-width: 900px)":{
+                width: "400px",
+                left: "8rem",
+                position: "relative",
+                "@media(max-width: 600px)":{
+                  width: "100%",
+                  position: "relative",
+                  left: "0px",
+                  padding: "2.5rem 10px",
+                },
+              },
+              p:"55px 30px"
             }}
           >
-            <Box sx={{ padding: "2rem" }}>
+            <Box>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   textAlign: "center",
-                  gap: 1,
+                  gap: {xs: 0, md: 1},
                 }}
               >
                 <img src={dashboardIcon} alt="" style={{width: "55px", height: "55px"}} />
@@ -60,15 +71,16 @@ const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
                 sx={{
                   textAlign: "center",
                   color: "#000000",
-                  fontSize: "30px",
+                  fontSize: "40px",
                   fontWeight: "700",
-                  fontFamily: "serif",
+                  fontFamily: "Inria Serif",
                 }}
               >
                 {header}
               </Typography>
+              {children}
             </Box>
-            {children}
+           
           </Box>
         </Box>
       </Box>

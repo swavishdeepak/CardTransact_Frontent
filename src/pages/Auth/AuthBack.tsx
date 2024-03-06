@@ -7,23 +7,25 @@ const AuthBack = () => {
     <Box
       sx={{
         position: "absolute",
-        height: "100%",
+        height: "100vh",
         width: "100%",
         display: "flex",
       }}
     >
-      <img
+      <Box
+        component="img"
         src={AuthImg}
-        style={{
-          //backgroundRepeat: "no-repeat",
+        sx={{
           backgroundPosition: "left",
           backgroundSize: "cover",
           objectFit: "cover",
-          // width: "auto",
           height: "100%",
           left: 0,
           top: 0,
           width: "78%",
+          "@media (max-width: 600px)": {
+            width: "100%",
+          },
         }}
         alt="background"
       />
