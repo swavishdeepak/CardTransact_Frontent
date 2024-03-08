@@ -74,7 +74,7 @@ export const Chat: React.FC<chatProps> = ({ children, style }) => {
         </Box>
         <Box sx={{ padding: 1 }}>
           <CustomTextInput
-            palceholder="Type Your Message Here"
+            placeholder="Type Your Message Here"
             multiline={true}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}

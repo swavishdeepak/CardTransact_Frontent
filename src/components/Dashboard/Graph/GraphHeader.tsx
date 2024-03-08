@@ -1,9 +1,9 @@
-import React, { useState,ChangeEvent } from "react";
+import React, { useState} from "react";
 import { Box, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import BasicDialog from "../../BasicDialog";
 import BasicSelect from "../../BasicSelect";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { SelectChangeEvent } from '@mui/material/Select';
 
 interface GraphHeaderProps {
   title: string;
@@ -12,7 +12,7 @@ interface GraphHeaderProps {
 }
 
 const GraphHeader: React.FC<GraphHeaderProps> = ({ style, title, date }) => {
-  const [selectedValue, setSelectedValue] = useState("weekly");
+  const [selectedValue, setSelectedValue] = useState<string>("weekly");
 
   
 
@@ -22,7 +22,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({ style, title, date }) => {
     { value: "yearly", label: "Yearly" },
   ];
 
-  const handleChange = (event: SelectChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: SelectChangeEvent<string>) => {
     setSelectedValue(event.target.value as string);
   };
   return (
@@ -38,7 +38,7 @@ const GraphHeader: React.FC<GraphHeaderProps> = ({ style, title, date }) => {
           name={"selectedValue"}
           label={"Booking"}
           value={selectedValue}
-          // handleChange={handleChange}
+          handleChange={handleChange}
           size="small"
           items={booking}
         />

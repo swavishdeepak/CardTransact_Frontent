@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
-import { CommonHeader } from "../../components/CommonHeader";
-import BasicSelect from "../../components/BasicSelect";
 import CustomTextInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { Colors } from "../../utils/Colors";
-import { LoadButton } from "../../components/LoadButton";
-import DatePickerPicker from "../../components/MyCustom/DatePickerInput";
-import Table from "../../components/Table";
+import { LoadButton } from '../../components/LoadButton';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import Table1 from "../../components/Table1";
 
 interface Column {
   field: string;
@@ -26,6 +23,7 @@ interface Column {
 interface Row {
   id: number;
   aquirer: string;
+  tier: string;
   file_Name: string;
   last_Update: string;
   added_By: string;
@@ -52,15 +50,16 @@ export const CommissionStructure = () => {
   ];
 
   const columns: Column[] = [
+   
     {
-      field: "id",
-      headerName: "Sr.No",
-      minWidth: 90,
+      field: "aquirer",
+      headerName: "Aquirer",
+      minWidth: 50,
       flex: 1,
     },
     {
-      field: "aquirer",
-      headerName: "aquirer",
+      field: "tier",
+      headerName: "Tier",
       minWidth: 100,
       flex: 1,
     },
@@ -96,6 +95,7 @@ export const CommissionStructure = () => {
     {
       id: 1,
       aquirer: "Worl Pay",
+      tier: "Tier01",
       file_Name: "File 01",
       last_Update: "12/02/2024",
       added_By: "Admin01",
@@ -104,7 +104,8 @@ export const CommissionStructure = () => {
     {
       id: 2,
       aquirer: "Worl Pay",
-      file_Name: "File 02",
+      tier: "Tier01",
+      file_Name: "File 01",
       last_Update: "12/02/2024",
       added_By: "Admin01",
       action: "Edit",
@@ -112,19 +113,14 @@ export const CommissionStructure = () => {
     {
       id: 3,
       aquirer: "Worl Pay",
-      file_Name: "File 03",
+      tier: "Tier01",
+      file_Name: "File 01",
       last_Update: "12/02/2024",
       added_By: "Admin01",
       action: "Edit",
     },
-    {
-      id: 4,
-      aquirer: "Worl Pay",
-      file_Name: "File 04",
-      last_Update: "12/02/2024",
-      added_By: "Admin01",
-      action: "Edit",
-    },
+   
+    
   ];
 
   const handleRedirect = () => {
@@ -133,58 +129,17 @@ export const CommissionStructure = () => {
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
-      <Header />
-      <CustomBox>
-        <CommonHeader header="Commission Structure">
-          <LoadButton onClick={handleRedirect} >Add Structure</LoadButton>
-        </CommonHeader>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "end",
-            width: "70%",
-            gap: 1,
-            marginTop: "1rem",
-          }}
-        >
-          <BasicSelect
-            sx={{
-              borderRadius: 1,
-              backgroundColor: "#FCFAFA",
-              border: "1px solid #898989",
-              height: "2rem",
-              padding: 2,
-              width: "100%",
-              fontSize: 12,
-            }}
-            placeholder="Select Aquirer"
-            name={"selectedValue"}
-            value={selectedValue}
-            handleChange={handleChange}
-            size="small"
-            items={aquirer}
-          />
-          <CustomTextInput />
-          <CustomTextInput />
-          <LoadButton
-            style={{
-              height: "2rem",
-              fontSize: "12px",
-            }}
-          >
-            Apply
-          </LoadButton>
-        </Box>
-
-        <Table
+      <Header>
+         <LoadButton style={{height: "80%"}} onClick={handleRedirect}>Add Structure</LoadButton>
+      </Header>
+        <Table1
           columns={columns}
-          includeSlots={false}
           rows={rows}
-          title="All Commission"
+          title="Commission Structure"
           getRowId={(row: any) => row.id}
+         
         />
-      </CustomBox>
+      
     </Box>
   );
 };
@@ -305,7 +260,7 @@ const More = (params: any) => {
           <CustomTextInput
             label="Remarks"
             rows={4}
-            palceholder="Tyle Here..."
+            placeholder="Tyle Here..."
             multiline={true}
           />
         </CustomBox>

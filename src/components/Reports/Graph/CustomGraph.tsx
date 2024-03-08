@@ -8,10 +8,10 @@ import { Link } from "react-router-dom";
 
 interface GraphHeaderProps {
   header?: string;
-  viewDetails?: string;
+  viewDetails?: React.ReactNode;
   year?: string;
   pound?: string;
-  children: React.ReactNode;
+  children?: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
   showPoundIcon?: boolean;
 }
 
@@ -44,7 +44,7 @@ export const CustomGraph: React.FC<GraphHeaderProps> = ({
             {header}
           </Typography>
 
-          <Link to="" style={{ color: Colors.LinkColor }}>
+          <Link to="#" style={{ color: Colors.LinkColor }}>
             {viewDetails}
           </Link>
         </Box>
@@ -63,9 +63,11 @@ export const CustomGraph: React.FC<GraphHeaderProps> = ({
         </Typography>
       </Box>
       <Typography sx={{ color: Colors.editColor }}>{year}</Typography>
-      <ResponsiveContainer width="100%" height={210}>
-        {children}
-      </ResponsiveContainer>
+      {children && ( // Render ResponsiveContainer only if children is defined
+        <ResponsiveContainer width="100%" height={210}>
+          {children}
+        </ResponsiveContainer>
+      )}
     </Box>
   );
 };

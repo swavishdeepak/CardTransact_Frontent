@@ -11,7 +11,7 @@ import BasicSelect from "../BasicSelect";
 
 
 interface ApplicationInfoProps {
-  disableStyles: boolean;
+  disableStyles?: boolean;
 }
 
 export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({disableStyles = false}) => {
@@ -73,7 +73,7 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({disableS
         <Grid item xs={12} md={4.5}>
           <CustomTextInput
             label={"Salesperson Name"}
-            palceholder="Enter Salesperson Name"
+            placeholder="Enter Salesperson Name"
           />
         </Grid>
         <Grid item xs={12} md={5.5}>
@@ -84,7 +84,7 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({disableS
         <Grid item xs={12} md={4.5}>
           <CustomTextInput
             label={"Company Name"}
-            palceholder="Enter Company Name"
+            placeholder="Enter Company Name"
           />
         </Grid>
       </Grid>

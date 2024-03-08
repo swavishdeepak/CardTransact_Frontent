@@ -69,7 +69,7 @@ export const CreateNotification: React.FC = () => {
             <Grid item xs={12}>
               <CustomTextInput
                 label="Title of Notification"
-                palceholder="Enter Title Of Notification"
+                placeholder="Enter Title Of Notification"
               />
             </Grid>
             <Grid item xs={12}>
@@ -77,7 +77,7 @@ export const CreateNotification: React.FC = () => {
                 label="Message"
                 rows={4}
                 multiline={true}
-                palceholder="Enter Title Of Notification"
+                placeholder="Enter Title Of Notification"
               />
             </Grid>
           </Grid>

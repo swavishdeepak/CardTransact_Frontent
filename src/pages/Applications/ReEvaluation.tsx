@@ -66,7 +66,7 @@ export const ReEvaluation = () => {
             label="Remarks"
             labelStyle={{ marginTop: "1rem" }}
             rows={4}
-            palceholder="Tyle Here..."
+            placeholder="Tyle Here..."
             multiline={true}
           />
           <Box

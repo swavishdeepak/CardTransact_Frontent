@@ -119,7 +119,7 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
           }}
         >
           <CustomTextInput
-            palceholder={"Search..."}
+            placeholder={"Search..."}
             value={searchUser}
             onChange={handleSearchChange}
             InputProps={{

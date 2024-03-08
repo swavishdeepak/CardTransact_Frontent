@@ -4,10 +4,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { Colors } from "../utils/Colors";
 
-interface BasicDialogProps extends Omit<DialogProps, 'onClose'> {
-  title: string;
+interface BasicDialogProps  {
+  title?: string;
   open: boolean;
-  handleClose: () => void;
+  handleClose?: () => void;
+  children?: React.ReactNode;
   fullScreen?: boolean;
   sx?: object;
 }

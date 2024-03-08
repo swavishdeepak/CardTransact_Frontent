@@ -18,6 +18,7 @@ import { GraphCustomBox } from "../../components/GraphCustomBox";
 import { Colors } from "../../utils/Colors";
 import CustomText from "../../components/CustomText";
 import saleIcon from "../../assets/saleIcon.svg";
+import { Link } from "react-router-dom";
 import Application from "../../components/Dashboard/Graph/Application";
 import { SalesPerson } from "../../components/Reports/TopSalesPersonList/SalesPerson";
 
@@ -154,7 +155,11 @@ export const Overview = () => {
           <GraphCustomBox>
             <CustomGraph
               header="Sales"
-              viewDetails="ViewDetails"
+              viewDetails={
+                <Link to="/salesDetails" style={{ color: Colors.LinkColor }}>
+                  ViewDetails
+                </Link>
+              }
               year="2024"
               pound="23,3453"
             >
@@ -209,9 +214,14 @@ export const Overview = () => {
           <GraphCustomBox>
             <CustomGraph
               header="Commission Recieved"
-              viewDetails="ViewDetails"
+              viewDetails={
+                <Link to="/commissionReceivedDetails" style={{ color: Colors.LinkColor }}>
+                  ViewDetails
+                </Link>
+              }
               year="2024"
               pound="23,3453"
+              
             >
               <BarChart
                 width={730}

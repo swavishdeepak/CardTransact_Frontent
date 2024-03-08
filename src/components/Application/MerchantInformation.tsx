@@ -42,31 +42,31 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({disable
         <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Merchant Name"}
-            palceholder="Enter Merchant`s Legal Name"
+            placeholder="Enter Merchant`s Legal Name"
           />
         </Grid>
         <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Legal Name"}
-            palceholder="Enter Limited Company/Solo Trader Name"
+            placeholder="Enter Limited Company/Solo Trader Name"
           />
         </Grid>
         <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Merchant Trading Name"}
-            palceholder="Enter Merchant Trading Name"
+            placeholder="Enter Merchant Trading Name"
           />
         </Grid>
         <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Mobile Number"}
-            palceholder="Enter Mobile Number"
+            placeholder="Enter Mobile Number"
           />
         </Grid>
         <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Enter Email Address"}
-            palceholder="Enter Email Address"
+            placeholder="Enter Email Address"
           />
         </Grid>
       </Grid>

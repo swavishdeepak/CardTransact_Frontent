@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Typography } from "@mui/material";
 import BasicSelect from "../BasicSelect"; 
 import { CustomBox } from "../MyCustom/CustomBox";
 import { Colors } from "../../utils/Colors";
 import { CommonHeader } from "../CommonHeader";
 import NavIcon from "../../assets/navIcon.svg"
+import { SelectChangeEvent } from '@mui/material/Select';
 
 interface SelectAquirerProps {
 
@@ -13,8 +13,8 @@ interface SelectAquirerProps {
 const SelectAquirer: React.FC<SelectAquirerProps> = (props) => {
   const [selectedValue, setSelectedValue] = useState<string>("");
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSelectedValue(event.target.value as string);
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedValue(event.target.value);
   };
 
   const selectAquirer = [

@@ -279,7 +279,7 @@ const More = (params: any) => {
           <CustomTextInput
             label="Remarks"
             rows={4}
-            palceholder="Tyle Here..."
+            placeholder="Tyle Here..."
             multiline={true}
           />
         </CustomBox>

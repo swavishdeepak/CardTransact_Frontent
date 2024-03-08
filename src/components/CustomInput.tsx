@@ -17,6 +17,11 @@ interface CustomTextInputProps {
   error?: string | undefined;
   multiline?: boolean;
   rows?: number;
+  InputProps?: {
+    startAdornment?: React.ReactNode;
+    style?: React.CSSProperties;
+    inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  };
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -32,6 +37,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   error,
   value,
   multiline,
+  InputProps,
   rows,
   ...props
 }) => {

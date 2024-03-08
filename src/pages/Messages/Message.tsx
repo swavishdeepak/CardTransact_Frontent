@@ -6,15 +6,21 @@ import { Chat } from "../../components/Messages/Chat";
 import MeessageSideBar from "../../components/Messages/MessageSideBar";
 import MessageHeader from "../../components/Messages/MessageHeader";
 
-export const Message = () => {
-  const [selectedUserId, setSelectedUserId] = useState({});
+interface SelectedUser {
+  userId: any;
+  userName: string;
+}
 
+export const Message = () => {
+  const [selectedUserId, setSelectedUserId] = useState<SelectedUser | null>(null);
   const handleUserClick = (userId: any, userName: string) => {
-    setSelectedUserId({ userId, userName });
+    setSelectedUserId({userId, userName });
     
   };
 
-  let user = selectedUserId.userName;
+  console.log("selectedUserId",selectedUserId)
+
+  let user = selectedUserId ? selectedUserId.userName || "": "";
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />

@@ -25,10 +25,14 @@ import { ViewApplication } from "./pages/Applications/ViewApplication";
 import EditApplication from "./pages/Applications/EditApplication";
 /* reports */
 import { Overview } from "./pages/Reports/Overview";
-import { WorldPay } from "./pages/Reports/WorldPay";
-import { Evo } from "./pages/Reports/Evo";
-import { Fdms } from "./pages/Reports/Fdms";
-import { Elavon } from "./pages/Reports/Elavon";
+import { CommissionShared } from "./pages/Reports/CommissionShared";
+import { Sales } from "./pages/Reports/Sales";
+import { CommissionReceived } from "./pages/Reports/CommissionReceived";
+import { Revenue } from "./pages/Reports/Revenue";
+import { ResidualReceived } from "./pages/Reports/ResidualReceived";
+import { ResidualShared } from "./pages/Reports/ResidualShared";
+import { Clawbacks } from "./pages/Reports/Clawbacks";
+import { SalesDetails } from "./pages/Reports/SalesDetails";
 import { ReEvaluation } from "./pages/Applications/ReEvaluation";
 /* merchants */
 import { Merchant } from "./pages/Merchant/Merchant";
@@ -51,6 +55,7 @@ import { NotificationDetails } from "./pages/Notifications/NotificationDetails";
 import { Message } from "./pages/Messages/Message";
 import { DeleteData } from "./pages/DeleteData/DeleteData";
 import { DeleteDataDetails } from "./pages/DeleteData/DeleteDataDetails";
+import { CommissionReceivedDetails } from "./pages/Reports/CommissionReceivedDetails";
 
 
 
@@ -182,20 +187,41 @@ function App() {
           element: <Overview />,
         },
         {
-          path: "/worldPay",
-          element: <WorldPay />,
+          path: "/sales",
+          element: <Sales />,
         },
         {
-          path: "/evo",
-          element: <Evo />,
+          path: "/revenue",
+          element: <Revenue />,
         },
         {
-          path: "/fdms",
-          element: <Fdms />,
+          path: "/commissionReceived",
+          element: <CommissionReceived />,
         },
         {
-          path: "/elavon",
-          element: <Elavon />,
+          path: "/commissionShared",
+          element: <CommissionShared />,
+        },
+        {
+          path: "/residualReceived",
+          element: <ResidualReceived />,
+        },
+        {
+          path: "/residualShared",
+          element: <ResidualShared />,
+        },
+        {
+          path: "/clawbacks",
+          element: <Clawbacks />,
+        },
+        {
+          path: "/salesDetails",
+          element: <SalesDetails/>
+
+        },
+        {
+          path: "/commissionReceivedDetails",
+          element: <CommissionReceivedDetails/>
         },
         /*Notification SideBar List************************/
         {

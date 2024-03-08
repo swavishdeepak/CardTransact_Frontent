@@ -1,6 +1,6 @@
 export const Colors = {
     ButtonColor: "#589E58",
-    SideBarItembgcolor: "#ece7e7",
+    SideBarItembgcolor: "#EEEBF4",
     SibarItemcolor: "#589E58",
     ExpandMoreColor: "#898989",
     LinkColor: "#77D177",

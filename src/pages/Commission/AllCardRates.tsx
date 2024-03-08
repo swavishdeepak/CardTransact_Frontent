@@ -8,10 +8,11 @@ import CustomTextInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { Colors } from "../../utils/Colors";
 import { LoadButton } from "../../components/LoadButton";
-import DatePickerPicker from "../../components/MyCustom/DatePickerInput";
+// import DatePickerPicker from "../../components/MyCustom/DatePickerInput";
 import Table from "../../components/Table";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Table1 from "../../components/Table1";
 
 interface Column {
   field: string;
@@ -134,63 +135,15 @@ export const AllCardRates = () => {
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
-      <Header />
-      <CustomBox>
-        <CommonHeader header="All Card Rates Structure" >
-            <LoadButton 
-             onClick={handleRedirect}
-              
-            >
-               Add Structure
-              </LoadButton>
-          </CommonHeader>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "end",
-            width: "70%",
-            gap: 1,
-            marginTop: "1rem",
-          }}
-        >
-          <BasicSelect
-            sx={{
-              borderRadius: 1,
-              backgroundColor: "#FCFAFA",
-              border: "1px solid #898989",
-              height: "2rem",
-              padding: 2,
-              width: "100%",
-              fontSize: 12,
-            }}
-            placeholder="Select Aquirer"
-            name={"selectedValue"}
-            value={selectedValue}
-            handleChange={handleChange}
-            size="small"
-            items={aquirer}
-          />
-          <CustomTextInput />
-          <CustomTextInput />
-          <LoadButton
-            style={{
-              height: "2rem",
-              fontSize: "12px"
-            }}
-          >
-            Apply
-          </LoadButton>
-        </Box>
-
-        <Table
+      <Header>
+      <LoadButton style={{height: "80%"}} onClick={handleRedirect}>Add Structure</LoadButton>
+      </Header>
+      <Table1
           columns={columns}
-          includeSlots={false}
           rows={rows}
-          title="All Commission"
+          title="All Card Rates Structure"
           getRowId={(row: any) => row.id}
         />
-      </CustomBox>
     </Box>
   );
 };

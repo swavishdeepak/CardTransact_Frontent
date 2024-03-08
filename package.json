@@ -20,8 +20,6 @@
     "@types/react-dom": "^18.2.18",
     "dayjs": "^1.11.10",
     "formik": "^2.4.5",
-    "framer-motion": "^11.0.3",
-    "material-react-table": "^2.11.3",
     "react": "^18.2.0",
     "react-datepicker": "^6.1.0",
     "react-dom": "^18.2.0",
@@ -57,6 +55,6 @@
     ]
   },
   "devDependencies": {
-    "typescript": "^3.2.1"
+    "typescript": "^5.4.2"
   }
 }

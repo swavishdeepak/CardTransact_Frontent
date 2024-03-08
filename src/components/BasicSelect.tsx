@@ -4,16 +4,17 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputBase from "@mui/material/InputBase";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
 import { Colors } from "../utils/Colors";
+import { SelectChangeEvent } from '@mui/material';
 
 interface BasicSelectProps {
   value: string;
   label?: string;
-  handleChange?: (event: SelectChangeEvent<string>) => void;
+  handleChange: (event: SelectChangeEvent<string>) => void;
   handleBlur?: () => void;
-  items?: { value: string; label: string }[];
+  items: { value: string; label: string }[];
   sx?: React.CSSProperties;
   labelStyle?: React.CSSProperties;
   name?: string;

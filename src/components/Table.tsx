@@ -6,6 +6,8 @@ import {
 import React from "react";
 import { CustomBox } from "./MyCustom/CustomBox";
 
+
+
 interface Column {
   field: string;
   headerName: string;
@@ -20,6 +22,7 @@ interface BasicTableProps {
   columns?: Column[];
   rows?: Row[];
   children?: React.ReactNode;
+  getRowClassName?: React.CSSProperties;
   pageSize?: number;
   sx?: object;
   title?: string;
@@ -39,6 +42,7 @@ const Table: React.FC<BasicTableProps> = ({
   title,
   exportHide,
   customButtons,
+  
   getRowId,
   includeSlots = true,
   includesPagination = true
@@ -90,6 +94,7 @@ const Table: React.FC<BasicTableProps> = ({
           },
         }}
         slots={includeSlots ? { toolbar: CustomToolbar } : {}}
+       
       />
     </CustomBox>
   );
@@ -120,10 +125,14 @@ const CustomToolbar: React.FC<{ title?: string }> = ({ title }) => {
          </>
         )}
       </Box>
+      
+    
+     
+      
 
       <Box>
         <GridToolbarQuickFilter 
-        variant="outlined"
+         variant="outlined"
          size="small"
          />
       </Box>

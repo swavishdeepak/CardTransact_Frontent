@@ -14,7 +14,7 @@ interface Column {
   minWidth: number;
   flex: number;
   sortable?: boolean;
-  rentalcell?: (params: any) => React.ReactNode;
+  renderCell?: (params: any) => React.ReactNode;
 }
 
 interface Row {
@@ -46,10 +46,12 @@ export const ViewStructure = () => {
       minWidth: 100,
       flex: 1,
       renderCell: () => (
+        <>
         <Typography sx={{ display: "flex", alignItems: "center" }}>
           <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
           <Typography sx={{ fontSize: "13px" }}>235.45</Typography>
         </Typography>
+        </>
       ),
     },
     {

@@ -242,7 +242,7 @@ export const UserProfile = () => {
           <CustomTextInput
             labelStyle={{ marginTop: "2rem" }}
             label="Registered Email Address"
-            palceholder="Email Address"
+            placeholder="Email Address"
           />
           <LoadButton style={{ marginTop: "1.5rem", width: "50%" }}>
             Confirm

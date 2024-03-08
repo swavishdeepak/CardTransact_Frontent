@@ -57,9 +57,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
-  alignItems: "center",
+  alignItems: "left",
   justifyContent: "flex-start",
-  padding: theme.spacing(0, 2.3),
+  padding: theme.spacing(0, 1.5),
   ...theme.mixins.toolbar,
 }));
 
@@ -211,7 +211,7 @@ export default function SideBar() {
               <MenuIcon onClick={handleDrawerClose} />
             ) : (
               <>
-                <List sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <List sx={{ display: "flex", alignItems: "left", gap: 1 }}>
                   <MenuIcon onClick={handleDrawerClose} />
                   <Link
                     to="/dashboard"
@@ -236,7 +236,7 @@ export default function SideBar() {
           style={{
             textDecoration: "none",
             color: "inherit",
-            padding: "0px 8px 0px",
+            padding: "0px 13px 0px 0px",
           }}
         >
           <ListItem
@@ -289,11 +289,13 @@ export default function SideBar() {
             </ListItemButton>
           </ListItem>
         </Link>
-        <List sx={{ padding: "0px 10px 0px" }}>
+        <List sx={{padding: "0px 13px 0px 0px" }}>
           {SidebarUserItems.map((item, index) => (
             <React.Fragment key={index}>
               <List
                 sx={{
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
                   borderRadius: "10px",
                   backgroundColor: isCollapse
                     ? Colors.SideBarItembgcolor
@@ -427,7 +429,7 @@ export default function SideBar() {
                                 opacity: open ? 1 : 0,
                                 "& .MuiTypography-root": {
                                   fontWeight: 600,
-                                  fontSize: "14px",
+                                  fontSize: "15px",
                                 },
                               }}
                             />
@@ -441,11 +443,13 @@ export default function SideBar() {
             </React.Fragment>
           ))}
         </List>
-        <List sx={{ padding: "0px 10px 0px" }}>
+        <List sx={{padding: "0px 13px 0px 0px", }}>
           {ApplicationItems.map((item, index) => (
             <React.Fragment key={index}>
               <List
                 style={{
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
                   borderRadius: "10px",
                   backgroundColor: isCollapseApplication
                     ? Colors.SideBarItembgcolor
@@ -576,7 +580,7 @@ export default function SideBar() {
                                 opacity: open ? 1 : 0,
                                 "& .MuiTypography-root": {
                                   fontWeight: 600,
-                                  fontSize: "14px",
+                                  fontSize: "15px",
                                 },
                               }}
                             />
@@ -595,7 +599,7 @@ export default function SideBar() {
           style={{
             textDecoration: "none",
             color: "inherit",
-            padding: "0px 10px 0px",
+            padding: "0px 13px 0px 0px",
           }}
         >
           <ListItem
@@ -646,11 +650,13 @@ export default function SideBar() {
             </ListItemButton>
           </ListItem>
         </Link>
-        <List sx={{ padding: "0px 10px 0px" }}>
+        <List sx={{padding: "0px 13px 0px 0px", }}>
           {Commission.map((item, index) => (
             <React.Fragment key={index}>
               <List
                 style={{
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
                   borderRadius: "10px",
                   backgroundColor: isCollapseCommission
                     ? Colors.SideBarItembgcolor
@@ -781,7 +787,7 @@ export default function SideBar() {
                                 opacity: open ? 1 : 0,
                                 "& .MuiTypography-root": {
                                   fontWeight: 600,
-                                  fontSize: "14px",
+                                  fontSize: "15px",
                                 },
                               }}
                             />
@@ -795,11 +801,13 @@ export default function SideBar() {
             </React.Fragment>
           ))}
         </List>
-        <List sx={{ padding: "0px 10px 0px" }}>
+        <List sx={{padding: "0px 13px 0px 0px" }}>
           {Reports.map((item, index) => (
             <React.Fragment key={index}>
               <List
                 style={{
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
                   borderRadius: "10px",
                   backgroundColor: isCollapseReport
                     ? Colors.SideBarItembgcolor
@@ -926,7 +934,7 @@ export default function SideBar() {
                                 opacity: open ? 1 : 0,
                                 "& .MuiTypography-root": {
                                   fontWeight: 600,
-                                  fontSize: "14px",
+                                  fontSize: "15px",
                                 },
                               }}
                             />
@@ -940,11 +948,13 @@ export default function SideBar() {
             </React.Fragment>
           ))}
         </List>
-        <List sx={{ padding: "0px 10px 0px" }}>
+        <List sx={{   padding: "0px 13px 0px 0px" }}>
           {Notification.map((item, index) => (
             <React.Fragment key={index}>
               <List
-                style={{
+                sx={{
+                  paddingTop: "0px",
+                  paddingBottom: "0px",
                   borderRadius: "10px",
                   backgroundColor: isCollapseNtf
                     ? Colors.SideBarItembgcolor
@@ -1071,7 +1081,7 @@ export default function SideBar() {
                                 opacity: open ? 1 : 0,
                                 "& .MuiTypography-root": {
                                   fontWeight: 600,
-                                  fontSize: "14px",
+                                  fontSize: "15px",
                                 },
                               }}
                             />
@@ -1090,12 +1100,14 @@ export default function SideBar() {
           style={{
             textDecoration: "none",
             color: "inherit",
-            padding: "0px 10px 0px",
+            padding: "0px 13px 0px 0px",
           }}
         >
           <ListItem
             disablePadding
             sx={{
+              paddingTop: "0px",
+              paddingBottom: "0px",
               display: "block",
               borderRadius: "10px",
               backgroundColor:
@@ -1149,12 +1161,14 @@ export default function SideBar() {
           style={{
             textDecoration: "none",
             color: "inherit",
-            padding: "0px 10px 0px",
+            padding: "0px 13px 0px 0px",
           }}
         >
           <ListItem
             disablePadding
             sx={{
+              paddingTop: "0px",
+              paddingBottom: "0px",
               display: "block",
               borderRadius: "10px",
               backgroundColor:

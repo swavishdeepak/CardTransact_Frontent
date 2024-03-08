@@ -11,17 +11,19 @@ interface ConfirmDialogProps {
   handleConfirm?: () => void;
   handleClose?: () => void;
   customButton?: ReactNode;
-  children?: ReactNode;
+  children: ReactNode;
 }
 
 const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   open,
   title,
   desc,
+  handleConfirm,
   handleClose,
-  children
+  children,
 }) => {
   return (
+    <>
     <BasicDialog
       open={open}
       sx={{ padding: "10px 10px"}}
@@ -53,6 +55,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         {children}
       </Box>
     </BasicDialog>
+    </>
   );
 };
 

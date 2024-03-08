@@ -83,11 +83,23 @@ export const Commission = [
 ];
 
 export const TransactionReport = [
-  {
-    text: "TrasactionReport",
-    link: "/transactionReport",
-    icon: DashboardIcon,
-  },
+ {
+  text: "Transaction Report",
+  icon: PersonIcon,
+  link: "transactionReport",
+  subItems: [
+    {
+      text: "Trasaction Report",
+      link: "/transactionReport",
+      icon: DashboardIcon,
+    },
+    {
+      text: "View Report",
+      link: "/viewReport",
+      icon: DashboardIcon,
+    },
+  ]
+ }
 ];
 
 export const Reports = [
@@ -102,24 +114,44 @@ export const Reports = [
         icon: DashboardIcon,
       },
       {
-        text: "WorldPay",
+        text: "Sales",
         icon: PersonIcon,
-        link: "/worldPay",
+        link: "/sales",
       },
       {
-        text: "EVO",
+        text: "Revenue",
         icon: PersonIcon,
-        link: "/evo",
+        link: "/revenue",
       },
       {
-        text: "FDMS",
+        text: "Commission Recieved",
         icon: PersonIcon,
-        link: "/fdms",
+        link: "/commissionReceived",
       },
       {
-        text: "ELAVON",
+        text: "Commission Shared",
         icon: PersonIcon,
-        link: "/elavon",
+        link: "/commissionShared",
+      },
+      {
+        text: "Residual Received",
+        icon: PersonIcon,
+        link: "/residualReceived",
+      },
+      {
+        text: "Residual Shared",
+        icon: PersonIcon,
+        link: "/residualShared",
+      },
+      {
+        text: "Clawbacks",
+        icon: PersonIcon,
+        link: "/clawbacks",
+      },
+      {
+        text: "Application",
+        icon: PersonIcon,
+        link: "/application",
       },
     ],
   },

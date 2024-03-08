@@ -16,7 +16,7 @@ interface Column {
   minWidth: number;
   flex: number;
   sortable?: boolean;
-  rentalcell?: (params: any) => React.ReactNode;
+  renderCell?: (params: any) => React.ReactNode;
 }
 
 interface Row {

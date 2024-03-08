@@ -9,8 +9,9 @@ interface CustomFileInputProps {
   style?: React.CSSProperties;
   borderRadius?: string | number;
   labelStyle?: React.CSSProperties;
-  palceholder?: string;
+  placeholder?: string;
   onFileChange?: React.ChangeEventHandler<HTMLInputElement>;
+  accept?: string
  
  
   
@@ -21,8 +22,9 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   style,
   borderRadius,
   labelStyle,
-  palceholder,
+  placeholder,
   onFileChange,
+  accept,
  
  
  
@@ -44,10 +46,10 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         {label}
       </Typography>
       <TextField
-        placeholder={palceholder}
+        placeholder={placeholder}
         size="small"
         type="file"
-        accept=".pdf,.doc,.docx,.txt"
+        inputProps={{ accept }} 
         onChange={onFileChange}
         sx={{
            width: "100%",

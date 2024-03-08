@@ -57,8 +57,8 @@ export const DeleteData: React.FC = () => {
       renderCell: (params: any) => <More {...params} />,
       minWidth: 100,
       flex: 1,
-      align: "center",
-      headerAlign: "center",
+      
+      
      
     },
   ];
@@ -106,7 +106,7 @@ export const DeleteData: React.FC = () => {
         rows={rows}
         title="All Delete Data"
         getRowId={(row: any) => row.id}
-        getRowHeight={() => 20}
+       
       />
     </Box>
   );

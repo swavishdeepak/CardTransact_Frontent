@@ -157,6 +157,7 @@ export const ViewApplication: React.FC = () => {
   const handleOpenDelete = () => {
     setOpenDelete(true);
   };
+ 
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -166,9 +167,10 @@ export const ViewApplication: React.FC = () => {
         rows={rows}
         title="All Applications"
         getRowId={(row: any) => row.id}
+        
        
       />
-    </Box>
+    </Box>  
   );
 };
 

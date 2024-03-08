@@ -38,21 +38,21 @@ export const BankInformation: React.FC<BankInformationProps> = ({disableStyles =
       
       <Grid container rowSpacing={4} columnSpacing={2} mt={disableStyles? "none": 2}>
         <Grid item xs={12} md={5}>
-          <CustomTextInput label={"Name Of Bank"} palceholder="Enter Name Of Bank" />
+          <CustomTextInput label={"Name Of Bank"} placeholder="Enter Name Of Bank" />
         </Grid>
         <Grid item xs={12} md={5}>
-          <CustomTextInput label={"Name On Bank Account"} palceholder="Enter Name of Bank Account" />
+          <CustomTextInput label={"Name On Bank Account"} placeholder="Enter Name of Bank Account" />
         </Grid>
         <Grid item xs={12} md={5}>
-          <CustomTextInput label={"Account Number"} palceholder="Enter Account Number" />
+          <CustomTextInput label={"Account Number"} placeholder="Enter Account Number" />
         </Grid>
         <Grid item xs={12} md={5}>
-          <CustomTextInput label={"Sort Code"} palceholder="Enter Sort Code " />
+          <CustomTextInput label={"Sort Code"} placeholder="Enter Sort Code " />
         </Grid>
         <Grid item xs={12} md={10}>
           <CustomFileInput
             label="Bank Statement"
-            palceholder="Upload Any Utility Document"
+            placeholder="Upload Any Utility Document"
             onFileChange={(e:any) => {
               setBankStatement(e.target.files[0]);
               }}

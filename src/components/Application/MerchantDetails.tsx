@@ -42,38 +42,38 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         <Grid item xs={12} md={8}>
           <CustomTextInput
             label={"House No./Flat No."}
-            palceholder="Enter House No./Flat No"
+            placeholder="Enter House No./Flat No"
           />
         </Grid>
         <Grid item xs={12} md={8}>
           <CustomTextInput
             label={"Street Name/Building Name"}
-            palceholder="Enter Street Name/Building Name"
+            placeholder="Enter Street Name/Building Name"
           />
         </Grid>
       </Grid>
       <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
         <Grid item xs={12} md={4}>
-          <CustomTextInput label={"City"} palceholder="Enter Your City" />
+          <CustomTextInput label={"City"} placeholder="Enter Your City" />
         </Grid>
         <Grid item xs={12} md={4}>
-          <CustomTextInput label={"County"} palceholder="Enter Your County" />
+          <CustomTextInput label={"County"} placeholder="Enter Your County" />
         </Grid>
       </Grid>
       <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
         <Grid item xs={12} md={4}>
-          <CustomTextInput label={"Country"} palceholder="Enter Your Country" />
+          <CustomTextInput label={"Country"} placeholder="Enter Your Country" />
         </Grid>
         <Grid item xs={12} md={4}>
           <CustomTextInput
             label={"Post Code"}
-            palceholder="Enter Your Post Code"
+            placeholder="Enter Your Post Code"
           />
         </Grid>
         <Grid item xs={12} md={8}>
           <CustomFileInput
             label="Trading Address proof"
-            palceholder="Upload Any Utility Document"
+            placeholder="Upload Any Utility Document"
             onFileChange={(e: any) => {
               setAddressProof(e.target.files[0]);
             }}
@@ -82,7 +82,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         <Grid item xs={12} md={8}>
           <CustomFileInput
             label="Site Proof"
-            palceholder="Upload Any Utility Document"
+            placeholder="Upload Any Utility Document"
             onFileChange={(e: any) => {
               setSiteProof(e.target.files[0]);
             }}

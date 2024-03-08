@@ -42,18 +42,18 @@ export const AddAgents = () => {
         >
           <Grid container rowSpacing={2} columnSpacing={2} mt={1}>
             <Grid item xs={12} md={5}>
-              <CustomTextInput label={"Name"} palceholder="Enter Your Name" />
+              <CustomTextInput label={"Name"} placeholder="Enter Your Name" />
             </Grid>
             <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Phone Number"}
-                palceholder="Enter your Phone"
+                placeholder="Enter your Phone"
               />
             </Grid>
             <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Email Address"}
-                palceholder="Enter Your Email"
+                placeholder="Enter Your Email"
               />
             </Grid>
           </Grid>
@@ -66,28 +66,28 @@ export const AddAgents = () => {
             <Grid item xs={12} md={9}>
               <CustomTextInput
                 label={"House.no/Flat.no/Bulding Name"}
-                palceholder="Enter Your Email"
+                placeholder="Enter Your Email"
               />
             </Grid>
             <Grid item xs={12} md={9}>
               <CustomTextInput
                 label={"Address Line 2"}
-                palceholder="Enter your Email"
+                placeholder="Enter your Email"
               />
             </Grid>
             <Grid item xs={12} md={4.5}>
-              <CustomTextInput label={"City"} palceholder="Enter Your City" />
+              <CustomTextInput label={"City"} placeholder="Enter Your City" />
             </Grid>
             <Grid item xs={12} md={4.5}>
               <CustomTextInput
                 label={"Country"}
-                palceholder="Enter Your Country"
+                placeholder="Enter Your Country"
               />
             </Grid>
             <Grid item xs={12} md={4.5}>
               <CustomTextInput
                 label={"Postal Code"}
-                palceholder="Enter Your Postal Code"
+                placeholder="Enter Your Postal Code"
               />
             </Grid>
           </Grid>
@@ -100,25 +100,25 @@ export const AddAgents = () => {
             <Grid item xs={12} md={9}>
               <CustomTextInput
                 label={"Bank Name"}
-                palceholder="Enter Your Bank"
+                placeholder="Enter Your Bank"
               />
             </Grid>
             <Grid item xs={12} md={9}>
               <CustomTextInput
                 label={"Name on Bank Account"}
-                palceholder="Enter the Name on Bank Acount"
+                placeholder="Enter the Name on Bank Acount"
               />
             </Grid>
             <Grid item xs={12} md={4.5}>
               <CustomTextInput
                 label={"Sort Code"}
-                palceholder="Enter Your Sort Code"
+                placeholder="Enter Your Sort Code"
               />
             </Grid>
             <Grid item xs={12} md={4.5}>
               <CustomTextInput
                 label={"Account Number"}
-                palceholder="Enter Your Account Number"
+                placeholder="Enter Your Account Number"
               />
             </Grid>
           </Grid>
