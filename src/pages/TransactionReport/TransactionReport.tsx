@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import { Box, Typography} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
-import Table from "../../components/Table";
-import { Colors } from "../../utils/Colors";
-import { Link } from "react-router-dom";
-import ConfirmDialog from "../../components/ConfirmDialog";
-import CustomButton from "../../components/CustomButton";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
 import CustomTextInput from "../../components/CustomInput";
-import { LoadButton } from "../../components/LoadButton";
-
-
+import CustomButton from "../../components/CustomButton";
+import { Colors } from "../../utils/Colors";
+import { LoadButton } from '../../components/LoadButton';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ConfirmDialog from "../../components/ConfirmDialog";
+import Table1 from "../../components/Table1";
 
 
 interface Column {
@@ -24,51 +23,71 @@ interface Column {
 
 interface Row {
   id: number;
-  title: string;
-  message: string | null;
-  date: string;
-  time: string;
+  aquirer: string;
+  tier: string;
+  file_Name: string;
+  last_Update: string;
+  added_By: string;
   action: string;
 }
 
-export const ReceivedNotification: React.FC = () => {
-  const [openDelete, setOpenDelete] = useState(false);
+export const TransactionReport = () => {
+  const navigate = useNavigate();
+  const [selectedValue, setSelectedValue] = useState("aquirer");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const handleChange = (event: any) => {
+    setSelectedValue(event.target.value);
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setSelectedDate(date);
+  };
+
+  const aquirer = [
+    { value: "aquirer", label: "aquirer" },
+    { value: "aquirer1", label: "aquirer1" },
+    { value: "aquirer2", label: "aquirer2" },
+  ];
+
   const columns: Column[] = [
+   
     {
-      field: "id",
-      headerName: "Sr.No",
-      minWidth: 20,
+      field: "aquirer",
+      headerName: "Aquirer",
+      minWidth: 50,
       flex: 1,
     },
     {
-      field: "title",
-      headerName: "Title",
-      minWidth: 200,
+      field: "tier",
+      headerName: "Tier",
+      minWidth: 100,
       flex: 1,
     },
     {
-      field: "message",
-      headerName: "Message",
-      minWidth: 200,
+      field: "file_Name",
+      headerName: "File Name",
+      minWidth: 100,
       flex: 1,
     },
     {
-      field: "date",
-      headerName: "Date",
-      minWidth: 150,
+      field: "last_Update",
+      headerName: "Last Update",
+      minWidth: 100,
       flex: 1,
     },
     {
-      field: "time",
-      headerName: "Time",
-      minWidth: 150,
+      field: "added_By",
+      headerName: "Added by",
+      minWidth: 50,
       flex: 1,
     },
+
     {
       field: "action",
       headerName: "Action",
       renderCell: (params: any) => <More {...params} />,
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
   ];
@@ -76,50 +95,52 @@ export const ReceivedNotification: React.FC = () => {
   const rows: Row[] = [
     {
       id: 1,
-      title: "Delete Request User",
-      message: "Lorem Ipsum is simply dummy text of the printing and ",
-      date: "12/12/2023",
-      time: "12:00 pm",
-      action: "View",
+      aquirer: "Worl Pay",
+      tier: "Tier01",
+      file_Name: "File 01",
+      last_Update: "12/02/2024",
+      added_By: "Admin01",
+      action: "Edit",
     },
     {
       id: 2,
-      title: "Add Application",
-      message: "Lorem Ipsum is simply dummy text of the printing and ",
-      date: "12/12/2023",
-      time: "12:00 pm",
-      action: "View",
+      aquirer: "Worl Pay",
+      tier: "Tier01",
+      file_Name: "File 01",
+      last_Update: "12/02/2024",
+      added_By: "Admin01",
+      action: "Edit",
     },
     {
       id: 3,
-      title: "Delete Merchant",
-      message: "Lorem Ipsum is simply dummy text of the printing and ",
-      date: "12/12/2023",
-      time: "12:00 pm",
-      action: "",
-    },
-    {
-      id: 3,
-      title: "Edit Agent",
-      message: "Lorem Ipsum is simply dummy text of the printing and ",
-      date: "12/12/2023",
-      time: "12:00 pm",
-      action: "",
+      aquirer: "Worl Pay",
+      tier: "Tier01",
+      file_Name: "File 01",
+      last_Update: "12/02/2024",
+      added_By: "Admin01",
+      action: "Edit",
     },
    
+    
   ];
 
-  
+  const handleRedirect = () => {
+    navigate("/commission/addCommissionStructure");
+  };
+
   return (
-    <Box sx={{ marginTop: "2rem", width: "100%"}} >
-      <Header />
-      <Table
-        columns={columns}
-        rows={rows}
-        title="Recieved Notifications"
-        getRowId={(row: any) => row.id}
-       
-      />
+    <Box sx={{ marginTop: "2rem", width: "100%" }}>
+      <Header>
+         <LoadButton style={{height: "80%"}} onClick={handleRedirect}>Add Report</LoadButton>
+      </Header>
+        <Table1
+          columns={columns}
+          rows={rows}
+          title="Transaction Report"
+          getRowId={(row: any) => row.id}
+         
+        />
+      
     </Box>
   );
 };
@@ -141,11 +162,34 @@ const More = (params: any) => {
   const handleDelete = () => {
     setOpenRequest(true);
   };
- 
+
   return (
-    <Box sx={{display: "flex", gap: 1}}>
-      <Link to="/notificationList/notificationDetails" style={{color: Colors.LinkColor, fontSize: "13.13px", fontWeight: "500"}}>View</Link>
-      <Link to="" onClick={handleDeleteOpen} style={{color: Colors.LinkColor, fontSize: "13.13px", fontWeight: "500"}}>Delete</Link>
+    <Box sx={{ display: "flex", gap: 1 }}>
+      <Link
+        to="/viewReport"
+        style={{
+          textDecoration: "none",
+          color: Colors.LinkColor,
+          fontWeight: "400",
+          fontSize: "13.13px",
+        }}
+      >
+        View
+        <Box sx={{ borderBottom: `0.4px solid ${Colors.LinkColor}` }} />
+      </Link>
+      <Box onClick={handleDeleteOpen}>
+        <Typography
+          sx={{
+            color: Colors.LinkColor,
+            fontSize: "13.13px",
+            fontWeight: "500",
+            cursor: "pointer",
+          }}
+        >
+          Delete
+        </Typography>
+        <Box sx={{ borderBottom: `1px solid ${Colors.LinkColor}` }} />
+      </Box>
       <ConfirmDialog
         title={"Confirmation"}
         desc="Are You Sure Want "
@@ -153,7 +197,7 @@ const More = (params: any) => {
       >
         <Box sx={{ display: "flex", gap:"3px" }}>
           <Typography>To</Typography>
-          <Typography  sx={{ color: "#202020", fontSize: "15px", fontWeight: "600" }}>Delete Received Notifications?</Typography>
+          <Typography  sx={{ color: "#202020", fontSize: "15px", fontWeight: "600" }}>Delete The Transaction Report?</Typography>
         </Box>
         <Box
             sx={{
@@ -200,7 +244,7 @@ const More = (params: any) => {
           <Typography
             sx={{ color: "#202020", fontSize: "15px", fontWeight: "600" }}
           >
-            Send Request To Delete Recieved Notification
+            Send Request To Delete Transaction Report
           </Typography>
           <CustomButton
             label="Cancel"
@@ -224,7 +268,7 @@ const More = (params: any) => {
         <LoadButton
           style={{
             marginTop: "2rem",
-            width: "40%",
+            width: "60%",
           }}
         >
           Submit

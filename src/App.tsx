@@ -23,6 +23,9 @@ import { ApplicationDetails } from "./pages/Applications/ApplicationDetails";
 import { Addapplication } from "./pages/Applications/Addapplication";
 import { ViewApplication } from "./pages/Applications/ViewApplication";
 import EditApplication from "./pages/Applications/EditApplication";
+/* Transaction Report */
+import { TransactionReport } from "./pages/TransactionReport/TransactionReport";
+import { ViewReport } from "./pages/TransactionReport/ViewReport";
 /* reports */
 import { Overview } from "./pages/Reports/Overview";
 import { CommissionShared } from "./pages/Reports/CommissionShared";
@@ -34,6 +37,7 @@ import { ResidualShared } from "./pages/Reports/ResidualShared";
 import { Clawbacks } from "./pages/Reports/Clawbacks";
 import { SalesDetails } from "./pages/Reports/SalesDetails";
 import { ReEvaluation } from "./pages/Applications/ReEvaluation";
+import { Applications } from "./pages/Reports/Applications";
 /* merchants */
 import { Merchant } from "./pages/Merchant/Merchant";
 import { MerchantDetail } from "./pages/Merchant/MerchantDetails";
@@ -56,6 +60,8 @@ import { Message } from "./pages/Messages/Message";
 import { DeleteData } from "./pages/DeleteData/DeleteData";
 import { DeleteDataDetails } from "./pages/DeleteData/DeleteDataDetails";
 import { CommissionReceivedDetails } from "./pages/Reports/CommissionReceivedDetails";
+import { ViewDetails } from "./pages/Notifications/ViewDetails";
+
 
 
 
@@ -181,6 +187,18 @@ function App() {
           path: "/viewCardRates",
           element: <ViewCardRates />,
         },
+        /* Transaction Report ********************/
+        {
+          path: "/transactionReport",
+          element: <TransactionReport/>
+
+        },
+        {
+          path: "/viewReport",
+          element: <ViewReport/>
+
+        },
+
         /*Reports SideBar List************************/
         {
           path: "/overView",
@@ -223,13 +241,18 @@ function App() {
           path: "/commissionReceivedDetails",
           element: <CommissionReceivedDetails/>
         },
+        {
+          path: "/application",
+          element: <Applications/>
+
+        },
         /*Notification SideBar List************************/
         {
           path: "/notificationList",
           element: <AllNotification />,
         },
         {
-          path: "/notificationList/ViewDetails",
+          path: "/notificationList/notificationDetails",
           element: <NotificationDetails/>
         },
         {
@@ -239,6 +262,10 @@ function App() {
         {
           path: "/receivedNotification",
           element: <ReceivedNotification />,
+        },
+        {
+          path: "/notificationList/viewDetails",
+          element: <ViewDetails/>
         },
          /*Notification SideBar List************************/
          {

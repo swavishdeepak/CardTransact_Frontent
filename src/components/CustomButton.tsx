@@ -20,6 +20,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
     <Button
       sx={{
         backgroundColor: "#fff",
+        color: "#fff",
         textTransform: "none",
         borderRadius: "8px",
         fontWeight: "700",

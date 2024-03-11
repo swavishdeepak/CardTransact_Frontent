@@ -38,7 +38,9 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
 }) => {
   return (
     <Box sx={{ minWidth: 100, sx }}>
-      <Typography style={{ marginTop: "1rem", ...labelStyle }}>
+      <Typography style={{ marginTop: "1rem", color: "#000000",
+          fontWeight: "600",
+          fontSize: "15px" , ...labelStyle }}>
         {label}
       </Typography>
       <FormControl fullWidth {...props}>
@@ -54,6 +56,7 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
               sx={{
                 marginTop: "4px",
                 borderRadius: 1,
+                borderColor: "1px solid #DCDCDC",
                 ...sx,
                 ...placeholderStyle,
               }}
@@ -61,6 +64,7 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
             />
           }
         >
+         
           {items.map((item) => (
             <MenuItem value={item.value} key={item.value}>
               {item.label}

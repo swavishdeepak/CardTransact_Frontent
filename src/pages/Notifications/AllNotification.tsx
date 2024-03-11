@@ -9,6 +9,7 @@ import CustomButton from "../../components/CustomButton";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
 import CustomTextInput from "../../components/CustomInput";
 import { LoadButton } from "../../components/LoadButton";
+import { GridToolbarExport } from "@mui/x-data-grid";
 
 
 
@@ -49,25 +50,27 @@ export const AllNotification: React.FC = () => {
     {
       field: "aquirer",
       headerName: "Aquirer",
-      minWidth: 150,
+      minWidth: 100,
       flex: 1,
     },
     {
       field: "message",
       headerName: "Message",
-      minWidth: 150,
+      minWidth: 250,
       flex: 1,
+     
+      
     },
     {
       field: "date",
       headerName: "Date",
-      minWidth: 150,
+      minWidth: 100,
       flex: 1,
     },
     {
       field: "time",
       headerName: "Time",
-      minWidth: 150,
+      minWidth: 100,
       flex: 1,
     },
     {
@@ -107,8 +110,6 @@ export const AllNotification: React.FC = () => {
       time: "12:00 pm",
       action: "",
     },
-   
-  
   ];
 
   

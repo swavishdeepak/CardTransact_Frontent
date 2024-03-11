@@ -70,6 +70,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         value={value}
         sx={{
           width: "100%",
+          borderColor: "1px solid #DCDCDC",
           "& .MuiOutlinedInput-root": {
             "&:hover fieldset": {
               border: "1px solid #DCDCDC",
