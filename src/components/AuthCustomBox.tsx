@@ -37,7 +37,7 @@ const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
                 left: "8rem",
                 position: "relative",
                 "@media(max-width: 600px)":{
-                  width: "100%",
+                  width: "360px",
                   position: "relative",
                   left: "0px",
                   padding: "2.5rem 10px",

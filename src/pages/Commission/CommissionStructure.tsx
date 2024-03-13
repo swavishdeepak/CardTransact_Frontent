@@ -130,7 +130,7 @@ export const CommissionStructure = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header>
-         <LoadButton style={{height: "80%"}} onClick={handleRedirect}>Add Structure</LoadButton>
+         <LoadButton style={{height: "80%", width: "fit-content"}} onClick={handleRedirect}>Add Structure</LoadButton>
       </Header>
         <Table1
           columns={columns}

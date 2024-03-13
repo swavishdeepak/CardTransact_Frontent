@@ -142,7 +142,6 @@ export const AddCommissionStructure = () => {
                   height: "2.3rem",
                   fontSize: "15px",
                   boxShadow: "5.625px 7.5px 9.375px 0px rgba(0, 0, 0, 0.24)",
-
                   backgroundColor: Colors.successColor,
                   color: "#ffffff",
                 }}

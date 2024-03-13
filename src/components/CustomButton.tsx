@@ -26,9 +26,9 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         fontWeight: "700",
         fontSize: "12px",
         "@media(max-width: 600px)":{
-          fontSize: "7px",
-          // height: "1.2rem"
-          
+          fontSize: "10px",
+          height: "1.5rem",
+          borderRadius: "5px",
         },
         '&:hover':{
           backgroundColor: hoverColor

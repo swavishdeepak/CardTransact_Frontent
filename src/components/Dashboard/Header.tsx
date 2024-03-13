@@ -40,6 +40,9 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
             fontSize: "16px",
             fontWeight: "600",
             marginTop: 1,
+            "@media(max-width: 600px)":{
+               fontSize: "12px"
+            }
           }}
         >
           {formattedPath}

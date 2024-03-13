@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
-import CustomText from "../../components/CustomText";
 import CustomTextInput from "../../components/CustomInput";
 import AuthCustomBox from "../../components/AuthCustomBox";
 import { loginSchema } from "../../utils/Validation";
@@ -74,9 +73,9 @@ export const Login = () => {
                   cursor: "pointer",
                   textAlign: "left",
                   display: "inline",
-                  width: "30%"
-                  
+                  width: "fit-content"
                 }}
+               
               >
                 Forgot Password?
               </Link>

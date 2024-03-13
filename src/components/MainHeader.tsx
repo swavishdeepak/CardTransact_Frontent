@@ -16,7 +16,14 @@ import Notification from "./Notification";
 import CustomButton from "./CustomButton";
 import { Link } from "react-router-dom";
 
-const MainHeader: React.FC = () => {
+interface mainHeaderProps {
+  style?: React.CSSProperties;
+  showhide?: boolean
+  
+  
+}
+
+const MainHeader: React.FC<mainHeaderProps> = ({style, showhide = true}) => {
   const [searchValue, setSearchValue] = useState<string>("");
   const [openProfile, setOpenProfile] = React.useState<null | HTMLElement>(
     null
@@ -24,7 +31,7 @@ const MainHeader: React.FC = () => {
   const [openNotification, setOpenNotification] =
     React.useState<null | HTMLElement>(null);
 
-  const open = Boolean(openProfile);
+  const openprofile = Boolean(openProfile);
   const openNot = Boolean(openNotification);
 
   const handleOpenNotification = (event: any) => {
@@ -80,12 +87,13 @@ const MainHeader: React.FC = () => {
         justifyContent: "space-between",
         alignItems: "center",
         flexGrow: 1,
+        ...style
       }}
     >
-      <TextField
+      {showhide &&<TextField
         // onChange={handleSearchChange}
         //variant="filled"
-        placeholder="search..."
+        placeholder="Search..."
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -109,8 +117,12 @@ const MainHeader: React.FC = () => {
         }}
         sx={{
           width: "50%",
+          "@media(max-width: 600px)":{
+            width: "70%",
+            
+          }
         }}
-      />
+      />}
       <Box sx={{ display: "flex", gap: 2 }}>
         <CircleNotificationsIcon
           onClick={handleOpenNotification}
@@ -183,7 +195,7 @@ const MainHeader: React.FC = () => {
         anchorEl={openProfile}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
-        open={open}
+        open={openprofile}
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",

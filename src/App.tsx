@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter,useRouteError } from "react-router-dom";
+import { Box } from "@mui/material";
 /* auth */
 import { Login } from "./pages/Auth/Login";
 import { GoogleAuthentication } from "./pages/Auth/GoogleAuthentication";
@@ -61,11 +62,16 @@ import { DeleteData } from "./pages/DeleteData/DeleteData";
 import { DeleteDataDetails } from "./pages/DeleteData/DeleteDataDetails";
 import { CommissionReceivedDetails } from "./pages/Reports/CommissionReceivedDetails";
 import { ViewDetails } from "./pages/Notifications/ViewDetails";
+//import { useNavigation } from "react-router-dom";
+
 
 
 
 
 function App() {
+ 
+
+
   const router = createBrowserRouter([
     {
       path: "/auth/login",
@@ -88,6 +94,7 @@ function App() {
     {
       path: "/",
       element: <MainLayout />,
+      errorElement: <ErrorBoundary />,
       children: [
         {
           path: "/dashboard",
@@ -287,4 +294,24 @@ function App() {
   return <RouterProvider router={router} />;
 }
 
+function ErrorBoundary() {
+  let error = useRouteError();
+  console.error(error);
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        textAlign: "center",
+        backgroundColor: "#f8f8f8",
+      }}
+    >
+      <h1>An error occurred</h1>
+      <p>Sorry, something went wrong.</p>
+    </Box>
+  );
+}
 export default App;

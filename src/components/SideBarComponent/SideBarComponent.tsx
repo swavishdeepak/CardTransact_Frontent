@@ -21,7 +21,7 @@ interface SidebarListProps {
 
 const SideBarComponent: React.FC<SidebarListProps> = ({ items, isCollapsed, handleCollapse, location, open }) => {
   return (
-    <List sx={{ padding: "0px 13px 0px 0px" }}>
+    <List sx={{ padding: "0px 6px 0px 6px" }}>
       {items.map((item, index) => (
         <React.Fragment key={index}>
           <List

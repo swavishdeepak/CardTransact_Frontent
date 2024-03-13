@@ -3,36 +3,25 @@ import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { Link } from "react-router-dom";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import { Colors } from "../utils/Colors";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import MainHeader from "./MainHeader";
-import { Collapse } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import PersonIcon from "@mui/icons-material/Person";
 import dashboardIcon from "../assets/dashboardIcon.svg";
 import { SidebarUserItems } from "../utils/SideBarItem";
 import { ApplicationItems } from "../utils/SideBarItem";
 import { Notification } from "../utils/SideBarItem";
 import { Commission } from "../utils/SideBarItem";
 import { Reports } from "../utils/SideBarItem";
-import { Messages } from "../utils/SideBarItem";
-import { DeleteData } from "../utils/SideBarItem";
 import { makeStyles } from "@mui/styles";
 import { TransactionReport } from "../utils/SideBarItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import CloseIcon from "@mui/icons-material/Close";
 
 import SideBarComponent from "./SideBarComponent/SideBarComponent";
 import SideBarWithOutDropdown from "./SideBarComponent/SideBarWithOutDropdown";
@@ -128,35 +117,22 @@ export default function SideBar() {
   const isMobile = useMediaQuery(theme.breakpoints.only("xs"));
   const [open, setOpen] = React.useState(!isMobile);
 
-  // const [collapse, setCollapse] = React.useState({
-  //   isCollapseUser: false,
-  //   isCollapseApplication: false,
-  //   isCollapseCommission: false,
-  //   isCollapseReport: false,
-  //   isCollapseNotification: false,
-  // });
-  const [isCollapse, setIsCollapse] = React.useState(false);
-  const [isCollapseApplication, setIsCollapseApplication] =
-    React.useState(false);
-  const [isCollapseCommission, setIsCollapseCommission] = React.useState(false);
-  const [isCollapseReport, setIsCollapseReport] = React.useState(false);
-  const [isCollapseNtf, setIsCollapseNtf] = React.useState(false);
-  const [isCollapseTransationReport, setIsCollapseTransactionreport] =
-    React.useState(false);
   const location = useLocation();
+  const [collapseState, setCollapseState] = React.useState({
+    isCollapse: false,
+    isCollapseApplication: false,
+    isCollapseCommission: false,
+    isCollapseReport: false,
+    isCollapseNtf: false,
+    isCollapseTransactionReport: false,
+  });
 
-  // const handleCollapse1 = (
-  //   key:
-  //     | "isCollapseUser"
-  //     | "isCollapseApplication"
-  //     | "isCollapseCommission"
-  //     | "isCollapseReport"
-  //     | 'isCollapseNotification'
-  // ) => {
-  //   setCollapse((prev)=>{
-  //     return {...prev, [key]: !prev[key]}
-  //   })
-  // };
+  const handleCollapse = (key: any) => {
+    setCollapseState((prevState: any) => ({
+      ...prevState,
+      [key]: !prevState[key],
+    }));
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -166,33 +142,11 @@ export default function SideBar() {
     setOpen(false);
   };
 
-  const handleCollapse = () => {
-    setIsCollapse(!isCollapse);
-  };
-  const handleCollapseApplication = () => {
-    setIsCollapseApplication(!isCollapseApplication);
-  };
-
-  const handleCollapseTransationReport = () => {
-    setIsCollapseTransactionreport(!isCollapseTransationReport);
-  };
-
-  const handleCollapseCommission = () => {
-    setIsCollapseCommission(!isCollapseCommission);
-  };
-  const handleCollapseReport = () => {
-    setIsCollapseReport(!isCollapseReport);
-  };
-
-  const handleCollapseNotification = () => {
-    setIsCollapseNtf(!isCollapseNtf);
-  };
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
-       // elevation={0}
+        // elevation={0}
         position="fixed"
         open={open}
         sx={{
@@ -205,6 +159,7 @@ export default function SideBar() {
           sx={{
             backgroundColor: "#fff",
             boxShadow: "none",
+          padding: "14px 14px !important"
           }}
         >
           <IconButton
@@ -212,15 +167,16 @@ export default function SideBar() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="end"
+
             sx={{
               marginRight: 5,
-              color: "black",
+              color: "#898989",
               ...(open && { display: "none" }),
             }}
           >
             <MenuIcon />
           </IconButton>
-          <MainHeader />
+          <MainHeader showhide={open && isMobile ? false : true} />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -231,7 +187,9 @@ export default function SideBar() {
             ) : (
               <>
                 <List sx={{ display: "flex", alignItems: "left", gap: 1 }}>
-                  <MenuIcon onClick={handleDrawerClose} />
+                  <Box onClick={handleDrawerClose}>
+                    {!isMobile ? <MenuIcon /> : <CloseIcon />}
+                  </Box>
                   <Link
                     to="/dashboard"
                     style={{
@@ -252,84 +210,87 @@ export default function SideBar() {
         </DrawerHeader>
         {/* Dashboard */}
         <SideBarWithOutDropdown
+          sx={{marginTop: "0.7rem"}}
           to={"/dashboard"}
           text="Dashboard"
           location={location}
+          open={open}
           pathMatch="/dashboard"
-
         />
         {/* User */}
         <SideBarComponent
-           items={SidebarUserItems}
-           isCollapsed={isCollapse}
-           handleCollapse={handleCollapse}
-           location={location}
-           open={open}
+          items={SidebarUserItems}
+          isCollapsed={collapseState.isCollapse}
+          handleCollapse={() => handleCollapse("isCollapse")}
+          location={location}
+          open={open}
         />
         {/* Application */}
         <SideBarComponent
-           items={ApplicationItems}
-           isCollapsed={isCollapseApplication}
-           handleCollapse={handleCollapseApplication}
-           location={location}
-           open={open}
+          items={ApplicationItems}
+          isCollapsed={collapseState.isCollapseApplication}
+          handleCollapse={() => handleCollapse("isCollapseApplication")}
+          location={location}
+          open={open}
         />
         {/* Merchant */}
-         <SideBarWithOutDropdown
+        <SideBarWithOutDropdown
           to={"/merchants"}
           text="Merchants"
           location={location}
+          open={open}
           pathMatch="/merchants"
         />
         {/* Commission */}
         <SideBarComponent
-           items={Commission}
-           isCollapsed={isCollapseCommission}
-           handleCollapse={handleCollapseCommission}
-           location={location}
-           open={open}
+          items={Commission}
+          isCollapsed={collapseState.isCollapseCommission}
+          handleCollapse={() => handleCollapse("isCollapseCommission")}
+          location={location}
+          open={open}
         />
         {/* Transaction Reports */}
         <SideBarComponent
-           items={TransactionReport}
-           isCollapsed={isCollapseTransationReport}
-           handleCollapse={handleCollapseTransationReport}
-           location={location}
-           open={open}
+          items={TransactionReport}
+          isCollapsed={collapseState.isCollapseTransactionReport}
+          handleCollapse={() => handleCollapse("isCollapseTransactionReport")}
+          location={location}
+          open={open}
         />
         {/* Reports */}
-         <SideBarComponent
-           items={Reports}
-           isCollapsed={isCollapseReport}
-           handleCollapse={handleCollapseReport}
-           location={location}
-           open={open}
+        <SideBarComponent
+          items={Reports}
+          isCollapsed={collapseState.isCollapseReport}
+          handleCollapse={() => handleCollapse("isCollapseReport")}
+          location={location}
+          open={open}
         />
         {/* Notification */}
-         <SideBarComponent
-           items={Notification}
-           isCollapsed={isCollapseNtf}
-           handleCollapse={handleCollapseNotification}
-           location={location}
-           open={open}
+        <SideBarComponent
+          items={Notification}
+          isCollapsed={collapseState.isCollapseNtf}
+          handleCollapse={() => handleCollapse("isCollapseNtf")}
+          location={location}
+          open={open}
         />
-         <SideBarWithOutDropdown
+        {/* Messages */}
+        <SideBarWithOutDropdown
           to={"/messages"}
           text="Messages"
           location={location}
+          open={open}
           pathMatch="/messages"
+          notificationShpow={true}
         />
-         <SideBarWithOutDropdown
+        {/* delete data */}
+        <SideBarWithOutDropdown
           to={"/deleteData"}
           text="Delete Data"
           location={location}
+          open={open}
           pathMatch="/deleteData"
         />
-    
       </Drawer>
     </Box>
   );
 }
-
-
-

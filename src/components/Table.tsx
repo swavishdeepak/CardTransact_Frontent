@@ -108,6 +108,10 @@ const CustomToolbar: React.FC<{ title?: string; includeSearch?: boolean }> = ({
         alignItems: "flex-start",
         justifyContent: "space-between",
         marginBottom: "2rem",
+        "@media(max-width: 600px)":{
+          justifyContent: "center",
+          gap: 3
+        }
       }}
     >
       <Box>

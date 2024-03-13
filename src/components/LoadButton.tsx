@@ -18,11 +18,15 @@ export const LoadButton: FC<LoadButtonProps> = ({ children, loading,hoverColor, 
         background: "linear-gradient(180deg, #069FFF 0%, #589E58 0.01%, #77D177 100%)",
         borderRadius: "11px",
         fontWeight: "700",
-        width: "20%",
+        width: "fit-content",
         textTransform: "none",
         fontSize: "15px",
         "&:hover": {
           backgroundColor: hoverColor ? hoverColor : "#589E58",
+        },
+        "@media(max-width: 600px)":{
+           height: "1.5rem",
+           borderRadius: "5px"
         },
         ...style
       }}

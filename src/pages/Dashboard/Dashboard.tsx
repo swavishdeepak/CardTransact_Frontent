@@ -13,6 +13,7 @@ import { Sales } from "../../components/Dashboard/Graph/Sales";
 import { Revenue } from "../../components/Dashboard/Graph/Revenue";
 import { MessageList } from "../../components/Dashboard/MessageList";
 import TopPerformance from "../../components/Dashboard/TopPerformance";
+import Shape1 from "../../assets/Shape1.svg"
 
 export const Dashboard = () => {
   
@@ -28,43 +29,46 @@ export const Dashboard = () => {
               iconLeft={<img src={Vector} alt="" />}
               iconRight={<img src={Vector2} alt="" />}
               description="Total Residual Received"
-              percent={57}
+              percent={67}
               linearProgressColor={"#775DA6"}
             />
           </Grid>
           <Grid item xs={6} sm={4} md={2.4}>
             <Card
-              value={22880.12}
+              value={1096.30}
               iconLeft={<img src={Vector} alt="" />}
               iconRight={<img src={Vector1} alt="" />}
               description="Total Residual Paid"
-              percent={70}
+              linearProgressColor="#F9837C"
+              percent={18}
             />
           </Grid>
           <Grid item xs={6} sm={4} md={2.4}>
             <Card
-              value={22880.12}
+              value={1096.30}
               iconLeft={<img src={Vector} alt="" />}
               iconRight={<img src={Vector3} alt="" />}
               description="Commission Paid"
-              percent={30}
-              linearProgressColor={"red"}
+              percent={78}
+              linearProgressColor={"#70B6C1"}
             />
           </Grid>
           <Grid item xs={6} sm={4} md={2.4}>
             <Card
               value={1247}
-              iconRight={<img src={Vector1} alt="" />}
+              iconRight={<img src={Shape1} alt="" />}
               description="Total Application"
-              percent={90}
+              linearProgressColor={"#F3CC5C"}
+              percent={80}
             />
           </Grid>
           <Grid item xs={6} sm={4} md={2.4}>
             <Card
               value={300}
-              iconRight={<img src={Vector1} alt="" />}
+              iconRight={<img src={Shape1} alt="" />}
               description="Total Employees"
-              percent={100}
+              linearProgressColor={"#F3CC5C"}
+              percent={80}
             />
           </Grid>
           <Grid item xs={12} md={5}>

@@ -26,7 +26,7 @@ const Application: React.FC = () => {
   return (
     <GraphCustomBox style={{padding: 2}}>
       <CustomGraph
-        header="Application"
+        header="Applications"
         showPoundIcon={false}
         year="January 2024"
       >

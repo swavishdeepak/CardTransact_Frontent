@@ -302,7 +302,7 @@ export const Addapplication = () => {
                   label={"Previous"}
                   hoverColor={Colors.editColor}
                   style={{
-                    width: "15%",
+                    width: "17%",
                     height: "2.3rem",
                     marginTop: "2rem",
                     fontSize: "15px",

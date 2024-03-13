@@ -19,12 +19,15 @@ const Card: React.FC<CardProps> = ({
   percent,
   iconRight,
   description,
-  linearProgressColor = "primary"
+  linearProgressColor = ""
 }) => {
   const percentage = percent;
   const percentageString = `${percentage}%`;
   return (
-    <CustomBox
+    <CustomBox style={{
+      padding: "18px",
+      marginTop: "1.5rem"
+    }}
     >
       <Box >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -42,7 +45,10 @@ const Card: React.FC<CardProps> = ({
 
         <Box style={{ display: "flex", gap: 10}}>
           <LinearProgress
-            sx={{ marginTop: "1rem", width: "100%", backgroundColor: linearProgressColor }}
+            sx={{ marginTop: "1rem", width: "100%", background: "#DCDCDC",  // Remove default color
+            '& .MuiLinearProgress-bar': {
+                background: linearProgressColor  // Apply custom color
+            } }}
             variant="determinate"
             value={percentage}
           />

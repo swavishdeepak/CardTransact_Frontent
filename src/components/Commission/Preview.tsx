@@ -7,12 +7,16 @@ const useStyles = makeStyles({
   header: {
     fontSize: "15px !important",
     fontWeight: "600 !important",
+    "@media(max-width: 600px)":{
+      fontSize: "12px !important"
+   }
   },
   content: {
     color: "rgba(58, 58, 58, 1) !important",
     fontSize: "13px !important",
     fontWeight: "300 !important",
     lineHeight: "15px !important",
+  
   },
 });
 const data1 = [

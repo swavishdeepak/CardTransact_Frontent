@@ -169,7 +169,7 @@ const CustomToolbar: React.FC<{
           <Grid item xs={6} sm={3} md={2}>
             <LoadButton
               style={{
-                height: "75%",
+                height: "80%",
                 fontSize: "13px",
               }}
             >

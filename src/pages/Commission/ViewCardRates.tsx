@@ -9,6 +9,7 @@ import Table from "../../components/Table";
 import BasicSelect from "../../components/BasicSelect";
 import CustomTextInput from "../../components/CustomInput";
 import { LoadButton } from "../../components/LoadButton";
+import Table1 from "../../components/Table1";
 
 interface Column {
   field: string;
@@ -166,13 +167,13 @@ export const ViewCardRates = () => {
               })}
           </Grid>
           <Grid item xs={12} sm={9}>
-            <Table
+            <Table1
               columns={columns}
               includeSlots={false}
               rows={rows}
               getRowId={(row: any) => row.id}
-            >
-              <Box
+            />
+              {/* <Box
                 sx={{
                   display: "flex",
                   flexDirection: "row",
@@ -211,8 +212,8 @@ export const ViewCardRates = () => {
                 >
                   Apply
                 </LoadButton>
-              </Box>
-            </Table>
+              </Box> */}
+            {/* </Table1> */}
           </Grid>
         </Grid>
       </CustomBox>
