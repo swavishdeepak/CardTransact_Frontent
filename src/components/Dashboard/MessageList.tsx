@@ -26,7 +26,7 @@ export const MessageList: React.FC<Message> = ({
    
       icon: messageIcon,
       senderName: "Deepak Kumar",
-      messageText: "Lorem Ipsum is simply dummy...",
+      messageText: "Lorem Ipsum is simply dummy... ahgdasdsdh nsdha adhasndasdhadn asdahdabndajhdbamdah ajdasdaj dhas ",
     },
     {
      
@@ -78,7 +78,7 @@ export const MessageList: React.FC<Message> = ({
           messageData.map((item, index) => {
             return (
               <Box key={index}>
-                <Box sx={{ display: "flex", gap: 1, marginTop: "10px" }} >
+                <Box sx={{ display: "flex", gap: "1px", marginTop: "10px" }} >
                   <ListItemAvatar>
                     <Avatar>
                       <img src={item.icon} alt=""></img>

@@ -147,8 +147,10 @@ export const AddEmployees = () => {
           loading={loading}
           style={{
             marginTop: 3,
-            width: "25%"
+            width: "25%",
+            
           }}
+          
         >
           {id ?"Save": "Add"}
         </LoadButton>

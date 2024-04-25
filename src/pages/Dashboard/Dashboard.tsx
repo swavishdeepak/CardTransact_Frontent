@@ -21,11 +21,11 @@ export const Dashboard = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
-      <Box>
-        <Grid container rowSpacing={{ xs: 2, md: 4 }} columnSpacing={2}>
+      <Box sx={{marginTop: "1rem"}}>
+        <Grid container rowSpacing={{ xs: 2, md: 4 }} columnSpacing={2} mt={2}>
           <Grid item xs={6} sm={4} md={2.4}>
             <Card
-              value={22880.12}
+              value={228.12}
               iconLeft={<img src={Vector} alt="" />}
               iconRight={<img src={Vector2} alt="" />}
               description="Total Residual Received"

@@ -44,7 +44,7 @@ export const AllNotification: React.FC = () => {
     {
       field: "created_by",
       headerName: "Created By",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
     {
@@ -56,7 +56,7 @@ export const AllNotification: React.FC = () => {
     {
       field: "message",
       headerName: "Message",
-      minWidth: 250,
+      minWidth: 200,
       flex: 1,
      
       
@@ -77,7 +77,7 @@ export const AllNotification: React.FC = () => {
       field: "action",
       headerName: "Action",
       renderCell: (params: any) => <More {...params} />,
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
   ];

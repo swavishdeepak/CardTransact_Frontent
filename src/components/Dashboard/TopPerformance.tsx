@@ -41,7 +41,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
       image: messageIcon,
       name: "Deepak",
       icon: Vector,
-      message: "message",
+      message: "236345",
       sale: "39",
       company: "company",
       successRate: "96",
@@ -51,7 +51,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
       image: messageIcon,
       name: "Deepak",
       icon: Vector,
-      message: "message",
+      message: "236345",
       sale: "39",
       company: "company",
       successRate: "50",
@@ -61,7 +61,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
       image: messageIcon,
       name: "Deepak",
       icon: Vector,
-      message: "message",
+      message: "236345",
       sale: "39",
       company: "company",
       successRate: "70",
@@ -71,7 +71,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
       image: messageIcon,
       name: "Deepak",
       icon: Vector,
-      message: "message",
+      message: "236345",
       sale: "39",
       company: "company",
       successRate: "90",
@@ -81,7 +81,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
       image: messageIcon,
       name: "Deepak",
       icon: Vector,
-      message: "message",
+      message: "236345",
       sale: "39",
       company: "company",
       successRate: "90",
@@ -90,7 +90,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
 
   return (
     <CustomBox style={{height: "100%"}}>
-      <Box sx={{ display: "flex", justifyContent: "space-between",alignItems: "end" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between",alignItems: "center" }}>
         <Box>
           <Typography
             sx={{ color: "#202020", fontWeight: "600",fontSize: { xs: "14px", md: "18px" }, }}
@@ -108,7 +108,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
             borderRadius: 1,
             backgroundColor: "#FCFAFA",
             border: "1px solid #898989",
-            padding: "0px 6px 0px 8px",
+            padding: "6px 6px 0px 8px",
           }}
           name={"selectedValue"}
           value={selectedValue}
@@ -168,9 +168,9 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                   {item.serialNo}
                 </Typography>
                 <Box sx={{ display: "flex", gap: 0 }}>
-                  <ListItemAvatar>
+                  <ListItemAvatar >
                     <Avatar>
-                      <img src={item.image} alt="" />
+                      <img src={item.image} alt=""  />
                     </Avatar>
                   </ListItemAvatar>
                   <Box>
