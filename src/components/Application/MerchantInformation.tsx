@@ -1,17 +1,33 @@
-import React from "react";
-import { Box, Typography } from "@mui/material";
+import React, { useState } from "react";
+import { Box, SelectChangeEvent, Typography } from "@mui/material";
 import { CustomBox } from "../MyCustom/CustomBox";
 import { CommonHeader } from "../CommonHeader";
 import NavIcon from "../../assets/navIcon.svg";
 import Grid from "@mui/material/Grid";
 import CustomTextInput from "../CustomInput";
 import { Colors } from "../../utils/Colors";
+import BasicSelect from "../BasicSelect";
+import CustomFileInput from "../CustomFileInput";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 interface MerchantInformationProps {
   disableStyles?: boolean;
 }
 
-export const MerchantInformation: React.FC<MerchantInformationProps> = ({disableStyles = false}) => {
+export const MerchantInformation: React.FC<MerchantInformationProps> = ({
+  disableStyles = false,
+}) => {
+  const [selecteIdProof, setSelecteIdProof] = useState<string>("");
+
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelecteIdProof(event.target.value);
+  };
+
+  const selectIDProof = [
+    { value: "driving_license", label: "Driving License" },
+    { value: "passport", label: "Passport" },
+    { value: "National Id", label: "National ID" },
+  ];
   return (
     <Box
       sx={
@@ -68,6 +84,29 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({disable
             label={"Enter Email Address"}
             placeholder="Enter Email Address"
           />
+        </Grid>
+        <Grid item xs={12} md={8}>
+          
+            <BasicSelect
+              label="Select ID Proofs"
+              placeholder="Select"
+              sx={{
+                width: "100%",
+                position: "relative",
+                border: "1px solid rgba(220, 220, 220, 1)",
+                padding: "10px 6px 0px 8px",
+              }}
+              name={"selectedValue2"}
+              value={selecteIdProof}
+              handleChange={handleChange}
+              size="small"
+              items={selectIDProof}
+            />
+            {/* <AddCircleOutlineIcon /> */}
+          
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <CustomFileInput label="" />
         </Grid>
       </Grid>
     </Box>

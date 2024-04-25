@@ -25,8 +25,7 @@ export const LoadButton: FC<LoadButtonProps> = ({ children, loading,hoverColor, 
           backgroundColor: hoverColor ? hoverColor : "#589E58",
         },
         "@media(max-width: 600px)":{
-           height: "1.5rem",
-           borderRadius: "5px"
+           borderRadius: "10px"
         },
         ...style
       }}

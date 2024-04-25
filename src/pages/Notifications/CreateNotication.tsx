@@ -13,8 +13,9 @@ import { useNavigate } from "react-router-dom";
 
 export const CreateNotification: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState("aquirer");
-  const [selectedValueReceiver, setSelectedValueReceiver] = useState("Select Receivers");
-  const navigate = useNavigate()
+  const [selectedValueReceiver, setSelectedValueReceiver] =
+    useState("Select Receivers");
+  const navigate = useNavigate();
 
   const handleChange = (event: any) => {
     setSelectedValue(event.target.value);
@@ -35,10 +36,9 @@ export const CreateNotification: React.FC = () => {
     { value: "aquirer2", label: "aquirer2" },
   ];
 
-
-  const handleDirect = ()=>{
-      navigate("/notificationList")
-  }
+  const handleDirect = () => {
+    navigate("/notificationList");
+  };
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -90,7 +90,7 @@ export const CreateNotification: React.FC = () => {
               />
             </Grid>
             <Grid item xs={12}>
-            <BasicSelect
+              <BasicSelect
                 sx={{
                   backgroundColor: "#FCFAFA",
                   border: "1px solid #898989",
@@ -117,10 +117,9 @@ export const CreateNotification: React.FC = () => {
             </Grid>
           </Grid>
         </CustomBox>
-        <LoadButton
-         style={{ marginTop: "1.5rem" }}
-         onClick={handleDirect}
-         >Send</LoadButton>
+        <LoadButton style={{ marginTop: "1.5rem", width: "20%" }} onClick={handleDirect}>
+          Send
+        </LoadButton>
       </CustomBox>
     </Box>
   );

@@ -34,13 +34,13 @@ export const ViewAgents: React.FC = () => {
     {
       field: "id",
       headerName: "Sr.No",
-      minWidth: 50,
+      minWidth: 25,
       flex: 1,
     },
     {
       field: "agentName",
-      headerName: "agent Name",
-      minWidth: 50,
+      headerName: "Agent Name",
+      minWidth: 200,
       flex: 1,
     },
     {
@@ -52,13 +52,13 @@ export const ViewAgents: React.FC = () => {
     {
       field: "company_Individuals",
       headerName: "Company/Individuals",
-      minWidth: 50,
+      minWidth: 200,
       flex: 1,
     },
     {
       field: "banks",
       headerName: "Banks",
-      minWidth: 50,
+      minWidth: 200,
       flex: 1,
     },
     {

@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
-import Table1 from "../../components/TableWithDatePic";
-import { Header } from "../../components/Dashboard/Header";
-import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
-import { Link } from "react-router-dom";
+import Table from "../Table";
 import { Colors } from "../../utils/Colors";
-
+import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 interface Column {
   field: string;
   headerName: string;
@@ -17,52 +16,53 @@ interface Column {
 
 interface Row {
   id: number;
-  agentName: string;
-  mid: number | null;
-  tid: number;
-  acquirer: string;
-  totalEarning: number;
-  residual: number;
-  oneTime: number;
+  agent_Name: string;
+  MID: number | null;
+  TID: number;
+  Acquirer: string;
+  Total_Earning: string;
+  Residual: string;
+  One_Time: string;
+  Claw_Back: string;
   action: string;
 }
 
-export const ResidualShared = () => {
+export const AllCommissionComp: React.FC = () => {
   const columns: Column[] = [
     {
       field: "id",
       headerName: "Sr.No",
-      minWidth: 50,
+      minWidth: 90,
       flex: 1,
     },
     {
-      field: "agentName",
-      headerName: "Agent Name",
-      minWidth: 50,
+      field: "agent_Name",
+      headerName: "agent_Name",
+      minWidth: 100,
       flex: 1,
     },
     {
-      field: "mid",
+      field: "MID",
       headerName: "MID",
       minWidth: 100,
       flex: 1,
     },
     {
-      field: "tid",
+      field: "TID",
       headerName: "TID",
       minWidth: 100,
       flex: 1,
     },
     {
-      field: "acquirer",
+      field: "Acquirer",
       headerName: "Acquirer",
-      minWidth: 100,
+      minWidth: 50,
       flex: 1,
     },
     {
-      field: "totalEarning",
-      headerName: "Total Earning",
-      minWidth: 100,
+      field: "Total_Earning",
+      headerName: "Total_Earning",
+      minWidth: 20,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>
@@ -72,9 +72,9 @@ export const ResidualShared = () => {
       ),
     },
     {
-      field: "residual",
+      field: "Residual",
       headerName: "Residual",
-      minWidth: 100,
+      minWidth: 50,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>
@@ -84,12 +84,30 @@ export const ResidualShared = () => {
       ),
     },
     {
-      field: "oneTime",
-      headerName: "One Time",
-      minWidth: 100,
+      field: "One_Time",
+      headerName: "One_Time",
+      minWidth: 50,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>
+          <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
+          <Typography sx={{ fontSize: "13px" }}>235.45</Typography>
+        </Typography>
+      ),
+    },
+    {
+      field: "Claw_Back",
+      headerName: "Claw_Back",
+      minWidth: 100,
+      flex: 1,
+      renderCell: () => (
+        <Typography
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            color: "rgba(193, 4, 4, 1)",
+          }}
+        >
           <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
           <Typography sx={{ fontSize: "13px" }}>235.45</Typography>
         </Typography>
@@ -107,62 +125,51 @@ export const ResidualShared = () => {
   const rows: Row[] = [
     {
       id: 1,
-      agentName: "Sam",
-      mid: 140,
-      tid: 123,
-      acquirer: "WoldPay",
-      totalEarning: 346453,
-      residual: 3635,
-      oneTime: 234,
-      action: "Action",
+      agent_Name: "Sam",
+      MID: 1,
+      TID: 1,
+      Acquirer: "WorldPay",
+      Total_Earning: "",
+      Residual: "",
+      One_Time: "",
+      Claw_Back: "$e",
+      action: "Edit",
     },
     {
       id: 2,
-      agentName: "Sam",
-      mid: 140,
-      tid: 123,
-      acquirer: "WoldPay",
-      totalEarning: 346453,
-      residual: 3635,
-      oneTime: 234,
-      action: "Action",
+      agent_Name: "Sam",
+      MID: 2,
+      TID: 2,
+      Acquirer: "Pay",
+      Total_Earning: "Enna",
+      Residual: "",
+      One_Time: "",
+      Claw_Back: "$e",
+      action: "Edit",
     },
     {
       id: 3,
-      agentName: "Sam",
-      mid: 140,
-      tid: 123,
-      acquirer: "WoldPay",
-      totalEarning: 346453,
-      residual: 3635,
-      oneTime: 234,
-      action: "Action",
-    },
-    {
-      id: 4,
-      agentName: "Sam",
-      mid: 140,
-      tid: 123,
-      acquirer: "WoldPay",
-      totalEarning: 346453,
-      residual: 3635,
-      oneTime: 234,
-      action: "Action",
+      agent_Name: "Sam",
+      MID: 3,
+      TID: 3,
+      Acquirer: "WorldPay",
+      Total_Earning: "Enna",
+      Residual: "",
+      One_Time: "",
+      Claw_Back: "$e",
+      action: "Edit",
     },
   ];
 
   return (
-    <>
-      <Box sx={{ marginTop: "2rem", width: "100%" }}>
-        <Header />
-        <Table1
-          columns={columns}
-          rows={rows}
-          title="Commission Shared Details"
-          getRowId={(row: any) => row.id}
-        />
-      </Box>
-    </>
+    <Box sx={{ marginTop: "2rem", width: "100%" }}>
+      <Table
+        columns={columns}
+        rows={rows}
+        title="All Commission"
+        getRowId={(row: any) => row.id}
+      />
+    </Box>
   );
 };
 
@@ -170,12 +177,11 @@ const More = (params: any) => {
   return (
     <Box sx={{ display: "flex", gap: 1 }}>
       <Link
-        to={""}
-        // to={
-        //   params && params.row && params.row.id
-        //     ? `/commissionDetails/${params.row.id}`
-        //     : ""
-        // }
+        to={
+          params && params.row && params.row.id
+            ? `/commissionDetails/${params.row.id}`
+            : ""
+        }
         style={{
           textDecoration: "none",
           color: Colors.LinkColor,
@@ -183,7 +189,7 @@ const More = (params: any) => {
           fontSize: "13.13px",
         }}
       >
-        View
+          View
         <Box sx={{ borderBottom: `0.4px solid ${Colors.LinkColor}` }} />
       </Link>
       <Box>

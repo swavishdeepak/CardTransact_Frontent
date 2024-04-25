@@ -7,10 +7,12 @@ export const SidebarUserItems = [
     icon: PersonIcon,
     link: "/users",
     subItems: [
+      { text: "View Employees", link: "/viewEmployees", icon: PersonIcon },
+      { text: "View Agents", link: "/viewAgents", icon: PersonIcon },
       { text: "Add Employees", link: "/addEmployees", icon: PersonIcon },
       { text: "Add Agents", link: "/addAgents", icon: PersonIcon },
-      { text: "View Agents", link: "/viewAgents", icon: PersonIcon },
-      { text: "View Employees", link: "/viewEmployees", icon: PersonIcon },
+    
+    
     ],
   },
 ];
@@ -110,38 +112,38 @@ export const Reports = [
     subItems: [
       {
         text: "Overview",
-        link: "/overview",
+        link: "/report/overview",
         icon: DashboardIcon,
       },
       {
         text: "Sales",
         icon: PersonIcon,
-        link: "/sales",
+        link: "/report/overview/salesDetails",
       },
       {
         text: "Revenue",
         icon: PersonIcon,
-        link: "/revenue",
+        link: "/revenueDetails",
       },
       {
         text: "Commission Recieved",
         icon: PersonIcon,
-        link: "/commissionReceived",
+        link: "/commissionReceivedDetails",
       },
       {
         text: "Commission Shared",
         icon: PersonIcon,
-        link: "/commissionShared",
+        link: "/commissionSharedDetails",
       },
       {
         text: "Residual Received",
         icon: PersonIcon,
-        link: "/residualReceived",
+        link: "/residualReceivedDetails",
       },
       {
         text: "Residual Shared",
         icon: PersonIcon,
-        link: "/residualShared",
+        link: "/residualSharedDetails",
       },
       {
         text: "Clawbacks",

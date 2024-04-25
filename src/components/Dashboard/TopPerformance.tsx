@@ -89,7 +89,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
   ];
 
   return (
-    <CustomBox>
+    <CustomBox style={{height: "100%"}}>
       <Box sx={{ display: "flex", justifyContent: "space-between",alignItems: "end" }}>
         <Box>
           <Typography

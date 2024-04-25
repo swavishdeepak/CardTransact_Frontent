@@ -10,8 +10,8 @@ const DetailsSubTitle: React.FC<DetailsSubTitleProps> = ({ title }) => {
     <Typography
       sx={{
        color: "#000000",
-        fontSize: "16px",
-        fontWeight: "400",
+        fontSize: "16.9px",
+        fontWeight: "600",
         "@media(max-width:600px)":{
           fontSize: "12px",
         }

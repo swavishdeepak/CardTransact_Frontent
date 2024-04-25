@@ -24,7 +24,7 @@ const size = {
 const Application: React.FC = () => {
   const total = data.reduce((acc, curr) => acc + curr.value, 0);
   return (
-    <GraphCustomBox style={{padding: 2}}>
+    <GraphCustomBox style={{padding: 2, height: "100%"}}>
       <CustomGraph
         header="Applications"
         showPoundIcon={false}

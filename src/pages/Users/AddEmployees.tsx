@@ -26,6 +26,8 @@ export const AddEmployees = () => {
   const handleBack = ()=>{
     navigate("/viewEmployees")
   }
+
+  
  
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -36,7 +38,7 @@ export const AddEmployees = () => {
             <Typography
               sx={{ color: "#202020", fontWeight: "600", fontSize: "18px" }}
             >
-              Add Employees
+             {id ? "Edit User": " Add Employees"}
             </Typography>
             <Divider sx={{ border: "1px solid #77D177" }} />
           </Box>
@@ -145,9 +147,10 @@ export const AddEmployees = () => {
           loading={loading}
           style={{
             marginTop: 3,
+            width: "25%"
           }}
         >
-          Add
+          {id ?"Save": "Add"}
         </LoadButton>
       </CustomBox>
     </Box>

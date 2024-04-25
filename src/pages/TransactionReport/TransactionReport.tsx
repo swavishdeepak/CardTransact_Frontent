@@ -9,7 +9,7 @@ import { LoadButton } from '../../components/LoadButton';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ConfirmDialog from "../../components/ConfirmDialog";
-import Table1 from "../../components/Table1";
+import Table1 from "../../components/TableWithDatePic";
 
 
 interface Column {

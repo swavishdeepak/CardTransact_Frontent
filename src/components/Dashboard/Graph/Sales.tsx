@@ -38,6 +38,8 @@ export const Sales = () => {
     <GraphCustomBox
       style={{
         padding: 2,
+        height: "100%"
+
       }}
     >
       <CustomGraph header="Sales" showPoundIcon={false}>

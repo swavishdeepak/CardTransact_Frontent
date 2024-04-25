@@ -12,6 +12,7 @@ import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
 import ProofIcons from "../../assets/ProofIcon.svg";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import { useNavigate } from "react-router-dom";
+import { Label } from "recharts";
 
 export const ApplicationDetails = () => {
   const navigate = useNavigate();
@@ -44,8 +45,8 @@ export const ApplicationDetails = () => {
   };
 
   const headerStyle = {
-    fontSize: "15px",
-    fontWeight: "500",
+    fontSize: "18px",
+    fontWeight: "600",
     lineHeight: "24px",
   };
 
@@ -83,7 +84,7 @@ export const ApplicationDetails = () => {
           </Grid>
           <Grid
             container
-            rowSpacing={2}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
@@ -105,11 +106,11 @@ export const ApplicationDetails = () => {
           </Grid>
           <Grid
             container
-            rowSpacing={2}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
-            <Grid item xs={3} >
+            <Grid item xs={3}>
               <DetailsSubTitle title={"Status"} />
             </Grid>
             <Grid item xs={9}>
@@ -134,7 +135,7 @@ export const ApplicationDetails = () => {
           </Grid>
           <Grid
             container
-            rowSpacing={2}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
@@ -148,7 +149,7 @@ export const ApplicationDetails = () => {
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Trading Name"} />
             </Grid>
-            <Grid  item xs={7} md={9}>
+            <Grid item xs={7} md={9}>
               <DetailsSubTitleName name={"Merchant01"} />
             </Grid>
             <Grid item xs={5} md={3}>
@@ -175,7 +176,7 @@ export const ApplicationDetails = () => {
           </Grid>
           <Grid
             container
-            rowSpacing={2}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
@@ -222,7 +223,7 @@ export const ApplicationDetails = () => {
           </Grid>
           <Grid
             container
-            rowSpacing={2}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
@@ -263,7 +264,7 @@ export const ApplicationDetails = () => {
           </Grid>
           <Grid
             container
-            rowSpacing={2}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
@@ -316,33 +317,160 @@ export const ApplicationDetails = () => {
           </Grid>
           <Grid
             container
-            rowSpacing={2}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             mt={3}
           >
             <Grid item xs={3}>
-              <DetailsSubTitle title={"Address Proof"} />
+              <DetailsSubTitle title={"ID Proof"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: 1,
-                    height: "1.5rem",
-                    width: "1.5rem",
-                  }}
-                >
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                </Box>
-              </DetailsSubTitleName>
+              <Box sx={{}}>
+                <DetailsSubTitleName style={{ alignItems: "start" }}>
+                  <Box>
+                    <Typography
+                      sx={{
+                        color: "#000000",
+                        fontSize: "15",
+                        fontWeight: "300",
+                      }}
+                    >
+                      Driving License
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: 1,
+                        height: "3rem",
+                        width: "3rem",
+                      }}
+                    >
+                      <img src={ProofIcons} alt=""></img>
+                      <img src={ProofIcons} alt=""></img>
+                      <img src={ProofIcons} alt=""></img>
+                      <img src={ProofIcons} alt=""></img>
+                    </Box>
+                  </Box>
+                </DetailsSubTitleName>
+              </Box>
             </Grid>
 
             <Grid item xs={3}>
-              <DetailsSubTitle title={"Site Pictures"} />
+              <DetailsSubTitle title={"Premises Pictures"} />
+            </Grid>
+            <Grid item xs={9}>
+              <DetailsSubTitleName style={{ alignItems: "start" }}>
+                <Box>
+                  <Typography
+                    sx={{
+                      color: "#000000",
+                      fontSize: "15",
+                      fontWeight: "300",
+                    }}
+                  >
+                    Outdoors
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 1,
+                      height: "3rem",
+                      width: "3rem",
+                      marginTop: "5px",
+                    }}
+                  >
+                    <img src={ProofIcons} alt=""></img>
+                    <img src={ProofIcons} alt=""></img>
+                    <img src={ProofIcons} alt=""></img>
+                   
+                  </Box>
+                  <Typography
+                    sx={{
+                      color: "#000000",
+                      fontSize: "15",
+                      fontWeight: "300",
+                      marginTop: "10px",
+                    }}
+                  >
+                    Indoors
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 1,
+                      marginTop: "5px",
+                      height: "3rem",
+                      width: "3rem",
+                    }}
+                  >
+                    <img src={ProofIcons} alt=""></img>
+                    <img src={ProofIcons} alt=""></img>
+                    <img src={ProofIcons} alt=""></img>
+                    
+                  </Box>
+                </Box>
+              </DetailsSubTitleName>
+            </Grid>
+            <Grid item xs={3}>
+              <DetailsSubTitle title={"Business Address Proof"} />
+            </Grid>
+            <Grid item xs={9}>
+              <DetailsSubTitleName style={{alignItems: "start"}}>
+                <Box>
+                <Typography
+                  sx={{
+                    color: "#000000",
+                    fontSize: "15",
+                    fontWeight: "300",
+                  }}
+                >
+                  Utility Bills
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 1,
+                    height: "3rem",
+                    width: "3rem",
+                  }}
+                >
+                  <img src={ProofIcons} alt=""></img>
+                  <img src={ProofIcons} alt=""></img>
+                </Box>
+                </Box>
+              </DetailsSubTitleName>
+            </Grid>
+            <Grid item xs={3}>
+              <DetailsSubTitle title={"Home Address Proof"} />
+            </Grid>
+            <Grid item xs={9}>
+            <DetailsSubTitleName style={{alignItems: "start"}}>
+                <Box>
+                <Typography
+                  sx={{
+                    color: "#000000",
+                    fontSize: "15",
+                    fontWeight: "300",
+                  }}
+                >
+                 Domestice Utility Bills
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 1,
+                    height: "3rem",
+                    width: "3rem",
+                  }}
+                >
+                  <img src={ProofIcons} alt=""></img>
+                  <img src={ProofIcons} alt=""></img>
+                </Box>
+                </Box>
+              </DetailsSubTitleName>
+            </Grid>
+            <Grid item xs={3}>
+              <DetailsSubTitle title={"Bank Statement"} />
             </Grid>
             <Grid item xs={9}>
               <DetailsSubTitleName>
@@ -350,20 +478,23 @@ export const ApplicationDetails = () => {
                   sx={{
                     display: "flex",
                     gap: 1,
-                    height: "1.5rem",
-                    width: "1.5rem",
+                    height: "3rem",
+                    width: "3rem",
                   }}
                 >
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
                   <img src={ProofIcons} alt=""></img>
                   <img src={ProofIcons} alt=""></img>
                 </Box>
               </DetailsSubTitleName>
             </Grid>
             <Grid item xs={3}>
-              <DetailsSubTitle title={"Bank Statements"} />
+              <DetailsSubTitle title={"Remarks"} />
+            </Grid>
+            <Grid item xs={9}>
+              <DetailsSubTitleName name="Lorem Ipsum has been the Industry" />
+            </Grid>
+            <Grid item xs={3}>
+              <DetailsSubTitle title={"Alternatives"} />
             </Grid>
             <Grid item xs={9}>
               <DetailsSubTitleName>
@@ -371,8 +502,8 @@ export const ApplicationDetails = () => {
                   sx={{
                     display: "flex",
                     gap: 1,
-                    height: "1.5rem",
-                    width: "1.5rem",
+                    height: "3rem",
+                    width: "3rem",
                   }}
                 >
                   <img src={ProofIcons} alt=""></img>
@@ -386,7 +517,7 @@ export const ApplicationDetails = () => {
           <CustomButton
             type="submit"
             label="Approve"
-            hoverColor= {Colors.successColor}
+            hoverColor={Colors.successColor}
             onClick={handleOpenApprove}
             style={{
               width: "15%",
@@ -395,9 +526,7 @@ export const ApplicationDetails = () => {
               backgroundColor: Colors.successColor,
               color: "#fff",
             }}
-          >
-            
-          </CustomButton>
+          ></CustomButton>
           <CustomButton
             onClick={handleOpenReview}
             label="Review"

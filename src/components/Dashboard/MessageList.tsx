@@ -61,7 +61,7 @@ export const MessageList: React.FC<Message> = ({
   ];
 
   return (
-    <CustomBox
+    <CustomBox style={{height: "100%"}}
     >
       <Box>
         <Typography

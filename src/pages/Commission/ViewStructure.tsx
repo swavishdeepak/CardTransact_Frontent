@@ -5,8 +5,8 @@ import { CustomBox } from "../../components/MyCustom/CustomBox";
 import { CommonHeader } from "../../components/CommonHeader";
 import { Grid } from "@mui/material";
 import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
-import Table from "../../components/Table";
-import CustomTextInput from "../../components/CustomInput";
+import { ViewCommission } from "../../components/Commission/ViewCommission";
+import TableWithDatePic from "../../components/TableWithDatePic";
 
 interface Column {
   field: string;
@@ -31,7 +31,7 @@ export const ViewStructure = () => {
     {
       field: "id",
       headerName: "Sr.No",
-      minWidth: 90,
+      minWidth: 50,
       flex: 1,
     },
     {
@@ -57,19 +57,19 @@ export const ViewStructure = () => {
     {
       field: "model",
       headerName: "Model",
-      minWidth: 100,
+      minWidth: 50,
       flex: 1,
     },
     {
       field: "duration",
       headerName: "Duration",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
     {
       field: "commission",
       headerName: "Commission",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>
@@ -107,13 +107,7 @@ export const ViewStructure = () => {
     },
   ];
 
-  const aquirerData: {type: string}[] = [
-    { type: "Overall" },
-    { type: "World Pay" },
-    { type: "EVO" },
-    { type: "FDMS" },
-    { type: "ELAVO" },
-  ];
+  
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -122,38 +116,15 @@ export const ViewStructure = () => {
         <Grid
           container
           rowSpacing={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          columnSpacing={{ xs: 1, sm: 4, md: 4 }}
           mt={3}
         >
-          <Grid item xs={12} sm={3}>
-            {aquirerData.length > 0 &&
-              aquirerData.map((data, index) => {
-                return (
-                  <Box
-                    key={index}
-                    sx={{
-                      backgroundColor: "rgba(224, 224, 224, 1)",
-                      borderRadius: "10px",
-                      textAlign: "center",
-                      color: "rgba(255, 255, 255, 1)",
-                      fontWeight: "700",
-                      fontSize: "12px",
-                      alignItems: "center",
-                      padding: 1,
-                      cursor: "pointer",
-                      marginTop: "1rem"
-                     
-                    }}
-                  >
-                    {data.type}
-                  </Box>
-                );
-              })}
-          </Grid>
-          <Grid item xs={12} sm={9}>
-            <Table
+          <ViewCommission/>
+          <Grid item xs={12} sm={8}>
+            <TableWithDatePic
               columns={columns}
-              includeSlots={false}
+              hideSelect={false}
+              hideSearch={false}
               rows={rows}
               getRowId={(row: any) => row.id}
             />

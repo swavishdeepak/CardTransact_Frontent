@@ -28,7 +28,7 @@ export const ViewCommissionStructure = () => {
         <CustomBox>
           <Grid
             container
-            rowSpacing={1}
+            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           >
             <Grid item xs={2}>
@@ -36,6 +36,12 @@ export const ViewCommissionStructure = () => {
             </Grid>
             <Grid item xs={10}>
               <DetailsSubTitleName name={"WorldPay"} />
+            </Grid>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Tier"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={"Tier 01"} />
             </Grid>
             <Grid item xs={2}>
               <DetailsSubTitle title={"Date"} />

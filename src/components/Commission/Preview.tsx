@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { PreviewRowItem } from "./PreviewRowItem";
+import { Commission } from '../../utils/SideBarItem';
 
 const useStyles = makeStyles({
   header: {
@@ -21,29 +22,31 @@ const useStyles = makeStyles({
 });
 const data1 = [
   {
-    sr: "01",
-    date: "20/2/2024",
-    rental: "01",
-    model: "20/2/2024",
-    duration: "01",
-    commission: "20/2/2024",
+    option: "options1",
+    model: "Ingenico Desk 500",
+    rent: "26.4",
+    month: "20/2/2024",
+    commission: "500",
+    bouns: "00.00",
   },
   {
-    sr: "02",
-    date: "20/2/2024",
-    rental: "01",
-    model: "20/2/2024",
-    duration: "01",
-    commission: "20/2/2024",
+    option: "options1",
+    model: "Ingenico Desk 500",
+    rent: "26.4",
+    month: "20/2/2024",
+    commission: "500",
+    bouns: "00.00",
   },
   {
-    sr: "03",
-    date: "20/2/2024",
-    rental: "01",
-    model: "20/2/2024",
-    duration: "01",
-    commission: "20/2/2024",
+    option: "options1",
+    model: "Ingenico Desk 500",
+    rent: "26.4",
+    month: "20/2/2024",
+    commission: "500",
+    bouns: "00.00",
   },
+  
+  
 ];
 
 interface PreviewProps {}
@@ -67,23 +70,23 @@ export const Preview: React.FC<PreviewProps> = () => {
           padding: 1,
         }}
       >
-        <Typography className={classes.header}>Sr.No</Typography>
-        <Typography className={classes.header}>Date</Typography>
-        <Typography className={classes.header}>Rental</Typography>
+        <Typography className={classes.header}>Options</Typography>
         <Typography className={classes.header}>Model</Typography>
-        <Typography className={classes.header}>Duration</Typography>
+        <Typography className={classes.header}>Rent</Typography>
+        <Typography className={classes.header}>Month</Typography>
         <Typography className={classes.header}>Commission</Typography>
+        <Typography className={classes.header}>Bouns</Typography>
       </Box>
       {data1.map((data, index) => {
         return (
           <PreviewRowItem
             key={index}
-            sr={data.sr}
-            date={data.date}
-            rental={data.rental}
-            model={data.model}
-            duration={data.duration}
-            commission={data.commission}
+            sr={data.option}
+            date={data.model}
+            rental={data.rent}
+            model={data.month}
+            duration={data.commission}
+            commission={data.bouns}
           />
         );
       })}

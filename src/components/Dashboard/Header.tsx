@@ -11,7 +11,7 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
   let path = location.pathname;
   let formattedPath = path.charAt(1).toUpperCase() + path.slice(2);
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "end" }}>
+    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "end", marginTop: "1rem" }}>
       <Box>
         <Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>

@@ -12,7 +12,7 @@ import { LoadButton } from "../../components/LoadButton";
 import Table from "../../components/Table";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Table1 from "../../components/Table1";
+import TableWithDatePic from "../../components/TableWithDatePic";
 
 interface Column {
   field: string;
@@ -60,7 +60,7 @@ export const AllCardRates = () => {
     },
     {
       field: "aquirer",
-      headerName: "aquirer",
+      headerName: "Aquirer",
       minWidth: 100,
       flex: 1,
     },
@@ -138,7 +138,7 @@ export const AllCardRates = () => {
       <Header>
       <LoadButton style={{height: "80%"}} onClick={handleRedirect}>Add Structure</LoadButton>
       </Header>
-      <Table1
+      <TableWithDatePic
           columns={columns}
           rows={rows}
           title="All Card Rates Structure"

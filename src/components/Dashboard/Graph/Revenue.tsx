@@ -76,7 +76,7 @@ const data = [
 export const Revenue = () => {
   return (
     <GraphCustomBox
-      style={{padding: 2}}
+      style={{padding: 2, height: "100%"}}
      >
       <CustomGraph
         header="Revenue"

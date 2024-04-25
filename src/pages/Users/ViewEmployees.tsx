@@ -40,7 +40,7 @@ export const ViewEmployees: React.FC = () => {
     {
       field: "userName",
       headerName: "User Name",
-      minWidth: 50,
+      minWidth: 200,
       flex: 1,
     },
     {
@@ -52,7 +52,7 @@ export const ViewEmployees: React.FC = () => {
     {
       field: "email",
       headerName: "Email",
-      minWidth: 50,
+      minWidth: 200,
       flex: 1,
     },
     {

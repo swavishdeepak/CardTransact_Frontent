@@ -72,7 +72,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
         <Grid item xs={12} md={8}>
           <CustomFileInput
-            label="Trading Address proof"
+            label="Upload Picture of Premises(Outdoors)"
             placeholder="Upload Any Utility Document"
             onFileChange={(e: any) => {
               setAddressProof(e.target.files[0]);
@@ -81,7 +81,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
         <Grid item xs={12} md={8}>
           <CustomFileInput
-            label="Site Proof"
+            label="Upload Picture of Premises(Indoors)"
             placeholder="Upload Any Utility Document"
             onFileChange={(e: any) => {
               setSiteProof(e.target.files[0]);

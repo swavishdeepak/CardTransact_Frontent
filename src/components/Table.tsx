@@ -7,6 +7,7 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import { CustomBox } from "./MyCustom/CustomBox";
+import { parse } from "path";
 
 interface Column {
   field: string;
@@ -32,6 +33,7 @@ interface BasicTableProps {
   includeSlots?: boolean;
   includesPagination?: boolean;
   includeSearch?: boolean;
+  showDatePicker?: boolean
 }
 
 const Table: React.FC<BasicTableProps> = ({
@@ -43,6 +45,7 @@ const Table: React.FC<BasicTableProps> = ({
   title,
   exportHide,
   customButtons,
+  showDatePicker,
   getRowId,
   includeSlots = true,
   includesPagination = true,
@@ -61,8 +64,14 @@ const Table: React.FC<BasicTableProps> = ({
           border: "none",
           "& .MuiDataGrid-columnHeaderTitle": {
             color: "#202020",
-            fontWeight: "500",
+            fontWeight: "600",
             fontSize: "15px",
+          },
+          "& .even": {
+            bgcolor: '#D1FDD1'
+          },
+          "& .odd": {
+            bgcolor: '#fff'
           },
           ...sx,
         }}
@@ -89,9 +98,13 @@ const Table: React.FC<BasicTableProps> = ({
             customButtons,
             includeSearch,
             exportHide,
+            showDatePicker
           },
         }}
         slots={includeSlots ? { toolbar: CustomToolbar } : {}}
+        getRowClassName={(params) =>
+          params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
+        }
       />
     </CustomBox>
   );

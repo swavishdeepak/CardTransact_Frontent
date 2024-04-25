@@ -215,7 +215,7 @@ export const UserProfile = () => {
             <Typography
               sx={{
                 color: "rgba(0, 0, 0, 1)",
-                fontSize: "18px",
+                fontSize: "25px",
                 fontWeight: "700",
                 fontFamily: "serif",
               }}
@@ -244,7 +244,7 @@ export const UserProfile = () => {
             label="Registered Email Address"
             placeholder="Email Address"
           />
-          <LoadButton style={{ marginTop: "1.5rem", width: "50%" }}>
+          <LoadButton style={{ marginTop: "1.5rem", width: "100%" }}>
             Confirm
           </LoadButton>
         </Box>
@@ -255,7 +255,7 @@ export const UserProfile = () => {
             <Typography
               sx={{
                 color: "rgba(0, 0, 0, 1)",
-                fontSize: "18px",
+                fontSize: "25px",
                 fontWeight: "700",
                 fontFamily: "serif",
               }}
@@ -333,7 +333,7 @@ export const UserProfile = () => {
               />
             </>
           )}
-          <LoadButton style={{ marginTop: "1.5rem", width: "50%" }}>
+          <LoadButton style={{ marginTop: "1.5rem", width: "100%" }}>
             Confirm
           </LoadButton>
         </Box>

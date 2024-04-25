@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
 import { RouterProvider, createBrowserRouter,useRouteError } from "react-router-dom";
 import { Box } from "@mui/material";
@@ -36,7 +36,6 @@ import { Revenue } from "./pages/Reports/Revenue";
 import { ResidualReceived } from "./pages/Reports/ResidualReceived";
 import { ResidualShared } from "./pages/Reports/ResidualShared";
 import { Clawbacks } from "./pages/Reports/Clawbacks";
-import { SalesDetails } from "./pages/Reports/SalesDetails";
 import { ReEvaluation } from "./pages/Applications/ReEvaluation";
 import { Applications } from "./pages/Reports/Applications";
 /* merchants */
@@ -60,18 +59,11 @@ import { NotificationDetails } from "./pages/Notifications/NotificationDetails";
 import { Message } from "./pages/Messages/Message";
 import { DeleteData } from "./pages/DeleteData/DeleteData";
 import { DeleteDataDetails } from "./pages/DeleteData/DeleteDataDetails";
-import { CommissionReceivedDetails } from "./pages/Reports/CommissionReceivedDetails";
+
 import { ViewDetails } from "./pages/Notifications/ViewDetails";
-//import { useNavigation } from "react-router-dom";
-
-
-
 
 
 function App() {
- 
-
-
   const router = createBrowserRouter([
     {
       path: "/auth/login",
@@ -208,45 +200,36 @@ function App() {
 
         /*Reports SideBar List************************/
         {
-          path: "/overView",
+          path: "/report/overView",
           element: <Overview />,
         },
         {
-          path: "/sales",
+          path: "/report/overview/salesDetails",
           element: <Sales />,
         },
         {
-          path: "/revenue",
+          path: "/revenueDetails",
           element: <Revenue />,
         },
         {
-          path: "/commissionReceived",
+          path: "/commissionReceivedDetails",
           element: <CommissionReceived />,
         },
         {
-          path: "/commissionShared",
+          path: "/commissionSharedDetails",
           element: <CommissionShared />,
         },
         {
-          path: "/residualReceived",
+          path: "/residualReceivedDetails",
           element: <ResidualReceived />,
         },
         {
-          path: "/residualShared",
+          path: "/residualSharedDetails",
           element: <ResidualShared />,
         },
         {
           path: "/clawbacks",
           element: <Clawbacks />,
-        },
-        {
-          path: "/salesDetails",
-          element: <SalesDetails/>
-
-        },
-        {
-          path: "/commissionReceivedDetails",
-          element: <CommissionReceivedDetails/>
         },
         {
           path: "/application",

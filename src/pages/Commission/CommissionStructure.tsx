@@ -9,7 +9,7 @@ import { LoadButton } from '../../components/LoadButton';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import ConfirmDialog from "../../components/ConfirmDialog";
-import Table1 from "../../components/Table1";
+import TableWithDatePic from "../../components/TableWithDatePic";
 
 interface Column {
   field: string;
@@ -119,6 +119,24 @@ export const CommissionStructure = () => {
       added_By: "Admin01",
       action: "Edit",
     },
+    {
+      id: 4,
+      aquirer: "Worl Pay",
+      tier: "Tier01",
+      file_Name: "File 01",
+      last_Update: "12/02/2024",
+      added_By: "Admin01",
+      action: "Edit",
+    },
+    {
+      id: 5,
+      aquirer: "Worl Pay",
+      tier: "Tier01",
+      file_Name: "File 01",
+      last_Update: "12/02/2024",
+      added_By: "Admin01",
+      action: "Edit",
+    },
    
     
   ];
@@ -132,7 +150,7 @@ export const CommissionStructure = () => {
       <Header>
          <LoadButton style={{height: "80%", width: "fit-content"}} onClick={handleRedirect}>Add Structure</LoadButton>
       </Header>
-        <Table1
+        <TableWithDatePic
           columns={columns}
           rows={rows}
           title="Commission Structure"

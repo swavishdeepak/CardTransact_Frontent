@@ -29,7 +29,8 @@ const useStyles = makeStyles({
 
 export const AddCommissionStructure = () => {
   const navigate = useNavigate();
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedAquire, setSelectedAquire] = useState("");
+  const [selectedTier, setSelectedTier] = useState("");
   const [openPreview, setOpenPreview] = useState(false);
 
   const handleOpenPreview = () => {
@@ -41,7 +42,10 @@ export const AddCommissionStructure = () => {
   };
 
   const handleChange = (event: any) => {
-    setSelectedValue(event.target.value);
+    setSelectedAquire(event.target.value);
+  };
+  const handleChangeTire = (event: any) => {
+    setSelectedTier(event.target.value);
   };
 
   const handleConfirm = () => {
@@ -53,6 +57,12 @@ export const AddCommissionStructure = () => {
     { value: "aquirer1", label: "aquirer1" },
     { value: "aquirer2", label: "aquirer2" },
   ];
+
+  const tier = [
+    { value: "tier1", label: "tier" },
+    { value: "tier2", label: "tier2" },
+    { value: "tier3", label: "tier3" },
+  ];
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -61,39 +71,56 @@ export const AddCommissionStructure = () => {
         <CustomBox
           style={{
             border: `1px solid ${Colors.LinkColor}`,
+            marginTop: "2rem",
           }}
         >
-          <Grid container mt={1}>
+          <Grid container rowSpacing={4} columnSpacing={2}>
             <Grid item xs={12} md={5}>
               <BasicSelect
+                label="Select Aquirer"
                 sx={{
                   border: "1px solid #898989",
                   height: "2rem",
                   padding: 2,
-                  width: "40%",
+                  width: "100%",
                 }}
                 placeholder="Select Aquirer"
                 name={"selectedValue"}
-                value={selectedValue}
+                value={selectedAquire}
                 handleChange={handleChange}
                 size="small"
                 items={aquirer}
               />
             </Grid>
-            <Grid container mt={1}>
-              <Grid item xs={12} md={7}>
-                <CustomFileInput
-                  label="Upload File"
-                  labelStyle={{ marginTop: "1.2rem" }}
-                  style={{}}
-                />
-              </Grid>
+            <Grid item xs={12} md={5}>
+              <BasicSelect
+                label="Select Tier"
+                sx={{
+                  border: "1px solid #898989",
+                  height: "2rem",
+                  padding: 2,
+                  width: "100%",
+                }}
+                placeholder="Select Aquirer"
+                name={"selectedValue"}
+                value={selectedTier}
+                handleChange={handleChangeTire}
+                size="small"
+                items={tier}
+              />
+            </Grid>
+            <Grid item xs={12} md={7}>
+              <CustomFileInput
+                label="Upload File"
+                labelStyle={{ marginTop: "1.2rem" }}
+                style={{}}
+              />
             </Grid>
           </Grid>
         </CustomBox>
         {!openPreview && (
           <Box sx={{ marginTop: "2rem", display: "flex", gap: 2 }}>
-            <LoadButton>Add</LoadButton>
+            <LoadButton style={{ width: "20%" }}>Add</LoadButton>
             <CustomButton
               label="Preview"
               onClick={handleOpenPreview}
@@ -115,10 +142,18 @@ export const AddCommissionStructure = () => {
               marginTop: "2rem",
             }}
           >
-            <Typography sx={{color: "rgba(32, 32, 32, 1)", fontSize: "1.2rem", fontWeight: "600"}}>Preview</Typography>
+            <Typography
+              sx={{
+                color: "rgba(32, 32, 32, 1)",
+                fontSize: "1.2rem",
+                fontWeight: "600",
+              }}
+            >
+              Preview
+            </Typography>
             <Preview />
-            <Preview />
-            <Preview />
+            {/* <Preview />
+            <Preview /> */}
             <Box sx={{ display: "flex", gap: 1, marginTop: "1.5rem" }}>
               <CustomButton
                 label="Cancel"

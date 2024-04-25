@@ -10,8 +10,11 @@ import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
 import DetailsHeader from "../../components/MyCustom/DetailsHeader";
 import { Colors } from "../../utils/Colors";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import { useNavigate } from "react-router-dom";
+import UserDetails from "../../components/User/UserDetails";
 
 export const AgentDetails = () => {
+  const  navigate = useNavigate()
   const [openDelete, setOpenDelete] = useState(false);
 
   const handleDeleteOpen = () => {
@@ -22,11 +25,15 @@ export const AgentDetails = () => {
     setOpenDelete(false);
   };
 
+  const handelEdit = ()=>{
+      navigate("/addAgents")
+  }
+
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
       <CustomBox>
-        <CommonHeader header={"View Agent"}>
+        <CommonHeader header={"AGENT DETAILS"}>
           <Box sx={{ display: "flex", gap: 1 }}>
             <CustomButton
               onClick={handleDeleteOpen}
@@ -44,113 +51,11 @@ export const AgentDetails = () => {
                 color: `${Colors.LinkColor}`,
                 border: `1px solid ${Colors.LinkColor}`,
               }}
+              onClick={handelEdit}
             />
           </Box>
         </CommonHeader>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-          <Grid item xs={12}>
-            <DetailsHeader heading={"personal Details"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Name"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"Hena"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Mobile Number"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"2756845382"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Email Address"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"heena123@gmail.com"} />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-          <Grid item xs={12}>
-            <DetailsHeader heading={"Address Details"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"House/Flat Address"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"1 charter Way"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"City"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"Liskeared"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"County"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"Devcon"} />
-          </Grid>
-
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Country"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"United Kingdom"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Post Code"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"P12 4Hk"} />
-          </Grid>
-        </Grid>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            mt={3}
-          >
-            <Grid item xs={12}>
-              <DetailsHeader heading={"Bank Details"} />
-            </Grid>
-            <Grid item xs={2}>
-              <DetailsSubTitle title={"Bank Name"} />
-            </Grid>
-            <Grid item xs={10}>
-              <DetailsSubTitleName name={"Lloyds"} />
-            </Grid>
-            <Grid item xs={2}>
-              <DetailsSubTitle title={"Name on Bank A/c"} />
-            </Grid>
-            <Grid item xs={10}>
-              <DetailsSubTitleName name={"Heena"} />
-            </Grid>
-
-            <Grid item xs={2}>
-              <DetailsSubTitle title={"Sort Code"} />
-            </Grid>
-            <Grid item xs={10}>
-              <DetailsSubTitleName name={"01-02-3"} />
-            </Grid>
-            <Grid item xs={2}>
-              <DetailsSubTitle title={"Account Number"} />
-            </Grid>
-            <Grid item xs={10}>
-              <DetailsSubTitleName name={"12345678"} />
-            </Grid>
-          </Grid>
+         <UserDetails/>
 
         <Grid></Grid>
       </CustomBox>
@@ -160,7 +65,14 @@ export const AgentDetails = () => {
         title={"Conformation"}
         desc="Are You Sure want You Want to Delete This User"
       >
-        <Box sx={{display: "flex", gap: 2, justifyContent: "center", marginTop: "1rem"}}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            justifyContent: "center",
+            marginTop: "1rem",
+          }}
+        >
           <CustomButton
             label="Cancel"
             onClick={handleDeleteClose}

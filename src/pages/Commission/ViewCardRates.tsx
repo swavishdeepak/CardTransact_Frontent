@@ -5,11 +5,8 @@ import { CustomBox } from "../../components/MyCustom/CustomBox";
 import { CommonHeader } from "../../components/CommonHeader";
 import { Grid } from "@mui/material";
 import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
-import Table from "../../components/Table";
-import BasicSelect from "../../components/BasicSelect";
-import CustomTextInput from "../../components/CustomInput";
-import { LoadButton } from "../../components/LoadButton";
-import Table1 from "../../components/Table1";
+import { ViewCommission } from "../../components/Commission/ViewCommission";
+import TableWithDatePic from "../../components/TableWithDatePic";
 
 interface Column {
   field: string;
@@ -41,11 +38,7 @@ export const ViewCardRates = () => {
     setSelectedDate(date);
   };
 
-  const aquirer = [
-    { value: "aquirer", label: "aquirer" },
-    { value: "aquirer1", label: "aquirer1" },
-    { value: "aquirer2", label: "aquirer2" },
-  ];
+ 
   const columns: Column[] = [
     {
       field: "id",
@@ -124,13 +117,7 @@ export const ViewCardRates = () => {
     },
   ];
 
-  const aquirerData: { type: string }[] = [
-    { type: "Overall" },
-    { type: "World Pay" },
-    { type: "EVO" },
-    { type: "FDMS" },
-    { type: "ELAVO" },
-  ];
+ 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -139,38 +126,16 @@ export const ViewCardRates = () => {
         <Grid
           container
           rowSpacing={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
+          columnSpacing={{ xs: 1, sm: 4, md: 4 }}
+          mt={1}
         >
-          <Grid item xs={12} sm={3}>
-            {aquirerData.length > 0 &&
-              aquirerData.map((data, index) => {
-                return (
-                  <Box
-                    key={index}
-                    sx={{
-                      backgroundColor: "rgba(224, 224, 224, 1)",
-                      borderRadius: "10px",
-                      textAlign: "center",
-                      color: "rgba(255, 255, 255, 1)",
-                      fontWeight: "700",
-                      fontSize: "12px",
-                      alignItems: "center",
-                      padding: 1,
-                      cursor: "pointer",
-                      marginTop: "1rem",
-                    }}
-                  >
-                    {data.type}
-                  </Box>
-                );
-              })}
-          </Grid>
-          <Grid item xs={12} sm={9}>
-            <Table1
+          <ViewCommission/>
+          <Grid item xs={12} sm={8}>
+            <TableWithDatePic
               columns={columns}
-              includeSlots={false}
               rows={rows}
+              hideSearch={false}
+              hideSelect={false}
               getRowId={(row: any) => row.id}
             />
               {/* <Box

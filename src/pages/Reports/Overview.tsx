@@ -156,7 +156,7 @@ export const Overview = () => {
             <CustomGraph
               header="Sales"
               viewDetails={
-                <Link to="/salesDetails" style={{ color: Colors.LinkColor }}>
+                <Link to="/report/overview/salesDetails" style={{ color: Colors.LinkColor }}>
                   ViewDetails
                 </Link>
               }
@@ -187,7 +187,11 @@ export const Overview = () => {
           <GraphCustomBox>
             <CustomGraph
               header="Revenue"
-              viewDetails="ViewDetails"
+              viewDetails={
+                <Link to="/revenueDetails" style={{ color: Colors.LinkColor }}>
+                  ViewDetails
+                </Link>
+              }
               year="January 2024"
               pound="23,3453"
             >
@@ -241,8 +245,13 @@ export const Overview = () => {
         <Grid item xs={12} md={6}>
           <GraphCustomBox>
             <CustomGraph
+           
               header="Commission Shared"
-              viewDetails="ViewDetails"
+              viewDetails={
+                <Link to="/commissionSharedDetails" style={{ color: Colors.LinkColor }}>
+                  ViewDetails
+                </Link>
+              }
               year="2024"
               pound="23,3453"
             >
@@ -269,7 +278,11 @@ export const Overview = () => {
           <GraphCustomBox>
             <CustomGraph
               header="Residual Received"
-              viewDetails="ViewDetails"
+              viewDetails={
+                <Link to="/residualReceivedDetails" style={{ color: Colors.LinkColor }}>
+                  ViewDetails
+                </Link>
+              }
               year="January 2024"
               pound="23,3453"
             >
