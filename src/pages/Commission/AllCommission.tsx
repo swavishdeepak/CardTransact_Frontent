@@ -8,7 +8,7 @@ import { AllCommissionComp } from "../../components/Commission/AllCommissionComp
 
 
 
-export const AllCommission: React.FC = () => {
+ const AllCommission: React.FC = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -16,5 +16,7 @@ export const AllCommission: React.FC = () => {
     </Box>
   );
 };
+
+export default AllCommission;
 
 

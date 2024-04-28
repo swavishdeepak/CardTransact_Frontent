@@ -10,7 +10,7 @@ import { Grid } from "@mui/material";
 import CustomButton from "../../components/CustomButton";
 import DetailsHeader from "../../components/MyCustom/DetailsHeader";
 
-export const NotificationDetails = () => {
+ const NotificationDetails = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -154,3 +154,5 @@ export const NotificationDetails = () => {
     </Box>
   );
 };
+
+export default NotificationDetails;

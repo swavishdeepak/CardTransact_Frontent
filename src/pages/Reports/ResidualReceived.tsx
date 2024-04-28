@@ -28,7 +28,7 @@ interface Row {
  
 }
 
-export const ResidualReceived = () => {
+ const ResidualReceived = () => {
   const columns: Column[] = [
     {
       field: "id",
@@ -151,4 +151,6 @@ export const ResidualReceived = () => {
     </>
   );
 };
+
+export  default ResidualReceived;
 

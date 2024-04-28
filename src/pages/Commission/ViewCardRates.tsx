@@ -26,7 +26,7 @@ interface Row {
   commission: string;
 }
 
-export const ViewCardRates = () => {
+ const ViewCardRates = () => {
   const [selectedValue, setSelectedValue] = useState("aquirer");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -117,6 +117,8 @@ export const ViewCardRates = () => {
     },
   ];
 
+  
+
  
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -185,3 +187,5 @@ export const ViewCardRates = () => {
     </Box>
   );
 };
+
+export default ViewCardRates;

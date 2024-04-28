@@ -155,7 +155,7 @@ const MainHeader: React.FC<mainHeaderProps> = ({style, showhide = true}) => {
         }}
       >
         <Notification notifications={notifications}>
-              <CustomButton 
+              {/* <CustomButton 
                label="Edit"
                style={{
                 border: "1px solid #898989",
@@ -185,7 +185,7 @@ const MainHeader: React.FC<mainHeaderProps> = ({style, showhide = true}) => {
                 height: "1.5rem",
                 fontSize: "10px"
               }}
-              />
+              /> */}
            
         </Notification>
       </Menu>

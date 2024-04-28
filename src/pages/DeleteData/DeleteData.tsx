@@ -23,7 +23,7 @@ interface Row {
   action: string;
 }
 
-export const DeleteData: React.FC = () => {
+const DeleteData: React.FC = () => {
   const columns: Column[] = [
     {
       field: "delete_by",
@@ -140,4 +140,4 @@ const More = (params: any) => {
   );
 };
 
-export default More;
+export default DeleteData;

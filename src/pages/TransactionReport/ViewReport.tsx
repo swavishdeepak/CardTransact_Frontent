@@ -31,7 +31,7 @@ interface Row {
   turnover: string;
 }
 
-export const ViewReport = () => {
+ const ViewReport = () => {
   const columns: Column[] = [
     {
       field: "processing_Date",
@@ -188,3 +188,4 @@ export const ViewReport = () => {
     </Box>
   );
 };
+export default ViewReport;

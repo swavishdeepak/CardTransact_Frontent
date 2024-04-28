@@ -168,7 +168,7 @@ function getStepContent(step: number): JSX.Element | string {
   }
 }
 
-export const Addapplication = () => {
+const Addapplication = () => {
   const [open, setOpen] = useState(false);
   const [activeStep, setActiveStep] = useState<number>(0);
   const [skippedSteps, setSkippedSteps] = useState<number[]>([]);
@@ -402,3 +402,5 @@ export const Addapplication = () => {
     </Box>
   );
 };
+
+export default Addapplication;

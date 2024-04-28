@@ -27,7 +27,7 @@ interface Row {
   action: string;
 }
 
-export const ResidualShared = () => {
+ const ResidualShared = () => {
   const columns: Column[] = [
     {
       field: "id",
@@ -203,4 +203,4 @@ const More = (params: any) => {
   );
 };
 
-export default More;
+export default ResidualShared;

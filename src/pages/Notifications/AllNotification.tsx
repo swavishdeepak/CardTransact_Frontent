@@ -32,7 +32,7 @@ interface Row {
   action: string;
 }
 
-export const AllNotification: React.FC = () => {
+ const AllNotification: React.FC = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const columns: Column[] = [
     {
@@ -154,6 +154,7 @@ const More = (params: any) => {
         title={"Confirmation"}
         desc="Are You Sure Want "
         open={deleteOpen}
+        handleClose={handleDeleteClose}
       >
         <Box sx={{ display: "flex", gap:"3px" }}>
           <Typography>To</Typography>
@@ -190,7 +191,7 @@ const More = (params: any) => {
           </Box>
         
       </ConfirmDialog>
-      <ConfirmDialog
+       <ConfirmDialog
         open={openRequest}
         handleClose={() => setOpenRequest(false)}
       >
@@ -238,4 +239,4 @@ const More = (params: any) => {
   );
 };
 
-export default More;
+export default AllNotification;

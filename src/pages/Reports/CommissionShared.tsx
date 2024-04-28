@@ -26,7 +26,7 @@ interface Row {
   paidDate: string;
 }
 
-export const CommissionShared = () => {
+ const CommissionShared = () => {
   const columns: Column[] = [
     {
       field: "aquirer",
@@ -131,3 +131,5 @@ export const CommissionShared = () => {
     </>
   );
 };
+
+export default CommissionShared;

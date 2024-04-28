@@ -17,7 +17,7 @@ import CustomTextInput from "../../components/CustomInput";
 import { LoadButton } from "../../components/LoadButton";
 import CheckBox from "../../components/MyCustom/CheckBox";
 
-export const UserProfile = () => {
+ const UserProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState();
   const [dialogOpen, setDialogOpen] = useState({
@@ -341,3 +341,7 @@ export const UserProfile = () => {
     </Box>
   );
 };
+
+export default UserProfile;
+
+

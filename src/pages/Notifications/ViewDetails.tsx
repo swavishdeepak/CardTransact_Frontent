@@ -8,7 +8,7 @@ import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
 import { Colors } from "../../utils/Colors";
 import { Grid } from "@mui/material";
 
-export const ViewDetails = () => {
+ const ViewDetails = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -55,3 +55,6 @@ export const ViewDetails = () => {
     </Box>
   );
 };
+export default ViewDetails;
+
+

@@ -32,7 +32,7 @@ interface Row {
   action: string;
 }
 
-export const AllCardRates = () => {
+ const AllCardRates = () => {
   const navigate = useNavigate()
   const [selectedValue, setSelectedValue] = useState("aquirer");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -180,4 +180,4 @@ const More = (params: any) => {
   );
 };
 
-export default More;
+export default AllCardRates;

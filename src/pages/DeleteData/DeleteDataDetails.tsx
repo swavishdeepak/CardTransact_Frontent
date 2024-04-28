@@ -7,7 +7,7 @@ import { Colors } from "../../utils/Colors";
 import CustomButton from "../../components/CustomButton";
 import UserDetails from "../../components/User/UserDetails";
 
-export const DeleteDataDetails = () => {
+ const DeleteDataDetails = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -37,3 +37,7 @@ export const DeleteDataDetails = () => {
     </Box>
   );
 };
+
+export  default DeleteDataDetails;
+
+

@@ -15,9 +15,7 @@ import { MessageList } from "../../components/Dashboard/MessageList";
 import TopPerformance from "../../components/Dashboard/TopPerformance";
 import Shape1 from "../../assets/Shape1.svg"
 
-export const Dashboard = () => {
-  
-
+ const Dashboard: React.FC = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -91,3 +89,5 @@ export const Dashboard = () => {
     </Box>
   );
 };
+
+export default Dashboard;

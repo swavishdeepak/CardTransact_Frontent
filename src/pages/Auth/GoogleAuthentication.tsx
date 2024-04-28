@@ -7,7 +7,7 @@ import OtpInput from "react-otp-input";
 import Divider from "@mui/material/Divider";
 import AuthCustomBox from "../../components/AuthCustomBox";
 
-export const GoogleAuthentication = () => {
+const GoogleAuthentication = () => {
   const [loading, setLoading] = useState(false);
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
@@ -151,3 +151,5 @@ export const GoogleAuthentication = () => {
     </>
   );
 };
+
+export default GoogleAuthentication;

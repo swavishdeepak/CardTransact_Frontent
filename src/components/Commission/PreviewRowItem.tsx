@@ -38,17 +38,18 @@ export const PreviewRowItem:React.FC<rowItemProps> = ({sr,date,rental,model,dura
         justifyContent: "space-between",
         borderBottom: "0.56px solid rgba(137, 137, 137, 1)",
         padding: 1,
+        width: "100%"
       }}
     >
-      <Typography className={classes.content}>{sr}</Typography>
-      <Typography className={classes.content}>{date}</Typography>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box className={classes.content} sx={{width: "20%"}}>{sr}</Box>
+      <Box className={classes.content} sx={{width: "20%"}}>{date}</Box>
+      <Box sx={{ display: "flex", alignItems: "center", width: "15%" }}>
         <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
         <Typography className={classes.content}>{rental}</Typography>
       </Box>
-      <Typography className={classes.content}>{model}</Typography>
-      <Typography className={classes.content}>{duration}</Typography>
-      <Box sx={{ display: "flex", alignItems: "center" }}>
+      <Box className={classes.content} sx={{width: "15%"}}>{model} </Box>
+      <Box className={classes.content} sx={{width: "15%"}}>{duration}  </Box>
+      <Box sx={{ display: "flex", alignItems: "center", width: "15%" }}>
         <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
         <Typography className={classes.content}>{commission}</Typography>
       </Box>

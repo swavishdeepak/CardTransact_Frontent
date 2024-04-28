@@ -10,7 +10,7 @@ import AuthCustomBox from "../../components/AuthCustomBox";
 import { Formik } from "formik";
 import { forgetSchema } from "../../utils/Validation";
 
-export const ForgetPassword = () => {
+ const ForgetPassword = () => {
   const [otp, setOtp] = useState();
   const [email, setEmail] = useState("");
   const [emailValidated, setEmailValidated] = useState(false);
@@ -222,3 +222,4 @@ export const ForgetPassword = () => {
     </>
   );
 };
+export default ForgetPassword;

@@ -39,7 +39,7 @@ const data1 = [
   },
   {
     option: "options1",
-    model: "Ingenico Desk 500",
+    model: "Ingenico Desk 500 ",
     rent: "26.4",
     month: "20/2/2024",
     commission: "500",
@@ -68,14 +68,16 @@ export const Preview: React.FC<PreviewProps> = () => {
           justifyContent: "space-between",
           borderBottom: "1px solid rgba(137, 137, 137, 1)",
           padding: 1,
+          width: "100%"
+          
         }}
       >
-        <Typography className={classes.header}>Options</Typography>
-        <Typography className={classes.header}>Model</Typography>
-        <Typography className={classes.header}>Rent</Typography>
-        <Typography className={classes.header}>Month</Typography>
-        <Typography className={classes.header}>Commission</Typography>
-        <Typography className={classes.header}>Bouns</Typography>
+        <Typography className={classes.header} sx={{width: "20%"}}>Options</Typography>
+        <Typography className={classes.header} sx={{width: "20%"}}>Model</Typography>
+        <Typography className={classes.header} sx={{width: "15%"}}>Rent</Typography>
+        <Typography className={classes.header}sx={{width: "15%"}}>Month</Typography>
+        <Typography className={classes.header}sx={{width: "15%"}}>Commission</Typography>
+        <Typography className={classes.header}sx={{width: "15%"}}>Bouns</Typography>
       </Box>
       {data1.map((data, index) => {
         return (

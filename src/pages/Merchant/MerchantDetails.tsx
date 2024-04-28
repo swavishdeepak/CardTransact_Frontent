@@ -10,7 +10,7 @@ import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
 import { Colors } from "../../utils/Colors";
 
 
-export const MerchantDetail = () => {
+ const MerchantDetail = () => {
   const [openDelete, setOpenDelete] = useState(false);
 
   const handleDeleteOpen = () => {
@@ -195,3 +195,4 @@ export const MerchantDetail = () => {
     </Box>
   );
 };
+export default MerchantDetail;

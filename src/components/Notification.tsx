@@ -1,6 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import React, { ReactNode } from "react";
 import Divider from "@mui/material/Divider";
+import CustomButton from "./CustomButton";
+import { Colors } from "../utils/Colors";
 
 interface NotificationData {
   id: number;
@@ -13,7 +15,7 @@ interface NotificationProps {
   children?: ReactNode;
 }
 
-const Notification: React.FC<NotificationProps> = ({ notifications, children }) => {
+const Notification: React.FC<NotificationProps> = ({ notifications}) => {
   
   return (
       <Box sx={{ display: "column", gap: 1, p:2 }}>
@@ -95,12 +97,43 @@ const Notification: React.FC<NotificationProps> = ({ notifications, children }) 
                   </Typography>
                 </Box>
                <Box sx={{display: "flex", gap:1, flexDirection: "row"}}>
-                 {children}
+               <CustomButton 
+               label="Edit"
+               style={{
+                border: "1px solid #898989",
+                color: "#898989",
+                fontSize: "10px",
+                height: "1.5rem",
+              }}
+
+              />
+              <CustomButton
+              label="Approved"
+              hoverColor={Colors.successColor}
+              style={{
+                backgroundColor: Colors.successColor,
+                color: "#fff",
+                height: "1.5rem",
+                fontSize: "10px"
+              }}
+
+              />
+              <CustomButton 
+              label="Reject"
+              hoverColor={Colors.deletebtnColor}
+              style={{
+                backgroundColor: Colors.deletebtnColor,
+                color: "#fff",
+                height: "1.5rem",
+                fontSize: "10px"
+              }}
+              />
                </Box>
               </Box>
             ))}
           </React.Fragment>
         )}
+        
       </Box>
     
   );

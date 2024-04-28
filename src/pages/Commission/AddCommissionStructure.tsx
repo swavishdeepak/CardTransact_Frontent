@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const AddCommissionStructure = () => {
+ const AddCommissionStructure = () => {
   const navigate = useNavigate();
   const [selectedAquire, setSelectedAquire] = useState("");
   const [selectedTier, setSelectedTier] = useState("");
@@ -188,3 +188,5 @@ export const AddCommissionStructure = () => {
     </Box>
   );
 };
+
+export default AddCommissionStructure;

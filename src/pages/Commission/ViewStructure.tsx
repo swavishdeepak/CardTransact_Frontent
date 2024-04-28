@@ -26,7 +26,7 @@ interface Row {
   commission: string;
 }
 
-export const ViewStructure = () => {
+ const ViewStructure = () => {
   const columns: Column[] = [
     {
       field: "id",
@@ -134,3 +134,5 @@ export const ViewStructure = () => {
     </Box>
   );
 };
+
+export default ViewStructure;

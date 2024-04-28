@@ -31,7 +31,7 @@ interface Row {
   action: string;
 }
 
-export const TransactionReport = () => {
+ const TransactionReport = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("aquirer");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -278,4 +278,4 @@ const More = (params: any) => {
   );
 };
 
-export default More;
+export default TransactionReport;

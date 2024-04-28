@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
 
-export const AddEmployees = () => {
+ const AddEmployees = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
   const [searchParams] = useSearchParams();
@@ -27,8 +27,6 @@ export const AddEmployees = () => {
     navigate("/viewEmployees")
   }
 
-  
- 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -158,3 +156,5 @@ export const AddEmployees = () => {
     </Box>
   );
 };
+
+export default AddEmployees;

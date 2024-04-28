@@ -13,7 +13,7 @@ import CheckBox from "../../components/MyCustom/CheckBox";
 import { SalesPerson } from "../../components/Reports/TopSalesPersonList/SalesPerson";
 import BasicSelect from "../../components/BasicSelect";
 
-export const AddAgents = () => {
+ const AddAgents = () => {
   const [searchParams] = useSearchParams();
   const type = searchParams.get("type");
   const id = searchParams.get("id");
@@ -238,3 +238,5 @@ export const AddAgents = () => {
     </Box>
   );
 };
+
+export default AddAgents;

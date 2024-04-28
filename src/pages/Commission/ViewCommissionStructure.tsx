@@ -10,7 +10,7 @@ import { Grid } from "@mui/material";
 import DetailsSubTitle from "../../components/MyCustom/DetailsSubTitle";
 import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
 
-export const ViewCommissionStructure = () => {
+ const ViewCommissionStructure = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -58,3 +58,5 @@ export const ViewCommissionStructure = () => {
     </Box>
   );
 };
+
+export default ViewCommissionStructure;

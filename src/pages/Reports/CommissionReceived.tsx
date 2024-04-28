@@ -31,7 +31,7 @@ interface Row {
 }
 
 
-export const CommissionReceived = () => {
+const CommissionReceived = () => {
   const columns: Column[] = [
    
     {
@@ -170,4 +170,6 @@ export const CommissionReceived = () => {
     </>
   );
 };
+
+export default CommissionReceived;
 

@@ -17,12 +17,12 @@ import { useNavigate, useParams } from "react-router-dom";
 
 let linkColor = Colors.LinkColor || "#000";
 
-export const EmployeesDetails = () => {
+ const EmployeesDetails = () => {
    const navigate = useNavigate()
   const {id} = useParams()
 
 const handleEdit = () =>{
-   navigate(`/addEmployees`)
+   navigate(`/addEmployee`)
 }
 
   return (
@@ -202,3 +202,5 @@ const handleEdit = () =>{
     </Box>
   );
 };
+
+export default EmployeesDetails;

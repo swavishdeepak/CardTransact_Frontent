@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
+//import Breadcrumbs from "../Breadcrumbs";
 
 interface buttonProps {
   children?: React.ReactNode;
@@ -45,6 +46,7 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
             }
           }}
         >
+          {/* <Breadcrumbs/> */}
           {formattedPath}
         </Typography>
       </Box>

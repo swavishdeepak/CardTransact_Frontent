@@ -7,7 +7,7 @@ import AuthCustomBox from "../../components/AuthCustomBox";
 import { resetPassword } from "../../utils/Validation";
 import { Formik } from "formik";
 
-export const ResetPassword = () => {
+ const ResetPassword = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [values, setValues] = useState({
@@ -74,3 +74,5 @@ export const ResetPassword = () => {
     </>
   );
 };
+
+export default ResetPassword;

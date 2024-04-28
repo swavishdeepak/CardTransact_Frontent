@@ -11,7 +11,7 @@ interface SelectedUser {
   userName: string;
 }
 
-export const Message = () => {
+ const Message = () => {
   const [selectedUserId, setSelectedUserId] = useState<SelectedUser | null>(null);
   const handleUserClick = (userId: any, userName: string) => {
     setSelectedUserId({userId, userName });
@@ -71,3 +71,5 @@ export const Message = () => {
     </Box>
   );
 };
+
+export default Message;

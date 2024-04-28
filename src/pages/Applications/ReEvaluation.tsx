@@ -12,7 +12,7 @@ import { ChenkBoxLables } from "../../utils/menuItems/MenuItems";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import done from "../../assets/done.svg";
 
-export const ReEvaluation = () => {
+ const ReEvaluation = () => {
   type CheckboxState = Record<string, boolean>;
   const [checkboxes, setCheckboxes] = useState<CheckboxState>({});
   const [open, setOpen] = useState(false);
@@ -136,3 +136,6 @@ export const ReEvaluation = () => {
     </Box>
   );
 };
+
+export default ReEvaluation;
+

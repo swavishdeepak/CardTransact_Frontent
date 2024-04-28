@@ -14,7 +14,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { useNavigate } from "react-router-dom";
 import { Label } from "recharts";
 
-export const ApplicationDetails = () => {
+ const ApplicationDetails = () => {
   const navigate = useNavigate();
   const [openApprove, setOpenApprove] = useState(false);
   const [openReview, setOpenReview] = useState(false);
@@ -631,3 +631,5 @@ export const ApplicationDetails = () => {
     </Box>
   );
 };
+
+export default ApplicationDetails;

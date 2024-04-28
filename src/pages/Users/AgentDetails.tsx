@@ -13,7 +13,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { useNavigate } from "react-router-dom";
 import UserDetails from "../../components/User/UserDetails";
 
-export const AgentDetails = () => {
+ const AgentDetails = () => {
   const  navigate = useNavigate()
   const [openDelete, setOpenDelete] = useState(false);
 
@@ -26,7 +26,7 @@ export const AgentDetails = () => {
   };
 
   const handelEdit = ()=>{
-      navigate("/addAgents")
+      navigate("user/addAgents")
   }
 
   return (
@@ -98,3 +98,5 @@ export const AgentDetails = () => {
     </Box>
   );
 };
+
+export default AgentDetails;

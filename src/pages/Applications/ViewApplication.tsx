@@ -31,7 +31,7 @@ interface Row {
   action: string;
 }
 
-export const ViewApplication: React.FC = () => {
+ const ViewApplication: React.FC = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const columns: Column[] = [
     {
@@ -289,7 +289,7 @@ const More = (params: any) => {
   );
 };
 
-export default More;
+export default ViewApplication;
 
 
 

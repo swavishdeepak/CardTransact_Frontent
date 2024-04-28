@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import Application from "../../components/Dashboard/Graph/Application";
 import { SalesPerson } from "../../components/Reports/TopSalesPersonList/SalesPerson";
 
-export const Overview = () => {
+ const Overview = () => {
   const data = [
     {
       name: "Page A",
@@ -370,3 +370,5 @@ export const Overview = () => {
     </Box>
   );
 };
+export default Overview;
+

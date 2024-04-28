@@ -21,7 +21,7 @@ interface Row {
  
 }
 
-export const Sales = () => {
+ const Sales = () => {
   const columns: Column[] = [
     {
       field: "id",
@@ -113,3 +113,5 @@ export const Sales = () => {
     </>
   );
 };
+
+export default Sales;

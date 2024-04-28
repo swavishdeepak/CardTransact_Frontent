@@ -9,7 +9,7 @@ import { Formik } from "formik";
 import { Link } from "react-router-dom";
 
 
-export const Login = () => {
+ const Login = () => {
   //const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -99,3 +99,6 @@ export const Login = () => {
     </AuthCustomBox>
   );
 };
+export default Login;
+
+

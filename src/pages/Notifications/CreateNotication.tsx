@@ -11,7 +11,7 @@ import CustomTextInput from "../../components/CustomInput";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
 
-export const CreateNotification: React.FC = () => {
+ const CreateNotification: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState("aquirer");
   const [selectedValueReceiver, setSelectedValueReceiver] =
     useState("Select Receivers");
@@ -124,3 +124,7 @@ export const CreateNotification: React.FC = () => {
     </Box>
   );
 };
+
+export default CreateNotification;
+
+

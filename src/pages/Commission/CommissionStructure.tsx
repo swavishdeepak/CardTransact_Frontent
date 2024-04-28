@@ -30,7 +30,7 @@ interface Row {
   action: string;
 }
 
-export const CommissionStructure = () => {
+ const CommissionStructure = () => {
   const navigate = useNavigate();
   const [selectedValue, setSelectedValue] = useState("aquirer");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -295,4 +295,4 @@ const More = (params: any) => {
   );
 };
 
-export default More;
+export default CommissionStructure;

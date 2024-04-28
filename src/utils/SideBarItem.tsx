@@ -9,8 +9,8 @@ export const SidebarUserItems = [
     subItems: [
       { text: "View Employees", link: "/viewEmployees", icon: PersonIcon },
       { text: "View Agents", link: "/viewAgents", icon: PersonIcon },
-      { text: "Add Employees", link: "/addEmployees", icon: PersonIcon },
-      { text: "Add Agents", link: "/addAgents", icon: PersonIcon },
+      { text: "Add Employees", link: "/addEmployee", icon: PersonIcon },
+      { text: "Add Agents", link: "/addAgent", icon: PersonIcon },
     
     
     ],
