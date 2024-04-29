@@ -19,14 +19,14 @@ const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
           justifyContent: "center",
         }}
       >
-        <Box sx={{ position: "relative" }}>
+        <Box sx={{ position: "relative"}}>
           <Box
             sx={{
               position: "absolute",
-              height: "500px",
-              width: "450px",
+              height: "390px",
+              width: "400px",
               top: 30,
-              left: "8rem",
+              left: "4rem",
               zIndex: 1,
               border: "0.5px solid #77D177",
               boxShadow: "5.625px 6.5625px 9.375px 0px #00000052",
@@ -34,7 +34,7 @@ const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
               backgroundColor: "#fff",
               "@media(max-width: 900px)":{
                 width: "400px",
-                left: "8rem",
+                left: "4rem",
                 position: "relative",
                 "@media(max-width: 600px)":{
                   width: "360px",
@@ -43,7 +43,7 @@ const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
                   padding: "2.5rem 10px",
                 },
               },
-              p:"55px 30px"
+              p:"50px 30px"
             }}
           >
             <Box>

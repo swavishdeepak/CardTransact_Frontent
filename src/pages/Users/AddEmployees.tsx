@@ -146,7 +146,6 @@ import { useNavigate } from "react-router-dom";
           style={{
             marginTop: 3,
             width: "25%",
-            
           }}
           
         >
