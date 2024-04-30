@@ -26,7 +26,7 @@ import UserDetails from "../../components/User/UserDetails";
   };
 
   const handelEdit = ()=>{
-      navigate("user/addAgents")
+      navigate("/addAgent")
   }
 
   return (

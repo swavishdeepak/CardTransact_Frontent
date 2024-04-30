@@ -18,7 +18,7 @@ import { ApplicationItems } from "../utils/SideBarItem";
 import { Notification } from "../utils/SideBarItem";
 import { Commission } from "../utils/SideBarItem";
 import { Reports } from "../utils/SideBarItem";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import { TransactionReport } from "../utils/SideBarItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CloseIcon from "@mui/icons-material/Close";
@@ -103,16 +103,16 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const sideBarStyle = makeStyles((theme) => ({
-  listStyleMain: {
-    color: "#2E2C34",
-    fontWeight: "700 !important",
-    fontSize: "1rem !important",
-  },
-}));
+// const sideBarStyle = makeStyles((theme) => ({
+//   listStyleMain: {
+//     color: "#2E2C34",
+//     fontWeight: "700 !important",
+//     fontSize: "1rem !important",
+//   },
+// }));
 
 export default function SideBar() {
-  const classes = sideBarStyle();
+  // const classes = sideBarStyle();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.only("xs"));
   const [open, setOpen] = React.useState(!isMobile);
@@ -159,7 +159,7 @@ export default function SideBar() {
           sx={{
             backgroundColor: "#fff",
             boxShadow: "none",
-          padding: "14px 14px !important"
+            padding: "14px 14px !important",
           }}
         >
           <IconButton
@@ -167,7 +167,6 @@ export default function SideBar() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="end"
-
             sx={{
               marginRight: 5,
               color: "#898989",
@@ -199,7 +198,13 @@ export default function SideBar() {
                     }}
                   >
                     <img src={dashboardIcon} alt="icon" />
-                    <Typography className={classes.listStyleMain}>
+                    <Typography
+                      sx={{
+                        color: "#2E2C34",
+                        fontWeight: "700 !important",
+                        fontSize: "1rem !important",
+                      }}
+                    >
                       Card Transact
                     </Typography>
                   </Link>
@@ -210,7 +215,7 @@ export default function SideBar() {
         </DrawerHeader>
         {/* Dashboard */}
         <SideBarWithOutDropdown
-          sx={{marginTop: "0.7rem"}}
+          sx={{ marginTop: "0.7rem" }}
           to={"/dashboard"}
           text="Dashboard"
           location={location}

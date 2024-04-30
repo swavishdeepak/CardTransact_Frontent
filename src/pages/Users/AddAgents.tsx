@@ -8,13 +8,14 @@ import CustomAccordion from "../../components/MyCustom/CustomAccordian";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 import { LoadButton } from "../../components/LoadButton";
-import { useSearchParams} from "react-router-dom";
+import { useSearchParams, useNavigate} from "react-router-dom";
 import CheckBox from "../../components/MyCustom/CheckBox";
 import { SalesPerson } from "../../components/Reports/TopSalesPersonList/SalesPerson";
 import BasicSelect from "../../components/BasicSelect";
 
  const AddAgents = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate()
   const type = searchParams.get("type");
   const id = searchParams.get("id");
   const [loading, setLoading] = useState(false);
@@ -50,6 +51,10 @@ import BasicSelect from "../../components/BasicSelect";
     
   ];
 
+  const handleBack = ()=>{
+    navigate("/viewAgents")
+  }
+
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -66,6 +71,7 @@ import BasicSelect from "../../components/BasicSelect";
           <CustomButton
             label={"Back"}
             hoverColor="#898989"
+            onClick={handleBack}
             style={{
               backgroundColor: "#898989",
               color: "#fff",

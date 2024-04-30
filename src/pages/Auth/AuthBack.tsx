@@ -1,5 +1,5 @@
 import React from "react";
-import AuthImg from "../../assets/AuthBack.svg";
+import AuthImg from "../../assets/authImg.png"
 import { Box } from "@mui/material";
 
 const AuthBack = () => {

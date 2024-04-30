@@ -7,7 +7,8 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import messageIcon from "../../assets/messageIcon.svg";
+
+import messageImg from "../../assets/MessageImg.png"
 import SearchIcon from "@mui/icons-material/Search";
 import CustomTextInput from "../CustomInput";
 
@@ -160,7 +161,7 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
             >
               <Avatar
                 alt="img"
-                src={messageIcon}
+                src={messageImg}
                 sx={{ width: 25, height: 25 }}
               />
               <Stack direction="column" spacing={0}>

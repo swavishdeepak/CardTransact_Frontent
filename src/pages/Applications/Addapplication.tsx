@@ -26,6 +26,8 @@ import { BankInformation } from "../../components/Application/BankInformation";
 import { ApplicationInformation } from "../../components/Application/ApplicationInformation";
 import ConfirmDialog from "../../components/ConfirmDialog";
 
+
+
 function getSteps(): string[] {
   return [
     "Select Aquirer",
@@ -45,11 +47,13 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       borderColor: "#ECECEC",
+      zIndex: 1
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       borderColor: "#ECECEC",
+      zIndex: 1
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -57,7 +61,8 @@ const QontoConnector = styled(StepConnector)(({ theme }) => ({
       theme.palette.mode === "dark" ? theme.palette.grey[800] : "#ECECEC",
     borderTopWidth: 12,
     borderRadius: 0,
-    boxShadow: "0px 0.9375px 61.75px 3px #00000040",
+    //boxShadow: "0px 0.9375px 61.75px 3px #00000040",
+    zIndex: 1
   },
 }));
 
@@ -78,6 +83,7 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
       borderRadius: "50%",
       backgroundColor: "rgba(119, 209, 119, 1)",
       color: "#fff",
+      zIndex: 1
     },
     "& .QontoStepIcon-circle": {
       width: 30,
@@ -91,6 +97,7 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
       borderRadius: "50%",
       backgroundColor: "rgba(217, 217, 217, 1)",
       boxShadow: "0px 0.9375px 3.75px 0px #00000040",
+      zIndex: 1
     },
   })
 );
@@ -323,6 +330,7 @@ const Addapplication = () => {
                     backgroundColor:
                       activeStep === 0 ? Colors.editColor : Colors.successColor,
                     color: "#fff",
+
                   }}
                 >
                   Next

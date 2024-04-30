@@ -11,8 +11,15 @@ import { MerchantDetails } from "../../components/Application/MerchantDetails";
 import { BankInformation } from "../../components/Application/BankInformation";
 import { ApplicationInformation } from "../../components/Application/ApplicationInformation";
 import { LoadButton } from "../../components/LoadButton";
+import { useNavigate } from "react-router-dom";
 
 const EditApplication = () => {
+  const navigate = useNavigate()
+
+  const handleBack = ()=>{
+    navigate("/viewApplications")
+  }
+
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -20,6 +27,8 @@ const EditApplication = () => {
         <CommonHeader header="Edit Applications">
           <CustomButton
             label="Back"
+            hoverColor= {Colors.editColor}
+            onClick={handleBack}
             style={{
               backgroundColor: Colors.editColor,
               color: "#fff",

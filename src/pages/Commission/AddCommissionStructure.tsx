@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, fabClasses } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
 import { CommonHeader } from "../../components/CommonHeader";
@@ -10,22 +10,11 @@ import { LoadButton } from "../../components/LoadButton";
 import CustomButton from "../../components/CustomButton";
 import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
 import { Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import { Preview } from "../../components/Commission/Preview";
 import { useNavigate } from "react-router-dom";
 
-const useStyles = makeStyles({
-  header: {
-    fontSize: "15px !important",
-    fontWeight: "600 !important",
-  },
-  content: {
-    color: "rgba(58, 58, 58, 1) !important",
-    fontSize: "13px !important",
-    fontWeight: "300 !important",
-    lineHeight: "15px !important",
-  },
-});
+
 
  const AddCommissionStructure = () => {
   const navigate = useNavigate();

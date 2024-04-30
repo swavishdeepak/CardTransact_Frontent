@@ -4,10 +4,11 @@ import BasicSelect from "../BasicSelect";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import messageIcon from "../../assets/messageIcon.svg";
+import messageImg from "../../assets/MessageImg.png"
 import Vector from "../../assets/Vector.svg";
 import { CustomBox } from "../MyCustom/CustomBox";
 import CircularProgress from "@mui/material/CircularProgress";
+
 
 interface Employee {
   serialNo: string;
@@ -37,7 +38,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
   const performanceData: Employee[] = [
     {
       serialNo: "1",
-      image: messageIcon,
+      image: messageImg,
       name: "Deepak",
       icon: Vector,
       message: "236345",
@@ -47,7 +48,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
     },
     {
       serialNo: "2",
-      image: messageIcon,
+      image: messageImg,
       name: "Deepak",
       icon: Vector,
       message: "236345",
@@ -57,7 +58,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
     },
     {
       serialNo: "3",
-      image: messageIcon,
+      image: messageImg,
       name: "Deepak",
       icon: Vector,
       message: "236345",
@@ -67,7 +68,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
     },
     {
       serialNo: "4",
-      image: messageIcon,
+      image: messageImg,
       name: "Deepak",
       icon: Vector,
       message: "236345",
@@ -77,7 +78,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
     },
     {
       serialNo: "5",
-      image: messageIcon,
+      image: messageImg,
       name: "Deepak",
       icon: Vector,
       message: "236345",
@@ -171,7 +172,7 @@ const TopPerformance: React.FC<TopPerformanceProps> = () => {
                 <Box sx={{ display: "flex", gap: 0 }}>
                   <ListItemAvatar >
                     <Avatar>
-                      <img src={item.image} alt=""  />
+                      <img src={item.image} alt="" loading="lazy"  />
                     </Avatar>
                   </ListItemAvatar>
                   <Box>

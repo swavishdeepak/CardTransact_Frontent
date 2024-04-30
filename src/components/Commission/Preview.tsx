@@ -1,25 +1,24 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { makeStyles } from "@mui/styles";
 import { PreviewRowItem } from "./PreviewRowItem";
-import { Commission } from '../../utils/SideBarItem';
+import { Commission } from "../../utils/SideBarItem";
 
-const useStyles = makeStyles({
-  header: {
-    fontSize: "15px !important",
-    fontWeight: "600 !important",
-    "@media(max-width: 600px)":{
-      fontSize: "12px !important"
-   }
-  },
-  content: {
-    color: "rgba(58, 58, 58, 1) !important",
-    fontSize: "13px !important",
-    fontWeight: "300 !important",
-    lineHeight: "15px !important",
-  
-  },
-});
+// const useStyles = makeStyles({
+//   header: {
+//     fontSize: "15px !important",
+//     fontWeight: "600 !important",
+//     "@media(max-width: 600px)": {
+//       fontSize: "12px !important",
+//     },
+//   },
+//   content: {
+//     color: "rgba(58, 58, 58, 1) !important",
+//     fontSize: "13px !important",
+//     fontWeight: "300 !important",
+//     lineHeight: "15px !important",
+//   },
+// });
 const data1 = [
   {
     option: "options1",
@@ -45,14 +44,12 @@ const data1 = [
     commission: "500",
     bouns: "00.00",
   },
-  
-  
 ];
 
 interface PreviewProps {}
 
 export const Preview: React.FC<PreviewProps> = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <Box
       sx={{
@@ -68,16 +65,32 @@ export const Preview: React.FC<PreviewProps> = () => {
           justifyContent: "space-between",
           borderBottom: "1px solid rgba(137, 137, 137, 1)",
           padding: 1,
-          width: "100%"
-          
+          width: "100%",
+          fontSize: "15px !important",
+          fontWeight: "600 !important",
+          "@media(max-width: 600px)": {
+            fontSize: "12px !important",
+          },
         }}
       >
-        <Typography className={classes.header} sx={{width: "20%"}}>Options</Typography>
-        <Typography className={classes.header} sx={{width: "20%"}}>Model</Typography>
-        <Typography className={classes.header} sx={{width: "15%"}}>Rent</Typography>
-        <Typography className={classes.header}sx={{width: "15%"}}>Month</Typography>
-        <Typography className={classes.header}sx={{width: "15%"}}>Commission</Typography>
-        <Typography className={classes.header}sx={{width: "15%"}}>Bouns</Typography>
+        <Typography  sx={{ width: "20%" }}>
+          Options
+        </Typography>
+        <Typography  sx={{ width: "20%" }}>
+          Model
+        </Typography>
+        <Typography  sx={{ width: "15%" }}>
+          Rent
+        </Typography>
+        <Typography  sx={{ width: "15%" }}>
+          Month
+        </Typography>
+        <Typography  sx={{ width: "15%" }}>
+          Commission
+        </Typography>
+        <Typography  sx={{ width: "15%" }}>
+          Bouns
+        </Typography>
       </Box>
       {data1.map((data, index) => {
         return (

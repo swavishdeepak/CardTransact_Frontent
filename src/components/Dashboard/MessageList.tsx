@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import messageIcon from "../../assets/messageIcon.svg";
+import messageImg from "../../assets/MessageImg.png"
 import { CustomBox } from "../MyCustom/CustomBox";
 
 interface Message {
@@ -24,37 +24,37 @@ export const MessageList: React.FC<Message> = ({
   const messageData: Message[] = [
     {
    
-      icon: messageIcon,
+      icon: messageImg,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy... ahgdasdsdh nsdha adhasndasdhadn asdahdabndajhdbamdah ajdasdaj dhas ",
     },
     {
      
-      icon: messageIcon,
+      icon: messageImg,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy...",
     },
     {
      
-      icon: messageIcon,
+      icon: messageImg,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy...",
     },
     {
       
-      icon: messageIcon,
+      icon: messageImg,
       senderName: "Deepak Kumar",
       messageText: "Lorem Ipsum is simply dummy...",
     },
     {
         
-        icon: messageIcon,
+        icon: messageImg,
         senderName: "Deepak Kumar",
         messageText: "Lorem Ipsum is simply dummy...",
       },
       {
         
-        icon: messageIcon,
+        icon: messageImg,
         senderName: "Deepak Kumar",
         messageText: "Lorem Ipsum is simply dummy...",
       },

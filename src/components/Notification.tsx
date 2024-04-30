@@ -54,7 +54,10 @@ const Notification: React.FC<NotificationProps> = ({ notifications}) => {
                       width: 20,
                       height: 20,
                       borderRadius: "50%",
-                      padding: "5px",
+                      padding: "6px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center"
                     },
                     p: "3px",
                     borderRadius: "50%",
