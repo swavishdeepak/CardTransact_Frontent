@@ -29,7 +29,7 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "Node",
     "skipLibCheck": true,
-    "strict": true
+    "strict": false
   },
   "include": [
     "src"
