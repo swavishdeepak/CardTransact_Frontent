@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box,Menu, MenuItem, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Menu, MenuItem, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import Table from "../../components/Table";
 import MoreVert from "@mui/icons-material/MoreVert";
@@ -10,6 +10,9 @@ import { CustomBox } from "../../components/MyCustom/CustomBox";
 import { LoadButton } from "../../components/LoadButton";
 import CustomTextInput from "../../components/CustomInput";
 import DeleteRequest from "../../components/User/DeleteRequest";
+import { useAppSelector } from "../../redux/hooks";
+import { API_AXIOS } from "../../http/interceptor";
+import Apis from "../../utils/apis";
 
 interface Column {
   field: string;
@@ -20,17 +23,27 @@ interface Column {
   renderCell?: (params: any) => React.ReactNode;
 }
 
-interface Row {
-  id: number;
-  userName: string;
-  id_no: number | null;
-  email: string | null;
-  banks: string;
-  action: string;
-}
+// interface Row {
+//   id: number;
+//   userName: string;
+//   id_no: number | null;
+//   email: string | null;
+//   banks: string;
+//   action: string;
+// }
 
- const ViewEmployees: React.FC = () => {
- 
+const ViewEmployees: React.FC = () => {
+  // const { employee } = useAppSelector((state) => state.employee)
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  });
+  const [rowCountState, setRowCountState] = useState(0);
+
+  
+
   const columns: Column[] = [
     {
       field: "id",
@@ -39,7 +52,7 @@ interface Row {
       flex: 1,
     },
     {
-      field: "userName",
+      field: "name",
       headerName: "User Name",
       minWidth: 200,
       flex: 1,
@@ -57,9 +70,15 @@ interface Row {
       flex: 1,
     },
     {
-      field: "banks",
+      field: "bankInfo.bankName",
       headerName: "Banks",
-      minWidth: 50,
+      minWidth: 100,
+      flex: 1,
+    },
+    {
+      field: "addedBy",
+      headerName: "Added By",
+      minWidth: 100,
       flex: 1,
     },
     {
@@ -71,50 +90,27 @@ interface Row {
     },
   ];
 
-  const rows: Row[] = [
-    {
-      id: 1,
-      userName: "Snow",
-      email: "XXXXX12@gmail.com",
-      id_no: 14,
-      banks: "HSBS",
-      action: "Edit",
-    },
-    {
-      id: 2,
-      userName: "Lannister",
-      email: "XXXXX12@gmail.com",
-      id_no: 31,
-      banks: "Monzo",
-      action: "Edit",
-    },
-    {
-      id: 3,
-      userName: "Lannister",
-      email: "XXXXX12@gmail.com",
-      id_no: 31,
-      banks: "Monzo",
-      action: "Edit",
-    },
-    {
-      id: 4,
-      userName: "Lannister",
-      email: "XXXXX12@gmail.com",
-      id_no: 31,
-      banks: "Monzo",
-      action: "Edit",
-    },
-    {
-      id: 5,
-      userName: "Lannister",
-      email: "XXXXX12@gmail.com",
-      id_no: 31,
-      banks: "Monzo",
-      action: "Edit",
-    },
-  ];
-
   
+
+  const getEmployees = async () => {
+    setLoading(true);
+    try {
+      const { data } = await API_AXIOS.get(`${Apis.getEmployee}`, {
+        params: {
+          page: paginationModel?.page + 1,
+        },
+      });
+      setRows(data?.data);
+      setRowCountState((prev) => data?.pagination?.totalItem ?? prev);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getEmployees();
+  }, [paginationModel?.page]);
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -123,7 +119,11 @@ interface Row {
         columns={columns}
         rows={rows}
         title="All Employees"
-        getRowId={(row: any) => row.id}
+        getRowId={(row: any) => row._id}
+        rowCountState={rowCountState}
+        paginationModel={paginationModel}
+        setPaginationModel={setPaginationModel}
+        loading={loading}
         // customButtons={
         //   <CustomButton label="delete" onClick={handleOpenDelete} />
         // }
@@ -136,7 +136,6 @@ const More = (params: any) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [openDelete, setOpenDelete] = useState(false);
-  
 
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -150,7 +149,6 @@ const More = (params: any) => {
   const handleDeleteOpen = () => {
     setOpenDelete(true);
   };
-
 
   return (
     <>
@@ -168,8 +166,8 @@ const More = (params: any) => {
       >
         <Link
           to={
-            params && params.row && params.row.id
-              ? `/viewEmployee/viewDetails/${params.row.id}`
+            params && params.row && params.row._id
+              ? `/viewEmployee/viewDetails/${params.row._id}`
               : ""
           }
           style={{
@@ -182,7 +180,7 @@ const More = (params: any) => {
           <MenuItem>View Details</MenuItem>
         </Link>
         <Link
-          to={`/addEmployee?type=employees&id=${params.row && params.row.id}`}
+          to={`/addEmployee?type=employees&id=${params.row && params.row._id}`}
           style={{
             textDecoration: "none",
             color: "#000000",
@@ -200,12 +198,11 @@ const More = (params: any) => {
           desc="Are you Sure want to Delete this User?"
           handleClose={() => setOpenDelete(false)}
         >
-          <DeleteRequest  setOpenDelete={setOpenDelete} />
+          <DeleteRequest setOpenDelete={setOpenDelete} />
         </ConfirmDialog>
       </Menu>
-      
     </>
   );
 };
 
-export default ViewEmployees
+export default ViewEmployees;

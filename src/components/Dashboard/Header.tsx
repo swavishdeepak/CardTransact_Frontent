@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import { useAppSelector } from "../../redux/hooks";
+import { NearMeDisabled } from "@mui/icons-material";
 //import Breadcrumbs from "../Breadcrumbs";
 
 interface buttonProps {
@@ -8,6 +10,13 @@ interface buttonProps {
 }
 
 export const Header: React.FC<buttonProps> = ({ children }) => {
+  const {verifiedUser} = useAppSelector((state) => state.verifiedUser); 
+  const [name, setName] = useState()
+  
+
+  console.log("verifiedUser",verifiedUser?.data?.name)
+
+
   const location = useLocation();
   let path = location.pathname;
   let formattedPath = path.charAt(1).toUpperCase() + path.slice(2);
@@ -26,12 +35,12 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
                 },
               }}
             >
-              Hi Shyamal Modak
+              Hi {verifiedUser?.data?.name}
             </Typography>
             <Typography
               sx={{ color: "#202020", fontWeight: "400", fontSize: "0.8rem" }}
             >
-              Super Admin
+              {verifiedUser?.data?.role}
             </Typography>
           </Box>
         </Box>

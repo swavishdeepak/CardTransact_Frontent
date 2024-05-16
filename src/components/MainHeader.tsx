@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,12 +9,15 @@ import profileIcon from "../assets/profileIcon.svg";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { Colors } from "../utils/Colors";
-
+import { logout } from "../redux/store/reducers/verifyOtp";
 import logoutIcon from "../assets/logout.svg";
 import profileIcon1 from "../assets/profileIcon1.svg";
 import Notification from "./Notification";
 import CustomButton from "./CustomButton";
 import { Link } from "react-router-dom";
+
+import { useAppDispatch } from "../redux/hooks";
+import { useNavigate } from "react-router-dom";
 
 interface mainHeaderProps {
   style?: React.CSSProperties;
@@ -28,6 +31,8 @@ const MainHeader: React.FC<mainHeaderProps> = ({style, showhide = true}) => {
   const [openProfile, setOpenProfile] = React.useState<null | HTMLElement>(
     null
   );
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
   const [openNotification, setOpenNotification] =
     React.useState<null | HTMLElement>(null);
 
@@ -56,6 +61,14 @@ const MainHeader: React.FC<mainHeaderProps> = ({style, showhide = true}) => {
     // Handle search submit logic here
     console.log("Search value:", searchValue);
   };
+
+
+  const handleLogout = useCallback(() => {
+    localStorage.clear();
+    dispatch(logout());
+    navigate("/auth/login");
+  }, [dispatch, navigate]);
+ 
 
   const notifications = [
     {
@@ -210,7 +223,7 @@ const MainHeader: React.FC<mainHeaderProps> = ({style, showhide = true}) => {
               View Profile
             </Typography>
           </Link>
-          <Box sx={{ display: "flex", gap:  "7px"}}>
+          <Box sx={{ display: "flex", gap:  "7px", cursor: "pointer"}}  onClick={handleLogout}>
             <img src={logoutIcon} alt="" />
             <Typography
               sx={{ color: "#898989", fontWeight: "400", fontSize: "14px" }}

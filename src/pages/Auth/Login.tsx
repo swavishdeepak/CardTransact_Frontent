@@ -1,50 +1,97 @@
-import React, { useState } from "react";
-import { Box } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
 import CustomTextInput from "../../components/CustomInput";
+import CheckBox from "../../components/MyCustom/CheckBox";
 import AuthCustomBox from "../../components/AuthCustomBox";
+import { userLogin } from "../../redux/store/actions/authAction";
 import { loginSchema } from "../../utils/Validation";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
+import { useAppDispatch,useAppSelector } from "../../redux/hooks";
 
 
- const Login = () => {
-  //const [loading, setLoading] = useState(false);
+const Login = () => {
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(false);
+  const {verifiedUser} = useAppSelector((state) => state.verifiedUser); 
   const navigate = useNavigate();
   const [values, setValues] = useState({
     email: "",
     password: "",
+    
   });
 
-  // const pageRedirect = () => {
-  //   navigate("/auth/ForgetPassword");
-  // };
-
-  const handleLogin = () => {
-    navigate("/auth/googleAuthentication");
-  };
+   
+  useEffect(() => {
+    if (verifiedUser?.data?.token) {
+      navigate("/dashboard");
+    }
+   }, [verifiedUser]);
 
   return (
     <AuthCustomBox header="Login">
-      <Box sx={{marginTop: "2rem"}}>
+      <Box>
         <Formik
           initialValues={values}
           validationSchema={loginSchema}
-          onSubmit={handleLogin}
+          onSubmit={async (values) => {
+            try {
+              setLoading(true); 
+              const { type } = await dispatch(userLogin(values));
+              if (type === "user/login/fulfilled") {
+                navigate(
+                  `/auth/googleAuthentication?email=${values.email}&password=${values.password}`
+                );
+              }
+            } catch (error) {
+              console.error("Error logging in:", error);
+            } finally {
+              setLoading(false); 
+            }
+          }}
         >
-          {({ 
-            values, errors, handleSubmit, handleChange
-           }) => (
+          {({ values, errors, handleSubmit, handleChange }) => (
             <form
               onSubmit={handleSubmit}
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap:10
-               
+                gap: 10,
               }}
             >
+              <Box>
+                <Typography
+                  sx={{ color: "#000000", fontSize: "20px", fontWeight: "600" }}
+                >
+                  Select Role
+                </Typography>
+                <Box sx={{ display: "flex" }}>
+                  <CheckBox
+                    label="Employee"
+                    iconStyle={{ width: "10px", height: "10px" }}
+                    labelStyle={{
+                      fontSize: "15px",
+                      color: "#898989",
+                      fontWeight: "400",
+                    }}
+                    
+                   
+                  />
+                  <CheckBox
+                    label="Agent"
+                    iconStyle={{ width: "10px", height: "10px" }}
+                    labelStyle={{
+                      fontSize: "15px",
+                      color: "#898989",
+                      fontWeight: "400",
+                    }}
+                   
+                   
+                  />
+                </Box>
+              </Box>
               <CustomTextInput
                 label="User Name"
                 name="email"
@@ -73,20 +120,18 @@ import { Link } from "react-router-dom";
                   cursor: "pointer",
                   textAlign: "left",
                   display: "inline",
-                  width: "fit-content"
+                  width: "fit-content",
                 }}
-               
               >
                 Forgot Password?
               </Link>
-
               <LoadButton
                 type="submit"
-                //loading={loading}
+                loading={loading}
                 variant="contained"
                 style={{
                   width: "100%",
-                  marginTop: 3,
+                  marginTop: 1,
                   textTransform: "none",
                 }}
               >
@@ -100,5 +145,3 @@ import { Link } from "react-router-dom";
   );
 };
 export default Login;
-
-

@@ -5,7 +5,8 @@ interface LoadButtonProps extends ButtonProps {
   loading?: boolean;
   style?: React.CSSProperties;
   hoverColor?: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  // onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void
 }
 
 export const LoadButton: FC<LoadButtonProps> = ({ children, loading,hoverColor, onClick, style, ...props }) => {

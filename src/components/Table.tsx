@@ -31,6 +31,10 @@ interface BasicTableProps {
   customButtons?: React.ReactNode;
   getRowId?: (row: Row) => string | number;
   includeSlots?: boolean;
+  loading?: boolean;
+  paginationModel?: any;
+  setPaginationModel?: any;
+  rowCountState?: number;
   includesPagination?: boolean;
   includeSearch?: boolean;
   showDatePicker?: boolean
@@ -48,6 +52,10 @@ const Table: React.FC<BasicTableProps> = ({
   showDatePicker,
   getRowId,
   includeSlots = true,
+  paginationModel,
+  setPaginationModel,
+  rowCountState,
+  loading = false,
   includesPagination = true,
   includeSearch = true,
 }) => {
@@ -58,6 +66,10 @@ const Table: React.FC<BasicTableProps> = ({
         // checkboxSelection
         autoHeight
         rows={rows}
+        rowCount={rowCountState}
+        paginationModel={paginationModel}
+        onPaginationModelChange={setPaginationModel}
+        loading={loading}
         columns={columns}
         getRowId={getRowId}
         sx={{

@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { LoadButton } from "../../components/LoadButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useSearchParams } from "react-router-dom";
 import CustomText from "../../components/CustomText";
 import OtpInput from "react-otp-input";
 import Divider from "@mui/material/Divider";
 import AuthCustomBox from "../../components/AuthCustomBox";
+import { API_AXIOS } from "../../http/interceptor";
+import Apis from "../../utils/apis";
+import { toast } from "react-toastify";
+import verifyOtp from "../../redux/store/actions/userVerify";
+import { useAppDispatch,useAppSelector } from "../../redux/hooks";
+
+
+
 
 const GoogleAuthentication = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const  {verifiedUser} = useAppSelector((state) => state.verifiedUser); 
+  let [searchParams] = useSearchParams();
+  let email = searchParams.get("email");
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
 
@@ -16,8 +28,35 @@ const GoogleAuthentication = () => {
     navigate("/auth/login");
   };
 
-  const redirectforgetPassword = () => {
-    navigate("/dashboard");
+  // const redirectforgetPassword = () => {
+  //   navigate("/dashboard");
+  // };
+
+  
+
+  
+  useEffect(() => {
+    if (verifiedUser?.data?.token) {
+      navigate("/dashboard");
+    }
+
+  }, [verifiedUser?.data, navigate]);
+
+  const handleSubmit = async () => {
+    try {
+      setLoading(true)
+      if (!email || typeof email !== "string") {
+        throw new Error("Email is not valid.");
+      }
+      await dispatch(verifyOtp({ email, otp }));
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Error verifying OTP:", error);
+      toast.error("Failed to verify OTP. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+
   };
 
   return (
@@ -112,7 +151,7 @@ const GoogleAuthentication = () => {
             ></CustomText>
           </Box>
           <LoadButton
-            onClick={redirectforgetPassword}
+            onClick={handleSubmit}
             type="submit"
             loading={loading}
             variant="contained"

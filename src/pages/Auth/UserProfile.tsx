@@ -16,9 +16,11 @@ import CloseIcon from "@mui/icons-material/Close";
 import CustomTextInput from "../../components/CustomInput";
 import { LoadButton } from "../../components/LoadButton";
 import CheckBox from "../../components/MyCustom/CheckBox";
+import { useAppSelector } from "../../redux/hooks";
 
  const UserProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const {verifiedUser} = useAppSelector((state) => state.verifiedUser);
   const [image, setImage] = useState();
   const [dialogOpen, setDialogOpen] = useState({
     changePass: false,
@@ -29,6 +31,8 @@ import CheckBox from "../../components/MyCustom/CheckBox";
     email: false,
     mobile: false,
   });
+
+  console.log("verifiedUser", verifiedUser?.data)
 
 //   const handleDialogOpen = (dialog: string) => {
 //     setDialogOpen({ ...dialogOpen, [dialog]: true });
@@ -159,25 +163,25 @@ import CheckBox from "../../components/MyCustom/CheckBox";
               <DetailsSubTitle title={"Name"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Agent01"} />
+              <DetailsSubTitleName name={verifiedUser?.data?.name} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Role"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Super admin"} />
+              <DetailsSubTitleName name={verifiedUser?.data?.role} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Mobile Number"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"+44 7300912119"} />
+              <DetailsSubTitleName name={verifiedUser?.data?.mobile || "NA"} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Email Address"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Agent12@gmail.com"} />
+              <DetailsSubTitleName name={verifiedUser?.data?.email} />
             </Grid>
             <Grid item xs={12} mt={2}>
               <DetailsHeader heading="Banks Details" />

@@ -10,7 +10,10 @@ interface CustomFileInputProps {
   borderRadius?: string | number;
   labelStyle?: React.CSSProperties;
   placeholder?: string;
+  file?: string;
+  onChange?: ()=> void;
   onFileChange?: React.ChangeEventHandler<HTMLInputElement>;
+
   accept?: string
  
  
@@ -23,6 +26,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   borderRadius,
   labelStyle,
   placeholder,
+  file,
   onFileChange,
   accept,
  
@@ -35,11 +39,14 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   return (
     <>
       <Typography
-        style={{
-          marginBottom: "4px",
+        sx={{
           color: "#000000",
-          fontWeight: "500",
+          fontWeight: "600",
           fontSize: "15px",
+          marginBottom: "2px",
+          "@media(max-width:600px)": {
+            fontSize: "13px",
+          },
           ...labelStyle,
         }}
       >

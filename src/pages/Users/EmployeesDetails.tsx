@@ -17,13 +17,13 @@ import { useNavigate, useParams } from "react-router-dom";
 
 let linkColor = Colors.LinkColor || "#000";
 
- const EmployeesDetails = () => {
-   const navigate = useNavigate()
-  const {id} = useParams()
+const EmployeesDetails = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-const handleEdit = () =>{
-   navigate(`/addEmployee`)
-}
+  const handleEdit = () => {
+    navigate(`/addEmployee?type=employees&id=${id}`);
+  };
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
