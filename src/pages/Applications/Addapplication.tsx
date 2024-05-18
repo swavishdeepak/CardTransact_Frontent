@@ -10,7 +10,7 @@ import {
 import StepConnector, {
   stepConnectorClasses,
 } from "@mui/material/StepConnector";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
 import { Colors } from "../../utils/Colors";
@@ -25,6 +25,8 @@ import { MerchantDetails } from "../../components/Application/MerchantDetails";
 import { BankInformation } from "../../components/Application/BankInformation";
 import { ApplicationInformation } from "../../components/Application/ApplicationInformation";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import { useGetAppDetailById } from "./getQuery/getQuery";
+import { useLocation } from "react-router-dom";
 
 
 
@@ -104,7 +106,7 @@ const QontoStepIconRoot = styled("div")<{ ownerState: { active?: boolean } }>(
 
 function QontoStepIcon(props: { step: number } & StepIconProps) {
   const { active, completed, className, step } = props;
-  
+
 
   return (
     <QontoStepIconRoot ownerState={{ active }} className={className}>
@@ -148,38 +150,22 @@ function QontoStepIcon(props: { step: number } & StepIconProps) {
   );
 }
 
-function getStepContent(step: number): JSX.Element | string {
-  switch (step) {
-    case 0:
-      return (
-          <SelectAquirer />
-      );
-    case 1:
-      return (
-          <MerchantInformation />
-      );
-    case 2:
-      return (
-          <MerchantDetails />
-      );
-    case 3:
-      return (
-          <BankInformation />
-      );
-    case 4:
-      return (
-          <ApplicationInformation />
-      );
-    default:
-      return "";
-  }
-}
-
 const Addapplication = () => {
+  const { state } = useLocation();
+  const [appId, setAppId] = useState<string>(state?._id);
+  const { data: appDetail, isFetched, refetch } = useGetAppDetailById(state?._id);
   const [open, setOpen] = useState(false);
-  const [activeStep, setActiveStep] = useState<number>(0);
+  const [activeStep, setActiveStep] = useState<number>(1);
   const [skippedSteps, setSkippedSteps] = useState<number[]>([]);
   const steps: string[] = getSteps();
+
+  useEffect(() => {
+    if (!state?._id && !appDetail?.formStep) {
+      setActiveStep(1);
+    } else if (!!appDetail?.formStep) {
+      setActiveStep(appDetail?.formStep)
+    }
+  }, [appDetail?.formStep, isFetched, state?._id]);
 
   const handleOpen = () => {
     setOpen(true);
@@ -194,7 +180,7 @@ const Addapplication = () => {
   };
 
   const handleBack = (): void => {
-    setActiveStep(activeStep - 1);
+    activeStep > 1 && setActiveStep(activeStep - 1);
   };
 
   const handleSubmit = () => {
@@ -205,12 +191,59 @@ const Addapplication = () => {
     setOpen(false);
     setActiveStep(activeStep + 1);
   };
+  const getStepContent = (step: number) => {
+    switch (step) {
+      case 1:
+        return (
+          <SelectAquirer
+            appId={appId}
+            setAppId={setAppId}
+            appDetail={appDetail}
+            refetch={refetch}
+          />
+        );
+      case 2:
+        return (
+          <MerchantInformation
+            appId={appId}
+            appDetail={appDetail}
+            refetch={refetch}
+          />
+        );
+      case 3:
+        return (
+          <MerchantDetails
+            appId={appId}
+            appDetail={appDetail}
+            refetch={refetch}
+          />
+        );
+      case 4:
+        return (
+          <BankInformation
+            appId={appId}
+            appDetail={appDetail}
+            refetch={refetch}
+          />
+        );
+      case 5:
+        return (
+          <ApplicationInformation
+            appId={appId}
+            appDetail={appDetail}
+            refetch={refetch}
+          />
+        );
+      default:
+        return "";
+    }
+  }
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
       <CustomBox>
-        {activeStep === 0 || activeStep === 5 ? (
+        {activeStep === 1 || activeStep === 6 ? (
           <Box
             sx={{
               display: "flex",
@@ -227,7 +260,7 @@ const Addapplication = () => {
             >
               Add Applications
             </Typography>
-            <Box sx={{ width: "20%", alignSelf: "center", height: "0.28px", backgroundColor: "rgba(119, 209, 119, 1)"}} > </Box>
+            <Box sx={{ width: "20%", alignSelf: "center", height: "0.28px", backgroundColor: "rgba(119, 209, 119, 1)" }} > </Box>
           </Box>
         ) : (
           <CommonHeader header="Add Application">
@@ -265,7 +298,7 @@ const Addapplication = () => {
                       boxShadow: "0px 0.9375px 3.75px 0px #00000040",
                       borderRadius: "2rem",
                       padding: "6px",
-                      "@media(max-width: 600px)":{
+                      "@media(max-width: 600px)": {
                         padding: 0,
                         fontSize: "8px"
                       }
@@ -279,7 +312,7 @@ const Addapplication = () => {
           })}
         </Stepper>
 
-        {activeStep === steps.length ? (
+        {activeStep === 6 ? (
           <Box
             sx={{
               justifyContent: "center",
@@ -303,7 +336,7 @@ const Addapplication = () => {
           <>
             <form>{getStepContent(activeStep)}</form>
             <Box sx={{ display: "flex", gap: 1 }}>
-              {activeStep !== 0 && (
+              {activeStep !== 1 && (
                 <CustomButton
                   onClick={handleBack}
                   label={"Previous"}
@@ -318,17 +351,17 @@ const Addapplication = () => {
                   }}
                 ></CustomButton>
               )}
-              {activeStep !== 4 ? (
+              {activeStep !== 6 ? (
                 <LoadButton
                   onClick={handleNext}
                   hoverColor={
-                    activeStep === 0 ? Colors.editColor : Colors.successColor
+                    activeStep === 1 ? Colors.editColor : Colors.successColor
                   }
                   style={{
                     width: "17%",
                     marginTop: "2rem",
                     backgroundColor:
-                      activeStep === 0 ? Colors.editColor : Colors.successColor,
+                      activeStep === 1 ? Colors.editColor : Colors.successColor,
                     color: "#fff",
 
                   }}

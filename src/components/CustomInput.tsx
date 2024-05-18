@@ -1,6 +1,6 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
-import { Typography,Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { Colors } from "../utils/Colors";
 
 interface CustomTextInputProps {
@@ -11,6 +11,7 @@ interface CustomTextInputProps {
   placeholder?: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>;
   onKeyPress?: React.KeyboardEventHandler<HTMLElement>;
   value?: string;
   name?: string;
@@ -22,6 +23,7 @@ interface CustomTextInputProps {
     style?: React.CSSProperties;
     inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   };
+  disabled?: boolean;
 }
 
 const CustomTextInput: React.FC<CustomTextInputProps> = ({
@@ -39,6 +41,8 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   multiline,
   InputProps,
   rows,
+  onBlur,
+  disabled,
   ...props
 }) => {
   const isError = !!error;
@@ -64,10 +68,12 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
         size="small"
         onClick={onClick}
         onChange={onChange}
+        onBlur={onBlur}
         onKeyPress={onKeyPress}
         multiline={multiline}
         rows={rows}
         value={value}
+        disabled={disabled}
         sx={{
           width: "100%",
           borderColor: "1px solid #DCDCDC",
@@ -76,7 +82,7 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
               border: "1px solid #DCDCDC",
             },
             "&.Mui-focused fieldset": {
-              border: isError?"1px solid red": "1px solid #DCDCDC",
+              border: isError ? "1px solid red" : "1px solid #DCDCDC",
             },
           },
         }}

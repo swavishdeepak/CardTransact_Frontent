@@ -1,12 +1,13 @@
 
 import React, { useState } from "react";
-import { Box,Menu, MenuItem} from "@mui/material";
+import { Box, Menu, MenuItem } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import Table from "../../components/Table";
 import MoreVert from "@mui/icons-material/MoreVert";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import CustomButton from "../../components/CustomButton";
+import { useGetApplications } from "./getQuery/getQuery";
 
 
 interface Column {
@@ -31,7 +32,7 @@ interface Row {
   action: string;
 }
 
- const ViewApplication: React.FC = () => {
+const ViewApplication: React.FC = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const columns: Column[] = [
     {
@@ -150,15 +151,24 @@ interface Row {
       status: "Rejected",
       action: "Edit"
     },
-   
-  
-  ];
 
+
+  ];
+  const navigate = useNavigate();
+  const { data, isLoading } = useGetApplications();
   const handleOpenDelete = () => {
     setOpenDelete(true);
   };
- 
 
+  const navToDetail = (item: any) => {
+    // navigate("/appicationDetails/1")
+    navigate(`/appicationDetails/${item?._id}`, { state: item });
+  }
+  const navToEdit = (item: any) => {
+    // navigate("/appicationDetails/1")
+    navigate(`/addApplication`, { state: item });
+  }
+  console.log('dataAppList', data)
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -167,10 +177,35 @@ interface Row {
         rows={rows}
         title="All Applications"
         getRowId={(row: any) => row.id}
-        
-       
       />
-    </Box>  
+      <div
+        style={{ display: "flex", gap: 10, marginBottom: 10 }}
+      >
+        <p style={{ width: 30 }}>SN.</p>
+        <p style={{ width: 100 }}>salesPerson</p>
+        <p style={{ width: 100 }}>Acquirer</p>
+        <p style={{ width: 100 }}>Trading name</p>
+        <p style={{ width: 100 }}>Status</p>
+        <button>Edit</button>
+        <button>View</button>
+        <button>delete</button>
+      </div>
+      {data?.map((el, i) => {
+        return <div
+          style={{ display: "flex", gap: 10, marginBottom: 10 }}
+          key={el?._id}
+        >
+          <p style={{ width: 30 }}>{++i}.</p>
+          <p style={{ width: 100 }}>{el?.salesPerson?.name ?? '--'}</p>
+          <p style={{ width: 100 }}>{el?.acquirer?.name ?? '--'}</p>
+          <p style={{ width: 100 }}>{el?.merchantInfo?.tradingName ?? '--'}</p>
+          <p style={{ width: 100 }}>{el?.status ?? '--'}</p>
+          <button onClick={() => navToEdit(el)}>Edit</button>
+          <button onClick={() => navToDetail(el)}>View</button>
+          <button>delete</button>
+        </div>
+      })}
+    </Box>
   );
 };
 
@@ -178,7 +213,7 @@ const More = (params: any) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [openDelete, setOpenDelete] = useState(false);
- 
+
 
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -197,12 +232,13 @@ const More = (params: any) => {
     setOpenDelete(false);
   };
 
- 
 
-  
+
+
 
   return (
     <>
+
       <MoreVert sx={{ cursor: "pointer" }} onClick={handleClick} />
       <Menu
         id="basic-menu"
@@ -231,11 +267,11 @@ const More = (params: any) => {
           <MenuItem>View Details</MenuItem>
         </Link>
         <Link
-        to={
-          params && params.row && params.row.id
-            ? `/viewApplications/editApplication/${params.row.id}`
-            : ""
-        }
+          to={
+            params && params.row && params.row.id
+              ? `/viewApplications/editApplication/${params.row.id}`
+              : ""
+          }
           style={{
             textDecoration: "none",
             color: "#000000",
@@ -273,7 +309,7 @@ const More = (params: any) => {
             />
             <CustomButton
               label="Delete"
-              
+
               hoverColor="#C10404"
               style={{
                 backgroundColor: "#C10404",
@@ -284,7 +320,7 @@ const More = (params: any) => {
           </Box>
         </ConfirmDialog>
       </Menu>
-    
+
     </>
   );
 };
