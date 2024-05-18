@@ -111,12 +111,35 @@ const ViewAgents: React.FC = () => {
       minWidth: 200,
       flex: 1,
     },
+
     {
-      field: "banks",
-      headerName: "Banks",
+      field: "email",
+      headerName: "Email",
       minWidth: 200,
       flex: 1,
     },
+    {
+      field: "phoneNumber",
+      headerName: "Mobile",
+      valueGetter: (params) => {
+        const { countryCode, phoneNumber } = params.row;
+        return `${countryCode || ""} ${phoneNumber || ""}`;
+      },
+      minWidth: 200,
+      flex: 1,
+    },
+    {
+      field: "manager",
+      headerName: "Manager",
+      minWidth: 150,
+      flex: 1,
+    },
+    // {
+    //   field: "banks",
+    //   headerName: "Banks",
+    //   minWidth: 200,
+    //   flex: 1,
+    // },
     {
       field: "action",
       headerName: "Action",

@@ -1,10 +1,10 @@
-import React from 'react';
-import { Box, Grid } from '@mui/material';
-import DetailsHeader from '../MyCustom/DetailsHeader';
-import DetailsSubTitle from '../MyCustom/DetailsSubTitle';
-import DetailsSubTitleName from '../MyCustom/DetailsSubTitleName';
+import React from "react";
+import { Box, Grid } from "@mui/material";
+import DetailsHeader from "../MyCustom/DetailsHeader";
+import DetailsSubTitle from "../MyCustom/DetailsSubTitle";
+import DetailsSubTitleName from "../MyCustom/DetailsSubTitleName";
 
-const UserDetails: React.FC = () => {
+const UserDetails = ({ user }: { user?: any }) => {
   return (
     <Box>
       <Grid
@@ -44,24 +44,40 @@ const UserDetails: React.FC = () => {
         <Grid item xs={12}>
           <DetailsHeader heading={"personal Details"} />
         </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Name"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"Hena"} />
-        </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Mobile Number"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"2756845382"} />
-        </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Email Address"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"heena123@gmail.com"} />
-        </Grid>
+
+        {user?.name && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Name"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.name} />
+            </Grid>
+          </>
+        )}
+
+        {user?.phoneNumber && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Mobile Number"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName
+                name={`${user?.countryCode || ""} ${user?.phoneNumber || ""}`}
+              />
+            </Grid>
+          </>
+        )}
+        {user?.email && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Email Address"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.email} />
+            </Grid>
+          </>
+        )}
       </Grid>
       <Grid
         container
@@ -72,37 +88,59 @@ const UserDetails: React.FC = () => {
         <Grid item xs={12}>
           <DetailsHeader heading={"Address Details"} />
         </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"House/Flat Address"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"1 charter Way"} />
-        </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"City"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"Liskeared"} />
-        </Grid>
-        <Grid item xs={2}>
+
+        {(user?.address?.address1 || user?.address?.address2) && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"House/Flat Address"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName
+                name={`${user?.address?.address1}, ${user?.address?.address2}`}
+              />
+            </Grid>
+          </>
+        )}
+
+        {user?.address?.city && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"City"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.address?.city} />
+            </Grid>
+          </>
+        )}
+
+        {/* <Grid item xs={2}>
           <DetailsSubTitle title={"County"} />
         </Grid>
         <Grid item xs={10}>
           <DetailsSubTitleName name={"Devcon"} />
-        </Grid>
+        </Grid> */}
 
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Country"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"United Kingdom"} />
-        </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Post Code"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"P12 4Hk"} />
-        </Grid>
+        {user?.address?.country && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Country"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.address?.country} />
+            </Grid>
+          </>
+        )}
+
+        {user?.address?.postalCode && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Post Code"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.address?.postalCode} />
+            </Grid>
+          </>
+        )}
       </Grid>
       <Grid
         container
@@ -113,31 +151,50 @@ const UserDetails: React.FC = () => {
         <Grid item xs={12}>
           <DetailsHeader heading={"Bank Details"} />
         </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Bank Name"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"Lloyds"} />
-        </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Name on Bank A/c"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"Heena"} />
-        </Grid>
 
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Sort Code"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"01-02-3"} />
-        </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Account Number"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"12345678"} />
-        </Grid>
+        {user?.bankInfo?.bankName && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Bank Name"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.bankInfo?.bankName} />
+            </Grid>
+          </>
+        )}
+
+        {user?.bankInfo?.nameOnBankAcc && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Name on Bank A/c"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.bankInfo?.nameOnBankAcc} />
+            </Grid>
+          </>
+        )}
+
+        {user?.bankInfo?.sortCode && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Sort Code"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.bankInfo?.sortCode} />
+            </Grid>
+          </>
+        )}
+
+        {user?.bankInfo?.AccNumb && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Account Number"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.bankInfo?.AccNumb} />
+            </Grid>
+          </>
+        )}
       </Grid>
     </Box>
   );
