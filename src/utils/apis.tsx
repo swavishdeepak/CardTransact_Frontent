@@ -6,12 +6,12 @@ const Apis = {
     veryfyOtp: `${baseURL}/auth/verifyOTP`,
     AddEmployee: `${baseURL}/emp`,
     getEmployee:`${baseURL}/emp`,
-    empUpdateById: `${baseURL}/emp/editRequestEmpById`
+    empUpdateById: `${baseURL}/emp/editRequestEmpById`,
     agent: baseURL + "/agent",
     agentDetailsById: baseURL + '/getAgentById',
     editRequestAgentById: baseURL + '/editRequestAgentById',
-    editAgentReqApproveRejectById: baseURL + '/editAgentReqApproveRejectById'
-    getEmpDetailsById: `${baseURL}/emp/getEmpById`,
+    editAgentReqApproveRejectById: baseURL + '/editAgentReqApproveRejectById',
+     getEmpDetailsById: `${baseURL}/emp/getEmpById`,
     deleteEmpReq: `${baseURL}/emp/deleteEmpRequestById`,
     deleteEmpById: `${baseURL}/emp/deleteEmpById`
 }
