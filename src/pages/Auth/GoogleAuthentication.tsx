@@ -33,8 +33,6 @@ const GoogleAuthentication = () => {
   // };
 
   
-
-  
   useEffect(() => {
     if (verifiedUser?.data?.token) {
       navigate("/dashboard");

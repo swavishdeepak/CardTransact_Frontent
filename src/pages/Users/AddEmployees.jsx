@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import { LoadButton } from "../../components/LoadButton";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { API_AXIOS_MULTIPART } from "../../http/interceptor";
+import { API_AXIOS, API_AXIOS_MULTIPART } from "../../http/interceptor";
 import Apis from "../../utils/apis";
 import CustomFileInput from "../../components/CustomFileInput";
 import { getEmployees } from "../../redux/store/reducers/employee";
@@ -27,12 +27,11 @@ const AddEmployees = () => {
   const id = searchParams.get("id");
   const [bankStatements, setBankStatements] = useState([]);
   const [addressProof, setAddressProof] = useState([]);
-  
 
   const { values, setFieldValue, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
-        name: "deepak",
+        name: "",
         email: "deepak@gmail.com",
         countryCode: "91",
         phoneNumber: "7896543534",
@@ -65,33 +64,59 @@ const AddEmployees = () => {
           formData.append("bankStatements", statement);
         });
         try {
-          
           if (type === "employees" && id) {
-            setLoading(true)
+            setLoading(true);
             const { data } = await API_AXIOS_MULTIPART.post(
               `${Apis.empUpdateById}/${id}`,
               formData
             );
-            toast.success(data);
+            toast.success(data?.message);
           } else {
-            setLoading(true)
+            setLoading(true);
             const { data } = await API_AXIOS_MULTIPART.post(
               `${Apis.AddEmployee}`,
               formData
             );
-            toast.success(data);
+            console.log("data", data?.message)
+            toast.success("Employee Add Successfully");
           }
-         
-          navigate("/viewEmployees")
+
+          navigate("/viewEmployees");
           dispatch(getEmployees());
-          
-        } catch (err: any) {
+        } catch (err) {
           console.log(err);
           toast.error(err.response.data);
         }
         setLoading(false);
       },
     });
+
+  const getEmployee = async () => {
+    try {
+      const { data } = await API_AXIOS.get(`${Apis.getEmpDetailsById}/${id}`);
+      setFieldValue("name", data?.data?.name);
+      setFieldValue("email", data?.data?.email);
+      setFieldValue("countryCode", data?.data?.countryCode);
+      setFieldValue("phoneNumber", data?.data?.phoneNumber);
+      setFieldValue("address1", data?.data?.address?.address1);
+      setFieldValue("address2", data?.data?.address?.address2);
+      setFieldValue("city", data?.data?.address?.city);
+      setFieldValue("coutry", data?.data?.address?.coutry);
+      setFieldValue("postalCode", data?.data?.address?.postalCode);
+      setFieldValue("bankName", data?.data?.bankInfo?.bankName);
+      setFieldValue("nameOnBankAcc", data?.data?.bankInfo?.nameOnBankAcc);
+      setFieldValue("sortCode", data?.data?.bankInfo?.sortCode);
+      setFieldValue("AccNumb", data?.data?.bankInfo?.AccNumb);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getEmployee();
+    }
+  }, [id]);
 
   const handleBack = () => {
     navigate("/viewEmployees");
@@ -135,7 +160,7 @@ const AddEmployees = () => {
               <CustomTextInput
                 label={"Phone Number"}
                 placeholder="Enter your Phone"
-                name="phone"
+                name="phoneNumber"
                 value={values.phoneNumber}
                 onChange={handleChange}
               />
@@ -202,7 +227,7 @@ const AddEmployees = () => {
               <CustomFileInput
                 label={"Address Proof"}
                 file="addressProof"
-                onFileChange={(e: any) => {
+                onFileChange={(e) => {
                   setAddressProof(e.target.files);
                 }}
               />
@@ -251,7 +276,7 @@ const AddEmployees = () => {
               <CustomFileInput
                 label={"Bank Statements"}
                 file="bankStatements"
-                onFileChange={(e: any) => {
+                onFileChange={(e) => {
                   setBankStatements(e.target.files);
                 }}
               />

@@ -23,14 +23,7 @@ interface Column {
   renderCell?: (params: any) => React.ReactNode;
 }
 
-// interface Row {
-//   id: number;
-//   userName: string;
-//   id_no: number | null;
-//   email: string | null;
-//   banks: string;
-//   action: string;
-// }
+
 
 const ViewEmployees: React.FC = () => {
   // const { employee } = useAppSelector((state) => state.employee)
@@ -48,19 +41,19 @@ const ViewEmployees: React.FC = () => {
     {
       field: "id",
       headerName: "Sr.No",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
     {
       field: "name",
       headerName: "User Name",
-      minWidth: 200,
+      minWidth: 100,
       flex: 1,
     },
     {
       field: "id_no",
       headerName: "ID No",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
     {
@@ -85,12 +78,10 @@ const ViewEmployees: React.FC = () => {
       field: "action",
       headerName: "Action",
       renderCell: (params: any) => <More {...params} />,
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
   ];
-
-  
 
   const getEmployees = async () => {
     setLoading(true);
@@ -124,9 +115,7 @@ const ViewEmployees: React.FC = () => {
         paginationModel={paginationModel}
         setPaginationModel={setPaginationModel}
         loading={loading}
-        // customButtons={
-        //   <CustomButton label="delete" onClick={handleOpenDelete} />
-        // }
+        
       />
     </Box>
   );
@@ -135,7 +124,8 @@ const ViewEmployees: React.FC = () => {
 const More = (params: any) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const [openDelete, setOpenDelete] = useState(false);
+  // const [openDelete, setOpenDelete] = useState(false);
+  // const [openDeleteReq, setOpenDeleteReq] = useState(false);
 
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -146,10 +136,11 @@ const More = (params: any) => {
     setAnchorEl(null);
   };
 
-  const handleDeleteOpen = () => {
-    setOpenDelete(true);
-  };
+  // const handleDeleteOpen = () => {
+  //   setOpenDelete(true);
+  // };
 
+  
   return (
     <>
       <MoreVert sx={{ cursor: "pointer" }} onClick={handleClick} />
@@ -190,8 +181,8 @@ const More = (params: any) => {
         >
           <MenuItem>Edit</MenuItem>
         </Link>
-        <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
-        {/* delete Request */}
+        {/* <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
+      
         <ConfirmDialog
           open={openDelete}
           title={"Confirmation"}
@@ -199,7 +190,7 @@ const More = (params: any) => {
           handleClose={() => setOpenDelete(false)}
         >
           <DeleteRequest setOpenDelete={setOpenDelete} />
-        </ConfirmDialog>
+        </ConfirmDialog> */}
       </Menu>
     </>
   );

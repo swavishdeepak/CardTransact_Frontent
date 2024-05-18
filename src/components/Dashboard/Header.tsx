@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box,  Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
-import { NearMeDisabled } from "@mui/icons-material";
+import { userTypes } from "../../utils/menuItems/MenuItems";
+import Breadcrumb from "../Breadcrumbs";
 //import Breadcrumbs from "../Breadcrumbs";
+
+
 
 interface buttonProps {
   children?: React.ReactNode;
 }
 
 export const Header: React.FC<buttonProps> = ({ children }) => {
-  const {verifiedUser} = useAppSelector((state) => state.verifiedUser); 
-  const [name, setName] = useState()
+  const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
   
-
-  console.log("verifiedUser",verifiedUser?.data?.name)
-
 
   const location = useLocation();
   let path = location.pathname;
   let formattedPath = path.charAt(1).toUpperCase() + path.slice(2);
+ 
+
+
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "end", marginTop: "1rem" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "end",
+        marginTop: "1rem",
+      }}
+    >
       <Box>
         <Box>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -35,12 +44,12 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
                 },
               }}
             >
-              Hi {verifiedUser?.data?.name}
+              {`Hi ${verifiedUser?.data?.name}`}
             </Typography>
             <Typography
               sx={{ color: "#202020", fontWeight: "400", fontSize: "0.8rem" }}
             >
-              {verifiedUser?.data?.role}
+               {userTypes[verifiedUser.data.role as keyof typeof userTypes]}
             </Typography>
           </Box>
         </Box>
@@ -50,13 +59,13 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
             fontSize: "16px",
             fontWeight: "600",
             marginTop: 1,
-            "@media(max-width: 600px)":{
-               fontSize: "12px"
-            }
+            "@media(max-width: 600px)": {
+              fontSize: "12px",
+            },
           }}
         >
-          {/* <Breadcrumbs/> */}
-          {formattedPath}
+           {/* <Breadcrumb/>  */}
+          {formattedPath}  
         </Typography>
       </Box>
       {children}

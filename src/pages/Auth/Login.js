@@ -5,16 +5,18 @@ import { useNavigate } from "react-router-dom";
 import CustomTextInput from "../../components/CustomInput";
 import CheckBox from "../../components/MyCustom/CheckBox";
 import AuthCustomBox from "../../components/AuthCustomBox";
-import { userLogin } from "../../redux/store/actions/authAction";
 import { loginSchema } from "../../utils/Validation";
 import { Formik } from "formik";
 import { Link } from "react-router-dom";
-import { useAppDispatch,useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
+import Apis from "../../utils/apis";
+import {toast} from "react-toastify"
+import { API_AXIOS } from "../../http/interceptor";
 
 
 const Login = () => {
-  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
+  const [role, setRole] = useState("employee");
   const {verifiedUser} = useAppSelector((state) => state.verifiedUser); 
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -30,26 +32,29 @@ const Login = () => {
     }
    }, [verifiedUser]);
 
+   
   return (
     <AuthCustomBox header="Login">
       <Box>
         <Formik
           initialValues={values}
           validationSchema={loginSchema}
-          onSubmit={async (values) => {
-            try {
-              setLoading(true); 
-              const { type } = await dispatch(userLogin(values));
-              if (type === "user/login/fulfilled") {
-                navigate(
-                  `/auth/googleAuthentication?email=${values.email}&password=${values.password}`
-                );
-              }
-            } catch (error) {
-              console.error("Error logging in:", error);
-            } finally {
-              setLoading(false); 
+          onSubmit={ async (values) => {
+            try{
+              setLoading(true)
+              const { data } = await API_AXIOS.post(
+                `${Apis.login}?type=${role}`,
+                 values,
+              );
+              toast.success(data?.message);
+              navigate(
+                `/auth/googleAuthentication?email=${values.email}&password=${values.password}`
+              );
+            
+            }catch(err){
+              toast.error(err?.response?.data?.message)
             }
+            setLoading(false)
           }}
         >
           {({ values, errors, handleSubmit, handleChange }) => (
@@ -76,6 +81,8 @@ const Login = () => {
                       color: "#898989",
                       fontWeight: "400",
                     }}
+                    checked={role === "employee"}
+                    onChange={() => setRole("employee")}
                     
                    
                   />
@@ -87,6 +94,8 @@ const Login = () => {
                       color: "#898989",
                       fontWeight: "400",
                     }}
+                    checked={role === "agent"}
+                    onChange={() => setRole("agent")}
                    
                    
                   />

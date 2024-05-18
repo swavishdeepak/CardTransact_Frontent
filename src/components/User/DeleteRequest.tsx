@@ -22,6 +22,16 @@ const DeleteRequest: React.FC<DeleteRequestProps> = ({setOpenDelete}) => {
   const handleCloseDelete = () => {
     setOpenDelete(false);
   };
+
+
+  // const deleteEmp = ()=>{
+  //   try{
+
+  //   }catch(e)
+
+  // }
+
+
   
 
   

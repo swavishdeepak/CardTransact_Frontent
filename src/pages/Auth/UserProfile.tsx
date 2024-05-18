@@ -17,6 +17,7 @@ import CustomTextInput from "../../components/CustomInput";
 import { LoadButton } from "../../components/LoadButton";
 import CheckBox from "../../components/MyCustom/CheckBox";
 import { useAppSelector } from "../../redux/hooks";
+import { userTypes } from "../../utils/menuItems/MenuItems";
 
  const UserProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,7 +33,7 @@ import { useAppSelector } from "../../redux/hooks";
     mobile: false,
   });
 
-  console.log("verifiedUser", verifiedUser?.data)
+  
 
 //   const handleDialogOpen = (dialog: string) => {
 //     setDialogOpen({ ...dialogOpen, [dialog]: true });
@@ -68,6 +69,8 @@ import { useAppSelector } from "../../redux/hooks";
     const file = event.target.files[0];
     setImage(file);
   };
+
+  
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -169,7 +172,7 @@ import { useAppSelector } from "../../redux/hooks";
               <DetailsSubTitle title={"Role"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={verifiedUser?.data?.role} />
+              <DetailsSubTitleName name={userTypes[verifiedUser?.data?.role as keyof typeof userTypes]} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Mobile Number"} />

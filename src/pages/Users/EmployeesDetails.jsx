@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
@@ -14,16 +14,47 @@ import { LoadButton } from "../../components/LoadButton";
 import { Label } from "recharts";
 import fileIcons from "../../assets/fileIcon.svg";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { API_AXIOS } from "../../http/interceptor";
+import Apis from "../../utils/apis";
+import ConfirmDialog from "../../components/ConfirmDialog";
+import EmpDelete from "../../components/User/EmpDelete";
+import EmpDeleteReq from "../../components/User/EmpDeleteReq";
+import { useAppSelector } from "../../redux/hooks";
 let linkColor = Colors.LinkColor || "#000";
 
 const EmployeesDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
+  const [empDetails, setEmpDetails] = useState();
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openDeleteReq, setOpenDeleteReq] = useState(false);
+
+  const handleDeleteOpen = () => {
+    setOpenDelete(true);
+  };
+  const handelDeleteReq = () => {
+    setOpenDeleteReq(true);
+  };
 
   const handleEdit = () => {
     navigate(`/addEmployee?type=employees&id=${id}`);
   };
+
+  const getEmpDetails = async () => {
+    try {
+      const { data } = await API_AXIOS.get(`${Apis.getEmpDetailsById}/${id}`);
+      setEmpDetails(data?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getEmpDetails();
+  }, [id]);
+
+  
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -31,14 +62,29 @@ const EmployeesDetails = () => {
       <CustomBox>
         <CommonHeader header={"EMPLOYEE DETAILS"}>
           <Box sx={{ display: "flex", gap: 1 }}>
-            <CustomButton
-              label={"Delete"}
-              hoverColor={linkColor}
-              style={{
-                backgroundColor: `${linkColor}`,
-                color: "#fff",
-              }}
-            />
+            {(verifiedUser?.data?.role !== "sup_admin" &&
+              verifiedUser?.data?.isDeleteReq === true) && (
+                <CustomButton
+                  label={"Delete Request"}
+                  hoverColor={linkColor}
+                  onClick={handelDeleteReq}
+                  style={{
+                    backgroundColor: `${linkColor}`,
+                    color: "#fff",
+                  }}
+                />
+              )}
+            {verifiedUser?.data?.role === "sup_admin" && (
+              <CustomButton
+                label={"Delete"}
+                onClick={handleDeleteOpen}
+                hoverColor={linkColor}
+                style={{
+                  backgroundColor: `${linkColor}`,
+                  color: "#fff",
+                }}
+              />
+            )}
             <CustomButton
               label={"Edit"}
               style={{
@@ -63,19 +109,19 @@ const EmployeesDetails = () => {
             <DetailsSubTitle title={"Name"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"Hena"} />
+            <DetailsSubTitleName name={empDetails?.name || "NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Mobile Number"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"2756845382"} />
+            <DetailsSubTitleName name={empDetails?.phoneNumber || "NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Email Address"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"heena123@gmail.com"} />
+            <DetailsSubTitleName name={empDetails?.email || "NA"} />
           </Grid>
         </Grid>
         <Grid
@@ -91,32 +137,34 @@ const EmployeesDetails = () => {
             <DetailsSubTitle title={"House/Flat Address"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"1 charter Way"} />
+            <DetailsSubTitleName name={empDetails?.address?.address1 || "NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"City"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"Liskeared"} />
+            <DetailsSubTitleName name={empDetails?.address?.city || "NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"County"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"Devcon"} />
+            <DetailsSubTitleName name={empDetails?.address?.country || "NA"} />
           </Grid>
 
           <Grid item xs={2}>
             <DetailsSubTitle title={"Country"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"United Kingdom"} />
+            <DetailsSubTitleName name={empDetails?.address?.country || "NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Post Code"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"P12 4Hk"} />
+            <DetailsSubTitleName
+              name={empDetails?.address?.postalCode || "NA"}
+            />
           </Grid>
         </Grid>
         <Grid
@@ -132,26 +180,32 @@ const EmployeesDetails = () => {
             <DetailsSubTitle title={"Bank Name"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"Lloyds"} />
+            <DetailsSubTitleName
+              name={empDetails?.bankInfo?.bankName || "NA"}
+            />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Name on Bank A/c"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"Heena"} />
+            <DetailsSubTitleName
+              name={empDetails?.bankInfo?.nameOnBankAcc || "NA"}
+            />
           </Grid>
 
           <Grid item xs={2}>
             <DetailsSubTitle title={"Sort Code"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"01-02-3"} />
+            <DetailsSubTitleName
+              name={empDetails?.bankInfo?.sortCode || "NA"}
+            />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Account Number"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={"12345678"} />
+            <DetailsSubTitleName name={empDetails?.bankInfo?.AccNumb || "NA"} />
           </Grid>
         </Grid>
         <Grid
@@ -199,6 +253,22 @@ const EmployeesDetails = () => {
         </LoadButton>
         <Grid></Grid>
       </CustomBox>
+      <ConfirmDialog
+        open={openDelete}
+        title={"Confirmation"}
+        desc="Are you Sure want to Delete this Employee?"
+        handleClose={() => setOpenDelete(false)}
+      >
+        <EmpDelete setOpenDelete={setOpenDelete} empId={id} />
+      </ConfirmDialog>
+      <ConfirmDialog
+        open={openDeleteReq}
+        title={"Confirmation"}
+        desc="Are you Sure want to Delete this Employee?"
+        handleClose={() => setOpenDeleteReq(false)}
+      >
+        <EmpDeleteReq setOpenDeleteReq={setOpenDeleteReq} empId={id} />
+      </ConfirmDialog>
     </Box>
   );
 };

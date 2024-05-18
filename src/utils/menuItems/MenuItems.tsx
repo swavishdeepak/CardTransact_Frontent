@@ -16,3 +16,15 @@ export const ChenkBoxLables = [
     { label: "SalesPerson Name", value: "SalesPerson Name" },
     { label: "Company/Individual", value: "Company/Individual" },
 ]
+
+type UserTypes = {
+    sup_admin?: string;
+    sub_admin?: string;
+    admin?: string;
+};
+
+export const userTypes: UserTypes = {
+    sup_admin: "Sup Admin",
+    sub_admin: "Sub Admin",
+    admin: "Admin"
+};
