@@ -1,7 +1,7 @@
 
 import React from "react";
 import TextField from "@mui/material/TextField";
-import { Typography,InputAdornment } from "@mui/material";
+import { Typography, InputAdornment } from "@mui/material";
 import fileIcon from "../assets/fileIcon.svg"
 
 interface CustomFileInputProps {
@@ -11,13 +11,13 @@ interface CustomFileInputProps {
   labelStyle?: React.CSSProperties;
   placeholder?: string;
   file?: string;
-  onChange?: ()=> void;
+  onChange?: any;
   onFileChange?: React.ChangeEventHandler<HTMLInputElement>;
 
   accept?: string
- 
- 
-  
+  disabled?: boolean
+
+
 }
 
 const CustomFileInput: React.FC<CustomFileInputProps> = ({
@@ -29,12 +29,12 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   file,
   onFileChange,
   accept,
- 
- 
- 
+  disabled,
+
+
   ...props
 }) => {
-  
+
 
   return (
     <>
@@ -56,19 +56,20 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         placeholder={placeholder}
         size="small"
         type="file"
-        inputProps={{ accept }} 
+        inputProps={{ accept, multiple: true }}
         onChange={onFileChange}
+        disabled={disabled}
         sx={{
-           width: "100%",
-           "& .MuiOutlinedInput-root": {
+          width: "100%",
+          "& .MuiOutlinedInput-root": {
             "&:hover fieldset": {
               border: "0.94px solid rgba(220, 220, 220, 1)"
             },
-            "&.Mui-focused fieldset": { 
+            "&.Mui-focused fieldset": {
               border: "0.94px solid rgba(220, 220, 220, 1)"
             },
           }
-          }}
+        }}
         InputProps={{
           style: {
             cursor: "pointer",
@@ -77,19 +78,18 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
             fontWeight: "400",
             "&::placeholder": {
               color: "#898989",
-              
+
             },
-            
+
           } as React.CSSProperties,
           endAdornment: (
             <InputAdornment position="end">
               <img src={fileIcon} alt="File Icon" width="15" height="15" />
             </InputAdornment>
           ),
-         
         }}
         {...props}
-        
+
       />
     </>
   );

@@ -12,9 +12,12 @@ import BasicSelect from "../BasicSelect";
 
 interface ApplicationInfoProps {
   disableStyles?: boolean;
+  appId?: string;
+  appDetail?: any;
+  refetch?: any;
 }
 
-export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({disableStyles = false}) => {
+export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({ disableStyles = false, appId, appDetail, refetch }) => {
   const [bankStatement, setBankStatement] = useState([]);
   const [selectedValue, setSelectedValue] = useState<string>("Select Model");
   const [selectedValue1, setSelectedValue1] = useState<string>("Select Rental");
@@ -50,9 +53,9 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({disableS
 
   return (
     <Box
-    sx={
-      !disableStyles
-        ? {
+      sx={
+        !disableStyles
+          ? {
             p: 3,
             marginTop: "2rem",
             boxShadow: "2.8125px 2.8125px 8.4375px 0px #0000002E",
@@ -61,15 +64,15 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({disableS
             borderRadius: "7.5px",
             border: `0.5px solid ${Colors.LinkColor}`,
           }
-        : undefined
-    }
-      
+          : undefined
+      }
+
     >
-     {!disableStyles && <CommonHeader header="Application Information">
+      {!disableStyles && <CommonHeader header="Application Information">
         <img src={NavIcon} alt=""></img>
       </CommonHeader>}
 
-      <Grid container rowSpacing={4} columnSpacing={2} mt={disableStyles? "none": 2}>
+      <Grid container rowSpacing={4} columnSpacing={2} mt={disableStyles ? "none" : 2}>
         <Grid item xs={12} md={4.5}>
           <CustomTextInput
             label={"Salesperson Name"}
@@ -90,54 +93,54 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({disableS
       </Grid>
       <Grid container rowSpacing={1} columnSpacing={2} mt={1}>
         <Grid item xs={12} md={4.5}>
-        <BasicSelect
-         label="Model"
-          sx={{
-            position: "relative",
-            border: "1px solid rgba(220, 220, 220, 1)",
-            padding: "10px 6px 0px 8px",
-          }}
-          name={"selectedValue"}
-          value={selectedValue}
-          handleChange={handleChange}
-          size="small"
-          items={Modeldata}
-        />
-         
+          <BasicSelect
+            label="Model"
+            sx={{
+              position: "relative",
+              border: "1px solid rgba(220, 220, 220, 1)",
+              padding: "10px 6px 0px 8px",
+            }}
+            name={"selectedValue"}
+            value={selectedValue}
+            handleChange={handleChange}
+            size="small"
+            items={Modeldata}
+          />
+
         </Grid>
         <Grid item xs={12} md={4.5}>
-        <BasicSelect
-         label="Rental"
-         
-          sx={{
-            position: "relative",
-            border: "1px solid rgba(220, 220, 220, 1)",
-            padding: "10px 6px 0px 8px",
-          }}
-          name={"selectedValue1"}
-          value={selectedValue1}
-          handleChange={handleChangeRental}
-          size="small"
-          items={Rentaldata}
-        />
-         
+          <BasicSelect
+            label="Rental"
+
+            sx={{
+              position: "relative",
+              border: "1px solid rgba(220, 220, 220, 1)",
+              padding: "10px 6px 0px 8px",
+            }}
+            name={"selectedValue1"}
+            value={selectedValue1}
+            handleChange={handleChangeRental}
+            size="small"
+            items={Rentaldata}
+          />
+
         </Grid>
         <Grid item xs={12} md={4.5}>
-        <BasicSelect
-         label="Contract Duration"
-         placeholder="abdab"
-          sx={{
-            position: "relative",
-            border: "1px solid rgba(220, 220, 220, 1)",
-            padding: "10px 6px 0px 8px",
-          }}
-          name={"selectedValue2"}
-          value={selectedValue2}
-          handleChange={handleChangeduration}
-          size="small"
-          items={Durationdata}
-        />
-         
+          <BasicSelect
+            label="Contract Duration"
+            placeholder="abdab"
+            sx={{
+              position: "relative",
+              border: "1px solid rgba(220, 220, 220, 1)",
+              padding: "10px 6px 0px 8px",
+            }}
+            name={"selectedValue2"}
+            value={selectedValue2}
+            handleChange={handleChangeduration}
+            size="small"
+            items={Durationdata}
+          />
+
         </Grid>
       </Grid>
     </Box>

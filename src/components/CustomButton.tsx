@@ -25,11 +25,11 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         borderRadius: "8px",
         fontWeight: "700",
         fontSize: "12px",
-        "@media(max-width: 600px)":{
+        "@media(max-width: 600px)": {
           fontSize: "10px",
           borderRadius: "10px",
         },
-        '&:hover':{
+        '&:hover': {
           backgroundColor: hoverColor
         },
         ...style,

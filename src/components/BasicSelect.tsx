@@ -23,6 +23,7 @@ interface BasicSelectProps {
   placeholderStyle?: React.CSSProperties;
   valueKey?: string;
   labelKey?: string;
+  disabled?: boolean;
 }
 
 const BasicSelect: React.FC<BasicSelectProps> = ({
@@ -43,6 +44,7 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
   name,
   valueKey = 'value',
   labelKey = 'label',
+  disabled,
   ...props
 }) => {
   return (
@@ -78,6 +80,7 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
               placeholder={placeholder}
             />
           }
+          disabled={disabled}
         >
           {items.map((item) => (
             <MenuItem value={item[valueKey]} key={item[labelKey]}>

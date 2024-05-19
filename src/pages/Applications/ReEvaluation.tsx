@@ -11,9 +11,16 @@ import { LoadButton } from "../../components/LoadButton";
 import { ChenkBoxLables } from "../../utils/menuItems/MenuItems";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import done from "../../assets/done.svg";
+import { API_AXIOS } from "../../http/interceptor";
+import Apis from "../../utils/apis";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useQueryClient } from "react-query";
 
- const ReEvaluation = () => {
-  type CheckboxState = Record<string, boolean>;
+type CheckboxState = Record<string, boolean>;
+const ReEvaluation = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient()
   const [checkboxes, setCheckboxes] = useState<CheckboxState>({});
   const [open, setOpen] = useState(false);
 
@@ -24,18 +31,28 @@ import done from "../../assets/done.svg";
     setOpen(false);
   };
 
-  const handleCheckboxChange = (label: any) => {
+  const handleCheckboxChange = (el: any) => {
     setCheckboxes((prevCheckboxes: any) => ({
       ...prevCheckboxes,
-      [label.label]: !prevCheckboxes[label.label],
+      [el.value]: !prevCheckboxes[el.value],
     }));
   };
 
-  const handleSubmit = () => {
-    setOpen(true);
-    console.log("Selected checkboxes:", checkboxes);
+  const handleSubmit = async () => {
+    try {
+      // let data={checkboxes}
+      let res = await API_AXIOS.post(`${Apis.reviewAppById}/${state?._id}`, checkboxes)
+      console.log('res', res);
+      queryClient.invalidateQueries('application');
+      navigate("/viewApplications")
+      // navigate({ pathname: 'viewApplications' })
+    } catch (e) {
+      console.log('error in appREVIEWById', e)
+    }
+    // setOpen(true);
+    // console.log("Selected checkboxes:", checkboxes);
   };
-
+  console.log('state', state)
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -86,12 +103,12 @@ import done from "../../assets/done.svg";
             >
               Enables Fields which need To Be Edited
             </Typography>
-            {ChenkBoxLables.map((label, index) => (
+            {ChenkBoxLables.map((el, index) => (
               <CheckBox
                 key={index}
-                label={label.label}
-                checked={!!checkboxes[label.label]}
-                onChange={() => handleCheckboxChange(label)}
+                label={el.label}
+                checked={!!checkboxes[el.value]}
+                onChange={() => handleCheckboxChange(el)}
               />
             ))}
           </Box>
