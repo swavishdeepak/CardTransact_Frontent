@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
@@ -20,19 +20,21 @@ import { useAppSelector } from "../../redux/hooks";
 import { useEmployeeQuery } from "./getQuery/useAgentQuery";
 import EmpDetails from "../../components/User/EmpDetails";
 import ConfirmEmpUpdate from "../../components/User/ConfirmEmpUpdate";
+import {
+  empStatusObj,
+  empStatusColorObj,
+} from "../../utils/menuItems/MenuItems";
+import ApprvRejtEmp from "../../components/User/ApprvRejtEmp";
 let linkColor = Colors.LinkColor || "#000";
-
 
 const EmployeesDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
-  const  { data }   = useEmployeeQuery(id)
+  const { data, refetch } = useEmployeeQuery(id);
   const [openDelete, setOpenDelete] = useState(false);
   const [openDeleteReq, setOpenDeleteReq] = useState(false);
-  let empUpdateData = JSON.parse(data?.updatingData || "{}")
-
-  
+  let empUpdateData = JSON.parse(data?.updatingData || "{}");
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -45,194 +47,75 @@ const EmployeesDetails = () => {
     navigate(`/addEmployee?type=employees&id=${id}`);
   };
 
-  console.log("data", data)
-
- 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
       {Object.keys(empUpdateData)?.length > 0 && (
         <CustomBox>
-          <CommonHeader header={"Updating Employee Details"}>
+          <CommonHeader
+            status={empStatusObj[data?.editStatus]}
+            statusColor={empStatusColorObj[data?.editStatus]}
+            header={"Updating Employee Details"}
+          >
             <ConfirmEmpUpdate id={id} />
           </CommonHeader>
           <EmpDetails employee={empUpdateData} />
         </CustomBox>
       )}
       <CustomBox>
-        <CommonHeader header={"EMPLOYEE DETAILS"}>
+        <CommonHeader
+          status={empStatusObj[data?.status]}
+          statusColor={empStatusColorObj[data?.status]}
+          header={"EMPLOYEE DETAILS"}
+        >
           <Box sx={{ display: "flex", gap: 1 }}>
-            {(verifiedUser?.data?.role !== "sup_admin" &&
-              verifiedUser?.data?.isDeleteReq === true) && (
+            {data?.status !== "new" ? (
+              <>
+                {verifiedUser?.data?.role !== "sup_admin" &&
+                  verifiedUser?.data?.isDeleteReq === true && (
+                    <CustomButton
+                      label={"Delete Request"}
+                      hoverColor={linkColor}
+                      onClick={handelDeleteReq}
+                      style={{
+                        backgroundColor: `${linkColor}`,
+                        color: "#fff",
+                      }}
+                    />
+                  )}
+                {verifiedUser?.data?.role === "sup_admin" && (
+                  <CustomButton
+                    label={"Delete"}
+                    onClick={handleDeleteOpen}
+                    hoverColor={linkColor}
+                    style={{
+                      backgroundColor: `${linkColor}`,
+                      color: "#fff",
+                    }}
+                  />
+                )}
                 <CustomButton
-                  label={"Delete Request"}
-                  hoverColor={linkColor}
-                  onClick={handelDeleteReq}
+                  label={"Edit"}
                   style={{
-                    backgroundColor: `${linkColor}`,
-                    color: "#fff",
+                    backgroundColor: "#fff",
+                    color: `${linkColor}`,
+                    border: `1px solid ${linkColor}`,
                   }}
+                  onClick={handleEdit}
                 />
-              )}
-            {verifiedUser?.data?.role === "sup_admin" && (
-              <CustomButton
-                label={"Delete"}
-                onClick={handleDeleteOpen}
-                hoverColor={linkColor}
-                style={{
-                  backgroundColor: `${linkColor}`,
-                  color: "#fff",
-                }}
-              />
+              </>
+            ) : (
+              <ApprvRejtEmp id={id} refetch={refetch} />
             )}
-            <CustomButton
-              label={"Edit"}
-              style={{
-                backgroundColor: "#fff",
-                color: `${linkColor}`,
-                border: `1px solid ${linkColor}`,
-              }}
-              onClick={handleEdit}
-            />
           </Box>
         </CommonHeader>
-        {/* <Grid
-          container
-          rowSpacing={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-          <Grid item xs={12}>
-            <DetailsHeader heading={"personal Details"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Name"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={ "NA"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Mobile Number"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"NA"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Email Address"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={ "NA"} />
-          </Grid>
-        </Grid>
+        <EmpDetails employee={data} />
         <Grid
           container
           rowSpacing={2}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           mt={3}
         >
-          <Grid item xs={12}>
-            <DetailsHeader heading={"Address Details"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"House/Flat Address"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"NA"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"City"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"NA"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"County"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={"NA"} />
-          </Grid>
-
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Country"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={ "NA"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Post Code"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName
-              name={"NA"}
-            />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          rowSpacing={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-          <Grid item xs={12}>
-            <DetailsHeader heading={"Bank Details"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Bank Name"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName
-              name={"NA"}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Name on Bank A/c"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName
-              name={ "NA"}
-            />
-          </Grid>
-
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Sort Code"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName
-              name={"NA"}
-            />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Account Number"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name={ "NA"} />
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          rowSpacing={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-          <Grid item xs={12}>
-            <DetailsHeader heading={"Attachment"} />
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Address Proof"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name="">
-              <img src={fileIcons} alt=""></img>
-            </DetailsSubTitleName>
-          </Grid>
-          <Grid item xs={2}>
-            <DetailsSubTitle title={"Bank Statement"} />
-          </Grid>
-          <Grid item xs={10}>
-            <DetailsSubTitleName name="">
-              <img src={fileIcons} alt=""></img>
-            </DetailsSubTitleName>
-          </Grid>
           <Grid item xs={12} mt={2}>
             <CustomTextInput
               label="Add Special Remarks"
@@ -247,36 +130,9 @@ const EmployeesDetails = () => {
           style={{
             marginTop: 3,
             width: "20%",
-          }}
-        >
-          Save Remark
-        </LoadButton>
-        <Grid></Grid> */}
-         <EmpDetails employee={data}/> 
-         <Grid
-          container
-          rowSpacing={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-         
-          <Grid item xs={12} mt={2}>
-            <CustomTextInput
-              label="Add Special Remarks"
-              rows={4}
-              multiline={true}
-              placeholder="Type Here..."
-            />
-          </Grid>
-        </Grid>
-         <LoadButton
-          type="submit"
-          style={{
-            marginTop: 3,
-            width: "20%",
-            "@media(max-width: 600px)":{
-               width: "100%"
-            }
+            "@media(max-width: 600px)": {
+              width: "100%",
+            },
           }}
         >
           Save Remark

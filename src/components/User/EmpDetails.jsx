@@ -22,7 +22,7 @@ const EmpDetails = ({ employee }) => {
               <DetailsSubTitle title={"Name"} />
             </Grid>
             <Grid item xs={10}>
-              <DetailsSubTitleName name={employee?.name || "NA"} />
+              <DetailsSubTitleName name={employee?.name || ""} />
             </Grid>
           </>
         )}
@@ -32,7 +32,9 @@ const EmpDetails = ({ employee }) => {
               <DetailsSubTitle title={"Mobile Number"} />
             </Grid>
             <Grid item xs={10}>
-              <DetailsSubTitleName name={employee?.phoneNumber || "NA"} />
+            <DetailsSubTitleName
+                name={`${employee?.countryCode || ""} ${employee?.phoneNumber || ""}`}
+              />
             </Grid>
           </>
         )}

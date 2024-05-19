@@ -45,6 +45,10 @@ export const agentAppRejById = ({ id, status }) => {
     status,
   });
 
+  
+
+
+
   // try {
   //   const { data } = await API_AXIOS.get(
   //     `${Apis.addAgentReqApproveRejectById}/${id}`
@@ -55,3 +59,11 @@ export const agentAppRejById = ({ id, status }) => {
   //   console.log("agentAppRejById", err);
   // }
 };
+
+export const employeeAppRejById = ({ id, status }) => {
+  return API_AXIOS.post(`${Apis.addEmpReqApproveRejectById}/${id}`, {
+    status,
+  });
+
+}
+

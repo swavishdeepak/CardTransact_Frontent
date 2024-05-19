@@ -11,7 +11,8 @@ interface UserToken {
 
 interface OtpParams {
   email: string;
-  otp: string
+  otp: string;
+  type: string;
   
 }
 
@@ -19,14 +20,14 @@ interface OtpParams {
 
 export const userVerify = createAsyncThunk<UserToken, OtpParams, { rejectValue: AxiosError }>(
   "user/verifyOtp",
-  async ({ email, otp }, { rejectWithValue }) => {
+  async ({ email, otp, type }, { rejectWithValue }) => {
     try {
       const { data } = await API_AXIOS.post(
         Apis.veryfyOtp,
         { email, otp},
         {
             params: {
-              type: "employee",
+              type: type
             },
           }
       );

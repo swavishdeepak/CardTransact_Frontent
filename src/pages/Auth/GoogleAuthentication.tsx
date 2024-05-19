@@ -21,8 +21,10 @@ const GoogleAuthentication = () => {
   const  {verifiedUser} = useAppSelector((state) => state.verifiedUser); 
   let [searchParams] = useSearchParams();
   let email = searchParams.get("email");
+  let type = searchParams.get("role");
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
+  
 
   const redirectLogin = () => {
     navigate("/auth/login");
@@ -34,11 +36,13 @@ const GoogleAuthentication = () => {
 
   
   useEffect(() => {
-    if (verifiedUser?.data?.token) {
+    if (verifiedUser) {
       navigate("/dashboard");
     }
 
   }, [verifiedUser?.data, navigate]);
+
+  
 
   const handleSubmit = async () => {
     try {
@@ -46,7 +50,7 @@ const GoogleAuthentication = () => {
       if (!email || typeof email !== "string") {
         throw new Error("Email is not valid.");
       }
-      await dispatch(verifyOtp({ email, otp }));
+      await dispatch(verifyOtp({ email, otp, type }));
       navigate("/dashboard");
     } catch (error) {
       console.error("Error verifying OTP:", error);

@@ -33,6 +33,8 @@ const Login = () => {
    }, [verifiedUser]);
 
    
+
+   
   return (
     <AuthCustomBox header="Login">
       <Box>
@@ -48,7 +50,7 @@ const Login = () => {
               );
               toast.success(data?.message);
               navigate(
-                `/auth/googleAuthentication?email=${values.email}&password=${values.password}`
+                `/auth/googleAuthentication?email=${values.email}&password=${values.password}&role=${role}`
               );
             
             }catch(err){

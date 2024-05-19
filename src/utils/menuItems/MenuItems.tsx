@@ -38,7 +38,23 @@ export const agentStatusObj = {
   rejected: "Rejected",
 }
 
+
+
 export const userStatusColorObj = {
+  approved: '#77D177',
+  rejected: '#C10404',
+  new: '#03AED2',
+}
+
+export const empStatusObj = {
+  new: "New",
+  approved: "Approved",
+  rejected: "Rejected",
+}
+
+
+
+export const empStatusColorObj = {
   approved: '#77D177',
   rejected: '#C10404',
   new: '#03AED2',
