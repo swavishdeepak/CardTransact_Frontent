@@ -10,9 +10,25 @@ export const confirmUpdate = function ({ status, id }) {
 export const getAgent = async (id) => {
   try {
     const { data } = await API_AXIOS.get(`${Apis.agentDetailsById}/${id}`);
-    console.log('data',data);
+
     return data?.data;
   } catch (err) {
     console.log("agentdetails", err);
   }
+};
+
+export const agentAppRejById = ({ id, status }) => {
+  return API_AXIOS.post(`${Apis.addAgentReqApproveRejectById}/${id}`, {
+    status,
+  });
+
+  // try {
+  //   const { data } = await API_AXIOS.get(
+  //     `${Apis.addAgentReqApproveRejectById}/${id}`
+  //   );
+
+  //   return data;
+  // } catch (err) {
+  //   console.log("agentAppRejById", err);
+  // }
 };

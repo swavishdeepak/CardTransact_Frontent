@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, SelectChangeEvent, Typography } from "@mui/material";
+import { Box, Radio, SelectChangeEvent, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
 import CustomTextInput from "../../components/CustomInput";
@@ -18,12 +18,17 @@ import Apis from "../../utils/apis";
 import { getAgentDetails } from "../../hooks/agent/getAgentDetails";
 import { formatChangedValues } from "../../utils/commonMethods";
 import { useAgentQuery } from "./getQuery/useAgentQuery";
+import { useTierQuery } from "../Tier/getQuery/useTierQuery";
+import CustomRadio from "../../components/CustomRadio";
+import { srManagers } from "../../utils/menuItems/MenuItems";
+import { toast } from "react-toastify";
 
 const AddAgents = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const type = searchParams.get("type");
   const id = searchParams.get("id");
+  const { data: tier } = useTierQuery();
   const { refetch } = useAgentQuery(id);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
@@ -36,7 +41,8 @@ const AddAgents = () => {
         email: "",
         salesType: "company",
         tier: "",
-        // manager:'',
+        companyName: "",
+        manager: "",
         address: {
           address1: "",
           address2: "",
@@ -100,12 +106,13 @@ const AddAgents = () => {
               formData
             );
           }
-          refetch()
+          refetch();
+          navigate("/viewAgents");
         } catch (err) {
+          toast.error(err.response?.data?.message)
           console.log(err);
         }
         setLoading(false);
-        navigate("/viewAgents");
       },
     });
 
@@ -117,6 +124,7 @@ const AddAgents = () => {
         email: data.email,
         phoneNumber: data.phoneNumber,
         salesType: data.salesType,
+        companyName: data.companyName,
         address: { ...data.address },
         bankInfo: { ...data.bankInfo },
         tier: data.tier,
@@ -127,52 +135,23 @@ const AddAgents = () => {
         ...state,
         ...updatingData,
       }));
-
-      // setAgent(data?.data || {});
     } catch (err) {
       console.log(err);
     }
   };
-  // console.log(agent);
 
   useEffect(() => {
-    getAgent(id);
+    if (id) getAgent(id);
   }, [id]);
 
-  const [selectedTier, setSelectedTier] = useState("");
-  const [selectedManger, setSelectedManger] = useState("");
-  const [selectedReporting, setSelectedReporting] = useState("");
-  // const [selectedTier, setSelectedTier] = useState<string>("");
-  // const [selectedManger, setSelectedManger] = useState<string>("");
-  // const [selectedReporting, setSelectedReporting] = useState<string>("");
+  // const [selectedReporting, setSelectedReporting] = useState("");
 
-  const handleChangeTier = (event) => {
-    setSelectedTier(event.target.value);
-  };
-
-  const handleChangeManger = (event) => {
-    setSelectedManger(event.target.value);
-  };
-  const handleChangeReporting = (event) => {
-    setSelectedReporting(event.target.value);
-  };
-  // const handleChangeTier = (event: SelectChangeEvent<string>) => {
-  //   setSelectedTier(event.target.value);
-  // };
-
-  // const handleChangeManger = (event: SelectChangeEvent<string>) => {
-  //   setSelectedManger(event.target.value);
-  // };
-  // const handleChangeReporting = (event: SelectChangeEvent<string>) => {
+  
+  // const handleChangeReporting = (event) => {
   //   setSelectedReporting(event.target.value);
   // };
 
-  const selectTier = [
-    { value: "Tier", label: "tier1" },
-    { value: "Tier2", label: "Tier2" },
-  ];
-  const selectManger = [{ value: "manager", label: "Manager1" }];
-  const selectReportingAgent = [{ value: "reporting1", label: "reporting1" }];
+  // const selectReportingAgent = [{ value: "reporting1", label: "reporting1" }];
 
   const handleBack = () => {
     navigate("/viewAgents");
@@ -236,19 +215,35 @@ const AddAgents = () => {
           </Grid>
           <Grid container rowSpacing={2} columnSpacing={2} mt={0}>
             <Grid item xs={12} md={6}>
-              <Typography>
+              {/* <Typography>
                 Is SalesPerson From a Company or Individual
-              </Typography>
+              </Typography> */}
               <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CheckBox label="From a Company" />
-                <CheckBox label="Is An Individual" />
+                {/* <Radio
+                  checked={values.salesType === ''}
+                  onChange={handleChange}
+                  value={values.salesType}
+                  name="salesType"
+                  la
+                  inputProps={{ "aria-label": "A" }}
+                /> */}
+                <CustomRadio
+                  label={"Is SalesPerson From a Company or Individual"}
+                  value={values.salesType}
+                  handleChange={handleChange}
+                  name="salesType"
+                  options={[
+                    { value: "company", label: "Company" },
+                    { value: "individual", label: "Individual" },
+                  ]}
+                />
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
               <CustomTextInput
-                // value={values.email}
-                // onChange={handleChange}
-                // name="email"
+                value={values.companyName}
+                onChange={handleChange}
+                name="companyName"
                 label={"Company Name"}
                 placeholder="Enter Company Name"
               />
@@ -263,18 +258,17 @@ const AddAgents = () => {
                   border: "1px solid rgba(220, 220, 220, 1)",
                   padding: "10px 6px 0px 8px",
                 }}
-                name={"selectedValue2"}
-                value={selectedTier}
-                handleChange={handleChangeTier}
+                name={"tier"}
+                value={values.tier}
+                handleChange={handleChange}
                 size="small"
-                items={selectTier}
+                valueKey="_id"
+                labelKey="name"
+                items={tier || []}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <BasicSelect
-                // value={values.manager}
-                // onChange={handleChange}
-                // name="email"
                 label="Select Manager"
                 placeholder="Select"
                 sx={{
@@ -283,14 +277,14 @@ const AddAgents = () => {
                   border: "1px solid rgba(220, 220, 220, 1)",
                   padding: "10px 6px 0px 8px",
                 }}
-                name={"selectedValue2"}
-                value={selectedManger}
-                handleChange={handleChangeManger}
+                name={"manager"}
+                value={values.manager}
+                handleChange={handleChange}
                 size="small"
-                items={selectManger}
+                items={srManagers}
               />
             </Grid>
-            <Grid item xs={12} md={6}>
+            {/* <Grid item xs={12} md={6}>
               <BasicSelect
                 label="Select Reporting Agent"
                 placeholder="Select"
@@ -300,13 +294,13 @@ const AddAgents = () => {
                   border: "1px solid rgba(220, 220, 220, 1)",
                   padding: "10px 6px 0px 8px",
                 }}
-                name={"selectedValue2"}
+                name={"manager"}
                 value={selectedReporting}
                 handleChange={handleChangeReporting}
                 size="small"
-                items={selectReportingAgent}
+                items={srManagers}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </CustomAccordion>
         <CustomAccordion summary="ADDRESS INFORMATION">

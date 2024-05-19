@@ -22,15 +22,36 @@ export const salesType = {
   individual: "Individual",
 };
 
+export const srManagers = [
+  { value: "pravanshu", label: "Pravanshu" },
+  { value: "shayamal", label: "Shayamal" },
+];
+
+export const srManagersObj = {
+  pravanshu: "Pravanshu",
+  shayamal: "Shayamal",
+}
+
+export const agentStatusObj = {
+  new: "New",
+  approved: "Approved",
+  rejected: "Rejected",
+}
+
+export const userStatusColorObj = {
+  approved: '#77D177',
+  rejected: '#C10404',
+  new: '#03AED2',
+}
 
 type UserTypes = {
-    sup_admin?: string;
-    sub_admin?: string;
-    admin?: string;
+  sup_admin?: string;
+  sub_admin?: string;
+  admin?: string;
 };
 
 export const userTypes: UserTypes = {
-    sup_admin: "Sup Admin",
-    sub_admin: "Sub Admin",
-    admin: "Admin"
+  sup_admin: "Sup Admin",
+  sub_admin: "Sub Admin",
+  admin: "Admin",
 };
