@@ -21,6 +21,7 @@ interface BasicSelectProps {
   [key: string]: any;
   placeholder?: string; // Add placeholder prop
   placeholderStyle?: React.CSSProperties;
+  disabled?: boolean;
 }
 
 const BasicSelect: React.FC<BasicSelectProps> = ({
@@ -34,13 +35,16 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
   placeholder,
   placeholderStyle = { color: "#898989", fontSize: "12px", fontWeight: "400", borderRadius: "7.5px" },
   name,
+  disabled,
   ...props
 }) => {
   return (
     <Box sx={{ minWidth: 100, sx }}>
-      <Typography style={{ marginTop: "1rem", color: "#000000",
-          fontWeight: "600",
-          fontSize: "15px" , ...labelStyle }}>
+      <Typography style={{
+        marginTop: "1rem", color: "#000000",
+        fontWeight: "600",
+        fontSize: "15px", ...labelStyle
+      }}>
         {label}
       </Typography>
       <FormControl fullWidth {...props}>
@@ -63,8 +67,9 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
               placeholder={placeholder}
             />
           }
+          disabled={disabled}
         >
-         
+
           {items.map((item) => (
             <MenuItem value={item.value} key={item.value}>
               {item.label}

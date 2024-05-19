@@ -37,6 +37,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
 }) => {
   const [selecteIdProof, setSelecteIdProof] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisable, setIsDisable] = useState<any>({})
   const queryClient = useQueryClient();
   const {
     values,
@@ -104,26 +105,33 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
         countryCode: merchantInfo?.countryCode,
         phoneNumber: merchantInfo?.phoneNumber,
         email: merchantInfo?.email
-      })
+      });
+
+      let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
+      setIsDisable(tempEdit)
     }
   }, [!!appDetail?._id])
-  // useEffect(() => {
-  //   if (!!appDetail?._id) {
-  //     const { merchantInfo } = appDetail;
 
-  //   }
-  // }, [!!appDetail?.acquirer?.id]);
-  //
+  const fieldDisable = (key) => {
+    if (appDetail?.reviewFields?.length > 1) {
+      if (isDisable?.hasOwnProperty(key)) {
+        return !isDisable?.[key]
+      } else {
+        return true
+      }
+    } else {
+      return false;
+    }
+  }
+  console.log('isDisable2', isDisable)
   const onImageChange = (e, key: 'drivingLicense' | 'passport' | 'nationalId') => {
     let objImg = e.target.files;
     console.log('e', e)
     let temp = Object.values(objImg);
     setFieldValue(key, temp)
   }
-  // const handleChange = (event: SelectChangeEvent<string>) => {
-  //   setSelecteIdProof(event.target.value);
-  // };
-  console.log('values', values)
+
+
   return (
     <Box
       sx={
@@ -159,7 +167,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.name}
             name="name"
-          // disabled={true}
+            disabled={fieldDisable('name')}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -170,6 +178,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.legalName}
             name="legalName"
+            disabled={fieldDisable('legalName')}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -180,6 +189,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.tradingName}
             name="tradingName"
+            disabled={fieldDisable('tradingName')}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -190,6 +200,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.phoneNumber}
             name="phoneNumber"
+            disabled={fieldDisable('phoneNumber')}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -200,6 +211,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.email}
             name="email"
+            disabled={fieldDisable('email')}
           />
         </Grid>
         <Grid item xs={12} md={8}>
@@ -226,18 +238,21 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
           <CustomFileInput
             label="Driving License"
             onChange={(e) => onImageChange(e, 'drivingLicense')}
+            disabled={fieldDisable('drivingLicense')}
           />
         </Grid>
         <Grid item xs={12} md={8}>
           <CustomFileInput
             label="National Id"
             onChange={(e) => onImageChange(e, 'nationalId')}
+            disabled={fieldDisable('nationalId')}
           />
         </Grid>
         <Grid item xs={12} md={8}>
           <CustomFileInput
             label="Passport"
             onChange={(e) => onImageChange(e, 'passport')}
+            disabled={fieldDisable('passport')}
           />
         </Grid>
         <Grid item xs={12} md={8}>
@@ -256,7 +271,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             }}
             loading={isLoading}
           >
-            Next
+            Save
           </LoadButton>
         </Grid>
 

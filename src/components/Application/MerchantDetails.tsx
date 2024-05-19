@@ -35,6 +35,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
 }) => {
   const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisable, setIsDisable] = useState<any>({})
   const {
     values,
     handleChange,
@@ -152,6 +153,8 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         postalCode: merchantTradingAdd?.postalCode,
         remark: merchantTradingAdd?.remark,
       })
+      let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
+      setIsDisable(tempEdit)
     }
   }, [!!appDetail?._id])
 
@@ -160,6 +163,19 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
     let temp = Object.values(objImg);
     setFieldValue(key, temp)
   }
+
+  const fieldDisable = (key) => {
+    if (appDetail?.reviewFields?.length > 1) {
+      if (isDisable?.hasOwnProperty(key)) {
+        return !isDisable?.[key]
+      } else {
+        return true
+      }
+    } else {
+      return false;
+    }
+  }
+  console.log('fieldDisable', fieldDisable('address1'))
   return (
     <Box
       sx={
@@ -190,6 +206,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             value={values.address1}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('address1')}
           />
         </Grid>
         <Grid item xs={12} md={8}>
@@ -200,6 +217,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             value={values.address2}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('address2')}
           />
         </Grid>
       </Grid>
@@ -212,6 +230,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             value={values.city}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('city')}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -222,6 +241,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             value={values.county}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('county')}
           />
         </Grid>
       </Grid>
@@ -234,6 +254,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             value={values.country}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('country')}
           />
         </Grid>
         <Grid item xs={12} md={4}>
@@ -244,6 +265,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             value={values.postalCode}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('postalCode')}
           />
         </Grid>
         {/* files */}
@@ -253,6 +275,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Premises(Outdoors)"
               placeholder="Upload Any Utility Document"
               onChange={(e) => onImageChange(e, 'outDoorPremisesPic')}
+              disabled={fieldDisable('outDoorPremisesPic')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -260,6 +283,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Premises(Indoors)"
               placeholder="Upload Any Utility Document"
               onChange={(e) => onImageChange(e, 'inDoorPremisesPic')}
+              disabled={fieldDisable('inDoorPremisesPic')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -267,6 +291,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of "
               placeholder="Upload Picture of Business Rate Pic"
               onChange={(e) => onImageChange(e, 'utilityBillPic')}
+              disabled={fieldDisable('utilityBillPic')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -274,6 +299,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Business Rate Pic"
               placeholder="Upload Picture of Business Rate Pic"
               onChange={(e) => onImageChange(e, 'businessRatePic')}
+              disabled={fieldDisable('businessRatePic')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -281,6 +307,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Lease Agreement Pic "
               placeholder="Upload Picture of Lease Agreement Pic"
               onChange={(e) => onImageChange(e, 'leaseAgreementPic')}
+              disabled={fieldDisable('leaseAgreementPic')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -288,6 +315,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Home Driving License Pic"
               placeholder="Upload Picture of Home Driving License Pic"
               onChange={(e) => onImageChange(e, 'homeUtilityBillPic')}
+              disabled={fieldDisable('homeUtilityBillPic')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -295,6 +323,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Home Driving License Pic"
               placeholder="Upload Picture of Home Driving License Pic"
               onChange={(e) => onImageChange(e, 'homeDrivingLicensePic')}
+              disabled={fieldDisable('homeDrivingLicensePic')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -302,6 +331,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of  Home Bank Statement"
               placeholder="Upload Picture of home Bank Statement"
               onChange={(e) => onImageChange(e, 'homeBankStatement')}
+              disabled={fieldDisable('homeBankStatement')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -309,6 +339,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Home Bank Letter"
               placeholder="Upload Picture of Home Bank Letter"
               onChange={(e) => onImageChange(e, 'homeBankLetter')}
+              disabled={fieldDisable('homeBankLetter')}
             />
           </Grid>
           <Grid item xs={12} md={8}>
@@ -316,6 +347,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               label="Upload Picture of Alternative Doc"
               placeholder="Upload Picture of Alternative Doc"
               onChange={(e) => onImageChange(e, 'alternativeDoc')}
+              disabled={fieldDisable('alternativeDoc')}
             />
           </Grid>
         </>
@@ -327,6 +359,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             value={values.remark}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('remark')}
           />
         </Grid>
 
@@ -346,7 +379,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             }}
             loading={isLoading}
           >
-            Next
+            Save
           </LoadButton>
         </Grid>
 

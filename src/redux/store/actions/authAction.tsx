@@ -11,7 +11,7 @@ interface UserToken {
 interface LoginParams {
   email: string;
   password: string
-  
+
 }
 
 const config = {
@@ -25,7 +25,7 @@ export const userLogin = createAsyncThunk<UserToken, LoginParams, { rejectValue:
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(
-        `${Apis.login}?type=${"employee"}`,
+        `${Apis.login}?type=${"agent"}`,
         { email, password },
         config
       );

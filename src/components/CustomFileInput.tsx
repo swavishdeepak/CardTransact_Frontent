@@ -15,7 +15,7 @@ interface CustomFileInputProps {
   onFileChange?: React.ChangeEventHandler<HTMLInputElement>;
 
   accept?: string
-
+  disabled?: boolean
 
 
 }
@@ -29,7 +29,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
   file,
   onFileChange,
   accept,
-
+  disabled,
 
 
   ...props
@@ -58,6 +58,7 @@ const CustomFileInput: React.FC<CustomFileInputProps> = ({
         type="file"
         inputProps={{ accept, multiple: true }}
         onChange={onFileChange}
+        disabled={disabled}
         sx={{
           width: "100%",
           "& .MuiOutlinedInput-root": {

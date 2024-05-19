@@ -12,7 +12,7 @@ interface UserToken {
 interface OtpParams {
   email: string;
   otp: string
-  
+
 }
 
 
@@ -23,21 +23,21 @@ export const userVerify = createAsyncThunk<UserToken, OtpParams, { rejectValue: 
     try {
       const { data } = await API_AXIOS.post(
         Apis.veryfyOtp,
-        { email, otp},
+        { email, otp },
         {
-            params: {
-              type: "employee",
-            },
-          }
+          params: {
+            type: "agent",
+          },
+        }
       );
-     
+
       localStorage.setItem("token", data?.data?.token);
       localStorage.setItem("info", JSON.stringify(data));
       toast.success(data?.message);
       return data;
-     
+
     } catch (error: any) {
-        toast.error(error?.message)
+      toast.error(error?.message)
       if (axios.isAxiosError(error)) {
         // toast.error(error)
         console.log("errorhsfbasj", error)

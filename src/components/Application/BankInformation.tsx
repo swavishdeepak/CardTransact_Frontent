@@ -23,6 +23,8 @@ interface BankInformationProps {
 
 export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles = false, appId, appDetail, refetch }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisable, setIsDisable] = useState<any>({});
+
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const {
@@ -86,9 +88,25 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
         nameOnBankAcc: bankInfo?.nameOnBankAcc,
         accountNumber: bankInfo?.accountNumber,
         sourceCode: bankInfo?.sourceCode,
-      })
+      });
+
+      let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
+      setIsDisable(tempEdit)
     }
   }, [!!appDetail?._id])
+  //
+
+  const fieldDisable = (key) => {
+    if (appDetail?.reviewFields?.length > 1) {
+      if (isDisable?.hasOwnProperty(key)) {
+        return !isDisable?.[key]
+      } else {
+        return true
+      }
+    } else {
+      return false;
+    }
+  }
   //
   const onImageChange = (e, key: 'bankStatement') => {
     let objImg = e.target.files;
@@ -96,7 +114,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
     let temp = Object.values(objImg);
     setFieldValue(key, temp)
   }
-  console.log('appDetail', appDetail?.formStep)
+
   return (
     <Box
       sx={
@@ -126,6 +144,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
             value={values.bankName}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('bankName')}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -136,6 +155,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
             value={values.nameOnBankAcc}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('nameOnBankAcc')}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -146,6 +166,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
             value={values.accountNumber}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('accountNumber')}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -156,6 +177,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
             value={values.sourceCode}
             onChange={handleChange}
             onBlur={handleBlur}
+            disabled={fieldDisable('sourceCode')}
           />
         </Grid>
         <Grid item xs={12} md={10}>
@@ -163,6 +185,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
             label="Bank Statement"
             placeholder="Upload Any Utility Document"
             onChange={(e) => onImageChange(e, 'bankStatement')}
+            disabled={fieldDisable('bankStatement')}
           />
         </Grid>
         {/* button */}
@@ -182,7 +205,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
             }}
             loading={isLoading}
           >
-            Next
+            Submit
           </LoadButton>
         </Grid>
       </Grid>

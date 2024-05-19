@@ -14,6 +14,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Label } from "recharts";
 import { useGetAppDetailById } from "./getQuery/getQuery";
+import { useAppSelector } from "../../redux/hooks";
 
 const customBoxStyle = {
   border: "1px solid #77D177",
@@ -27,12 +28,15 @@ const headerStyle = {
 };
 
 const ApplicationDetails = () => {
+  const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
+  const isAgent = verifiedUser?.data?.role === 'agent';
   const navigate = useNavigate();
   const { state, pathname } = useLocation();
   const { data: appDetail } = useGetAppDetailById(state?._id)
   const [openApprove, setOpenApprove] = useState(false);
   const [openReview, setOpenReview] = useState(false);
-  console.log('appDetail ', appDetail);
+
+  console.log('verifiedUser@ ', verifiedUser?.data?.role);
 
   const handleOpenApprove = () => {
     setOpenApprove(true);
@@ -51,7 +55,7 @@ const ApplicationDetails = () => {
   };
 
   const handleRedirect = () => {
-    navigate("/Re-evaluation");
+    navigate("/Re-evaluation", { state: appDetail });
   };
 
   //javed
@@ -523,7 +527,7 @@ const ApplicationDetails = () => {
             </Grid>
           </Grid>
         </CustomBox>
-        <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
+        {!isAgent && <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
           <CustomButton
             type="submit"
             label="Approve"
@@ -549,7 +553,7 @@ const ApplicationDetails = () => {
               color: "#fff",
             }}
           ></CustomButton>
-        </Box>
+        </Box>}
       </CustomBox>
       <ConfirmDialog
         open={openApprove}

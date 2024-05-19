@@ -27,6 +27,7 @@ const SelectAquirer: React.FC<SelectAquirerProps> = ({
 }) => {
   const queryClient = useQueryClient();
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisable, setIsDisable] = useState<any>({});
   const { data: selectAcquirer } = useGetAcquirer();
   const { data, isLoading: appLoading } = useGetAppDetailById(appId);
   const navigate = useNavigate();
@@ -72,6 +73,8 @@ const SelectAquirer: React.FC<SelectAquirerProps> = ({
       setValues({
         acquirer: appDetail?.acquirer?.id
       })
+      let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
+      setIsDisable(tempEdit)
     }
   }, [!!appDetail?.acquirer?.id]);
 
@@ -79,7 +82,19 @@ const SelectAquirer: React.FC<SelectAquirerProps> = ({
     // setSelectedValue(event.target.value);
     setFieldValue('acquirer', event.target.value)
   };
-  console.log('valuesSelectAcquer', values)
+
+  const fieldDisable = (key) => {
+    if (appDetail?.reviewFields?.length > 1) {
+      if (isDisable?.hasOwnProperty(key)) {
+        return !isDisable?.[key]
+      } else {
+        return true
+      }
+    } else {
+      return false;
+    }
+  }
+
   return (
     <CustomBox
       style={{
@@ -106,6 +121,7 @@ const SelectAquirer: React.FC<SelectAquirerProps> = ({
             handleChange={handleChange}
             size="small"
             items={selectAcquirer || []}
+            disabled={fieldDisable('acquirer')}
           />
         </Grid>
         {/* button */}
@@ -125,7 +141,7 @@ const SelectAquirer: React.FC<SelectAquirerProps> = ({
             }}
             loading={isLoading}
           >
-            Next
+            Save
           </LoadButton>
         </Grid>
       </Grid>
