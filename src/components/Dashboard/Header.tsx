@@ -49,7 +49,7 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
             <Typography
               sx={{ color: "#202020", fontWeight: "400", fontSize: "0.8rem" }}
             >
-               {userTypes[verifiedUser.data.role as keyof typeof userTypes]}
+               {userTypes[verifiedUser?.data?.role as keyof typeof userTypes]}
             </Typography>
           </Box>
         

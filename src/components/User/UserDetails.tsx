@@ -3,8 +3,9 @@ import { Box, Grid } from "@mui/material";
 import DetailsHeader from "../MyCustom/DetailsHeader";
 import DetailsSubTitle from "../MyCustom/DetailsSubTitle";
 import DetailsSubTitleName from "../MyCustom/DetailsSubTitleName";
+import { srManagersObj } from "../../utils/menuItems/MenuItems";
 
-const UserDetails = ({ user }: { user?: any }) => {
+const UserDetails = ({ user, tierObj = {} }: { user?: any; tierObj?: any }) => {
   return (
     <Box>
       <Grid
@@ -16,24 +17,34 @@ const UserDetails = ({ user }: { user?: any }) => {
         <Grid item xs={12}>
           <DetailsHeader heading={"Organisation Details"} />
         </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Manager"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"Shyamal Modak"} />
-        </Grid>
-        <Grid item xs={2}>
+        {user?.manager && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Manager"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={srManagersObj[user?.manager]} />
+            </Grid>
+          </>
+        )}
+
+        {/* <Grid item xs={2}>
           <DetailsSubTitle title={"Reporting Agent"} />
         </Grid>
         <Grid item xs={10}>
           <DetailsSubTitleName name={"Agent01"} />
-        </Grid>
-        <Grid item xs={2}>
-          <DetailsSubTitle title={"Tier"} />
-        </Grid>
-        <Grid item xs={10}>
-          <DetailsSubTitleName name={"Tier01"} />
-        </Grid>
+        </Grid> */}
+
+        {user?.tier && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"Tier"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={tierObj[user?.tier]} />
+            </Grid>
+          </>
+        )}
       </Grid>
       <Grid
         container

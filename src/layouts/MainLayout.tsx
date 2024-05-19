@@ -13,6 +13,7 @@ export const MainLayout = () => {
   const {verifiedUser} = useAppSelector((state) => state.verifiedUser);
 
 
+  console.log('verified',verifiedUser)
   useEffect(() => {
     if (!verifiedUser) {
       sessionStorage.setItem("requestUrl", pathname);
