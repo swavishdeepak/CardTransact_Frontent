@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Box, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Menu, MenuItem} from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
-import Table from "../../components/Table";
 import MoreVert from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
-import ConfirmDialog from "../../components/ConfirmDialog";
-import CustomButton from "../../components/CustomButton";
-import { CustomBox } from "../../components/MyCustom/CustomBox";
-import { LoadButton } from "../../components/LoadButton";
-import CustomTextInput from "../../components/CustomInput";
-import DeleteRequest from "../../components/User/DeleteRequest";
-import { useAppSelector } from "../../redux/hooks";
+// import ConfirmDialog from "../../components/ConfirmDialog";
+// import CustomButton from "../../components/CustomButton";
+// import { CustomBox } from "../../components/MyCustom/CustomBox";
+// import { LoadButton } from "../../components/LoadButton";
+// import CustomTextInput from "../../components/CustomInput";
+// import DeleteRequest from "../../components/User/DeleteRequest";
+// import { useAppSelector } from "../../redux/hooks";
 import { API_AXIOS } from "../../http/interceptor";
 import Apis from "../../utils/apis";
+import TableServer from "../../components/TableServer";
 
 interface Column {
   field: string;
@@ -21,12 +21,12 @@ interface Column {
   flex: number;
   sortable?: boolean;
   renderCell?: (params: any) => React.ReactNode;
+  valueGetter?: (params: any) => string;
 }
 
 
 
 const ViewEmployees: React.FC = () => {
-  // const { employee } = useAppSelector((state) => state.employee)
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [paginationModel, setPaginationModel] = useState({
@@ -38,24 +38,24 @@ const ViewEmployees: React.FC = () => {
   
 
   const columns: Column[] = [
-    {
-      field: "id",
-      headerName: "Sr.No",
-      minWidth: 100,
-      flex: 1,
-    },
+    // {
+    //   field: "id",
+    //   headerName: "",
+    //   minWidth: 50,
+    //   flex: 1,
+    // },
     {
       field: "name",
       headerName: "User Name",
-      minWidth: 100,
+      minWidth: 150,
       flex: 1,
     },
-    {
-      field: "id_no",
-      headerName: "ID No",
-      minWidth: 100,
-      flex: 1,
-    },
+    // {
+    //   field: "id_no",
+    //   headerName: "ID No",
+    //   minWidth: 100,
+    //   flex: 1,
+    // },
     {
       field: "email",
       headerName: "Email",
@@ -63,22 +63,27 @@ const ViewEmployees: React.FC = () => {
       flex: 1,
     },
     {
-      field: "bankInfo.bankName",
+      field: "bankName",
       headerName: "Banks",
-      minWidth: 100,
+      valueGetter: (params) => {
+        const { bankInfo } = params.row;
+        return `${bankInfo?.bankName || ""}`;
+      },
+      
+      minWidth: 200,
       flex: 1,
     },
     {
       field: "addedBy",
       headerName: "Added By",
-      minWidth: 100,
+      minWidth: 200,
       flex: 1,
     },
     {
       field: "action",
       headerName: "Action",
       renderCell: (params: any) => <More {...params} />,
-      minWidth: 100,
+      minWidth: 50,
       flex: 1,
     },
   ];
@@ -103,12 +108,14 @@ const ViewEmployees: React.FC = () => {
     getEmployees();
   }, [paginationModel?.page]);
 
+  
+
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
-      <Table
+      <TableServer
         columns={columns}
-        rows={rows}
+        rows={rows || []}
         title="All Employees"
         getRowId={(row: any) => row._id}
         rowCountState={rowCountState}

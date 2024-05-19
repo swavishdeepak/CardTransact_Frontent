@@ -14,17 +14,16 @@ import { useFormik } from "formik";
 import { API_AXIOS, API_AXIOS_MULTIPART } from "../../http/interceptor";
 import Apis from "../../utils/apis";
 import CustomFileInput from "../../components/CustomFileInput";
-import { getEmployees } from "../../redux/store/reducers/employee";
-import { useAppDispatch } from "../../redux/hooks";
 import { toast } from "react-toastify";
+import { useEmployeeQuery } from "./getQuery/useAgentQuery";
 
 const AddEmployees = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
-  const type = searchParams.get("type");
   const id = searchParams.get("id");
+  const {refetch} = useEmployeeQuery(id)
+  const type = searchParams.get("type");
   const [bankStatements, setBankStatements] = useState([]);
   const [addressProof, setAddressProof] = useState([]);
 
@@ -32,21 +31,22 @@ const AddEmployees = () => {
     useFormik({
       initialValues: {
         name: "",
-        email: "deepak@gmail.com",
-        countryCode: "91",
-        phoneNumber: "7896543534",
+        email: "",
+        countryCode: "",
+        phoneNumber: "",
         address: {
-          address1: "noida",
-          address2: "noida2",
-          city: "delhi",
-          country: "india",
-          postalCode: "335001",
+          address1: "",
+          address2: "",
+          city: "",
+          county: "",
+          country: "",
+          postalCode: "",
         },
         bankInfo: {
-          bankName: "state Bank of india",
-          nameOnBankAcc: "deepak",
-          sortCode: "2324",
-          AccNumb: "756533456788",
+          bankName: "",
+          nameOnBankAcc: "",
+          sortCode: "",
+          AccNumb: "",
         },
       },
       onSubmit: async (values) => {
@@ -82,7 +82,7 @@ const AddEmployees = () => {
           }
 
           navigate("/viewEmployees");
-          dispatch(getEmployees());
+          refetch()
         } catch (err) {
           console.log(err);
           toast.error(err.response.data);
@@ -101,6 +101,7 @@ const AddEmployees = () => {
       setFieldValue("address1", data?.data?.address?.address1);
       setFieldValue("address2", data?.data?.address?.address2);
       setFieldValue("city", data?.data?.address?.city);
+      setFieldValue("county", data?.data?.address?.county);
       setFieldValue("coutry", data?.data?.address?.coutry);
       setFieldValue("postalCode", data?.data?.address?.postalCode);
       setFieldValue("bankName", data?.data?.bankInfo?.bankName);
@@ -207,6 +208,15 @@ const AddEmployees = () => {
             </Grid>
             <Grid item xs={12} md={4.5}>
               <CustomTextInput
+                label={"County"}
+                placeholder="Enter Your City"
+                name="address.county"
+                value={values.address.county}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} md={4.5}>
+              <CustomTextInput
                 label={"Country"}
                 placeholder="Enter Your Country"
                 name="address.country"
@@ -223,7 +233,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={8} md={8}>
+            <Grid item xs={12} sm={8} md={9}>
               <CustomFileInput
                 label={"Address Proof"}
                 file="addressProof"
@@ -272,7 +282,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={7} md={7}>
+            <Grid item xs={12} sm={7} md={9}>
               <CustomFileInput
                 label={"Bank Statements"}
                 file="bankStatements"
@@ -290,6 +300,9 @@ const AddEmployees = () => {
           style={{
             marginTop: 3,
             width: "25%",
+            "@media(max-width: 600px)":{
+               width: "100%"
+            }
           }}
         >
           {id ? "Save" : "Add"}

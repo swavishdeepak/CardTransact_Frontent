@@ -28,11 +28,11 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "end",
-        marginTop: "1rem",
+        marginTop: "0.3rem",
       }}
     >
       <Box>
-        <Box>
+        
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <Typography
               sx={{
@@ -52,7 +52,7 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
                {userTypes[verifiedUser.data.role as keyof typeof userTypes]}
             </Typography>
           </Box>
-        </Box>
+        
         <Typography
           sx={{
             color: "#589E58",

@@ -16,3 +16,26 @@ export const getAgent = async (id) => {
     console.log("agentdetails", err);
   }
 };
+
+
+{/* For Employee */}
+export const confirmEmpUpdate = function ({ status, id }) {
+  return API_AXIOS.post(Apis.editEmpReqApprovedRejectById + "/" + id, {
+    status,
+  });
+};
+
+export const getEmployee = async (id) => {
+  try {
+    const { data } = await API_AXIOS.get(`${Apis.getEmpDetailsById}/${id}`);
+    console.log('data',data);
+    return data?.data;
+  } catch (err) {
+    console.log("Employeedetails", err);
+  }
+};
+
+
+
+
+

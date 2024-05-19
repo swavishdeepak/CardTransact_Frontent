@@ -13,7 +13,9 @@ const Apis = {
     editAgentReqApproveRejectById: baseURL + '/editAgentReqApproveRejectById',
      getEmpDetailsById: `${baseURL}/emp/getEmpById`,
     deleteEmpReq: `${baseURL}/emp/deleteEmpRequestById`,
-    deleteEmpById: `${baseURL}/emp/deleteEmpById`
+    deleteEmpById: `${baseURL}/emp/deleteEmpById`,
+    editEmpReqApprovedRejectById: baseURL + '/emp/editEmpReqApproveRejectById'
+
 }
 
 export default Apis 

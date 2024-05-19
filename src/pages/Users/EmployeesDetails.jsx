@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Box } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
@@ -11,24 +11,28 @@ import DetailsHeader from "../../components/MyCustom/DetailsHeader";
 import { Colors } from "../../utils/Colors";
 import CustomTextInput from "../../components/CustomInput";
 import { LoadButton } from "../../components/LoadButton";
-import { Label } from "recharts";
 import fileIcons from "../../assets/fileIcon.svg";
 import { useNavigate, useParams } from "react-router-dom";
-import { API_AXIOS } from "../../http/interceptor";
-import Apis from "../../utils/apis";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import EmpDelete from "../../components/User/EmpDelete";
 import EmpDeleteReq from "../../components/User/EmpDeleteReq";
 import { useAppSelector } from "../../redux/hooks";
+import { useEmployeeQuery } from "./getQuery/useAgentQuery";
+import EmpDetails from "../../components/User/EmpDetails";
+import ConfirmEmpUpdate from "../../components/User/ConfirmEmpUpdate";
 let linkColor = Colors.LinkColor || "#000";
+
 
 const EmployeesDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
-  const [empDetails, setEmpDetails] = useState();
+  const  { data }   = useEmployeeQuery(id)
   const [openDelete, setOpenDelete] = useState(false);
   const [openDeleteReq, setOpenDeleteReq] = useState(false);
+  let empUpdateData = JSON.parse(data?.updatingData || "{}")
+
+  
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -41,24 +45,20 @@ const EmployeesDetails = () => {
     navigate(`/addEmployee?type=employees&id=${id}`);
   };
 
-  const getEmpDetails = async () => {
-    try {
-      const { data } = await API_AXIOS.get(`${Apis.getEmpDetailsById}/${id}`);
-      setEmpDetails(data?.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  console.log("data", data)
 
-  useEffect(() => {
-    getEmpDetails();
-  }, [id]);
-
-  
-
+ 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
+      {Object.keys(empUpdateData)?.length > 0 && (
+        <CustomBox>
+          <CommonHeader header={"Updating Employee Details"}>
+            <ConfirmEmpUpdate id={id} />
+          </CommonHeader>
+          <EmpDetails employee={empUpdateData} />
+        </CustomBox>
+      )}
       <CustomBox>
         <CommonHeader header={"EMPLOYEE DETAILS"}>
           <Box sx={{ display: "flex", gap: 1 }}>
@@ -96,7 +96,7 @@ const EmployeesDetails = () => {
             />
           </Box>
         </CommonHeader>
-        <Grid
+        {/* <Grid
           container
           rowSpacing={2}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
@@ -109,19 +109,19 @@ const EmployeesDetails = () => {
             <DetailsSubTitle title={"Name"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.name || "NA"} />
+            <DetailsSubTitleName name={ "NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Mobile Number"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.phoneNumber || "NA"} />
+            <DetailsSubTitleName name={"NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Email Address"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.email || "NA"} />
+            <DetailsSubTitleName name={ "NA"} />
           </Grid>
         </Grid>
         <Grid
@@ -137,33 +137,33 @@ const EmployeesDetails = () => {
             <DetailsSubTitle title={"House/Flat Address"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.address?.address1 || "NA"} />
+            <DetailsSubTitleName name={"NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"City"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.address?.city || "NA"} />
+            <DetailsSubTitleName name={"NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"County"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.address?.country || "NA"} />
+            <DetailsSubTitleName name={"NA"} />
           </Grid>
 
           <Grid item xs={2}>
             <DetailsSubTitle title={"Country"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.address?.country || "NA"} />
+            <DetailsSubTitleName name={ "NA"} />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Post Code"} />
           </Grid>
           <Grid item xs={10}>
             <DetailsSubTitleName
-              name={empDetails?.address?.postalCode || "NA"}
+              name={"NA"}
             />
           </Grid>
         </Grid>
@@ -181,7 +181,7 @@ const EmployeesDetails = () => {
           </Grid>
           <Grid item xs={10}>
             <DetailsSubTitleName
-              name={empDetails?.bankInfo?.bankName || "NA"}
+              name={"NA"}
             />
           </Grid>
           <Grid item xs={2}>
@@ -189,7 +189,7 @@ const EmployeesDetails = () => {
           </Grid>
           <Grid item xs={10}>
             <DetailsSubTitleName
-              name={empDetails?.bankInfo?.nameOnBankAcc || "NA"}
+              name={ "NA"}
             />
           </Grid>
 
@@ -198,14 +198,14 @@ const EmployeesDetails = () => {
           </Grid>
           <Grid item xs={10}>
             <DetailsSubTitleName
-              name={empDetails?.bankInfo?.sortCode || "NA"}
+              name={"NA"}
             />
           </Grid>
           <Grid item xs={2}>
             <DetailsSubTitle title={"Account Number"} />
           </Grid>
           <Grid item xs={10}>
-            <DetailsSubTitleName name={empDetails?.bankInfo?.AccNumb || "NA"} />
+            <DetailsSubTitleName name={ "NA"} />
           </Grid>
         </Grid>
         <Grid
@@ -251,7 +251,36 @@ const EmployeesDetails = () => {
         >
           Save Remark
         </LoadButton>
-        <Grid></Grid>
+        <Grid></Grid> */}
+         <EmpDetails employee={data}/> 
+         <Grid
+          container
+          rowSpacing={2}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          mt={3}
+        >
+         
+          <Grid item xs={12} mt={2}>
+            <CustomTextInput
+              label="Add Special Remarks"
+              rows={4}
+              multiline={true}
+              placeholder="Type Here..."
+            />
+          </Grid>
+        </Grid>
+         <LoadButton
+          type="submit"
+          style={{
+            marginTop: 3,
+            width: "20%",
+            "@media(max-width: 600px)":{
+               width: "100%"
+            }
+          }}
+        >
+          Save Remark
+        </LoadButton>
       </CustomBox>
       <ConfirmDialog
         open={openDelete}
