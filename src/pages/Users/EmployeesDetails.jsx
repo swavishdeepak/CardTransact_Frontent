@@ -72,7 +72,7 @@ const EmployeesDetails = () => {
             {data?.status !== "new" ? (
               <>
                 {verifiedUser?.data?.role !== "sup_admin" &&
-                  verifiedUser?.data?.isDeleteReq === true && (
+                  !verifiedUser?.data?.isDeleteReq  && (
                     <CustomButton
                       label={"Delete Request"}
                       hoverColor={linkColor}

@@ -15,6 +15,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Label } from "recharts";
 import { useGetAppDetailById } from "./getQuery/getQuery";
 import { useAppSelector } from "../../redux/hooks";
+import { statusObj } from "../../utils/menuItems/MenuItems";
 
 const customBoxStyle = {
   border: "1px solid #77D177",
@@ -30,13 +31,16 @@ const headerStyle = {
 const ApplicationDetails = () => {
   const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
   const isAgent = verifiedUser?.data?.role === 'agent';
+  const { id } = useParams()
   const navigate = useNavigate();
-  const { state, pathname } = useLocation();
-  const { data: appDetail } = useGetAppDetailById(state?._id)
+  //const { state, pathname } = useLocation();
+  //const { data: appDetail } = useGetAppDetailById(state?._id)
+  const { data: appDetail} = useGetAppDetailById(id)
+  
   const [openApprove, setOpenApprove] = useState(false);
   const [openReview, setOpenReview] = useState(false);
 
-  console.log('verifiedUser@ ', verifiedUser?.data?.role);
+  //console.log('verifiedUser@ ', verifiedUser?.data?.role);
 
   const handleOpenApprove = () => {
     setOpenApprove(true);
@@ -63,6 +67,8 @@ const ApplicationDetails = () => {
     navigate("/addApplication", { state: appDetail })
   }
 
+  console.log("appDetail",appDetail)
+
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -77,7 +83,7 @@ const ApplicationDetails = () => {
                 color: "#fff",
               }}
             />
-            <CustomButton
+           {verifiedUser?.data?.role !== "admin" && <CustomButton
               label={"Edit"}
               style={{
                 backgroundColor: "#fff",
@@ -85,7 +91,7 @@ const ApplicationDetails = () => {
                 border: `1px solid ${Colors.editColor}`,
               }}
               onClick={navToUpdateApp}
-            />
+            />}
           </Box>
         </CommonHeader>
         <CustomBox style={customBoxStyle}>
@@ -128,7 +134,7 @@ const ApplicationDetails = () => {
               <DetailsSubTitle title={"Status"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={appDetail?.status ?? '--'} />
+              <DetailsSubTitleName name={statusObj[appDetail?.status ?? '--']} />
             </Grid>
 
             <Grid item xs={3}>

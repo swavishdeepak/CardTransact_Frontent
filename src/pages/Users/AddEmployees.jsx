@@ -28,6 +28,9 @@ const AddEmployees = () => {
   const [bankStatements, setBankStatements] = useState([]);
   const [addressProof, setAddressProof] = useState([]);
 
+
+
+
   const { values, setFieldValue, handleChange, handleBlur, handleSubmit } =
     useFormik({
       initialValues: {
@@ -95,20 +98,21 @@ const AddEmployees = () => {
   const getEmployee = async () => {
     try {
       const { data } = await API_AXIOS.get(`${Apis.getEmpDetailsById}/${id}`);
+      console.log("eidtData", data?.data?.bankInfo)
       setFieldValue("name", data?.data?.name);
       setFieldValue("email", data?.data?.email);
       setFieldValue("countryCode", data?.data?.countryCode);
       setFieldValue("phoneNumber", data?.data?.phoneNumber);
-      setFieldValue("address1", data?.data?.address?.address1);
-      setFieldValue("address2", data?.data?.address?.address2);
-      setFieldValue("city", data?.data?.address?.city);
-      setFieldValue("county", data?.data?.address?.county);
-      setFieldValue("coutry", data?.data?.address?.coutry);
-      setFieldValue("postalCode", data?.data?.address?.postalCode);
-      setFieldValue("bankName", data?.data?.bankInfo?.bankName);
-      setFieldValue("nameOnBankAcc", data?.data?.bankInfo?.nameOnBankAcc);
-      setFieldValue("sortCode", data?.data?.bankInfo?.sortCode);
-      setFieldValue("AccNumb", data?.data?.bankInfo?.AccNumb);
+      setFieldValue("address.address1", data?.data?.address?.address1);
+      setFieldValue("address.address2", data?.data?.address?.address2);
+      setFieldValue("address.city", data?.data?.address?.city);
+      setFieldValue("address.county", data?.data?.address?.county);
+      setFieldValue("address.coutry", data?.data?.address?.coutry);
+      setFieldValue("address.postalCode", data?.data?.address?.postalCode);
+      setFieldValue("bankInfo.bankName", data?.data?.bankInfo?.bankName);
+      setFieldValue("bankInfo.nameOnBankAcc", data?.data?.bankInfo?.nameOnBankAcc);
+      setFieldValue("bankInfo.sortCode", data?.data?.bankInfo?.sortCode);
+      setFieldValue("bankInfo.AccNumb", data?.data?.bankInfo?.AccNumb);
     } catch (err) {
       console.log(err);
     }

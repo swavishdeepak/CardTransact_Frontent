@@ -133,7 +133,7 @@ const SelectAquirer: React.FC<SelectAquirerProps> = ({
             }
             style={{
               width: "17%",
-              marginTop: "2rem",
+              marginTop: "2.5rem",
               backgroundColor:
                 true ? Colors.editColor : Colors.successColor,
               color: "#fff",

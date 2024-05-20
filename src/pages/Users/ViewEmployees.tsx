@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Menu, MenuItem} from "@mui/material";
+import { Box, Menu, MenuItem, Typography} from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import MoreVert from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 import { API_AXIOS } from "../../http/interceptor";
 import Apis from "../../utils/apis";
 import TableServer from "../../components/TableServer";
+import { statusObj, statusObjColor } from "../../utils/menuItems/MenuItems";
 
 interface Column {
   field: string;
@@ -47,7 +48,7 @@ const ViewEmployees: React.FC = () => {
     {
       field: "name",
       headerName: "User Name",
-      minWidth: 150,
+      minWidth: 200,
       flex: 1,
     },
     // {
@@ -59,7 +60,7 @@ const ViewEmployees: React.FC = () => {
     {
       field: "email",
       headerName: "Email",
-      minWidth: 200,
+      minWidth: 250,
       flex: 1,
     },
     {
@@ -73,17 +74,28 @@ const ViewEmployees: React.FC = () => {
       minWidth: 200,
       flex: 1,
     },
+    // {
+    //   field: "addedBy",
+    //   headerName: "Added By",
+    //   minWidth: 200,
+    //   flex: 1,
+    // },
     {
-      field: "addedBy",
-      headerName: "Added By",
-      minWidth: 200,
+      field: "status",
+      headerName: "Status",
+      renderCell: (params) => (
+        <Typography sx={{ color: statusObjColor[params.row.status] }}>
+          {statusObj[params.row.status]}
+        </Typography>
+      ),
+      minWidth: 100,
       flex: 1,
     },
     {
       field: "action",
       headerName: "Action",
       renderCell: (params: any) => <More {...params} />,
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
   ];

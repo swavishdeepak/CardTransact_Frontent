@@ -38,6 +38,10 @@ export const agentStatusObj = {
   rejected: "Rejected",
 }
 
+export const restrcitEdit = ["draft", "review"]
+    
+
+
 
 
 export const userStatusColorObj = {
@@ -51,6 +55,25 @@ export const empStatusObj = {
   approved: "Approved",
   rejected: "Rejected",
 }
+
+export const statusObj = {
+  new: "New",
+  draft: "Draft",
+  review: "Review",
+  approved: "Approved",
+  rejected: "Rejected",
+  forwarded: "Forwarded"
+}
+
+export const statusObjColor = {
+  approved: '#77D177',
+  rejected: '#C10404',
+  new: '#2F2F2E',
+  review: "#03588D",
+  forwarded: "#C4C737"
+}
+
+
 
 
 

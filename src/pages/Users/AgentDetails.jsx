@@ -63,7 +63,6 @@ const AgentDetails = () => {
           >
             <ConfirmUpdate id={id} />
           </CommonHeader>
-
           <UserDetails user={updatingData} tierObj={tierObj} />
         </CustomBox>
       )}
