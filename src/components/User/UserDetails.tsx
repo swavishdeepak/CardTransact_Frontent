@@ -1,9 +1,11 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import DetailsHeader from "../MyCustom/DetailsHeader";
 import DetailsSubTitle from "../MyCustom/DetailsSubTitle";
 import DetailsSubTitleName from "../MyCustom/DetailsSubTitleName";
 import { srManagersObj } from "../../utils/menuItems/MenuItems";
+import { CustomBox } from "../MyCustom/CustomBox";
+import { CommonHeader } from "../CommonHeader";
 
 const UserDetails = ({ user, tierObj = {} }: { user?: any; tierObj?: any }) => {
   return (
@@ -14,6 +16,23 @@ const UserDetails = ({ user, tierObj = {} }: { user?: any; tierObj?: any }) => {
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         mt={3}
       >
+        {user?.isDeleteReq && (
+          <Grid item xs={12}>
+            <CustomBox>
+              <Grid container rowSpacing={1}>
+                <Grid item xs={12}>
+                  <CommonHeader header="Remarks" />
+                </Grid>
+                <Grid item xs={2}>
+                  <DetailsSubTitle title={"Delete Remarks"} />
+                </Grid>
+                <Grid item xs={10}>
+                  <DetailsSubTitleName name={user?.deleteRequestRemark} />
+                </Grid>
+              </Grid>
+            </CustomBox>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <DetailsHeader heading={"Organisation Details"} />
         </Grid>

@@ -15,7 +15,11 @@ import UserDetails from "../../components/User/UserDetails";
 import { API_AXIOS } from "../../http/interceptor";
 import Apis from "../../utils/apis";
 import ConfirmUpdate from "../../components/User/ConfirmUpdate";
-import { confirmUpdate } from "./apiFunc/userApiFunc";
+import {
+  confirmUpdate,
+  deleteAgentById,
+  deleteAgentRequestById,
+} from "./apiFunc/userApiFunc";
 import { useAgentQuery } from "./getQuery/useAgentQuery";
 import { useTierQuery } from "../Tier/getQuery/useTierQuery";
 import {
@@ -23,14 +27,20 @@ import {
   userStatusColorObj,
 } from "../../utils/menuItems/MenuItems";
 import ApprvRejtAgent from "../../components/User/ApprvRejtAgent";
+import AgentDeleteReq from "../../components/User/AgentDeleteReq";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AgentDetails = () => {
   const navigate = useNavigate();
   let { id } = useParams();
   const [openDelete, setOpenDelete] = useState(false);
+  const [openDeleteReq, setOpenDeleteReq] = useState(false);
   const { data: tier } = useTierQuery();
-  const { data, refetch } = useAgentQuery(id);
+  const { data, refetch, remove } = useAgentQuery(id);
   let updatingData = JSON.parse(data?.updatingData || "{}");
+  const { verifiedUser } = useSelector((state) => state.verifiedUser);
+  const auth = verifiedUser?.data || {};
 
   const handleDeleteOpen = () => {
     setOpenDelete(true);
@@ -50,6 +60,18 @@ const AgentDetails = () => {
       return acc;
     }, {});
   }, [tier]);
+
+  const handleDelete = async () => {
+    try {
+      const { data } = await deleteAgentById(id);
+      remove();
+      toast.success(data?.message)
+      navigate("/viewAgents");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.reponse?.data?.message);
+    }
+  };
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -75,15 +97,28 @@ const AgentDetails = () => {
         >
           {data?.status !== "new" ? (
             <Box sx={{ display: "flex", gap: 1 }}>
-              <CustomButton
-                onClick={handleDeleteOpen}
-                label={"Delete"}
-                hoverColor={`${Colors.LinkColor}`}
-                style={{
-                  backgroundColor: `${Colors.LinkColor}`,
-                  color: "#fff",
-                }}
-              />
+              {auth?.role === "sup_admin" ? (
+                <CustomButton
+                  onClick={handleDeleteOpen}
+                  label={"Delete"}
+                  hoverColor={`${Colors.LinkColor}`}
+                  style={{
+                    backgroundColor: `${Colors.LinkColor}`,
+                    color: "#fff",
+                  }}
+                />
+              ) : !data?.isDeleteReq ? (
+                <CustomButton
+                  onClick={() => setOpenDeleteReq((state) => !state)}
+                  label={"Delete Request"}
+                  hoverColor={`${Colors.LinkColor}`}
+                  style={{
+                    backgroundColor: `${Colors.LinkColor}`,
+                    color: "#fff",
+                  }}
+                />
+              ) : null}
+
               <CustomButton
                 label={"Edit"}
                 style={{
@@ -105,7 +140,7 @@ const AgentDetails = () => {
       <ConfirmDialog
         open={openDelete}
         handleClose={() => setOpenDelete(false)}
-        title={"Conformation"}
+        title={"Confirmation"}
         desc="Are You Sure want You Want to Delete This User"
       >
         <Box
@@ -128,7 +163,7 @@ const AgentDetails = () => {
           />
           <CustomButton
             label="Delete"
-            onClick={handleDeleteClose}
+            onClick={handleDelete}
             hoverColor="#C10404"
             style={{
               backgroundColor: "#C10404",
@@ -137,6 +172,18 @@ const AgentDetails = () => {
             }}
           />
         </Box>
+      </ConfirmDialog>
+      <ConfirmDialog
+        open={openDeleteReq}
+        handleClose={() => setOpenDeleteReq((state) => !state)}
+        title={"Confirmation"}
+        desc="Are You Sure want you want to submit delete request"
+      >
+        <AgentDeleteReq
+          handleClose={() => setOpenDeleteReq((state) => !state)}
+          id={id}
+          refetch={refetch}
+        />
       </ConfirmDialog>
     </Box>
   );
