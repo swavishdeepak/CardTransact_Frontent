@@ -40,9 +40,9 @@ export const CommonHeader: React.FC<CommonHeaderProps> = ({
           </Typography>
           <Divider sx={{ border: "0.5px solid #77D177" }} />
         </Box>
-        <Typography sx={{ color: statusColor ?? "black", fontWeight: "bold" }}>
+        {status && <Typography sx={{ color: statusColor ?? "black", fontWeight: "bold" }}>
           ({status})
-        </Typography>
+        </Typography>}
         {/* {status && <Typography>{status}</Typography>} */}
       </Box>
       {children}

@@ -16,7 +16,11 @@ import { useFormik } from "formik";
 import { API_AXIOS, API_AXIOS_MULTIPART } from "../../http/interceptor";
 import Apis from "../../utils/apis";
 import { getAgentDetails } from "../../hooks/agent/getAgentDetails";
-import { formatChangedValues } from "../../utils/commonMethods";
+import {
+  compareObjects,
+  formatChangedValues,
+  getFilteredObject,
+} from "../../utils/commonMethods";
 import { useAgentQuery } from "./getQuery/useAgentQuery";
 import { useTierQuery } from "../Tier/getQuery/useTierQuery";
 import CustomRadio from "../../components/CustomRadio";
@@ -63,40 +67,43 @@ const AddAgents = () => {
 
         try {
           if (id) {
-            const changedValues = {};
+            const changedValues = getFilteredObject(user, values);
+            // console.log(changedValues)
+            // const changedValues = {};
 
-            // Recursive function to traverse nested objects
-            function compareObjects(initial, current, path = "") {
-              for (const key in initial) {
-                if (
-                  initial.hasOwnProperty(key) &&
-                  current.hasOwnProperty(key)
-                ) {
-                  const newPath = path ? `${path}.${key}` : key;
-                  if (
-                    typeof initial[key] === "object" &&
-                    initial[key] !== null
-                  ) {
-                    compareObjects(initial[key], current[key], newPath);
-                  } else {
-                    if (initial[key] !== current[key]) {
-                      changedValues[newPath] = current[key];
-                    }
-                  }
-                }
-              }
-            }
+            // // Recursive function to traverse nested objects
+            // function compareObjects(initial, current, path = "") {
+            //   for (const key in initial) {
+            //     if (
+            //       initial.hasOwnProperty(key) &&
+            //       current.hasOwnProperty(key)
+            //     ) {
+            //       const newPath = path ? `${path}.${key}` : key;
+            //       if (
+            //         typeof initial[key] === "object" &&
+            //         initial[key] !== null
+            //       ) {
+            //         compareObjects(initial[key], current[key], newPath);
+            //       } else {
+            //         if (initial[key] !== current[key]) {
+            //           changedValues[newPath] = current[key];
+            //         }
+            //       }
+            //     }
+            //   }
+            // }
 
-            compareObjects(user, values);
-            const formattedValues = formatChangedValues(changedValues);
+            // compareObjects(user, values);
+            // const formattedValues = formatChangedValues(changedValues);
 
             const formData = new FormData();
 
-            formData.append("data", JSON.stringify(formattedValues));
+            formData.append("data", JSON.stringify(changedValues));
             const { data } = await API_AXIOS_MULTIPART.post(
               `${Apis.editRequestAgentById}/${id}`,
               formData
             );
+            toast.success(data?.message)
           } else {
             const formData = new FormData();
 
@@ -109,7 +116,7 @@ const AddAgents = () => {
           refetch();
           navigate("/viewAgents");
         } catch (err) {
-          toast.error(err.response?.data?.message)
+          toast.error(err.response?.data?.message);
           console.log(err);
         }
         setLoading(false);
@@ -146,7 +153,6 @@ const AddAgents = () => {
 
   // const [selectedReporting, setSelectedReporting] = useState("");
 
-  
   // const handleChangeReporting = (event) => {
   //   setSelectedReporting(event.target.value);
   // };

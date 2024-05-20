@@ -14,6 +14,8 @@ const Apis = {
   addAgentReqApproveRejectById: `${baseURL}/addAgentReqApproveRejectById`,
   editRequestAgentById: baseURL + "/editRequestAgentById",
   editAgentReqApproveRejectById: baseURL + "/editAgentReqApproveRejectById",
+  deleteAgentById: `${baseURL}/deleteAgentById`,
+  deleteAgentRequestById: `${baseURL}/deleteAgentRequestById` ,
   getEmpDetailsById: `${baseURL}/emp/getEmpById`,
   deleteEmpReq: `${baseURL}/emp/deleteEmpRequestById`,
   deleteEmpById: `${baseURL}/emp/deleteEmpById`,
