@@ -29,7 +29,7 @@ const EmpDelete: React.FC<EmpDeleteProps> = ({ setOpenDelete,empId }) => {
       );
       toast.success(data?.message);
       handleDelClose()
-      navigate("/viewEmployees")
+      navigate("/viewEmployee")
     } catch (err: any) {
       toast.error(err);
     }

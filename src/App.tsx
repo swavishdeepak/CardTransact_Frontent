@@ -123,7 +123,7 @@ function App() {
           element: <AddEmployees />,
         },
         {
-          path: "/viewEmployees",
+          path: "/viewEmployee",
           element: <ViewEmployees />,
         },
         {

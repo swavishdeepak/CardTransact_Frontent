@@ -25,6 +25,7 @@ import {
   empStatusColorObj,
 } from "../../utils/menuItems/MenuItems";
 import ApprvRejtEmp from "../../components/User/ApprvRejtEmp";
+import EmpRemarkUpdateDetails from "../../components/User/EmpRemarkUpdateDetails";
 let linkColor = Colors.LinkColor || "#000";
 
 const EmployeesDetails = () => {
@@ -44,8 +45,10 @@ const EmployeesDetails = () => {
   };
 
   const handleEdit = () => {
-    navigate(`/addEmployee?type=employees&id=${id}`);
+    navigate(`/addEmployee?id=${id}`);
   };
+
+  console.log("empUpdateData",empUpdateData)
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -110,33 +113,7 @@ const EmployeesDetails = () => {
           </Box>
         </CommonHeader>
         <EmpDetails employee={data} />
-        <Grid
-          container
-          rowSpacing={2}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          mt={3}
-        >
-          <Grid item xs={12} mt={2}>
-            <CustomTextInput
-              label="Add Special Remarks"
-              rows={4}
-              multiline={true}
-              placeholder="Type Here..."
-            />
-          </Grid>
-        </Grid>
-        <LoadButton
-          type="submit"
-          style={{
-            marginTop: 3,
-            width: "20%",
-            "@media(max-width: 600px)": {
-              width: "100%",
-            },
-          }}
-        >
-          Save Remark
-        </LoadButton>
+        <EmpRemarkUpdateDetails/>
       </CustomBox>
       <ConfirmDialog
         open={openDelete}

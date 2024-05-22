@@ -6,14 +6,11 @@ import { Header } from "../components/Dashboard/Header";
 import { useAppSelector } from "../redux/hooks";
 import { useNavigate } from "react-router-dom";
 
-
 export const MainLayout = () => {
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
-  const {verifiedUser} = useAppSelector((state) => state.verifiedUser);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
 
-
-  console.log('verified',verifiedUser)
   useEffect(() => {
     if (!verifiedUser) {
       sessionStorage.setItem("requestUrl", pathname);
@@ -30,19 +27,36 @@ export const MainLayout = () => {
   }
 
   return (
-    <Box
-      component="main"
-      sx={{
-       flexGrow: 1,
-        p: "3rem 1.5rem",
-        display: "flex",
-        "@media(max-width: 600px)": {
-          p: "2.5rem  0.8rem",
-        },
-      }}
-    >
+    // <Box
+    //   component="main"
+    //   sx={{
+    //     flexGrow: 1,
+    //     p: "3rem 1.5rem",
+    //     display: "flex",
+    //     "@media(max-width: 600px)": {
+    //       p: "2.5rem  0.8rem",
+    //     },
+    //   }}
+    // >
+    //   <SideBar />
+    //   <Outlet />
+    // </Box>
+    <Box sx={{ display: "flex", width: "100%" }}>
       <SideBar />
-      <Outlet />
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          width: "75%",
+          p: "3rem 1rem",
+          display: "flex",
+          "@media(max-width: 600px)": {
+            p: "2.5rem  0.8rem",
+          },
+        }}
+      >
+        <Outlet />
+      </Box>
     </Box>
   );
 };

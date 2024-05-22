@@ -31,18 +31,15 @@ export const userVerify = createAsyncThunk<UserToken, OtpParams, { rejectValue: 
             },
           }
       );
-
       localStorage.setItem("token", data?.data?.token);
       localStorage.setItem("info", JSON.stringify(data));
       toast.success(data?.message);
       return data;
 
     } catch (error: any) {
-      toast.error(error?.message)
+      toast.error(error.response?.data?.message)
       if (axios.isAxiosError(error)) {
-        // toast.error(error)
-        console.log("errorhsfbasj", error)
-        return rejectWithValue(error.response?.data);
+        return rejectWithValue(error.response?.data?.message);
       } else {
         return rejectWithValue(error);
       }

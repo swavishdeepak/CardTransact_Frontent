@@ -10,7 +10,7 @@ interface authProps {
 
 const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
   return (
-    <Box sx={{ height: "100vh" }}>
+    <Box sx={{ height: "100vh"}}>
       <AuthBack />
       <Box
         sx={{
@@ -25,8 +25,10 @@ const AuthCustomBox: React.FC<authProps> = ({ header, children }) => {
               position: "absolute",
               //height: "450px",
               width: "400px",
-              top: 30,
-              left: "4rem",
+              marginTop: "8vh",
+             // width: "100vh",
+              //top: 45,
+              left: "7rem",
               zIndex: 1,
               border: "0.5px solid #77D177",
               boxShadow: "5.625px 6.5625px 9.375px 0px #00000052",

@@ -22,7 +22,7 @@ const ConfirmEmpUpdate = ({ id }) => {
       refetch();
       handleToggleOpen();
       toast.success(data?.message);
-      //navigate("/viewEmployees")
+      //navigate("/viewEmployee")
       
     } catch (err) {
       console.log(err);
@@ -57,20 +57,21 @@ const ConfirmEmpUpdate = ({ id }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            mt: 1,
+            mt: 2,
           }}
         >
           <LoadButton
             hoverColor="#048519"
-            style={{ background: "#048519" }}
+            style={{ background: "#048519", width: "40%" }}
             loading={confirmLoad}
             onClick={() => handleConfirmEmpUpdate("approved")}
+            
           >
             Approved
           </LoadButton>
           <LoadButton
             hoverColor="#C10404"
-            style={{ background: "#C10404" }}
+            style={{ background: "#C10404", width: "35%" }}
             onClick={() => handleConfirmEmpUpdate("rejected")}
             loading={rejectLoad}
           >

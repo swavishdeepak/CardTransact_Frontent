@@ -16,103 +16,113 @@ import Apis from "../../utils/apis";
 import CustomFileInput from "../../components/CustomFileInput";
 import { toast } from "react-toastify";
 import { useEmployeeQuery } from "./getQuery/useAgentQuery";
-
+import {
+  getFilteredObject,
+  
+} from "../../utils/commonMethods";
 
 const AddEmployees = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
-  const {refetch} = useEmployeeQuery(id)
+  const { refetch } = useEmployeeQuery(id);
+  const [employee, setEmployee] = useState({});
   const type = searchParams.get("type");
   const [bankStatements, setBankStatements] = useState([]);
   const [addressProof, setAddressProof] = useState([]);
 
-
-
-
-  const { values, setFieldValue, handleChange, handleBlur, handleSubmit } =
-    useFormik({
-      initialValues: {
-        name: "",
-        email: "",
-        countryCode: "",
-        phoneNumber: "",
-        address: {
-          address1: "",
-          address2: "",
-          city: "",
-          county: "",
-          country: "",
-          postalCode: "",
-        },
-        bankInfo: {
-          bankName: "",
-          nameOnBankAcc: "",
-          sortCode: "",
-          AccNumb: "",
-        },
+  const {
+    values,
+    setFieldValue,
+    handleChange,
+    setValues,
+    handleBlur,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      countryCode: "",
+      phoneNumber: "",
+      address: {
+        address1: "",
+        address2: "",
+        city: "",
+        county: "",
+        country: "",
+        postalCode: "",
       },
-      onSubmit: async (values) => {
-        const { ...rest } = values;
-        const formData = new FormData();
-        formData.append("data", JSON.stringify(rest));
-        const addressProofArr = Object?.values(addressProof) || [];
-        const bankStatementsArr = Object?.values(bankStatements) || [];
+      bankInfo: {
+        bankName: "",
+        nameOnBankAcc: "",
+        sortCode: "",
+        AccNumb: "",
+      },
+    },
+    onSubmit: async (values) => {
+      setLoading(true);
 
-        addressProofArr?.forEach((proof) => {
-          formData.append("addressProof", proof);
-        });
+      const formData = new FormData();
+      const addressProofArr = Object?.values(addressProof) || [];
+      const bankStatementsArr = Object?.values(bankStatements) || [];
 
-        bankStatementsArr?.forEach((statement) => {
-          formData.append("bankStatements", statement);
-        });
-        try {
-          if (type === "employees" && id) {
-            setLoading(true);
-            const { data } = await API_AXIOS_MULTIPART.post(
-              `${Apis.empUpdateById}/${id}`,
-              formData
-            );
-            toast.success(data?.message);
-          } else {
-            setLoading(true);
-            const { data } = await API_AXIOS_MULTIPART.post(
-              `${Apis.AddEmployee}`,
-              formData
-            );
-            console.log("data", data?.message)
-            toast.success("Employee Add Successfully");
-          }
+      addressProofArr?.forEach((proof) => {
+        formData.append("addressProof", proof);
+      });
 
-          navigate("/viewEmployees");
-          refetch()
-        } catch (err) {
-          console.log(err);
-          toast.error(err.response.data);
+      bankStatementsArr?.forEach((statement) => {
+        formData.append("bankStatements", statement);
+      });
+      try {
+        if (id) {
+          const changedValues = getFilteredObject(employee, values);
+          // const formData = new FormData();
+          formData.append("data", JSON.stringify(changedValues));
+          const { data } = await API_AXIOS_MULTIPART.post(
+            `${Apis.empUpdateById}/${id}`,
+            formData
+          );
+          toast.success(data?.message);
+        } else {
+          formData.append("data", JSON.stringify(values));
+
+          const { data } = await API_AXIOS_MULTIPART.post(
+            `${Apis.AddEmployee}`,
+            formData
+          );
+          toast.success("Employee Add Successfully");
         }
-        setLoading(false);
-      },
-    });
+
+        navigate("/viewEmployee");
+        refetch();
+      } catch (err) {
+        console.log(err);
+        toast.error(err.response.data.toString());
+      }
+      setLoading(false);
+    },
+  });
 
   const getEmployee = async () => {
     try {
       const { data } = await API_AXIOS.get(`${Apis.getEmpDetailsById}/${id}`);
-      console.log("eidtData", data?.data?.bankInfo)
-      setFieldValue("name", data?.data?.name);
-      setFieldValue("email", data?.data?.email);
-      setFieldValue("countryCode", data?.data?.countryCode);
-      setFieldValue("phoneNumber", data?.data?.phoneNumber);
-      setFieldValue("address.address1", data?.data?.address?.address1);
-      setFieldValue("address.address2", data?.data?.address?.address2);
-      setFieldValue("address.city", data?.data?.address?.city);
-      setFieldValue("address.county", data?.data?.address?.county);
-      setFieldValue("address.coutry", data?.data?.address?.coutry);
-      setFieldValue("address.postalCode", data?.data?.address?.postalCode);
-      setFieldValue("bankInfo.bankName", data?.data?.bankInfo?.bankName);
-      setFieldValue("bankInfo.nameOnBankAcc", data?.data?.bankInfo?.nameOnBankAcc);
-      setFieldValue("bankInfo.sortCode", data?.data?.bankInfo?.sortCode);
-      setFieldValue("bankInfo.AccNumb", data?.data?.bankInfo?.AccNumb);
+      let updatingData = {
+        bankStatements: [data?.data?.bankStatements],
+        addressProof: [data?.data?.addressProofDoc],
+        name: data?.data?.name,
+        email: data?.data?.email,
+        countryCode: data?.data?.countryCode,
+        phoneNumber: data?.data?.phoneNumber,
+        countryCode: data?.data?.countryCode,
+        address: { ...data?.data?.address },
+        bankInfo: { ...data?.data?.bankInfo },
+      };
+      setEmployee(data?.data);
+      setValues((state) => ({
+        ...state,
+        ...updatingData,
+      }));
     } catch (err) {
       console.log(err);
     }
@@ -125,7 +135,7 @@ const AddEmployees = () => {
   }, [id]);
 
   const handleBack = () => {
-    navigate("/viewEmployees");
+    navigate("/viewEmployee");
   };
 
   return (
@@ -137,7 +147,7 @@ const AddEmployees = () => {
             <Typography
               sx={{ color: "#202020", fontWeight: "600", fontSize: "18px" }}
             >
-              {id ? "Edit User" : " Add Employees"}
+              {id ? "Edit Employee" : "Add Employee"}
             </Typography>
             <Divider sx={{ border: "1px solid #77D177" }} />
           </Box>
@@ -184,25 +194,25 @@ const AddEmployees = () => {
         </CustomAccordion>
         <CustomAccordion summary="ADDRESS INFORMATION">
           <Grid container rowSpacing={2} columnSpacing={2} mt={1}>
-            <Grid item xs={12} md={9}>
+            <Grid item xs={12} md={10}>
               <CustomTextInput
                 label={"House.no/Flat.no/Bulding Name"}
-                placeholder="Enter Your Email"
+                placeholder="Enter Your House.no/Flat.no/Bulding Name"
                 name="address.address1"
                 value={values.address.address1}
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={9}>
+            <Grid item xs={12} md={10}>
               <CustomTextInput
                 label={"Address Line 2"}
-                placeholder="Enter your Email"
+                placeholder="Enter your Address Line 2"
                 name="address.address2"
                 value={values.address.address2}
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={4.5}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"City"}
                 placeholder="Enter Your City"
@@ -211,7 +221,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={4.5}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"County"}
                 placeholder="Enter Your City"
@@ -220,7 +230,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={4.5}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Country"}
                 placeholder="Enter Your Country"
@@ -229,7 +239,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={4.5}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Postal Code"}
                 placeholder="Enter Your Postal Code"
@@ -238,7 +248,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={8} md={9}>
+            <Grid item xs={12} sm={8} md={10}>
               <CustomFileInput
                 label={"Address Proof"}
                 file="addressProof"
@@ -251,7 +261,7 @@ const AddEmployees = () => {
         </CustomAccordion>
         <CustomAccordion summary="BANK INFORMATION">
           <Grid container rowSpacing={2} columnSpacing={2} mt={1}>
-            <Grid item xs={12} md={9}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Bank Name"}
                 placeholder="Enter Your Bank"
@@ -260,7 +270,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={9}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Name on Bank Account"}
                 placeholder="Enter the Name on Bank Acount"
@@ -269,7 +279,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={4.5}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Sort Code"}
                 placeholder="Enter Your Sort Code"
@@ -278,7 +288,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} md={4.5}>
+            <Grid item xs={12} md={5}>
               <CustomTextInput
                 label={"Account Number"}
                 placeholder="Enter Your Account Number"
@@ -287,7 +297,7 @@ const AddEmployees = () => {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item xs={12} sm={7} md={9}>
+            <Grid item xs={12} sm={7} md={10}>
               <CustomFileInput
                 label={"Bank Statements"}
                 file="bankStatements"
@@ -305,9 +315,9 @@ const AddEmployees = () => {
           style={{
             marginTop: 3,
             width: "25%",
-            "@media(max-width: 600px)":{
-               width: "100%"
-            }
+            "@media(max-width: 600px)": {
+              width: "100%",
+            },
           }}
         >
           {id ? "Save" : "Add"}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box,  Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import { userTypes } from "../../utils/menuItems/MenuItems";
 import Breadcrumb from "../Breadcrumbs";
@@ -16,9 +16,9 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
   const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
   
 
-  const location = useLocation();
-  let path = location.pathname;
-  let formattedPath = path.charAt(1).toUpperCase() + path.slice(2);
+  // const location = useLocation();
+  // let path = location.pathname;
+  // let formattedPath = path.charAt(1).toUpperCase() + path.slice(2);
  
 
 
@@ -64,8 +64,8 @@ export const Header: React.FC<buttonProps> = ({ children }) => {
             },
           }}
         >
-           {/* <Breadcrumb/>  */}
-          {formattedPath}  
+            <Breadcrumb/>  
+          {/* {formattedPath}   */}
         </Typography>
       </Box>
       {children}

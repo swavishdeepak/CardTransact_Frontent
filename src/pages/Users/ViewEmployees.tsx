@@ -88,14 +88,14 @@ const ViewEmployees: React.FC = () => {
           {statusObj[params.row.status]}
         </Typography>
       ),
-      minWidth: 100,
+      minWidth: 200,
       flex: 1,
     },
     {
       field: "action",
       headerName: "Action",
       renderCell: (params: any) => <More {...params} />,
-      minWidth: 100,
+      minWidth: 50,
       flex: 1,
     },
   ];

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ConfirmDialog from "../ConfirmDialog";
 import { toast } from "react-toastify";
 import { employeeAppRejById } from "../../pages/Users/apiFunc/userApiFunc";
+import { LoadButton } from "../LoadButton";
 
 const option = {
   approved: "Approve",
@@ -28,7 +29,6 @@ const ApprvRejtEmp = ({ id, refetch }) => {
     setLoading(true);
     try {
       const { data } = await employeeAppRejById({ id, status });
-
       refetch();
       toast.success(data?.message);
       handleClose();
@@ -40,55 +40,66 @@ const ApprvRejtEmp = ({ id, refetch }) => {
   };
 
   return (
-    <div>
-      <Button
-        onClick={() => handleOpen("approved")}
-        color="success"
-        variant="contained"
-        size="small"
+    <Box>
+      <Box sx={{display: "flex",  gap: 2 }}>
+        <LoadButton
+          hoverColor="#048519"
+          style={{
+            background: "#048519",
+            
+          }}
+          onClick={() => handleOpen("approved")}
+        >
+          Approve
+        </LoadButton>
+        <LoadButton
+          hoverColor="#C10404"
+          style={{
+            background: "#C10404",
+            
+          }}
+          onClick={() => handleOpen("rejected")}
+        >
+          Reject
+        </LoadButton>
+      </Box>
+      <ConfirmDialog
+        handleClose={handleClose}
+        open={open}
+        title={`Are You sure you want to ${status ? option[status] : ""}`}
       >
-        Approve
-      </Button>
-      <Button
-        onClick={() => handleOpen("rejected")}
-        color="error"
-        variant="contained"
-        size="small"
-        sx={{ ml: 1 }}
-      >
-        Reject
-      </Button>
-      <ConfirmDialog handleClose={handleClose} open={open}>
-        <div>
-          <h3>Are You sure you want to {option[status]}</h3>
-        </div>
         <Box
           sx={{
             display: "flex",
+            marginTop: "1rem",
             alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <Button
+          <LoadButton
+            hoverColor="#048519"
+            style={{
+              background: "#048519",
+              width: "25%",
+            }}
             onClick={handleSubmit}
-            color="success"
-            variant="contained"
-            size="small"
-            disabled={loading}
+            loading={loading}
           >
             Yes
-          </Button>
-          <Button
+          </LoadButton>
+          <LoadButton
+            hoverColor="#C10404"
+            style={{
+              background: "#C10404",
+              width: "25%",
+            }}
             onClick={handleClose}
-            color="error"
-            variant="contained"
-            size="small"
           >
             No
-          </Button>
+          </LoadButton>
         </Box>
       </ConfirmDialog>
-    </div>
+    </Box>
   );
 };
 

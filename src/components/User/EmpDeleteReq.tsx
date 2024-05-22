@@ -33,7 +33,7 @@ const EmpDeleteReq: React.FC<EmpDeleteProps> = ({
       console.log("data", data);
       toast.success(data?.message);
       handleCloseRequest()
-      navigate("/viewEmployees")
+      navigate("/viewEmployee")
       
     } catch (err: any) {
       toast.error(err);

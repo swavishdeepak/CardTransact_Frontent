@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Box, Grid } from "@mui/material";
 import DetailsHeader from "../MyCustom/DetailsHeader";
 import DetailsSubTitle from "../MyCustom/DetailsSubTitle";
 import DetailsSubTitleName from "../MyCustom/DetailsSubTitleName";
+import ConfirmDialog from "../ConfirmDialog";
+import { Padding } from "@mui/icons-material";
 
 const EmpDetails = ({ employee }) => {
+  const [openImage, setOpenImage] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const handleReviewOpen = useCallback((url) => {
+    setUrl(url);
+    setOpenImage(true);
+  }, []);
+
+  const handleReviewClose = useCallback(() => {
+    setOpenImage(false);
+    setUrl("");
+  }, []);
+
+   
+    
   return (
     <Box>
       <Grid
@@ -32,8 +49,10 @@ const EmpDetails = ({ employee }) => {
               <DetailsSubTitle title={"Mobile Number"} />
             </Grid>
             <Grid item xs={10}>
-            <DetailsSubTitleName
-                name={`${employee?.countryCode || ""} ${employee?.phoneNumber || ""}`}
+              <DetailsSubTitleName
+                name={`${employee?.countryCode || ""} ${
+                  employee?.phoneNumber || ""
+                }`}
               />
             </Grid>
           </>
@@ -188,42 +207,70 @@ const EmpDetails = ({ employee }) => {
               <DetailsSubTitle title={"Address Proof"} />
             </Grid>
             <Grid item xs={10}>
-              {employee?.addressProofDoc?.map((item) => {
-                return (
-                  <DetailsSubTitleName name="">
-                    <img
-                      src={item}
-                      alt=""
-                      style={{ width: "2rem", height: "2rem" }}
-                    ></img>
-                  </DetailsSubTitleName>
-                );
-              })}
+              <DetailsSubTitleName>
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  {employee?.addressProofDoc?.map((url) => {
+                    return (
+                      <img
+                        src={url}
+                        alt=""
+                        style={{
+                          width: 50,
+                          height: 50,
+                          cursor: "pointer",
+                          borderRadius: "5px",
+                        }}
+                        onClick={() => handleReviewOpen(url)}
+                      ></img>
+                    );
+                  })}
+                </Box>
+              </DetailsSubTitleName>
             </Grid>
           </>
         )}
         {employee?.bankStatements?.length > 0 && (
           <>
-            {" "}
             <Grid item xs={2}>
               <DetailsSubTitle title={"Bank Statement"} />
             </Grid>
             <Grid item xs={10}>
-              {employee?.bankStatements?.map((item) => {
-                return (
-                  <DetailsSubTitleName name="">
-                    <img
-                      src={item}
-                      alt=""
-                      style={{ width: "2rem", height: "2rem" }}
-                    ></img>
-                  </DetailsSubTitleName>
-                );
-              })}
+              <DetailsSubTitleName>
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  {employee?.bankStatements?.map((url) => {
+                    return (
+                      <img
+                        src={url}
+                        alt=""
+                        style={{
+                          width: 50,
+                          height: 50,
+                          cursor: "pointer",
+                          borderRadius: "5px",
+                        }}
+                        onClick={()=> handleReviewOpen(url)}
+                      ></img>
+                    );
+                  })}
+                </Box>
+              </DetailsSubTitleName>
             </Grid>
           </>
         )}
       </Grid>
+      <ConfirmDialog open={openImage} handleClose={handleReviewClose} style={{padding: "0px 0px"}}>
+        <img
+          src={url}
+          alt="img"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "5px",
+          }}
+          loading="lazy"
+        />
+      </ConfirmDialog>
 
       <Grid></Grid>
     </Box>
