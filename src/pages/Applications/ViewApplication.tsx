@@ -37,12 +37,12 @@ interface Row {
 const ViewApplication: React.FC = () => {
   const [openDelete, setOpenDelete] = useState(false);
   const columns: Column[] = [
-    {
-      field: "id",
-      headerName: "Sr.No",
-      minWidth: 50,
-      flex: 1,
-    },
+    // {
+    //   field: "_id",
+    //   headerName: "Sr.No",
+    //   minWidth: 50,
+    //   flex: 1,
+    // },
     // {
     //   field: "app_Id",
     //   headerName: "App ID",
@@ -52,7 +52,7 @@ const ViewApplication: React.FC = () => {
     {
       field: "salesPerson",
       headerName: "SalesPerson",
-      minWidth: 100,
+      minWidth: 200,
       valueGetter: (params) => {
         const { salesPerson } = params.row;
         return `${salesPerson?.name || ""}`;
@@ -68,7 +68,7 @@ const ViewApplication: React.FC = () => {
     {
       field: "acquirer",
       headerName: "Acquirer",
-      minWidth: 100,
+      minWidth:200,
       valueGetter: (params) => {
         const { acquirer } = params.row;
         return `${acquirer?.name || ""}`;
@@ -82,7 +82,7 @@ const ViewApplication: React.FC = () => {
         const { merchantInfo } = params.row;
         return `${merchantInfo?.tradingName || ""}`;
       },
-      minWidth: 100,
+      minWidth: 200,
       flex: 1,
     },
     // {
@@ -105,14 +105,14 @@ const ViewApplication: React.FC = () => {
           {statusObj[params.row.status]}
         </Typography>
       ),
-      minWidth: 100,
+      minWidth: 200,
       flex: 1,
     },
     {
       field: "action",
       headerName: "Action",
       renderCell: (params: any) => <More {...params} navToEdit={navToEdit} />,
-      minWidth: 100,
+      minWidth: 50,
       flex: 1,
     },
   ];

@@ -15,7 +15,8 @@ import CustomButton from "../CustomButton";
 import { LoadButton } from "../LoadButton";
 import { addApplication } from "../../pages/Applications/apiFunc/appApiFunc";
 import { useQueryClient } from "react-query";
-
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const selectIDProof = [
   { value: "driving_license", label: "Driving License" },
@@ -33,11 +34,12 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
   disableStyles = false,
   appId,
   appDetail,
-  refetch
+  refetch,
 }) => {
   const [selecteIdProof, setSelecteIdProof] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const [isDisable, setIsDisable] = useState<any>({})
+  const [isDisable, setIsDisable] = useState<any>({});
+  const [fileInputs, setFileInputs] = useState<string[]>(["driving_license"]);
   const queryClient = useQueryClient();
   const {
     values,
@@ -45,50 +47,55 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
     handleBlur,
     setFieldValue,
     handleSubmit,
-    setValues
+    setValues,
   } = useFormik<any>({
     initialValues: {
-      name: '',
-      legalName: '',
-      tradingName: '',
-      countryCode: '+91',
-      phoneNumber: '',
-      email: '',
+      name: "",
+      legalName: "",
+      tradingName: "",
+      countryCode: "+91",
+      phoneNumber: "",
+      email: "",
       drivingLicense: [],
       passport: [],
-      nationalId: []
+      nationalId: [],
     },
     onSubmit: async (values) => {
       setIsLoading(true);
       try {
-        const { drivingLicense, passport, nationalId, ...merchantInfo } = values;
+        const { drivingLicense, passport, nationalId, ...merchantInfo } =
+          values;
 
         let formData = new FormData();
-        formData.append('data', JSON.stringify({ merchantInfo }));
-        !!nationalId && nationalId.length > 0 && nationalId.forEach((el) => {
-          formData.append('nationalId', el)
-        })
-        !!passport && passport.length > 0 && passport.forEach((el) => {
-          formData.append('passport', el)
-        })
-        !!drivingLicense && drivingLicense.length > 0 && drivingLicense.forEach((el) => {
-          formData.append('drivingLicense', el)
-        })
+        formData.append("data", JSON.stringify({ merchantInfo }));
+        !!nationalId &&
+          nationalId.length > 0 &&
+          nationalId.forEach((el) => {
+            formData.append("nationalId", el);
+          });
+        !!passport &&
+          passport.length > 0 &&
+          passport.forEach((el) => {
+            formData.append("passport", el);
+          });
+        !!drivingLicense &&
+          drivingLicense.length > 0 &&
+          drivingLicense.forEach((el) => {
+            formData.append("drivingLicense", el);
+          });
         let a = await addApplication({
           data: formData,
           id: appId,
-          step: '2'
-        })
+          step: "2",
+        });
 
-        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
-          let temp = { ...x, ...a.data }
-          return temp
-        })
-      }
-      catch (err) {
-        console.log('err', err);
-      }
-      finally {
+        await queryClient.setQueryData(["acquirer", appId], (x: any) => {
+          let temp = { ...x, ...a.data };
+          return temp;
+        });
+      } catch (err) {
+        console.log("err", err);
+      } finally {
         setIsLoading(false);
       }
     },
@@ -104,32 +111,62 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
         tradingName: merchantInfo?.tradingName,
         countryCode: merchantInfo?.countryCode,
         phoneNumber: merchantInfo?.phoneNumber,
-        email: merchantInfo?.email
+        email: merchantInfo?.email,
       });
 
-      let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
-      setIsDisable(tempEdit)
+      let tempEdit = JSON.parse(appDetail?.reviewFields || "{}");
+      setIsDisable(tempEdit);
     }
-  }, [!!appDetail?._id])
+  }, [!!appDetail?._id]);
 
   const fieldDisable = (key) => {
     if (appDetail?.reviewFields?.length > 1) {
       if (isDisable?.hasOwnProperty(key)) {
-        return !isDisable?.[key]
+        return !isDisable?.[key];
       } else {
-        return true
+        return true;
       }
     } else {
       return false;
     }
-  }
-  console.log('isDisable2', isDisable)
-  const onImageChange = (e, key: 'drivingLicense' | 'passport' | 'nationalId') => {
+  };
+  console.log("isDisable2", isDisable);
+
+  const onImageChange = (
+    e,
+    key: "drivingLicense" | "passport" | "nationalId"
+  ) => {
     let objImg = e.target.files;
-    console.log('e', e)
+    console.log("e", e);
     let temp = Object.values(objImg);
-    setFieldValue(key, temp)
-  }
+    setFieldValue(key, temp);
+  };
+
+  
+
+  // const addFileInput = (value:any) => {
+  //   if (!fileInputs.includes(value)) {
+  //     setFileInputs((fileInputs) => [...fileInputs, value]);
+  //   }
+  // };
+  const addFileInput = (value: any) => {
+    if (fileInputs.length < selectIDProof.length && !fileInputs.includes(value)) {
+      setFileInputs((fileInputs) => [...fileInputs, value]);
+    }
+  };
+  const removeFileInput = (value: any) => {
+    setFileInputs(fileInputs.filter((item) => item !== value));
+    setFieldValue(value, []);
+  };
+
+  const handleIdProofChange = (e: any) => {
+    const value = e.target.value;
+    setSelecteIdProof(value);
+    addFileInput(value);
+  };
+
+  
+
 
 
   return (
@@ -137,14 +174,14 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
       sx={
         !disableStyles
           ? {
-            p: 3,
-            marginTop: "2rem",
-            boxShadow: "2.8125px 2.8125px 8.4375px 0px #0000002E",
-            backgroundColor: "#FFFFFF",
-            bgcolor: "#FFFFFF",
-            borderRadius: "7.5px",
-            border: `0.5px solid ${Colors.LinkColor}`,
-          }
+              p: 3,
+              marginTop: "2rem",
+              boxShadow: "2.8125px 2.8125px 8.4375px 0px #0000002E",
+              backgroundColor: "#FFFFFF",
+              bgcolor: "#FFFFFF",
+              borderRadius: "7.5px",
+              border: `0.5px solid ${Colors.LinkColor}`,
+            }
           : undefined
       }
     >
@@ -167,7 +204,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.name}
             name="name"
-            disabled={fieldDisable('name')}
+            disabled={fieldDisable("name")}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -178,7 +215,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.legalName}
             name="legalName"
-            disabled={fieldDisable('legalName')}
+            disabled={fieldDisable("legalName")}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -189,7 +226,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.tradingName}
             name="tradingName"
-            disabled={fieldDisable('tradingName')}
+            disabled={fieldDisable("tradingName")}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -200,7 +237,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.phoneNumber}
             name="phoneNumber"
-            disabled={fieldDisable('phoneNumber')}
+            disabled={fieldDisable("phoneNumber")}
           />
         </Grid>
         <Grid item xs={12} md={5}>
@@ -211,11 +248,10 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onBlur={handleBlur}
             value={values.email}
             name="email"
-            disabled={fieldDisable('email')}
+            disabled={fieldDisable("email")}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
-
+        <Grid item xs={10} md={10}>
           <BasicSelect
             label="Select ID Proofs"
             placeholder="Select"
@@ -227,14 +263,59 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             }}
             name={"selectedValue2"}
             value={selecteIdProof}
-            handleChange={handleChange}
+            //handleChange={handleChange}
+            handleChange={handleIdProofChange}
             size="small"
             items={selectIDProof}
           />
           {/* <AddCircleOutlineIcon /> */}
-
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={2} md={2} mt={5}>
+          <ControlPointIcon
+            fontSize="large"
+            sx={{ cursor: "pointer", color: "#DCDCDC" }}
+            onClick={addFileInput}
+          />
+        </Grid>
+        {/* {fileInputs.map((input, index) => (
+          <>
+            <Grid item xs={12} md={8} key={index}>
+              <CustomFileInput
+                label={`Driving License ${index + 1}`}
+                onChange={(e) => onImageChange(e, "nationalId")}
+                disabled={fieldDisable("nationalId")}
+              />
+            </Grid>
+            <Grid item xs={2} md={2} mt={3}  alignItems="center">
+              <HighlightOffIcon
+                fontSize="large"
+                sx={{ cursor: "pointer" }}
+                onClick={() => removeFileInput(index)}
+              />
+            </Grid>
+          </>
+        ))} */}
+        
+         {fileInputs.map((input, index) => (
+          <React.Fragment key={index}>
+            <Grid item xs={10} md={10}>
+              <CustomFileInput
+               // label={`${input}`}
+               placeholder="Upload Document"
+                onChange={(e: any) => onImageChange(e, input as "drivingLicense" | "passport" | "nationalId")}
+                disabled={fieldDisable(input)}
+              />
+            </Grid>
+          {index !== 0 && <Grid item xs={2} md={2} >
+              <HighlightOffIcon
+                fontSize="large"
+                sx={{ cursor: "pointer", color: "#DCDCDC" }}
+                onClick={() => removeFileInput(input)}
+              />
+            </Grid>}
+          </React.Fragment>
+        ))}
+        {/* <Grid item xs={12} md={8}>
           <CustomFileInput
             label="Driving License"
             onChange={(e) => onImageChange(e, 'drivingLicense')}
@@ -254,27 +335,22 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             onChange={(e) => onImageChange(e, 'passport')}
             disabled={fieldDisable('passport')}
           />
-        </Grid>
+        </Grid> */}
         <Grid item xs={12} md={8}>
           <LoadButton
             onClick={handleSubmit}
-            hoverColor={
-              true ? Colors.editColor : Colors.successColor
-            }
+            hoverColor={true ? Colors.editColor : Colors.successColor}
             style={{
               width: "17%",
               marginTop: "2rem",
-              backgroundColor:
-                true ? Colors.editColor : Colors.successColor,
+              backgroundColor: true ? Colors.editColor : Colors.successColor,
               color: "#fff",
-
             }}
             loading={isLoading}
           >
             Save
           </LoadButton>
         </Grid>
-
       </Grid>
     </Box>
   );
