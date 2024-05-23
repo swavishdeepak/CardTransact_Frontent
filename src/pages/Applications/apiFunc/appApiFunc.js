@@ -46,3 +46,26 @@ export const getApplications = () => {
 };
 
 // let res= await API_AXIOS.post(`${Apis.reviewAppById}/${id}`,data)
+
+export const getModelsByAcquirer = (id) => {
+  return API_AXIOS.get(`${Apis.getModelsByAcquirer}/${id}`)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((err) => {
+      console.log("getModelsByAcquirer", err);
+    });
+}
+
+export const getOptionsByModel = ({
+  acquirerId,
+  modelId
+}) => {
+  return API_AXIOS.get(`${Apis.getOptionsByModel}?acquirerId=${acquirerId}&model=${modelId}`)
+    .then((res) => {
+      return res.data.data;
+    })
+    .catch((err) => {
+      console.log("getOptionsByModel", err);
+    });
+}

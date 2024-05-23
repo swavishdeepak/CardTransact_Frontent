@@ -10,6 +10,7 @@ import { useGetApplications } from "./getQuery/getQuery";
 import { statusObj } from "../../utils/menuItems/MenuItems";
 import { statusObjColor } from "../../utils/menuItems/MenuItems";
 import { restrcitEdit } from "../../utils/menuItems/MenuItems";
+import TableServer from "../../components/TableServer";
 
 interface Column {
   field: string;
@@ -119,6 +120,13 @@ const ViewApplication: React.FC = () => {
 
   const navigate = useNavigate();
   const { data, isLoading } = useGetApplications();
+  //
+  const [paginationModel, setPaginationModel] = useState({
+    page: 0,
+    pageSize: 10,
+  });
+  const [rowCountState, setRowCountState] = useState(0);
+  //
   const handleOpenDelete = () => {
     setOpenDelete(true);
   };
@@ -131,15 +139,25 @@ const ViewApplication: React.FC = () => {
     // navigate("/appicationDetails/1")
     navigate(`/addApplication`, { state: item });
   };
-  
+
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
-      <Table
+      {/* <Table
         columns={columns}
         rows={data}
         title="All Applications"
         getRowId={(row: any) => row._id}
+      /> */}
+      <TableServer
+        columns={columns}
+        rows={data}
+        title="All Applications"
+        getRowId={(row: any) => row._id}
+        rowCountState={rowCountState}
+        paginationModel={paginationModel}
+        setPaginationModel={setPaginationModel}
+        loading={isLoading}
       />
 
       {/* <div
