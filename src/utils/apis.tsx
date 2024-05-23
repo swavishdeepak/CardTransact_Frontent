@@ -29,7 +29,8 @@ const Apis = {
   allApplications: `${baseURL}/application`,
   reviewAppById: `${baseURL}/reviewAppById`,
   getModelsByAcquirer: `${baseURL}/comStruct/getModelsByAcquirer`,
-  getOptionsByModel: `${baseURL}/comStruct/getOptionsByModel`
+  getOptionsByModel: `${baseURL}/comStruct/getOptionsByModel`,
+  forwardedAppById: `${baseURL}/forwardedAppById`
 };
 
 export default Apis;

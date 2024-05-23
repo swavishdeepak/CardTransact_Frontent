@@ -18,6 +18,10 @@ import { useGetAppDetailById } from "./getQuery/getQuery";
 import { useAppSelector } from "../../redux/hooks";
 import { statusObj } from "../../utils/menuItems/MenuItems";
 import ApplicationAttachDetails from "../../components/Application/ApplicationAttachDetails";
+import axios from "axios";
+import Apis from "../../utils/apis";
+import { API_AXIOS } from "../../http/interceptor";
+import { useQueryClient } from "react-query";
 
 const customBoxStyle = {
   border: "1px solid #77D177",
@@ -35,9 +39,10 @@ const ApplicationDetails = () => {
   const isAgent = verifiedUser?.data?.role === "agent";
   const { id } = useParams();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   //const { state, pathname } = useLocation();
   //const { data: appDetail } = useGetAppDetailById(state?._id)
-  const { data: appDetail } = useGetAppDetailById(id);
+  const { data: appDetail, refetch } = useGetAppDetailById(id);
 
   const [openApprove, setOpenApprove] = useState(false);
   const [openReview, setOpenReview] = useState(false);
@@ -69,8 +74,23 @@ const ApplicationDetails = () => {
     navigate("/addApplication", { state: appDetail });
   };
 
-  
+  const handleAppForward = async () => {
+    try {
+      let data = await API_AXIOS.post(`${Apis.forwardedAppById}/${id}`)
+      console.log('dataHandleAppForward', data?.data);
+      refetch();
+      queryClient.invalidateQueries({
+        queryKey: ['application'],
+      });
+      setOpenApprove(false);
+    }
+    catch {
 
+    }
+  }
+
+  let { models } = JSON.parse(appDetail?.options || "{}")
+  console.log('modelInfo', models)
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -343,42 +363,63 @@ const ApplicationDetails = () => {
               <DetailsSubTitle title={"Company/Individual"} />
             </Grid>
             <Grid item xs={6} md={9}>
-              <DetailsSubTitleName name={ "NA"} />
+              <DetailsSubTitleName name={"Individual"} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Model"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"NA"} />
+              <DetailsSubTitleName name={models?.model ?? "NA"} />
             </Grid>
             <Grid item xs={3}>
-              <DetailsSubTitle title={"Rental"} />
+              <DetailsSubTitle title={"Commission"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"NA"} />
+              <DetailsSubTitleName name={models?.options?.commission ?? "NA"} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Contract Duration"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"NA"} />
+              <DetailsSubTitleName name={models?.options?.duration ?? "NA"} />
             </Grid>
             <Grid item xs={3}>
-              <DetailsSubTitle title={"Total Commission"} />
+              <DetailsSubTitle title={"Revenue %"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"NA"} />
+              <DetailsSubTitleName name={models?.options?.revenuePerc ?? "NA"} />
+            </Grid>
+
+            <Grid item xs={3}>
+              <DetailsSubTitle title={"1st 12 Months"} />
+            </Grid>
+            <Grid item xs={9}>
+              <DetailsSubTitleName name={models?.options?.yearly ?? "NA"} />
+            </Grid>
+
+            <Grid item xs={3}>
+              <DetailsSubTitle title={"6 Months"} />
+            </Grid>
+            <Grid item xs={9}>
+              <DetailsSubTitleName name={models?.options?.halfYearly ?? "NA"} />
+            </Grid>
+
+            <Grid item xs={3}>
+              <DetailsSubTitle title={"Cancelled Before 6 Months"} />
+            </Grid>
+            <Grid item xs={9}>
+              <DetailsSubTitleName name={models?.options?.cancelledBefore6 ?? "NA"} />
             </Grid>
           </Grid>
         </CustomBox>
-       
+
         {/* All Attachment Image component */}
-        <ApplicationAttachDetails  appDetail={appDetail}/>
+        <ApplicationAttachDetails appDetail={appDetail} />
         {!isAgent && (
           <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
             <CustomButton
               type="submit"
-              label="Approve"
+              label="Forward"
               hoverColor={Colors.successColor}
               onClick={handleOpenApprove}
               style={{
@@ -433,6 +474,7 @@ const ApplicationDetails = () => {
               color: "#fff",
               fontSize: "10px",
             }}
+            onClick={handleAppForward}
           />
         </Box>
       </ConfirmDialog>
