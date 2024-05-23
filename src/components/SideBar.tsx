@@ -18,6 +18,10 @@ import { ApplicationItems } from "../utils/SideBarItem";
 import { Notification } from "../utils/SideBarItem";
 import { Commission } from "../utils/SideBarItem";
 import { Reports } from "../utils/SideBarItem";
+import { Dashboard } from "../utils/SideBarItem";
+import { MerchantItem } from "../utils/SideBarItem";
+import { Messages } from "../utils/SideBarItem";
+import { DeleteData } from "../utils/SideBarItem";
 import { TransactionReport } from "../utils/SideBarItem";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CloseIcon from "@mui/icons-material/Close";
@@ -136,7 +140,7 @@ export default function SideBar() {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar
-        // elevation={0}
+        elevation={0}
         position="fixed"
         open={open}
         sx={{
@@ -206,11 +210,12 @@ export default function SideBar() {
         {/* Dashboard */}
         <SideBarWithOutDropdown
           sx={{ marginTop: "0.7rem" }}
-          to={"/dashboard"}
-          text="Dashboard"
+          items={Dashboard}
+          // to={"/dashboard"}
+          // text="Dashboard"
           location={location}
           open={open}
-          pathMatch="/dashboard"
+          // pathMatch="/dashboard"
         />
         {/* User */}
         <SideBarComponent
@@ -230,11 +235,12 @@ export default function SideBar() {
         />
         {/* Merchant */}
         <SideBarWithOutDropdown
-          to={"/merchants"}
-          text="Merchants"
+          items={MerchantItem}
+          // to={"/merchants"}
+          // text="Merchants"
           location={location}
           open={open}
-          pathMatch="/merchants"
+          //pathMatch="/merchants"
         />
         {/* Commission */}
         <SideBarComponent
@@ -270,20 +276,22 @@ export default function SideBar() {
         />
         {/* Messages */}
         <SideBarWithOutDropdown
-          to={"/messages"}
-          text="Messages"
+          items={Messages}
+          // to={"/messages"}
+          // text="Messages"
           location={location}
           open={open}
-          pathMatch="/messages"
-          notificationShpow={true}
+          // pathMatch="/messages"
+         notificationShow={true}
         />
         {/* delete data */}
         <SideBarWithOutDropdown
-          to={"/deleteData"}
-          text="Delete Data"
+          // to={"/deleteData"}
+          // text="Delete Data"
+          items={DeleteData}
           location={location}
           open={open}
-          pathMatch="/deleteData"
+          // pathMatch="/deleteData"
         />
       </Drawer>
     </Box>

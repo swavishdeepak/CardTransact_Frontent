@@ -1,5 +1,15 @@
 import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import MessageIcon from '@mui/icons-material/Message';
+import DeleteIcon from '@mui/icons-material/Delete';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import ReportIcon from '@mui/icons-material/Report';
+import ReportRoundedIcon from '@mui/icons-material/ReportRounded';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import CreateIcon from '@mui/icons-material/Create';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import DetailsIcon from '@mui/icons-material/Details';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 
 export const SidebarUserItems = [
@@ -8,10 +18,10 @@ export const SidebarUserItems = [
     icon: PersonIcon,
     link: "/users",
     subItems: [
-      { text: "View Employees", link: "/viewEmployee", icon: PersonIcon },
-      { text: "View Agents", link: "/viewAgents", icon: PersonIcon },
-      { text: "Add Employees", link: "/addEmployee", icon: PersonIcon },
-      { text: "Add Agents", link: "/addAgent", icon: PersonIcon },
+      { text: "View Employees", link: "/viewEmployee", icon: DashboardIcon },
+      { text: "View Agents", link: "/viewAgents", icon: DashboardIcon },
+      { text: "Add Employees", link: "/addEmployee", icon: PersonAddAlt1Icon},
+      { text: "Add Agents", link: "/addAgent", icon: PersonAddAlt1Icon},
     
     
     ],
@@ -24,7 +34,7 @@ export const ApplicationItems = [
     icon: PersonIcon,
     link: "/applications",
     subItems: [
-      { text: "Add Application", link: "/addApplication", icon: PersonIcon },
+      { text: "Add Application", link: "/addApplication", icon: PersonAddAlt1Icon },
       {
         text: "View Applications",
         link: "/viewApplications",
@@ -88,7 +98,7 @@ export const Commission = [
 export const TransactionReport = [
   {
     text: "Transaction Report",
-    icon: PersonIcon,
+    icon: ReportRoundedIcon,
     link: "transactionReport",
     subItems: [
       {
@@ -108,7 +118,7 @@ export const TransactionReport = [
 export const Reports = [
   {
     text: "Reports",
-    icon: PersonIcon,
+    icon: ReportIcon,
     link: "/reports",
     subItems: [
       {
@@ -163,18 +173,18 @@ export const Reports = [
 export const Notification = [
   {
     text: "Notification",
-    icon: PersonIcon,
+    icon: NotificationsIcon,
     link: "/notification",
     subItems: [
       {
         text: "List",
         link: "/notificationList",
-        icon: DashboardIcon,
+        icon: ListAltIcon,
       },
       {
         text: "Create",
         link: "/createNotication",
-        icon: DashboardIcon,
+        icon: AddBoxIcon,
       },
       {
         text: "Recieved Notification",
@@ -188,14 +198,14 @@ export const Notification = [
 export const Messages = [
   {
     text: "Messages",
-    icons: DashboardIcon,
+    icon: MessageIcon,
     link: "/messages",
   },
 ];
 export const DeleteData = [
   {
     text: "Delete Data",
-    icons: DashboardIcon,
+    icon: DeleteIcon,
     link: "/DeleteData",
   },
 ];
