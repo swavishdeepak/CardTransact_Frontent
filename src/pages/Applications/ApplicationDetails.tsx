@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
@@ -16,6 +17,7 @@ import { Label } from "recharts";
 import { useGetAppDetailById } from "./getQuery/getQuery";
 import { useAppSelector } from "../../redux/hooks";
 import { statusObj } from "../../utils/menuItems/MenuItems";
+import ApplicationAttachDetails from "../../components/Application/ApplicationAttachDetails";
 
 const customBoxStyle = {
   border: "1px solid #77D177",
@@ -30,13 +32,13 @@ const headerStyle = {
 
 const ApplicationDetails = () => {
   const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
-  const isAgent = verifiedUser?.data?.role === 'agent';
-  const { id } = useParams()
+  const isAgent = verifiedUser?.data?.role === "agent";
+  const { id } = useParams();
   const navigate = useNavigate();
   //const { state, pathname } = useLocation();
   //const { data: appDetail } = useGetAppDetailById(state?._id)
-  const { data: appDetail} = useGetAppDetailById(id)
-  
+  const { data: appDetail } = useGetAppDetailById(id);
+
   const [openApprove, setOpenApprove] = useState(false);
   const [openReview, setOpenReview] = useState(false);
 
@@ -64,10 +66,10 @@ const ApplicationDetails = () => {
 
   //javed
   const navToUpdateApp = () => {
-    navigate("/addApplication", { state: appDetail })
-  }
+    navigate("/addApplication", { state: appDetail });
+  };
 
-  console.log("appDetail",appDetail)
+  
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -83,15 +85,17 @@ const ApplicationDetails = () => {
                 color: "#fff",
               }}
             />
-           {verifiedUser?.data?.role !== "admin" && <CustomButton
-              label={"Edit"}
-              style={{
-                backgroundColor: "#fff",
-                color: `${Colors.editColor}`,
-                border: `1px solid ${Colors.editColor}`,
-              }}
-              onClick={navToUpdateApp}
-            />}
+            {verifiedUser?.data?.role !== "admin" && (
+              <CustomButton
+                label={"Edit"}
+                style={{
+                  backgroundColor: "#fff",
+                  color: `${Colors.editColor}`,
+                  border: `1px solid ${Colors.editColor}`,
+                }}
+                onClick={navToUpdateApp}
+              />
+            )}
           </Box>
         </CommonHeader>
         <CustomBox style={customBoxStyle}>
@@ -112,7 +116,7 @@ const ApplicationDetails = () => {
               <DetailsSubTitle title={"Acquirer"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={appDetail?.acquirer?.name ?? '--'} />
+              <DetailsSubTitleName name={appDetail?.acquirer?.name ?? "--"} />
             </Grid>
           </Grid>
         </CustomBox>
@@ -134,14 +138,18 @@ const ApplicationDetails = () => {
               <DetailsSubTitle title={"Status"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={statusObj[appDetail?.status ?? '--']} />
+              <DetailsSubTitleName
+                name={statusObj[appDetail?.status ?? "--"]}
+              />
             </Grid>
 
             <Grid item xs={3}>
               <DetailsSubTitle title={"Remarks"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={appDetail?.merchantTradingAdd?.remark ?? '--'} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantTradingAdd?.remark ?? "--"}
+              />
             </Grid>
           </Grid>
         </CustomBox>
@@ -160,29 +168,45 @@ const ApplicationDetails = () => {
             mt={3}
           >
             <Grid item xs={5} md={3}>
+              <DetailsSubTitle title={"Name"} />
+            </Grid>
+            <Grid item xs={7} md={9}>
+              <DetailsSubTitleName
+                name={appDetail?.merchantInfo?.name || "NA"}
+              />
+            </Grid>
+            <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Legal Name"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"Merchnat01"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantInfo?.legalName || "NA"}
+              />
             </Grid>
 
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Trading Name"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"Merchant01"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantInfo?.tradingName || "NA"}
+              />
             </Grid>
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Mobile Number"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"+44 730091234"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantInfo?.phoneNumber || "NA"}
+              />
             </Grid>
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Email Address"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"merchnats@gmail.com"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantInfo?.email || "NA"}
+              />
             </Grid>
           </Grid>
         </CustomBox>
@@ -204,32 +228,42 @@ const ApplicationDetails = () => {
               <DetailsSubTitle title={"House/Flat Address"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"1 Charter Way"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantTradingAdd?.address1 || "NA"}
+              />
             </Grid>
 
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"City"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"Liskeared"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantTradingAdd?.city || "NA"}
+              />
             </Grid>
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"County"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"Devon"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantTradingAdd?.county || "NA"}
+              />
             </Grid>
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Country"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"United Kingdom"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantTradingAdd?.country || "NA"}
+              />
             </Grid>
             <Grid item xs={5} md={3}>
               <DetailsSubTitle title={"Post Code"} />
             </Grid>
             <Grid item xs={7} md={9}>
-              <DetailsSubTitleName name={"PI24 4HX"} />
+              <DetailsSubTitleName
+                name={appDetail?.merchantTradingAdd?.postalCode || "NA"}
+              />
             </Grid>
           </Grid>
         </CustomBox>
@@ -251,26 +285,34 @@ const ApplicationDetails = () => {
               <DetailsSubTitle title={"Name of Bank"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"LIoyds"} />
+              <DetailsSubTitleName
+                name={appDetail?.bankInfo?.bankName || "NA"}
+              />
             </Grid>
 
             <Grid item xs={3}>
               <DetailsSubTitle title={"Name on Bank Ac."} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Merchant01"} />
+              <DetailsSubTitleName
+                name={appDetail?.bankInfo?.nameOnBankAcc || "NA"}
+              />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Account No"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"12345678"} />
+              <DetailsSubTitleName
+                name={appDetail?.bankInfo?.accountNumber || "NA"}
+              />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Sort Code"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"01-02-03"} />
+              <DetailsSubTitleName
+                name={appDetail?.bankInfo?.sourceCode || "NA"}
+              />
             </Grid>
           </Grid>
         </CustomBox>
@@ -292,274 +334,75 @@ const ApplicationDetails = () => {
               <DetailsSubTitle title={"Name"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Agent01"} />
+              <DetailsSubTitleName
+                name={appDetail?.salesPerson?.name || "NA"}
+              />
             </Grid>
 
             <Grid item xs={6} md={3}>
               <DetailsSubTitle title={"Company/Individual"} />
             </Grid>
             <Grid item xs={6} md={9}>
-              <DetailsSubTitleName name={"Individual"} />
+              <DetailsSubTitleName name={ "NA"} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Model"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Input Filed"} />
+              <DetailsSubTitleName name={"NA"} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Rental"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"0.0.00"} />
+              <DetailsSubTitleName name={"NA"} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Contract Duration"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Input Field"} />
+              <DetailsSubTitleName name={"NA"} />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Total Commission"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"0.00"} />
+              <DetailsSubTitleName name={"NA"} />
             </Grid>
           </Grid>
         </CustomBox>
-        <CustomBox style={customBoxStyle}>
-          <Grid item xs={12}>
-            <CommonHeader
-              style={{ width: "100%" }}
-              headerStyle={headerStyle}
-              header="ATTACHMENT"
-            ></CommonHeader>
-          </Grid>
-          <Grid
-            container
-            rowSpacing={3}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            mt={3}
-          >
-            <Grid item xs={3}>
-              <DetailsSubTitle title={"ID Proof"} />
-            </Grid>
-            <Grid item xs={9}>
-              <Box sx={{}}>
-                <DetailsSubTitleName style={{ alignItems: "start" }}>
-                  <Box>
-                    <Typography
-                      sx={{
-                        color: "#000000",
-                        fontSize: "15",
-                        fontWeight: "300",
-                      }}
-                    >
-                      Driving License
-                    </Typography>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        gap: 1,
-                        height: "3rem",
-                        width: "3rem",
-                      }}
-                    >
-                      <img src={ProofIcons} alt=""></img>
-                      <img src={ProofIcons} alt=""></img>
-                      <img src={ProofIcons} alt=""></img>
-                      <img src={ProofIcons} alt=""></img>
-                    </Box>
-                  </Box>
-                </DetailsSubTitleName>
-              </Box>
-            </Grid>
-
-            <Grid item xs={3}>
-              <DetailsSubTitle title={"Premises Pictures"} />
-            </Grid>
-            <Grid item xs={9}>
-              <DetailsSubTitleName style={{ alignItems: "start" }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      color: "#000000",
-                      fontSize: "15",
-                      fontWeight: "300",
-                    }}
-                  >
-                    Outdoors
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: 1,
-                      height: "3rem",
-                      width: "3rem",
-                      marginTop: "5px",
-                    }}
-                  >
-                    <img src={ProofIcons} alt=""></img>
-                    <img src={ProofIcons} alt=""></img>
-                    <img src={ProofIcons} alt=""></img>
-
-                  </Box>
-                  <Typography
-                    sx={{
-                      color: "#000000",
-                      fontSize: "15",
-                      fontWeight: "300",
-                      marginTop: "10px",
-                    }}
-                  >
-                    Indoors
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: 1,
-                      marginTop: "5px",
-                      height: "3rem",
-                      width: "3rem",
-                    }}
-                  >
-                    <img src={ProofIcons} alt=""></img>
-                    <img src={ProofIcons} alt=""></img>
-                    <img src={ProofIcons} alt=""></img>
-
-                  </Box>
-                </Box>
-              </DetailsSubTitleName>
-            </Grid>
-            <Grid item xs={3}>
-              <DetailsSubTitle title={"Business Address Proof"} />
-            </Grid>
-            <Grid item xs={9}>
-              <DetailsSubTitleName style={{ alignItems: "start" }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      color: "#000000",
-                      fontSize: "15",
-                      fontWeight: "300",
-                    }}
-                  >
-                    Utility Bills
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: 1,
-                      height: "3rem",
-                      width: "3rem",
-                    }}
-                  >
-                    <img src={ProofIcons} alt=""></img>
-                    <img src={ProofIcons} alt=""></img>
-                  </Box>
-                </Box>
-              </DetailsSubTitleName>
-            </Grid>
-            <Grid item xs={3}>
-              <DetailsSubTitle title={"Home Address Proof"} />
-            </Grid>
-            <Grid item xs={9}>
-              <DetailsSubTitleName style={{ alignItems: "start" }}>
-                <Box>
-                  <Typography
-                    sx={{
-                      color: "#000000",
-                      fontSize: "15",
-                      fontWeight: "300",
-                    }}
-                  >
-                    Domestice Utility Bills
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      gap: 1,
-                      height: "3rem",
-                      width: "3rem",
-                    }}
-                  >
-                    <img src={ProofIcons} alt=""></img>
-                    <img src={ProofIcons} alt=""></img>
-                  </Box>
-                </Box>
-              </DetailsSubTitleName>
-            </Grid>
-            <Grid item xs={3}>
-              <DetailsSubTitle title={"Bank Statement"} />
-            </Grid>
-            <Grid item xs={9}>
-              <DetailsSubTitleName>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: 1,
-                    height: "3rem",
-                    width: "3rem",
-                  }}
-                >
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                </Box>
-              </DetailsSubTitleName>
-            </Grid>
-            <Grid item xs={3}>
-              <DetailsSubTitle title={"Remarks"} />
-            </Grid>
-            <Grid item xs={9}>
-              <DetailsSubTitleName name="Lorem Ipsum has been the Industry" />
-            </Grid>
-            <Grid item xs={3}>
-              <DetailsSubTitle title={"Alternatives"} />
-            </Grid>
-            <Grid item xs={9}>
-              <DetailsSubTitleName>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: 1,
-                    height: "3rem",
-                    width: "3rem",
-                  }}
-                >
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                </Box>
-              </DetailsSubTitleName>
-            </Grid>
-          </Grid>
-        </CustomBox>
-        {!isAgent && <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
-          <CustomButton
-            type="submit"
-            label="Approve"
-            hoverColor={Colors.successColor}
-            onClick={handleOpenApprove}
-            style={{
-              width: "15%",
-              height: "2.3rem",
-              fontSize: "15px",
-              backgroundColor: Colors.successColor,
-              color: "#fff",
-            }}
-          ></CustomButton>
-          <CustomButton
-            onClick={handleOpenReview}
-            label="Review"
-            hoverColor={Colors.deletebtnColor}
-            style={{
-              width: "15%",
-              height: "2.3rem",
-              fontSize: "15px",
-              backgroundColor: Colors.deletebtnColor,
-              color: "#fff",
-            }}
-          ></CustomButton>
-        </Box>}
+       
+        {/* All Attachment Image component */}
+        <ApplicationAttachDetails  appDetail={appDetail}/>
+        {!isAgent && (
+          <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
+            <CustomButton
+              type="submit"
+              label="Approve"
+              hoverColor={Colors.successColor}
+              onClick={handleOpenApprove}
+              style={{
+                width: "20%",
+                height: "2.3rem",
+                fontSize: "15px",
+                backgroundColor: Colors.successColor,
+                color: "#fff",
+              }}
+            ></CustomButton>
+            <CustomButton
+              onClick={handleOpenReview}
+              label="Review"
+              hoverColor={Colors.deletebtnColor}
+              style={{
+                width: "20%",
+                height: "2.3rem",
+                fontSize: "15px",
+                backgroundColor: Colors.deletebtnColor,
+                color: "#fff",
+              }}
+            ></CustomButton>
+          </Box>
+        )}
       </CustomBox>
       <ConfirmDialog
         open={openApprove}

@@ -198,7 +198,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </CommonHeader>
       )}
       <Grid container rowSpacing={4} columnSpacing={2} mt={disableStyles ? "none" : 2}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomTextInput
             label={"House No./Flat No."}
             placeholder="Enter House No./Flat No"
@@ -209,7 +209,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             disabled={fieldDisable('address1')}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomTextInput
             label={"Street Name/Building Name"}
             placeholder="Enter Street Name/Building Name"
@@ -222,7 +222,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
       </Grid>
       <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"City"}
             placeholder="Enter Your City"
@@ -233,7 +233,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             disabled={fieldDisable('city')}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"County"}
             placeholder="Enter Your County"
@@ -246,7 +246,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
       </Grid>
       <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Country"}
             placeholder="Enter Your Country"
@@ -257,7 +257,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             disabled={fieldDisable('country')}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Post Code"}
             placeholder="Enter Your Post Code"
@@ -270,7 +270,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
         {/* files */}
         <>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Premises(Outdoors)"
               placeholder="Upload Any Utility Document"
@@ -278,7 +278,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('outDoorPremisesPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Premises(Indoors)"
               placeholder="Upload Any Utility Document"
@@ -286,7 +286,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('inDoorPremisesPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of "
               placeholder="Upload Picture of Business Rate Pic"
@@ -294,7 +294,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('utilityBillPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Business Rate Pic"
               placeholder="Upload Picture of Business Rate Pic"
@@ -302,7 +302,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('businessRatePic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Lease Agreement Pic "
               placeholder="Upload Picture of Lease Agreement Pic"
@@ -310,7 +310,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('leaseAgreementPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Home Driving License Pic"
               placeholder="Upload Picture of Home Driving License Pic"
@@ -318,7 +318,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeUtilityBillPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Home Driving License Pic"
               placeholder="Upload Picture of Home Driving License Pic"
@@ -326,7 +326,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeDrivingLicensePic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of  Home Bank Statement"
               placeholder="Upload Picture of home Bank Statement"
@@ -334,7 +334,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeBankStatement')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Home Bank Letter"
               placeholder="Upload Picture of Home Bank Letter"
@@ -342,7 +342,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeBankLetter')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Alternative Doc"
               placeholder="Upload Picture of Alternative Doc"
@@ -351,7 +351,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             />
           </Grid>
         </>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomTextInput
             label={"Remarks"}
             placeholder="Remarks"

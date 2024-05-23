@@ -214,7 +214,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             disabled={fieldDisable('email')}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        {/* <Grid item xs={12} md={10}>
 
           <BasicSelect
             label="Select ID Proofs"
@@ -231,24 +231,27 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             size="small"
             items={selectIDProof}
           />
-          {/* <AddCircleOutlineIcon /> */}
+         
 
+        </Grid> */}
+        <Grid item xs={12} md={10}>
+             <Typography sx={{fontSize: "15px", color: "#000000", fontWeight: "600"}}>ID Proof</Typography>
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomFileInput
             label="Driving License"
             onChange={(e) => onImageChange(e, 'drivingLicense')}
             disabled={fieldDisable('drivingLicense')}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomFileInput
             label="National Id"
             onChange={(e) => onImageChange(e, 'nationalId')}
             disabled={fieldDisable('nationalId')}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomFileInput
             label="Passport"
             onChange={(e) => onImageChange(e, 'passport')}
