@@ -66,7 +66,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
         queryClient.invalidateQueries({
           queryKey: ['application'],
         });
-        navigate("/viewApplications")
+        // navigate("/viewApplications")
       }
 
       catch (err) {
