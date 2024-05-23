@@ -127,7 +127,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
           step: '3'
         })
         // refetch();
-        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
+        await queryClient.setQueryData(['useGetAppDetailById', appId], (x: any) => {
           let temp = { ...x, ...a.data }
           return temp
         })

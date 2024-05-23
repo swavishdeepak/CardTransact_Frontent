@@ -61,7 +61,7 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({ disable
           step: '5'
         })
         console.log('addApplication@', a)
-        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
+        await queryClient.setQueryData(['useGetAppDetailById', appId], (x: any) => {
           let temp = { ...x, ...a.data }
           return temp
         });
@@ -103,14 +103,14 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({ disable
 
   useEffect(() => {
     if (!!appDetail?._id) {
-      const bankInfo = appDetail?.bankInfo;
+      const { models } = JSON.parse(appDetail?.options || '{}');
       setValues({
-        modelId: JSON.parse(appDetail?.options).models?._id ?? '',
-        optionId: JSON.parse(appDetail?.options)?.models?.options?._id ?? ''
+        modelId: models?._id ?? '',
+        optionId: models?.options?._id ?? ''
       });
 
       let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
-      setIsDisable(tempEdit)
+      setIsDisable(tempEdit);
     }
   }, [!!appDetail?._id])
   //
@@ -136,8 +136,6 @@ export const ApplicationInformation: React.FC<ApplicationInfoProps> = ({ disable
     setSelectedValue2(event.target.value);
   };
 
-  console.log('optionData',
-    JSON.parse(appDetail?.options)?.models?.options?._id)
   return (
     <Box
       sx={

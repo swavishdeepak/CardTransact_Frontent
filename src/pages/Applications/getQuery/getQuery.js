@@ -19,7 +19,7 @@ export const useGetAcquirer = () => {
     let temp = []
     if (!!res?.data) {
         temp = res?.data.map((el) => {
-            return { ...el, value: el?._id, label: el?.model }
+            return { ...el, value: el?._id, label: el?.name }
         })
     }
     return { ...res, data: temp }
@@ -69,8 +69,7 @@ export const useGetOptionsByModel = ({
 // getAppDetailById
 export const useGetAppDetailById = (id) => {
     return useQuery({
-        // ['acquirer', id], getAppDetailById
-        queryKey: ['acquirer', id],
+        queryKey: ['useGetAppDetailById', id],
         queryFn: () => getAppDetailById(id),
         staleTime: 1000 * 60 * 60,
         enabled: !!id

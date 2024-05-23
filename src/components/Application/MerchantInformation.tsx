@@ -80,7 +80,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
           step: '2'
         })
 
-        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
+        await queryClient.setQueryData(['useGetAppDetailById', appId], (x: any) => {
           let temp = { ...x, ...a.data }
           return temp
         })
