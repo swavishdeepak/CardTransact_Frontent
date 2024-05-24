@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { LoadButton } from "../../components/LoadButton";
-import { useNavigate,useSearchParams } from "react-router-dom";
+import { useNavigate,useSearchParams, useLocation } from "react-router-dom";
 import CustomText from "../../components/CustomText";
 import OtpInput from "react-otp-input";
 import Divider from "@mui/material/Divider";
@@ -18,11 +18,14 @@ import { useAppDispatch,useAppSelector } from "../../redux/hooks";
 const GoogleAuthentication = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
+  const {pathname} = useLocation()
   const  {verifiedUser} = useAppSelector((state) => state.verifiedUser); 
   let [searchParams] = useSearchParams();
   let email = searchParams.get("email");
+  let type = searchParams.get("role");
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
+  
 
   const redirectLogin = () => {
     navigate("/auth/login");
@@ -32,15 +35,17 @@ const GoogleAuthentication = () => {
   //   navigate("/dashboard");
   // };
 
-  
 
   
   useEffect(() => {
-    if (verifiedUser?.data?.token) {
+    if (verifiedUser) {
+      //sessionStorage.setItem("requestUrl", pathname);
       navigate("/dashboard");
     }
 
-  }, [verifiedUser?.data, navigate]);
+  }, [verifiedUser, navigate]);
+
+  
 
   const handleSubmit = async () => {
     try {
@@ -48,7 +53,7 @@ const GoogleAuthentication = () => {
       if (!email || typeof email !== "string") {
         throw new Error("Email is not valid.");
       }
-      await dispatch(verifyOtp({ email, otp }));
+      await dispatch(verifyOtp({ email, otp, type }));
       navigate("/dashboard");
     } catch (error) {
       console.error("Error verifying OTP:", error);

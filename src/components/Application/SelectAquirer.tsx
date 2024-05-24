@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BasicSelect from "../BasicSelect";
 import { CustomBox } from "../MyCustom/CustomBox";
 import { Colors } from "../../utils/Colors";
@@ -6,20 +6,94 @@ import { CommonHeader } from "../CommonHeader";
 import NavIcon from "../../assets/navIcon.svg";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { Grid } from "@mui/material";
-interface SelectAquirerProps {}
+import { useGetAcquirer, useGetAppDetailById } from "../../pages/Applications/getQuery/getQuery";
+import { useFormik } from "formik";
+import { LoadButton } from "../LoadButton";
+import { addApplication } from "../../pages/Applications/apiFunc/appApiFunc";
+import { useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
+interface SelectAquirerProps {
+  appId?: string;
+  setAppId?: any;
+  appDetail?: any;
+  refetch?: any;
+}
 
-const SelectAquirer: React.FC<SelectAquirerProps> = (props) => {
-  const [selectedValue, setSelectedValue] = useState<string>("");
+const SelectAquirer: React.FC<SelectAquirerProps> = ({
+  appId,
+  setAppId,
+  appDetail,
+  refetch
+}) => {
+  const queryClient = useQueryClient();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDisable, setIsDisable] = useState<any>({});
+  const { data: selectAcquirer } = useGetAcquirer();
+  const { data, isLoading: appLoading } = useGetAppDetailById(appId);
+  const navigate = useNavigate();
+
+  const {
+    values,
+    setFieldValue,
+    handleSubmit,
+    setValues
+  } = useFormik({
+    initialValues: {
+      acquirer: appDetail?.acquirer?.id || '',
+    },
+    onSubmit: async (value) => {
+      setIsLoading(true);
+      const { acquirer } = value;
+      try {
+        let formData = new FormData();
+        formData.append('data', JSON.stringify({ acquirer }));
+        let a = await addApplication({
+          data: formData,
+          ...(!!appId && { id: appId }),
+          step: '1'
+        });
+        setAppId(a?.data?._id);
+        navigate(".", { state: a?.data })
+        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
+          let temp = { ...x, ...a?.data }
+          return temp
+        })
+      }
+      catch (error) {
+        console.log('errorAddApplication1', error);
+      }
+      finally {
+        setIsLoading(false)
+      }
+    },
+  });
+  //initial
+  useEffect(() => {
+    if (!!appDetail?.acquirer?.id) {
+      setValues({
+        acquirer: appDetail?.acquirer?.id
+      })
+      let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
+      setIsDisable(tempEdit)
+    }
+  }, [!!appDetail?.acquirer?.id]);
 
   const handleChange = (event: SelectChangeEvent<string>) => {
-    setSelectedValue(event.target.value);
+    // setSelectedValue(event.target.value);
+    setFieldValue('acquirer', event.target.value)
   };
 
-  const selectAquirer = [
-    { value: "aqu1", label: "Aqui1" },
-    { value: "aqu2", label: "aqu2" },
-    { value: "aqu3", label: "aqu3" },
-  ];
+  const fieldDisable = (key) => {
+    if (appDetail?.reviewFields?.length > 1) {
+      if (isDisable?.hasOwnProperty(key)) {
+        return !isDisable?.[key]
+      } else {
+        return true
+      }
+    } else {
+      return false;
+    }
+  }
 
   return (
     <CustomBox
@@ -43,11 +117,32 @@ const SelectAquirer: React.FC<SelectAquirerProps> = (props) => {
               padding: "10px 6px 0px 8px",
             }}
             name={"selectedValue2"}
-            value={selectedValue}
+            value={values.acquirer || null}
             handleChange={handleChange}
             size="small"
-            items={selectAquirer}
+            items={selectAcquirer || []}
+            disabled={fieldDisable('acquirer')}
           />
+        </Grid>
+        {/* button */}
+        <Grid item xs={12} md={8}>
+          <LoadButton
+            onClick={handleSubmit}
+            hoverColor={
+              true ? Colors.editColor : Colors.successColor
+            }
+            style={{
+              width: "17%",
+              marginTop: "2.5rem",
+              backgroundColor:
+                true ? Colors.editColor : Colors.successColor,
+              color: "#fff",
+
+            }}
+            loading={isLoading}
+          >
+            Save
+          </LoadButton>
         </Grid>
       </Grid>
     </CustomBox>

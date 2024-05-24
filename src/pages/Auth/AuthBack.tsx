@@ -15,6 +15,7 @@ const AuthBack = () => {
       <Box
         component="img"
         src={AuthImg}
+        loading="lazy"
         sx={{
           backgroundPosition: "left",
           backgroundSize: "cover",

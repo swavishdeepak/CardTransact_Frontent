@@ -12,7 +12,12 @@ import CustomTextInput from "../../components/CustomInput";
 import DeleteRequest from "../../components/User/DeleteRequest";
 import Apis from "../../utils/apis";
 import { API_AXIOS } from "../../http/interceptor";
-import { salesType } from "../../utils/menuItems/MenuItems";
+import {
+  agentStatusObj,
+  salesType,
+  srManagersObj,
+  userStatusColorObj,
+} from "../../utils/menuItems/MenuItems";
 import TableServer from "../../components/TableServer";
 
 interface Column {
@@ -111,12 +116,48 @@ const ViewAgents: React.FC = () => {
       minWidth: 200,
       flex: 1,
     },
+
     {
-      field: "banks",
-      headerName: "Banks",
+      field: "email",
+      headerName: "Email",
       minWidth: 200,
       flex: 1,
     },
+    {
+      field: "phoneNumber",
+      headerName: "Mobile",
+      valueGetter: (params) => {
+        const { countryCode, phoneNumber } = params.row;
+        return `${countryCode || ""} ${phoneNumber || ""}`;
+      },
+      minWidth: 200,
+      flex: 1,
+    },
+    {
+      field: "manager",
+      headerName: "Manager",
+      valueGetter: (params) => srManagersObj[params.row.manager],
+      minWidth: 150,
+      flex: 1,
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      renderCell: (params) => (
+        <Typography sx={{ color: userStatusColorObj[params.row.status] }}>
+          {agentStatusObj[params.row.status]}
+        </Typography>
+      ),
+      // valueGetter: (params) => srManagersObj[params.row.manager],
+      minWidth: 150,
+      flex: 1,
+    },
+    // {
+    //   field: "banks",
+    //   headerName: "Banks",
+    //   minWidth: 200,
+    //   flex: 1,
+    // },
     {
       field: "action",
       headerName: "Action",

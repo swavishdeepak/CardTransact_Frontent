@@ -1,14 +1,14 @@
 import * as Yup from "yup";
 
 export const loginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email format").required("Email is required"),
-  password: Yup.string().required("password is Required"),
+  email: Yup.string().email("Invalid Email Format").required("Email is Required"),
+  password: Yup.string().required("Password is Required"),
 });
 
 export const forgetSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Invalid email address")
-    .required("Email is required"),
+    .email("Invalid Email Address")
+    .required("Email is Required"),
 });
 
 export const resetPassword = Yup.object().shape({

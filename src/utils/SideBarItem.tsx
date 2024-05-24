@@ -1,13 +1,14 @@
 import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
+
 export const SidebarUserItems = [
   {
     text: "Users",
     icon: PersonIcon,
     link: "/users",
     subItems: [
-      { text: "View Employees", link: "/viewEmployees", icon: PersonIcon },
+      { text: "View Employees", link: "/viewEmployee", icon: PersonIcon },
       { text: "View Agents", link: "/viewAgents", icon: PersonIcon },
       { text: "Add Employees", link: "/addEmployee", icon: PersonIcon },
       { text: "Add Agents", link: "/addAgent", icon: PersonIcon },

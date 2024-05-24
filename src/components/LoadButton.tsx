@@ -31,11 +31,8 @@ export const LoadButton: FC<LoadButtonProps> = ({ children, loading,hoverColor, 
         },
         ...style
       }}
-
-      
-
     >
-      {loading ? <CircularProgress sx={{ padding: "8px" }} /> : children}
+      {loading ? <CircularProgress/> : children}
     </Button>
   );
 };

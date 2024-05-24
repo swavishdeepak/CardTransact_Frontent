@@ -1,41 +1,53 @@
-import { Typography, Box } from "@mui/material";
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import * as React from "react";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import { useLocation, Link as RouterLink } from "react-router-dom";
 
-
-const Breadcrumbs = (): JSX.Element => {
+export default function Breadcrumb() {
   const location = useLocation();
-  let breadcrumbs: JSX.Element[] = [];
-  const pathSegments = location.pathname.split("/").filter((segment) => segment !== "");
-  pathSegments.forEach((segment, index) => {
-    const path = `/${pathSegments.slice(0, index + 1).join("/")}`;
-    const isLast = index === pathSegments.length - 1;
-    const isCurrent = path === location.pathname;
+  const pathnames = location.pathname.split("/").filter((segment) => segment);
 
-    const displaySegment =  segment;
+  const breadcrumbs = pathnames.map((segment, index) => {
+    const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+    const isLastSegment = index === pathnames.length - 1;
+    const containsNumber = /\d/.test(segment);
+    const nextSegmentContainsNumber = index < pathnames.length - 1 && /\d/.test(pathnames[index + 1]);
 
-    const linkStyle = {
-      textDecoration: "none",
-      color: "#77D177",
-      fontWeight: isLast ? "bold" : "normal",
-      borderBottom: isCurrent ? "1.5px solid #77D177" : "none",
+    if (isLastSegment && containsNumber) return null;
+
+    const segmentText = segment.charAt(0).toUpperCase() + segment.slice(1);
+    const commonProps = {
+      key: to,
+      style: { color: "#77D177", fontSize: "16px", fontWeight: "600" },
     };
 
-    breadcrumbs.push(
-      <React.Fragment key={path}>
-        <Link to={path} style={linkStyle}>
-          {isLast ? displaySegment.charAt(0).toUpperCase() + displaySegment.slice(1) : displaySegment}
-        </Link>
-        {!isLast && <span style={{ margin: "0 0.5rem", color: "#77D177" }}>&gt;&gt;</span>}
-      </React.Fragment>
+    if (isLastSegment || nextSegmentContainsNumber) {
+      return (
+        <Typography {...commonProps}>{segmentText}</Typography>
+      );
+    }
+
+    return (
+      <Link
+        {...commonProps}
+        underline="hover"
+        component={RouterLink}
+        to={to}
+      >
+        {segmentText}
+      </Link>
     );
-  });
+  }).filter(Boolean);
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Typography sx={{ whiteSpace: "nowrap", fontSize: "1rem" }}>{breadcrumbs}</Typography>
-    </Box>
+    <Stack spacing={0}>
+      <Breadcrumbs
+        separator={<span style={{ margin: "0 0.5rem", color: "#77D177", fontSize: "16px", fontWeight: "600" }}>&gt;&gt;</span>}
+      >
+        {breadcrumbs}
+      </Breadcrumbs>
+    </Stack>
   );
-};
-
-export default Breadcrumbs;
+}

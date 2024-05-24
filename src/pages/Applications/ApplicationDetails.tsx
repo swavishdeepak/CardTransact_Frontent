@@ -11,13 +11,36 @@ import DetailsSubTitle from "../../components/MyCustom/DetailsSubTitle";
 import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
 import ProofIcons from "../../assets/ProofIcon.svg";
 import ConfirmDialog from "../../components/ConfirmDialog";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Label } from "recharts";
+import { useGetAppDetailById } from "./getQuery/getQuery";
+import { useAppSelector } from "../../redux/hooks";
+import { statusObj } from "../../utils/menuItems/MenuItems";
 
- const ApplicationDetails = () => {
+const customBoxStyle = {
+  border: "1px solid #77D177",
+  marginTop: 4,
+};
+
+const headerStyle = {
+  fontSize: "18px",
+  fontWeight: "600",
+  lineHeight: "24px",
+};
+
+const ApplicationDetails = () => {
+  const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
+  const isAgent = verifiedUser?.data?.role === 'agent';
+  const { id } = useParams()
   const navigate = useNavigate();
+  //const { state, pathname } = useLocation();
+  //const { data: appDetail } = useGetAppDetailById(state?._id)
+  const { data: appDetail} = useGetAppDetailById(id)
+  
   const [openApprove, setOpenApprove] = useState(false);
   const [openReview, setOpenReview] = useState(false);
+
+  //console.log('verifiedUser@ ', verifiedUser?.data?.role);
 
   const handleOpenApprove = () => {
     setOpenApprove(true);
@@ -36,19 +59,15 @@ import { Label } from "recharts";
   };
 
   const handleRedirect = () => {
-    navigate("/Re-evaluation");
+    navigate("/Re-evaluation", { state: appDetail });
   };
 
-  const customBoxStyle = {
-    border: "1px solid #77D177",
-    marginTop: 4,
-  };
+  //javed
+  const navToUpdateApp = () => {
+    navigate("/addApplication", { state: appDetail })
+  }
 
-  const headerStyle = {
-    fontSize: "18px",
-    fontWeight: "600",
-    lineHeight: "24px",
-  };
+  console.log("appDetail",appDetail)
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -64,14 +83,15 @@ import { Label } from "recharts";
                 color: "#fff",
               }}
             />
-            <CustomButton
+           {verifiedUser?.data?.role !== "admin" && <CustomButton
               label={"Edit"}
               style={{
                 backgroundColor: "#fff",
                 color: `${Colors.editColor}`,
                 border: `1px solid ${Colors.editColor}`,
               }}
-            />
+              onClick={navToUpdateApp}
+            />}
           </Box>
         </CommonHeader>
         <CustomBox style={customBoxStyle}>
@@ -92,7 +112,7 @@ import { Label } from "recharts";
               <DetailsSubTitle title={"Acquirer"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"WorldPay"} />
+              <DetailsSubTitleName name={appDetail?.acquirer?.name ?? '--'} />
             </Grid>
           </Grid>
         </CustomBox>
@@ -114,14 +134,14 @@ import { Label } from "recharts";
               <DetailsSubTitle title={"Status"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Pending"} />
+              <DetailsSubTitleName name={statusObj[appDetail?.status ?? '--']} />
             </Grid>
 
             <Grid item xs={3}>
               <DetailsSubTitle title={"Remarks"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"--"} />
+              <DetailsSubTitleName name={appDetail?.merchantTradingAdd?.remark ?? '--'} />
             </Grid>
           </Grid>
         </CustomBox>
@@ -382,7 +402,7 @@ import { Label } from "recharts";
                     <img src={ProofIcons} alt=""></img>
                     <img src={ProofIcons} alt=""></img>
                     <img src={ProofIcons} alt=""></img>
-                   
+
                   </Box>
                   <Typography
                     sx={{
@@ -406,7 +426,7 @@ import { Label } from "recharts";
                     <img src={ProofIcons} alt=""></img>
                     <img src={ProofIcons} alt=""></img>
                     <img src={ProofIcons} alt=""></img>
-                    
+
                   </Box>
                 </Box>
               </DetailsSubTitleName>
@@ -415,28 +435,28 @@ import { Label } from "recharts";
               <DetailsSubTitle title={"Business Address Proof"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName style={{alignItems: "start"}}>
+              <DetailsSubTitleName style={{ alignItems: "start" }}>
                 <Box>
-                <Typography
-                  sx={{
-                    color: "#000000",
-                    fontSize: "15",
-                    fontWeight: "300",
-                  }}
-                >
-                  Utility Bills
-                </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: 1,
-                    height: "3rem",
-                    width: "3rem",
-                  }}
-                >
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                </Box>
+                  <Typography
+                    sx={{
+                      color: "#000000",
+                      fontSize: "15",
+                      fontWeight: "300",
+                    }}
+                  >
+                    Utility Bills
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 1,
+                      height: "3rem",
+                      width: "3rem",
+                    }}
+                  >
+                    <img src={ProofIcons} alt=""></img>
+                    <img src={ProofIcons} alt=""></img>
+                  </Box>
                 </Box>
               </DetailsSubTitleName>
             </Grid>
@@ -444,28 +464,28 @@ import { Label } from "recharts";
               <DetailsSubTitle title={"Home Address Proof"} />
             </Grid>
             <Grid item xs={9}>
-            <DetailsSubTitleName style={{alignItems: "start"}}>
+              <DetailsSubTitleName style={{ alignItems: "start" }}>
                 <Box>
-                <Typography
-                  sx={{
-                    color: "#000000",
-                    fontSize: "15",
-                    fontWeight: "300",
-                  }}
-                >
-                 Domestice Utility Bills
-                </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    gap: 1,
-                    height: "3rem",
-                    width: "3rem",
-                  }}
-                >
-                  <img src={ProofIcons} alt=""></img>
-                  <img src={ProofIcons} alt=""></img>
-                </Box>
+                  <Typography
+                    sx={{
+                      color: "#000000",
+                      fontSize: "15",
+                      fontWeight: "300",
+                    }}
+                  >
+                    Domestice Utility Bills
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 1,
+                      height: "3rem",
+                      width: "3rem",
+                    }}
+                  >
+                    <img src={ProofIcons} alt=""></img>
+                    <img src={ProofIcons} alt=""></img>
+                  </Box>
                 </Box>
               </DetailsSubTitleName>
             </Grid>
@@ -513,7 +533,7 @@ import { Label } from "recharts";
             </Grid>
           </Grid>
         </CustomBox>
-        <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
+        {!isAgent && <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
           <CustomButton
             type="submit"
             label="Approve"
@@ -539,7 +559,7 @@ import { Label } from "recharts";
               color: "#fff",
             }}
           ></CustomButton>
-        </Box>
+        </Box>}
       </CustomBox>
       <ConfirmDialog
         open={openApprove}

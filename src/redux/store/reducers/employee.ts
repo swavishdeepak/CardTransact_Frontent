@@ -17,13 +17,13 @@ const initialState: employee = {
 
 
 export const getEmployees = createAsyncThunk("employeesList", async (thunkApi) => {
-    try {
-      const { data } = await API_AXIOS.get(Apis.getEmployee);
-      return data
-    } catch (err) {
-      console.log(err);
-      return [];
-    }
+    // try {
+    //   const { data } = await API_AXIOS.get(Apis.getEmployee);
+    //   return data
+    // } catch (err) {
+    //   console.log(err);
+    //   return [];
+    // }
   });
 
 const employeeSlice = createSlice({

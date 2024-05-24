@@ -18,7 +18,7 @@ import Shape1 from "../../assets/Shape1.svg"
  const Dashboard: React.FC = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
-      <Header />
+      <Header /> 
       <Box sx={{marginTop: "1rem"}}>
         <Grid container rowSpacing={{ xs: 2, md: 4 }} columnSpacing={2} mt={2}>
           <Grid item xs={6} sm={4} md={2.4}>

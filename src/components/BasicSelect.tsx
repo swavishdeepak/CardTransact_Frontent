@@ -7,7 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
 import { Colors } from "../utils/Colors";
-import { SelectChangeEvent } from '@mui/material';
+import { SelectChangeEvent } from "@mui/material";
 
 interface BasicSelectProps {
   value: string;
@@ -21,6 +21,9 @@ interface BasicSelectProps {
   [key: string]: any;
   placeholder?: string; // Add placeholder prop
   placeholderStyle?: React.CSSProperties;
+  valueKey?: string;
+  labelKey?: string;
+  disabled?: boolean;
 }
 
 const BasicSelect: React.FC<BasicSelectProps> = ({
@@ -32,15 +35,29 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
   labelStyle,
   sx,
   placeholder,
-  placeholderStyle = { color: "#898989", fontSize: "12px", fontWeight: "400", borderRadius: "7.5px" },
+  placeholderStyle = {
+    color: "#898989",
+    fontSize: "12px",
+    fontWeight: "400",
+    borderRadius: "7.5px",
+  },
   name,
+  valueKey = 'value',
+  labelKey = 'label',
+  disabled,
   ...props
 }) => {
   return (
     <Box sx={{ minWidth: 100, sx }}>
-      <Typography style={{ marginTop: "1rem", color: "#000000",
+      <Typography
+        style={{
+          marginTop: "1rem",
+          color: "#000000",
           fontWeight: "600",
-          fontSize: "15px" , ...labelStyle }}>
+          fontSize: "15px",
+          ...labelStyle,
+        }}
+      >
         {label}
       </Typography>
       <FormControl fullWidth {...props}>
@@ -63,11 +80,11 @@ const BasicSelect: React.FC<BasicSelectProps> = ({
               placeholder={placeholder}
             />
           }
+          disabled={disabled}
         >
-         
           {items.map((item) => (
-            <MenuItem value={item.value} key={item.value}>
-              {item.label}
+            <MenuItem value={item[valueKey]} key={item[labelKey]}>
+              {item[labelKey]}
             </MenuItem>
           ))}
         </Select>

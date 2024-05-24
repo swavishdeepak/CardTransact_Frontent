@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Box, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Menu, MenuItem, Typography} from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
-import Table from "../../components/Table";
 import MoreVert from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
-import ConfirmDialog from "../../components/ConfirmDialog";
-import CustomButton from "../../components/CustomButton";
-import { CustomBox } from "../../components/MyCustom/CustomBox";
-import { LoadButton } from "../../components/LoadButton";
-import CustomTextInput from "../../components/CustomInput";
-import DeleteRequest from "../../components/User/DeleteRequest";
-import { useAppSelector } from "../../redux/hooks";
+// import ConfirmDialog from "../../components/ConfirmDialog";
+// import CustomButton from "../../components/CustomButton";
+// import { CustomBox } from "../../components/MyCustom/CustomBox";
+// import { LoadButton } from "../../components/LoadButton";
+// import CustomTextInput from "../../components/CustomInput";
+// import DeleteRequest from "../../components/User/DeleteRequest";
+// import { useAppSelector } from "../../redux/hooks";
 import { API_AXIOS } from "../../http/interceptor";
 import Apis from "../../utils/apis";
+import TableServer from "../../components/TableServer";
+import { statusObj, statusObjColor } from "../../utils/menuItems/MenuItems";
 
 interface Column {
   field: string;
@@ -21,19 +22,12 @@ interface Column {
   flex: number;
   sortable?: boolean;
   renderCell?: (params: any) => React.ReactNode;
+  valueGetter?: (params: any) => string;
 }
 
-// interface Row {
-//   id: number;
-//   userName: string;
-//   id_no: number | null;
-//   email: string | null;
-//   banks: string;
-//   action: string;
-// }
+
 
 const ViewEmployees: React.FC = () => {
-  // const { employee } = useAppSelector((state) => state.employee)
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [paginationModel, setPaginationModel] = useState({
@@ -45,40 +39,56 @@ const ViewEmployees: React.FC = () => {
   
 
   const columns: Column[] = [
-    {
-      field: "id",
-      headerName: "Sr.No",
-      minWidth: 50,
-      flex: 1,
-    },
+    // {
+    //   field: "id",
+    //   headerName: "",
+    //   minWidth: 50,
+    //   flex: 1,
+    // },
     {
       field: "name",
       headerName: "User Name",
       minWidth: 200,
       flex: 1,
     },
-    {
-      field: "id_no",
-      headerName: "ID No",
-      minWidth: 50,
-      flex: 1,
-    },
+    // {
+    //   field: "id_no",
+    //   headerName: "ID No",
+    //   minWidth: 100,
+    //   flex: 1,
+    // },
     {
       field: "email",
       headerName: "Email",
+      minWidth: 250,
+      flex: 1,
+    },
+    {
+      field: "bankName",
+      headerName: "Banks",
+      valueGetter: (params) => {
+        const { bankInfo } = params.row;
+        return `${bankInfo?.bankName || ""}`;
+      },
+      
       minWidth: 200,
       flex: 1,
     },
+    // {
+    //   field: "addedBy",
+    //   headerName: "Added By",
+    //   minWidth: 200,
+    //   flex: 1,
+    // },
     {
-      field: "bankInfo.bankName",
-      headerName: "Banks",
-      minWidth: 100,
-      flex: 1,
-    },
-    {
-      field: "addedBy",
-      headerName: "Added By",
-      minWidth: 100,
+      field: "status",
+      headerName: "Status",
+      renderCell: (params) => (
+        <Typography sx={{ color: statusObjColor[params.row.status] }}>
+          {statusObj[params.row.status]}
+        </Typography>
+      ),
+      minWidth: 200,
       flex: 1,
     },
     {
@@ -89,8 +99,6 @@ const ViewEmployees: React.FC = () => {
       flex: 1,
     },
   ];
-
-  
 
   const getEmployees = async () => {
     setLoading(true);
@@ -112,21 +120,21 @@ const ViewEmployees: React.FC = () => {
     getEmployees();
   }, [paginationModel?.page]);
 
+  
+
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
-      <Table
+      <TableServer
         columns={columns}
-        rows={rows}
+        rows={rows || []}
         title="All Employees"
         getRowId={(row: any) => row._id}
         rowCountState={rowCountState}
         paginationModel={paginationModel}
         setPaginationModel={setPaginationModel}
         loading={loading}
-        // customButtons={
-        //   <CustomButton label="delete" onClick={handleOpenDelete} />
-        // }
+        
       />
     </Box>
   );
@@ -135,7 +143,8 @@ const ViewEmployees: React.FC = () => {
 const More = (params: any) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const [openDelete, setOpenDelete] = useState(false);
+  // const [openDelete, setOpenDelete] = useState(false);
+  // const [openDeleteReq, setOpenDeleteReq] = useState(false);
 
   const open = Boolean(anchorEl);
   const handleClick = (event: any) => {
@@ -146,10 +155,11 @@ const More = (params: any) => {
     setAnchorEl(null);
   };
 
-  const handleDeleteOpen = () => {
-    setOpenDelete(true);
-  };
+  // const handleDeleteOpen = () => {
+  //   setOpenDelete(true);
+  // };
 
+  
   return (
     <>
       <MoreVert sx={{ cursor: "pointer" }} onClick={handleClick} />
@@ -190,8 +200,8 @@ const More = (params: any) => {
         >
           <MenuItem>Edit</MenuItem>
         </Link>
-        <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
-        {/* delete Request */}
+        {/* <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
+      
         <ConfirmDialog
           open={openDelete}
           title={"Confirmation"}
@@ -199,7 +209,7 @@ const More = (params: any) => {
           handleClose={() => setOpenDelete(false)}
         >
           <DeleteRequest setOpenDelete={setOpenDelete} />
-        </ConfirmDialog>
+        </ConfirmDialog> */}
       </Menu>
     </>
   );
