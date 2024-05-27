@@ -15,7 +15,30 @@ interface NotificationProps {
   children?: ReactNode;
 }
 
-const Notification: React.FC<NotificationProps> = ({ notifications}) => {
+const notifications = [
+  {
+    id: 1,
+    title: "Delete Request",
+    description: "Request to delete a user (employees)",
+  },
+  {
+    id: 2,
+    title: "Delete Request",
+    description: "Request to delete a user (employees)",
+  },
+  {
+    id: 3,
+    title: "Delete Request",
+    description: "Request to delete a user (employees)",
+  },
+  {
+    id: 4,
+    title: "Delete Request",
+    description: "Request to delete a user (employees)",
+  },
+];
+
+const Notification: React.FC<NotificationProps> = () => {
   
   return (
       <Box sx={{ display: "column", gap: 1, p:2 }}>

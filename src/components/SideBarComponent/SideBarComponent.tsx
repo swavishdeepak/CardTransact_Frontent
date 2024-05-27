@@ -60,6 +60,7 @@ const SideBarComponent: React.FC<SidebarListProps> = ({ items, isCollapsed, hand
                   }}
                 >
                   <item.icon
+                  
                     sx={{
                       color: location.pathname === item.link ? Colors.SibarItemcolor : "",
                     }}

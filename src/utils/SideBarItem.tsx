@@ -1,17 +1,33 @@
 import PersonIcon from "@mui/icons-material/Person";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import DeleteIcon from '@mui/icons-material/Delete';
+import ReportIcon from '@mui/icons-material/Report';
+import MessageIcon from '@mui/icons-material/Message';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import SupervisedUserCircleRoundedIcon from '@mui/icons-material/SupervisedUserCircleRounded';
+import {ReactComponent as AddEmpIcon} from "../assets/viewagent.svg"
+import {ReactComponent as ViewAgent} from "../assets/viewEmp.svg"
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import {ReactComponent as ViewApp} from "../assets/viewAppIcon.svg"
+import {ReactComponent as AddApp} from "../assets/addAppIcon.svg"
+import {ReactComponent as AppIcon} from "../assets/appicon.svg"
+
+
+
+
 
 
 export const SidebarUserItems = [
   {
     text: "Users",
-    icon: PersonIcon,
+    icon: AccountBoxIcon,
     link: "/users",
     subItems: [
-      { text: "View Employees", link: "/viewEmployee", icon: PersonIcon },
-      { text: "View Agents", link: "/viewAgents", icon: PersonIcon },
-      { text: "Add Employees", link: "/addEmployee", icon: PersonIcon },
-      { text: "Add Agents", link: "/addAgent", icon: PersonIcon },
+      { text: "View Employees", link: "/viewEmployee", icon: ViewAgent } ,
+      { text: "View Agents", link: "/viewAgents", icon: ViewAgent},
+      { text: "Add Employees", link: "/addEmployee", icon: AddEmpIcon},
+      { text: "Add Agents", link: "/addAgent", icon: AddEmpIcon} ,
     
     
     ],
@@ -21,14 +37,14 @@ export const SidebarUserItems = [
 export const ApplicationItems = [
   {
     text: "Applications",
-    icon: PersonIcon,
+    icon: AppIcon,
     link: "/applications",
     subItems: [
-      { text: "Add Application", link: "/addApplication", icon: PersonIcon },
+      { text: "Add Application", link: "/addApplication", icon: AddApp },
       {
         text: "View Applications",
         link: "/viewApplications",
-        icon: PersonIcon,
+        icon: ViewApp,
       },
     ],
   },
@@ -45,7 +61,7 @@ export const Dashboard = [
 export const MerchantItem = [
   {
     text: "Merchants",
-    icon: PersonIcon,
+    icon: SupervisedUserCircleRoundedIcon,
     link: "/merchants",
   },
 ];
@@ -88,7 +104,7 @@ export const Commission = [
 export const TransactionReport = [
   {
     text: "Transaction Report",
-    icon: PersonIcon,
+    icon: ReportIcon,
     link: "transactionReport",
     subItems: [
       {
@@ -108,7 +124,7 @@ export const TransactionReport = [
 export const Reports = [
   {
     text: "Reports",
-    icon: PersonIcon,
+    icon: ReportIcon,
     link: "/reports",
     subItems: [
       {
@@ -163,7 +179,7 @@ export const Reports = [
 export const Notification = [
   {
     text: "Notification",
-    icon: PersonIcon,
+    icon: NotificationsIcon,
     link: "/notification",
     subItems: [
       {
@@ -188,14 +204,14 @@ export const Notification = [
 export const Messages = [
   {
     text: "Messages",
-    icons: DashboardIcon,
+    icon: MessageIcon,
     link: "/messages",
   },
 ];
 export const DeleteData = [
   {
     text: "Delete Data",
-    icons: DashboardIcon,
+    icon: DeleteIcon,
     link: "/DeleteData",
   },
 ];

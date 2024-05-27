@@ -78,10 +78,10 @@ import Shape1 from "../../assets/Shape1.svg"
           <Grid item xs={12} md={3.5}>
             <Revenue />
           </Grid>
-          <Grid item xs={12} md={8} mt={2}>
+          <Grid item xs={12} md={8} >
             <TopPerformance />
           </Grid>
-          <Grid item xs={12} md={4} mt={2}>
+          <Grid item xs={12} md={4}>
             <MessageList />
           </Grid>
         </Grid>

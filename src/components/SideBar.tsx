@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import MainHeader from "./MainHeader";
 import { useLocation } from "react-router-dom";
 import dashboardIcon from "../assets/dashboardIcon.svg";
-import { SidebarUserItems } from "../utils/SideBarItem";
+import { Dashboard, DeleteData, MerchantItem, Messages, SidebarUserItems } from "../utils/SideBarItem";
 import { ApplicationItems } from "../utils/SideBarItem";
 import { Notification } from "../utils/SideBarItem";
 import { Commission } from "../utils/SideBarItem";
@@ -178,7 +178,7 @@ export default function SideBar() {
           <MainHeader showhide={open && isMobile ? false : true} />
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} >
         <DrawerHeader>
           <IconButton>
             {theme.direction === "rtl" ? (
@@ -215,12 +215,13 @@ export default function SideBar() {
         </DrawerHeader>
         {/* Dashboard */}
         <SideBarWithOutDropdown
+          items={Dashboard}
           sx={{ marginTop: "0.7rem" }}
-          to={"/dashboard"}
-          text="Dashboard"
+          // to={"/dashboard"}
+          // text="Dashboard"
           location={location}
           open={open}
-          pathMatch="/dashboard"
+          // pathMatch="/dashboard"
         />
         {/* User */}
         <SideBarComponent
@@ -240,11 +241,12 @@ export default function SideBar() {
         />
         {/* Merchant */}
         <SideBarWithOutDropdown
-          to={"/merchants"}
-          text="Merchants"
+          // to={"/merchants"}
+          // text="Merchants"
+          items={MerchantItem}
           location={location}
           open={open}
-          pathMatch="/merchants"
+          // pathMatch="/merchants"
         />
         {/* Commission */}
         <SideBarComponent
@@ -280,20 +282,23 @@ export default function SideBar() {
         />
         {/* Messages */}
         <SideBarWithOutDropdown
-          to={"/messages"}
-          text="Messages"
+          // to={"/messages"}
+          // text="Messages"
+          items={Messages}
           location={location}
           open={open}
-          pathMatch="/messages"
-          notificationShpow={true}
+          // pathMatch="/messages"
+          notificationShow={true}
         />
         {/* delete data */}
         <SideBarWithOutDropdown
-          to={"/deleteData"}
-          text="Delete Data"
+          // to={"/deleteData"}
+          // text="Delete Data"
+          items={DeleteData}
           location={location}
           open={open}
-          pathMatch="/deleteData"
+          // pathMatch="/deleteData"
+
         />
       </Drawer>
     </Box>

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
 import SideBar from "../components/SideBar";
-import { Header } from "../components/Dashboard/Header";
 import { useAppSelector } from "../redux/hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -50,8 +49,12 @@ export const MainLayout = () => {
           width: "75%",
           p: "3rem 1rem",
           display: "flex",
-          "@media(max-width: 600px)": {
-            p: "2.5rem  0.8rem",
+          "@media(max-width: 900px)": {
+             width: "66%",
+             "@media(max-width: 600px)":{
+              p: "2.5rem  0.8rem",
+             }
+
           },
         }}
       >

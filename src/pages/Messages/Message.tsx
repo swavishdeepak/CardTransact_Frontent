@@ -24,7 +24,7 @@ interface SelectedUser {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
-      <CustomBox style={{ padding: 0 }}>
+      <CustomBox style={{ padding: 0}}>
         <Box
           sx={{
             width: "100%",

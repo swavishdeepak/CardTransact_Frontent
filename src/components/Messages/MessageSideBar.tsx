@@ -6,9 +6,10 @@ import {
   Avatar,
   InputAdornment,
   IconButton,
+  Badge,
 } from "@mui/material";
 
-import messageImg from "../../assets/MessageImg.png"
+import messageImg from "../../assets/MessageImg.png";
 import SearchIcon from "@mui/icons-material/Search";
 import CustomTextInput from "../CustomInput";
 
@@ -193,7 +194,7 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
                   {v.messageHeader}
                 </Typography>
               </Stack>
-              <Box
+              {/* <Box
                 sx={{
                   width: 15,
                   height: 15,
@@ -209,7 +210,10 @@ const MeessageSideBar: React.FC<sideBarProps> = ({ style, onClick }) => {
                 >
                   0
                 </Typography>
-              </Box>
+              </Box> */}
+              <Badge color="error" badgeContent={1} showZero>
+                
+              </Badge>
             </Stack>
           );
         })}

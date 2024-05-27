@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Box, ListItem, Typography } from "@mui/material";
+import { Box, ListItem} from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CommonHeader } from "../../components/CommonHeader";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
@@ -12,12 +12,10 @@ import DetailsHeader from "../../components/MyCustom/DetailsHeader";
 import DetailsSubTitle from "../../components/MyCustom/DetailsSubTitle";
 import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
 import ConfirmDialog from "../../components/ConfirmDialog";
-import CloseIcon from "@mui/icons-material/Close";
-import CustomTextInput from "../../components/CustomInput";
-import { LoadButton } from "../../components/LoadButton";
-import CheckBox from "../../components/MyCustom/CheckBox";
 import { useAppSelector } from "../../redux/hooks";
 import { userTypes } from "../../utils/menuItems/MenuItems";
+import ChangePassword from "../../components/User/Profile/ChangePassword";
+import SendRequestPass from "../../components/User/Profile/SendRequestPass";
 
  const UserProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -28,20 +26,6 @@ import { userTypes } from "../../utils/menuItems/MenuItems";
     sendRequest: false,
   });
 
-  const [inputVisibility, setInputVisibility] = useState({
-    email: false,
-    mobile: false,
-  });
-
-  
-
-//   const handleDialogOpen = (dialog: string) => {
-//     setDialogOpen({ ...dialogOpen, [dialog]: true });
-//   };
-
-//   const handleDialogClose = (dialog: string) => {
-//     setDialogOpen({ ...dialogOpen, [dialog]: false });
-//   };
 
   const toggleModal=(key:'changePass'|'sendRequest')=>{
     setDialogOpen((prev)=>{
@@ -49,15 +33,6 @@ import { userTypes } from "../../utils/menuItems/MenuItems";
     });
   }
 
-  const handleCheckboxChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    type: string
-  ) => {
-    setInputVisibility({
-      ...inputVisibility,
-      [type]: event.target.checked,
-    });
-  };
 
   const handleImageClick = (event: any) => {
     if (inputRef.current) {
@@ -69,8 +44,6 @@ import { userTypes } from "../../utils/menuItems/MenuItems";
     const file = event.target.files[0];
     setImage(file);
   };
-
-  
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -217,133 +190,10 @@ import { userTypes } from "../../utils/menuItems/MenuItems";
         </CustomBox>
       </CustomBox>
       <ConfirmDialog open={dialogOpen.changePass}>
-        <Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography
-              sx={{
-                color: "rgba(0, 0, 0, 1)",
-                fontSize: "25px",
-                fontWeight: "700",
-                fontFamily: "serif",
-              }}
-            >
-              Change Password
-            </Typography>
-            <CloseIcon
-              onClick={() => toggleModal("changePass")}
-              sx={{ cursor: "pointer" }}
-            />
-          </Box>
-          <Typography
-            sx={{
-              color: "rgba(0, 0, 0, 1)",
-              fontSize: "14px",
-              fontWeight: "500",
-              marginTop: "1rem",
-              fontFamily: "enter",
-            }}
-          >
-            Kindly confirm Your Registered Email Address to Received An{" "}
-            <br></br>OTP For Verification
-          </Typography>
-          <CustomTextInput
-            labelStyle={{ marginTop: "2rem" }}
-            label="Registered Email Address"
-            placeholder="Email Address"
-          />
-          <LoadButton style={{ marginTop: "1.5rem", width: "100%" }}>
-            Confirm
-          </LoadButton>
-        </Box>
+        <ChangePassword toggleModal={toggleModal}/>
       </ConfirmDialog>
       <ConfirmDialog open={dialogOpen.sendRequest}>
-        <Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography
-              sx={{
-                color: "rgba(0, 0, 0, 1)",
-                fontSize: "25px",
-                fontWeight: "700",
-                fontFamily: "serif",
-              }}
-            >
-              Send Request
-            </Typography>
-            <CloseIcon
-              onClick={() => toggleModal("sendRequest")}
-              sx={{ cursor: "pointer" }}
-            />
-          </Box>
-          <Typography
-            sx={{
-              color: "rgba(0, 0, 0, 1)",
-              fontSize: "14px",
-              fontWeight: "500",
-              marginTop: "1rem",
-              fontFamily: "enter",
-            }}
-          >
-            To Change Your Email Address or Mobile number you have to <br></br>
-            Send a request to the Super Admin
-          </Typography>
-          <Box
-            sx={{ display: "flex", flexDirection: "column", marginTop: "1rem" }}
-          >
-            <CheckBox
-              label="Email Address"
-              labelStyle={{ fontSize: "0.8rem" }}
-              onChange={(event) => handleCheckboxChange(event, "email")}
-            />
-            <CheckBox
-              label="Mobile Number"
-              labelStyle={{ fontSize: "0.8rem" }}
-              onChange={(event) => handleCheckboxChange(event, "mobile")}
-            />
-          </Box>
-          {inputVisibility.email && (
-            <>
-              <CustomTextInput
-                labelStyle={{
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  marginTop: "1rem",
-                }}
-                label="Old Email Address"
-              />
-              <CustomTextInput
-                labelStyle={{
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  marginTop: "1rem",
-                }}
-                label="New Email Address"
-              />
-            </>
-          )}
-          {inputVisibility.mobile && (
-            <>
-              <CustomTextInput
-                labelStyle={{
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  marginTop: "1rem",
-                }}
-                label="Old Mobile Number"
-              />
-              <CustomTextInput
-                labelStyle={{
-                  fontSize: "12px",
-                  fontWeight: "600",
-                  marginTop: "1rem",
-                }}
-                label="New Mobile Number"
-              />
-            </>
-          )}
-          <LoadButton style={{ marginTop: "1.5rem", width: "100%" }}>
-            Confirm
-          </LoadButton>
-        </Box>
+        <SendRequestPass toggleModal={toggleModal}/>
       </ConfirmDialog>
     </Box>
   );
