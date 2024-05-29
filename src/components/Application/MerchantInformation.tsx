@@ -15,7 +15,9 @@ import CustomButton from "../CustomButton";
 import { LoadButton } from "../LoadButton";
 import { addApplication } from "../../pages/Applications/apiFunc/appApiFunc";
 import { useQueryClient } from "react-query";
+import CustomText from "../CustomText";
 
+type ImgFileKey = 'drivingLicense' | 'passport' | 'nationalId' | 'homeUtilityBillPic' | 'homeBusinessRatePic' | 'homeLeaseAgreementPic'
 
 const selectIDProof = [
   { value: "driving_license", label: "Driving License" },
@@ -54,14 +56,30 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
       countryCode: '+91',
       phoneNumber: '',
       email: '',
+      homeAdd1: '',
+      homeAdd2: '',
+      homeCity: '',
+      homeCounty: '',
+      homeCountry: '',
+      homePostalCode: '',
       drivingLicense: [],
       passport: [],
-      nationalId: []
+      nationalId: [],
+      homeUtilityBillPic: [],
+      homeBusinessRatePic: [],
+      homeLeaseAgreementPic: [],
     },
     onSubmit: async (values) => {
       setIsLoading(true);
       try {
-        const { drivingLicense, passport, nationalId, ...merchantInfo } = values;
+        const {
+          drivingLicense,
+          passport,
+          nationalId,
+          homeUtilityBillPic,
+          homeBusinessRatePic,
+          homeLeaseAgreementPic,
+          ...merchantInfo } = values;
 
         let formData = new FormData();
         formData.append('data', JSON.stringify({ merchantInfo }));
@@ -71,9 +89,17 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
         !!passport && passport.length > 0 && passport.forEach((el) => {
           formData.append('passport', el)
         })
-        !!drivingLicense && drivingLicense.length > 0 && drivingLicense.forEach((el) => {
-          formData.append('drivingLicense', el)
+        //
+        !!homeUtilityBillPic && homeUtilityBillPic.length > 0 && homeUtilityBillPic.forEach((el) => {
+          formData.append('homeUtilityBillPic', el)
         })
+        !!homeBusinessRatePic && homeBusinessRatePic.length > 0 && homeBusinessRatePic.forEach((el) => {
+          formData.append('homeBusinessRatePic', el)
+        })
+        !!homeLeaseAgreementPic && homeLeaseAgreementPic.length > 0 && homeLeaseAgreementPic.forEach((el) => {
+          formData.append('homeLeaseAgreementPic', el)
+        })
+
         let a = await addApplication({
           data: formData,
           id: appId,
@@ -104,7 +130,13 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
         tradingName: merchantInfo?.tradingName,
         countryCode: merchantInfo?.countryCode,
         phoneNumber: merchantInfo?.phoneNumber,
-        email: merchantInfo?.email
+        email: merchantInfo?.email,
+        homeAdd1: merchantInfo?.homeAdd1,
+        homeAdd2: merchantInfo?.homeAdd2,
+        homeCity: merchantInfo?.homeCity,
+        homeCounty: merchantInfo?.homeCounty,
+        homeCountry: merchantInfo?.homeCountry,
+        homePostalCode: merchantInfo?.homePostalCode
       });
 
       let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
@@ -123,15 +155,14 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
       return false;
     }
   }
-  console.log('isDisable2', isDisable)
-  const onImageChange = (e, key: 'drivingLicense' | 'passport' | 'nationalId') => {
+
+  const onImageChange = (e, key: ImgFileKey) => {
     let objImg = e.target.files;
-    console.log('e', e)
     let temp = Object.values(objImg);
     setFieldValue(key, temp)
   }
 
-
+  console.log('values', values)
   return (
     <Box
       sx={
@@ -235,7 +266,7 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
 
         </Grid> */}
         <Grid item xs={12} md={10}>
-             <Typography sx={{fontSize: "15px", color: "#000000", fontWeight: "600"}}>ID Proof</Typography>
+          <Typography sx={{ fontSize: "15px", color: "#000000", fontWeight: "600" }}>ID Proof</Typography>
         </Grid>
         <Grid item xs={12} md={10}>
           <CustomFileInput
@@ -258,6 +289,111 @@ export const MerchantInformation: React.FC<MerchantInformationProps> = ({
             disabled={fieldDisable('passport')}
           />
         </Grid>
+        {/* home address */}
+        <Grid item xs={12} md={8}>
+          <CustomText
+            text="Home Address"
+            style={{
+              borderBottom: '1px solid',
+              display: "inline-block"
+            }}
+          />
+        </Grid>
+        <Grid
+          container
+          rowSpacing={4}
+          columnSpacing={2}
+          mt={disableStyles ? "none" : 2}
+        >
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"House No./Flat No."}
+              placeholder="Enter House No./Flat No."
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.homeAdd1}
+              name="homeAdd1"
+              disabled={fieldDisable('homeAdd1')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"Street Name/Building Name"}
+              placeholder="Enter Street Name/Building Name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.homeAdd2}
+              name="homeAdd2"
+              disabled={fieldDisable('homeAdd2')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"City"}
+              placeholder="Enter City"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.homeCity}
+              name="homeCity"
+              disabled={fieldDisable('homeCity')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"County"}
+              placeholder="Enter Country"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.homeCounty}
+              name="homeCounty"
+              disabled={fieldDisable('homeCounty')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"Country"}
+              placeholder="Enter Country"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.homeCountry}
+              name="homeCountry"
+              disabled={fieldDisable('homeCountry')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"Postal Code"}
+              placeholder="Enter Postal Code"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.homePostalCode}
+              name="homePostalCode"
+              disabled={fieldDisable('homePostalCode')}
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} md={10}>
+          <CustomFileInput
+            label="Home Utility Bill Pic"
+            onChange={(e) => onImageChange(e, 'homeUtilityBillPic')}
+            disabled={fieldDisable('homeUtilityBillPic')}
+          />
+        </Grid>
+        <Grid item xs={12} md={10}>
+          <CustomFileInput
+            label="Home Business Rate Pic"
+            onChange={(e) => onImageChange(e, 'homeBusinessRatePic')}
+            disabled={fieldDisable('homeBusinessRatePic')}
+          />
+        </Grid>
+        <Grid item xs={12} md={10}>
+          <CustomFileInput
+            label="Home Lease Agreement Pic"
+            onChange={(e) => onImageChange(e, 'homeLeaseAgreementPic')}
+            disabled={fieldDisable('homeLeaseAgreementPic')}
+          />
+        </Grid>
+        {/* home address end */}
         <Grid item xs={12} md={8}>
           <LoadButton
             onClick={handleSubmit}

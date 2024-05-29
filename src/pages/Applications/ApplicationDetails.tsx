@@ -384,28 +384,28 @@ const ApplicationDetails = () => {
               <DetailsSubTitleName name={models?.options?.duration ?? "NA"} />
             </Grid>
             <Grid item xs={3}>
-              <DetailsSubTitle title={"Revenue %"} />
+              <DetailsSubTitle title={"Revenue Share %"} />
             </Grid>
             <Grid item xs={9}>
               <DetailsSubTitleName name={models?.options?.revenuePerc ?? "NA"} />
             </Grid>
 
             <Grid item xs={3}>
-              <DetailsSubTitle title={"1st 12 Months"} />
+              <DetailsSubTitle title={"1st 12 Months Rental"} />
             </Grid>
             <Grid item xs={9}>
               <DetailsSubTitleName name={models?.options?.yearly ?? "NA"} />
             </Grid>
 
             <Grid item xs={3}>
-              <DetailsSubTitle title={"6 Months"} />
+              <DetailsSubTitle title={"6 Months Rental"} />
             </Grid>
             <Grid item xs={9}>
               <DetailsSubTitleName name={models?.options?.halfYearly ?? "NA"} />
             </Grid>
 
             <Grid item xs={3}>
-              <DetailsSubTitle title={"Cancelled Before 6 Months"} />
+              <DetailsSubTitle title={"Cancelled Before 6 Months (Claw back)"} />
             </Grid>
             <Grid item xs={9}>
               <DetailsSubTitleName name={models?.options?.cancelledBefore6 ?? "NA"} />
