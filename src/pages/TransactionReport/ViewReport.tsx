@@ -31,24 +31,24 @@ interface Row {
   turnover: string;
 }
 
- const ViewReport = () => {
+const ViewReport = () => {
   const columns: Column[] = [
     {
       field: "processing_Date",
-      headerName: "Processing_date",
+      headerName: "Processing Date",
       minWidth: 150,
       flex: 1,
     },
     {
       field: "transaction_Date",
-      headerName: "Transaction_Date",
+      headerName: "Transaction Date",
       minWidth: 150,
       flex: 1,
     },
     {
       field: "outletName",
-      headerName: "OutletName",
-      minWidth: 100,
+      headerName: "Outlet Name",
+      minWidth: 150,
       flex: 1,
     },
     {
@@ -66,7 +66,7 @@ interface Row {
     {
       field: "transaction",
       headerName: "Transaction",
-      minWidth: 100,
+      minWidth: 150,
       flex: 1,
     },
     {
@@ -155,33 +155,37 @@ interface Row {
             </Grid>
           </Grid>
         </CustomBox>
-        <CustomBox style={{
-          border: `1px solid ${Colors.LinkColor}`
-        }}>
-        <Table
-          columns={columns}
-          rows={rows}
-          includesPagination={false}
-          includeSearch={false}
-           title="Preview"
-        />
-        </CustomBox>
-        <Box sx={{display: "flex", marginTop: "2rem", gap: 2}}>
-          <LoadButton 
-          hoverColor={Colors.deletebtnColor}
+        <CustomBox
           style={{
-            background: Colors.deletebtnColor
-          }}>
+            border: `1px solid ${Colors.LinkColor}`,
+          }}
+        >
+          <Table
+            columns={columns}
+            rows={rows}
+            includesPagination={false}
+            includeSearch={false}
+            title="Preview"
+          />
+        </CustomBox>
+        <Box sx={{ display: "flex", marginTop: "2rem", gap: 2 }}>
+          <LoadButton
+            hoverColor={Colors.deletebtnColor}
+            style={{
+              background: Colors.deletebtnColor,
+              width: "20%"
+            }}
+          >
             Cancel
           </LoadButton>
-          <LoadButton 
-          hoverColor={Colors.successColor}
-          style={{
-            background: Colors.successColor,
-           
-          
-          }}>
-           Confirm
+          <LoadButton
+            hoverColor={Colors.successColor}
+            style={{
+              background: Colors.successColor,
+              width: "20%"
+            }}
+          >
+            Confirm
           </LoadButton>
         </Box>
       </CustomBox>

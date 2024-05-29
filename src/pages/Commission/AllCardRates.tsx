@@ -128,7 +128,7 @@ interface Row {
   ];
 
   const handleRedirect = ()=>{
-    navigate("/commission/addCommissionStructure")
+    navigate("/allCardRates/AddCardRateStructure")
   }
 
 

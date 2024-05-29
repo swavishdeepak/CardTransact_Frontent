@@ -257,12 +257,22 @@ export default function SideBar() {
           open={open}
         />
         {/* Transaction Reports */}
-        <SideBarComponent
+        {/* <SideBarComponent
           items={TransactionReport}
           isCollapsed={collapseState.isCollapseTransactionReport}
           handleCollapse={() => handleCollapse("isCollapseTransactionReport")}
           location={location}
           open={open}
+        />
+         */}
+          <SideBarWithOutDropdown
+          // to={"/deleteData"}
+          // text="Delete Data"
+          items={TransactionReport}
+          location={location}
+          open={open}
+          // pathMatch="/deleteData"
+
         />
         {/* Reports */}
         <SideBarComponent

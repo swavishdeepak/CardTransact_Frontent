@@ -52,8 +52,7 @@ import DetailsSubTitleName from "../../components/MyCustom/DetailsSubTitleName";
           </Grid>
         </CustomBox>
         <Preview />
-        <Preview/>
-        <Preview/>
+       
       </CustomBox>
     </Box>
   );

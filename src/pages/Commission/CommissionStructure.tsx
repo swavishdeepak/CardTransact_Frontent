@@ -142,7 +142,7 @@ interface Row {
   ];
 
   const handleRedirect = () => {
-    navigate("/commission/addCommissionStructure");
+    navigate("/commissionStructure/addCommissionStructure");
   };
 
   return (

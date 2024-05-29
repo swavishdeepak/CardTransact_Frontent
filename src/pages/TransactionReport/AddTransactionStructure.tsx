@@ -11,12 +11,12 @@ import CustomButton from "../../components/CustomButton";
 import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
 import { Grid } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
-import { Preview } from "../../components/Commission/Preview";
+import { Preview } from "../../components/TransactionReport/Preview";
 import { useNavigate } from "react-router-dom";
 
 
 
- const AddCommissionStructure = () => {
+ const AddTransactionStructure = () => {
   const navigate = useNavigate();
   const [selectedAquire, setSelectedAquire] = useState("");
   const [selectedTier, setSelectedTier] = useState("");
@@ -38,7 +38,7 @@ import { useNavigate } from "react-router-dom";
   };
 
   const handleConfirm = () => {
-    navigate("/commissionStructure/addCommissionStructure/viewCommission");
+    navigate("/transactionReport/addTransactionReport/viewReport");
   };
 
   const aquirer = [
@@ -56,7 +56,7 @@ import { useNavigate } from "react-router-dom";
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
       <CustomBox>
-        <CommonHeader header="Add Commission Structure" />
+        <CommonHeader header="Add Transaction Structure" />
         <CustomBox
           style={{
             border: `1px solid ${Colors.LinkColor}`,
@@ -81,24 +81,7 @@ import { useNavigate } from "react-router-dom";
                 items={aquirer}
               />
             </Grid>
-            <Grid item xs={12} md={5}>
-              <BasicSelect
-                label="Select Tier"
-                sx={{
-                  border: "1px solid #898989",
-                  height: "2rem",
-                  padding: 2,
-                  width: "100%",
-                }}
-                placeholder="Select Aquirer"
-                name={"selectedValue"}
-                value={selectedTier}
-                handleChange={handleChangeTire}
-                size="small"
-                items={tier}
-              />
-            </Grid>
-            <Grid item xs={12} md={7}>
+            <Grid item xs={12} md={10}>
               <CustomFileInput
                 label="Upload File"
                 labelStyle={{ marginTop: "1.2rem" }}
@@ -118,8 +101,8 @@ import { useNavigate } from "react-router-dom";
                 height: "2.4rem",
                 fontSize: "15px",
                 fontWeight: "700",
-                border: "1px solid #77D177",
-                color: "#77D177",
+                border: "0.94px solid rgba(224, 224, 224, 1)",
+                color: "rgba(224, 224, 224, 1)",
               }}
             />
           </Box>
@@ -141,8 +124,6 @@ import { useNavigate } from "react-router-dom";
               Preview
             </Typography>
             <Preview />
-            {/* <Preview />
-            <Preview /> */}
             <Box sx={{ display: "flex", gap: 1, marginTop: "1.5rem" }}>
               <CustomButton
                 label="Cancel"
@@ -178,4 +159,4 @@ import { useNavigate } from "react-router-dom";
   );
 };
 
-export default AddCommissionStructure;
+export default AddTransactionStructure;

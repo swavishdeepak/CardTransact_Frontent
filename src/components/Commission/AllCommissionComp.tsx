@@ -56,13 +56,13 @@ export const AllCommissionComp: React.FC = () => {
     {
       field: "Acquirer",
       headerName: "Acquirer",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
     {
       field: "Total_Earning",
       headerName: "Total_Earning",
-      minWidth: 20,
+      minWidth: 150,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>
@@ -74,7 +74,7 @@ export const AllCommissionComp: React.FC = () => {
     {
       field: "Residual",
       headerName: "Residual",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>
@@ -86,7 +86,7 @@ export const AllCommissionComp: React.FC = () => {
     {
       field: "One_Time",
       headerName: "One_Time",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>

@@ -27,7 +27,9 @@ const Apis = {
   addApplication: `${baseURL}/application`,
   getAppDetailById: `${baseURL}/getApplicationById`,
   allApplications: `${baseURL}/application`,
-  reviewAppById: `${baseURL}/reviewAppById`
+  reviewAppById: `${baseURL}/reviewAppById`,
+  ProfileImgUpload: `${baseURL}/profilePicture`,
+  EmpProfileImgUpload: `${baseURL}/emp/profilePicture`
 };
 
 export default Apis;

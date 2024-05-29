@@ -87,10 +87,12 @@ type UserTypes = {
   sup_admin?: string;
   sub_admin?: string;
   admin?: string;
+  agent?: string;
 };
 
 export const userTypes: UserTypes = {
   sup_admin: "Sup Admin",
   sub_admin: "Sub Admin",
   admin: "Admin",
+  agent: "Agent"
 };

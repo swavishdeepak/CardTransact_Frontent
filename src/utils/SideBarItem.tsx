@@ -12,6 +12,11 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import {ReactComponent as ViewApp} from "../assets/viewAppIcon.svg"
 import {ReactComponent as AddApp} from "../assets/addAppIcon.svg"
 import {ReactComponent as AppIcon} from "../assets/appicon.svg"
+import {ReactComponent as CommissionIcons} from "../assets/comissionIcons.svg"
+import {ReactComponent as CommStructureIcons} from "../assets/commiStructureIcons.svg"
+
+import PreviewIcon from '@mui/icons-material/Preview';
+import CardMembershipIcon from '@mui/icons-material/CardMembership';
 
 
 
@@ -69,32 +74,32 @@ export const MerchantItem = [
 export const Commission = [
   {
     text: "Commission",
-    icon: PersonIcon,
+    icon: CommissionIcons,
     link: "/commission",
     subItems: [
       {
         text: "All Commission",
-        icon: PersonIcon,
+        icon: CommissionIcons,
         link: "/allCommission",
       },
       {
         text: "Commission Structure",
-        icon: PersonIcon,
+        icon: CommStructureIcons,
         link: "/commissionStructure",
       },
       {
         text: "View Structure",
-        icon: PersonIcon,
+        icon: PreviewIcon,
         link: "/viewStructure",
       },
       {
         text: "All Card rates",
-        icon: PersonIcon,
+        icon: CardMembershipIcon,
         link: "/allCardRates",
       },
       {
         text: "View Card Rates",
-        icon: PersonIcon,
+        icon: PreviewIcon,
         link: "/viewCardRates",
       },
     ],
@@ -105,21 +110,30 @@ export const TransactionReport = [
   {
     text: "Transaction Report",
     icon: ReportIcon,
-    link: "transactionReport",
-    subItems: [
-      {
-        text: "Transaction Report",
-        link: "/transactionReport",
-        icon: DashboardIcon,
-      },
-      {
-        text: "View Report",
-        link: "/viewReport",
-        icon: DashboardIcon,
-      },
-    ],
+    link: "/transactionReport",
+   
   },
 ];
+
+// export const TransactionReport = [
+//   {
+//     text: "Transaction Report",
+//     icon: ReportIcon,
+//     link: "transactionReport",
+//     subItems: [
+//       {
+//         text: "Transaction Report",
+//         link: "/transactionReport",
+//         icon: DashboardIcon,
+//       },
+//       {
+//         text: "View Report",
+//         link: "/viewReport",
+//         icon: DashboardIcon,
+//       },
+//     ],
+//   },
+// ];
 
 export const Reports = [
   {

@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Box, ListItem} from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import { Box, CircularProgress, ListItem, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import { CommonHeader } from "../../components/CommonHeader";
 import { CustomBox } from "../../components/MyCustom/CustomBox";
@@ -16,23 +16,25 @@ import { useAppSelector } from "../../redux/hooks";
 import { userTypes } from "../../utils/menuItems/MenuItems";
 import ChangePassword from "../../components/User/Profile/ChangePassword";
 import SendRequestPass from "../../components/User/Profile/SendRequestPass";
+import { uploadImageToCloudinary } from "../../components/User/Profile/UploadProfileImg";
 
- const UserProfile = () => {
+const UserProfile = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const {verifiedUser} = useAppSelector((state) => state.verifiedUser);
-  const [image, setImage] = useState();
+  const { verifiedUser } = useAppSelector((state) => state.verifiedUser);
+  const [profilePicture, setProfilePicture] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState({
     changePass: false,
     sendRequest: false,
   });
+  let userId = verifiedUser?.data?._id;
+  let userRole = verifiedUser?.data?.role;
 
-
-  const toggleModal=(key:'changePass'|'sendRequest')=>{
-    setDialogOpen((prev)=>{
-        return {...prev,[key]:!prev[key]}
+  const toggleModal = (key: "changePass" | "sendRequest") => {
+    setDialogOpen((prev) => {
+      return { ...prev, [key]: !prev[key] };
     });
-  }
-
+  };
 
   const handleImageClick = (event: any) => {
     if (inputRef.current) {
@@ -40,10 +42,23 @@ import SendRequestPass from "../../components/User/Profile/SendRequestPass";
     }
   };
 
-  const handleImageChange = (event: any) => {
+  const handleImageChange = async (event: any) => {
     const file = event.target.files[0];
-    setImage(file);
+    if (file) {
+      try {
+        setLoading(true);
+        const imageUrl = await uploadImageToCloudinary(file, userId, userRole);
+        setProfilePicture(imageUrl?.data?.profilePicture);
+        // localStorage.setItem("profileImage", imageUrl?.data?.profilePicture);
+        localStorage.setItem("info", JSON.stringify(imageUrl));
+      } catch (error) {
+        console.error("Failed to upload image to Cloudinary", error);
+      }
+      setLoading(false);
+    }
   };
+
+  
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -81,32 +96,39 @@ import SendRequestPass from "../../components/User/Profile/SendRequestPass";
             justifyContent: { xs: "center", md: "flex-start" },
           }}
         >
-          {image ? (
-            <Avatar
-              alt="img"
-              src={URL.createObjectURL(image)}
-              sx={{
-                width: { xs: 40, md: 56 },
-                height: { xs: 40, md: 56 },
-                backgroundColor: "black",
-                position: "relative",
-              }}
-            />
+          {loading ? (
+            <CircularProgress/>
           ) : (
-            <Avatar
-              alt="img"
-              src=""
-              sx={{
-                width: { xs: 40, md: 56 },
-                height: { xs: 40, md: 56 },
-                backgroundColor: "black",
-                position: "relative",
-              }}
-            />
+            <>
+              {" "}
+              {verifiedUser ? (
+                <Avatar
+                  alt="img"
+                  // src={URL.createObjectURL(image)}
+                  src={profilePicture || verifiedUser?.data?.profilePicture}
+                  sx={{
+                    width: { xs: 40, md: 56 },
+                    height: { xs: 40, md: 56 },
+                    backgroundColor: "black",
+                    position: "relative",
+                  }}
+                />
+              ) : (
+                <Avatar
+                  alt="img"
+                  src=""
+                  sx={{
+                    width: { xs: 40, md: 56 },
+                    height: { xs: 40, md: 56 },
+                    backgroundColor: "black",
+                    position: "relative",
+                  }}
+                />
+              )}
+            </>
           )}
-
           <Box
-          onClick={handleImageClick}
+            onClick={handleImageClick}
             sx={{
               width: 25,
               height: 25,
@@ -122,7 +144,12 @@ import SendRequestPass from "../../components/User/Profile/SendRequestPass";
               fontSize="small"
               sx={{ color: "#fff", cursor: "pointer" }}
             />
-            <input type="file" ref={inputRef} onChange={handleImageChange}   style={{display: "none"}}/>
+            <input
+              type="file"
+              ref={inputRef}
+              onChange={handleImageChange}
+              style={{ display: "none" }}
+            />
           </Box>
         </ListItem>
         <CustomBox style={{ border: `1px solid ${Colors.LinkColor}` }}>
@@ -145,7 +172,11 @@ import SendRequestPass from "../../components/User/Profile/SendRequestPass";
               <DetailsSubTitle title={"Role"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={userTypes[verifiedUser?.data?.role as keyof typeof userTypes]} />
+              <DetailsSubTitleName
+                name={
+                  userTypes[verifiedUser?.data?.role as keyof typeof userTypes]
+                }
+              />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Mobile Number"} />
@@ -166,39 +197,45 @@ import SendRequestPass from "../../components/User/Profile/SendRequestPass";
               <DetailsSubTitle title={"Bank Name"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"loyod"} />
+              <DetailsSubTitleName
+                name={verifiedUser?.data?.bankInfo?.bankName || "NA"}
+              />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Name on Bank A/C"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"Agent01"} />
+              <DetailsSubTitleName
+                name={verifiedUser?.data?.bankInfo?.nameOnBankAcc || "NA"}
+              />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Sort Code"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"01-02-2023"} />
+              <DetailsSubTitleName
+                name={verifiedUser?.data?.bankInfo?.sortCode || "NA"}
+              />
             </Grid>
             <Grid item xs={3}>
               <DetailsSubTitle title={"Acount Number"} />
             </Grid>
             <Grid item xs={9}>
-              <DetailsSubTitleName name={"12345678"} />
+              <DetailsSubTitleName
+                name={verifiedUser?.data?.bankInfo?.AccNumb || "NA"}
+              />
             </Grid>
           </Grid>
         </CustomBox>
       </CustomBox>
       <ConfirmDialog open={dialogOpen.changePass}>
-        <ChangePassword toggleModal={toggleModal}/>
+        <ChangePassword toggleModal={toggleModal} />
       </ConfirmDialog>
       <ConfirmDialog open={dialogOpen.sendRequest}>
-        <SendRequestPass toggleModal={toggleModal}/>
+        <SendRequestPass toggleModal={toggleModal} />
       </ConfirmDialog>
     </Box>
   );
 };
 
 export default UserProfile;
-
-

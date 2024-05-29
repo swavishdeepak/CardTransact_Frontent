@@ -12,7 +12,7 @@ import { AllCommissionComp } from "../../components/Commission/AllCommissionComp
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
-     <AllCommissionComp/>
+      <AllCommissionComp/>
     </Box>
   );
 };

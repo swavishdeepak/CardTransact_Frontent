@@ -32,7 +32,7 @@ export const LoadButton: FC<LoadButtonProps> = ({ children, loading,hoverColor, 
         ...style
       }}
     >
-      {loading ? <CircularProgress/> : children}
+      {loading ? <CircularProgress size={25}/> : children}
     </Button>
   );
 };

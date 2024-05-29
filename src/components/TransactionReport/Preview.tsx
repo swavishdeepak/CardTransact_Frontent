@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import { PreviewRowItem } from "./PreviewRowItem";
-import { Commission } from "../../utils/SideBarItem";
+
 
 
 const data1 = [
@@ -32,8 +32,8 @@ const data1 = [
 ];
 
 interface PreviewProps {}
-
 export const Preview: React.FC<PreviewProps> = () => {
+  
   return (
     <Box
       sx={{

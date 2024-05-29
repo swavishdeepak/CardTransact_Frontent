@@ -6,21 +6,16 @@ import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
 
 interface rowItemProps {
   key?: number;
-  sr: string;
-  date: string;
-  rental: string;
-  model: string;
-  duration: string;
-  commission: string;
+  GBPTurnOver: string;
+  debitCard: string;
+  creditCard: string;
+  
 }
 
-export const PreviewRowItem: React.FC<rowItemProps> = ({
-  sr,
-  date,
-  rental,
-  model,
-  duration,
-  commission,
+export const CardPreviewRowItem: React.FC<rowItemProps> = ({
+  GBPTurnOver,
+  debitCard,
+  creditCard,
   key,
 }) => {
   return (
@@ -34,15 +29,17 @@ export const PreviewRowItem: React.FC<rowItemProps> = ({
         width: "100%",
       }}
     >
-      <Box
-        sx={{
-          width: "20%",
-          color: "rgba(58, 58, 58, 1) important",
-          fontSize: "13px important",
-          fontWeight: "300 important",
-        }}
-      >
-        {sr}
+      <Box sx={{ display: "flex", alignItems: "center", width: "20%" }}>
+        <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
+        <Typography
+          sx={{
+            color: "rgba(58, 58, 58, 1) important",
+            fontSize: "13px important",
+            fontWeight: "300 important",
+          }}
+        >
+           {GBPTurnOver}
+        </Typography>
       </Box>
       <Box
         sx={{
@@ -52,7 +49,7 @@ export const PreviewRowItem: React.FC<rowItemProps> = ({
           fontWeight: "300 important",
         }}
       >
-        {date}
+        {debitCard}
       </Box>
       <Box sx={{ display: "flex", alignItems: "center", width: "15%" }}>
         <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
@@ -63,41 +60,11 @@ export const PreviewRowItem: React.FC<rowItemProps> = ({
             fontWeight: "300 important",
           }}
         >
-          {rental}
+          {creditCard}
         </Typography>
       </Box>
-      <Box
-        sx={{
-          width: "15%",
-          color: "rgba(58, 58, 58, 1) important",
-          fontSize: "13px important",
-          fontWeight: "300 important",
-        }}
-      >
-        {model}{" "}
-      </Box>
-      <Box
-        sx={{
-          width: "15%",
-          color: "rgba(58, 58, 58, 1) important",
-          fontSize: "13px important",
-          fontWeight: "300 important",
-        }}
-      >
-        {duration}{" "}
-      </Box>
-      <Box sx={{ display: "flex", alignItems: "center", width: "15%" }}>
-        <CurrencyPoundIcon sx={{ width: "13px", height: "13px" }} />
-        <Typography
-          sx={{
-            color: "rgba(58, 58, 58, 1) important",
-            fontSize: "13px important",
-            fontWeight: "300 important",
-          }}
-        >
-          {commission}
-        </Typography>
-      </Box>
+    
+      
     </Box>
   );
 };

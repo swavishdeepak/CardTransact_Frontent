@@ -31,7 +31,7 @@ interface Row {
     {
       field: "id",
       headerName: "Sr.No",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
     {
@@ -57,7 +57,7 @@ interface Row {
     {
       field: "model",
       headerName: "Model",
-      minWidth: 50,
+      minWidth: 100,
       flex: 1,
     },
     {
@@ -69,7 +69,7 @@ interface Row {
     {
       field: "commission",
       headerName: "Commission",
-      minWidth: 100,
+      minWidth: 150,
       flex: 1,
       renderCell: () => (
         <Typography sx={{ display: "flex", alignItems: "center" }}>

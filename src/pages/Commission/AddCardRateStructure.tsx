@@ -8,18 +8,16 @@ import BasicSelect from "../../components/BasicSelect";
 import CustomFileInput from "../../components/CustomFileInput";
 import { LoadButton } from "../../components/LoadButton";
 import CustomButton from "../../components/CustomButton";
-import CurrencyPoundIcon from "@mui/icons-material/CurrencyPound";
 import { Grid } from "@mui/material";
-// import { makeStyles } from "@mui/styles";
 import { Preview } from "../../components/Commission/Preview";
 import { useNavigate } from "react-router-dom";
+import { CardRatePreview } from "../../components/Commission/CardRatePreview";
 
 
 
- const AddCommissionStructure = () => {
+ const AddCardRateStructure = () => {
   const navigate = useNavigate();
   const [selectedAquire, setSelectedAquire] = useState("");
-  const [selectedTier, setSelectedTier] = useState("");
   const [openPreview, setOpenPreview] = useState(false);
 
   const handleOpenPreview = () => {
@@ -33,12 +31,10 @@ import { useNavigate } from "react-router-dom";
   const handleChange = (event: any) => {
     setSelectedAquire(event.target.value);
   };
-  const handleChangeTire = (event: any) => {
-    setSelectedTier(event.target.value);
-  };
+  
 
   const handleConfirm = () => {
-    navigate("/commissionStructure/addCommissionStructure/viewCommission");
+    //navigate("");
   };
 
   const aquirer = [
@@ -47,11 +43,7 @@ import { useNavigate } from "react-router-dom";
     { value: "aquirer2", label: "aquirer2" },
   ];
 
-  const tier = [
-    { value: "tier1", label: "tier" },
-    { value: "tier2", label: "tier2" },
-    { value: "tier3", label: "tier3" },
-  ];
+  
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
@@ -81,24 +73,7 @@ import { useNavigate } from "react-router-dom";
                 items={aquirer}
               />
             </Grid>
-            <Grid item xs={12} md={5}>
-              <BasicSelect
-                label="Select Tier"
-                sx={{
-                  border: "1px solid #898989",
-                  height: "2rem",
-                  padding: 2,
-                  width: "100%",
-                }}
-                placeholder="Select Aquirer"
-                name={"selectedValue"}
-                value={selectedTier}
-                handleChange={handleChangeTire}
-                size="small"
-                items={tier}
-              />
-            </Grid>
-            <Grid item xs={12} md={7}>
+            <Grid item xs={12} md={10}>
               <CustomFileInput
                 label="Upload File"
                 labelStyle={{ marginTop: "1.2rem" }}
@@ -140,9 +115,7 @@ import { useNavigate } from "react-router-dom";
             >
               Preview
             </Typography>
-            <Preview />
-            {/* <Preview />
-            <Preview /> */}
+            <CardRatePreview />
             <Box sx={{ display: "flex", gap: 1, marginTop: "1.5rem" }}>
               <CustomButton
                 label="Cancel"
@@ -178,4 +151,4 @@ import { useNavigate } from "react-router-dom";
   );
 };
 
-export default AddCommissionStructure;
+export default AddCardRateStructure;

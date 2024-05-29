@@ -7,6 +7,8 @@ import { Box } from "@mui/material";
 import { RouterProvider, createBrowserRouter, useRouteError } from "react-router-dom";
 import Loadable from "./components/Loadable";
 import { MainLayout } from "./layouts/MainLayout";
+import AddTransactionStructure from "./pages/TransactionReport/AddTransactionStructure";
+
 
 /* auth */
 const Login = Loadable(lazy(() => import("./pages/Auth/Login")));
@@ -56,6 +58,8 @@ const CommissionStructure = Loadable(lazy(() => import("./pages/Commission/Commi
 const ViewStructure = Loadable(lazy(() => import("./pages/Commission/ViewStructure")));
 const CommissionDetails = Loadable(lazy(() => import("./pages/Commission/CommissionDetails")));
 const AddCommissionStructure = Loadable(lazy(() => import("./pages/Commission/AddCommissionStructure")));
+
+const AddCardRateStructure = Loadable(lazy(() => import("./pages/Commission/AddCardRateStructure")));
 const ViewCommissionStructure = Loadable(lazy(() => import("./pages/Commission/ViewCommissionStructure")));
 const AllCardRates = Loadable(lazy(() => import("./pages/Commission/AllCardRates")));
 const ViewCardRates = Loadable(lazy(() => import("./pages/Commission/ViewCardRates")));
@@ -162,11 +166,11 @@ function App() {
         },
         /*Commission SideBar List************************/
         {
-          path: "/commission/addCommissionStructure",
+          path: "/commissionStructure/addCommissionStructure",
           element: <AddCommissionStructure />,
         },
         {
-          path: "/commission/addCommissionStructure/viewCommission",
+          path: "/commissionStructure/addCommissionStructure/viewCommission",
           element: <ViewCommissionStructure />,
         },
         {
@@ -176,6 +180,10 @@ function App() {
         {
           path: "/allCardRates",
           element: <AllCardRates />,
+        },
+        {
+          path: "/allCardRates/AddCardRateStructure",
+          element: <AddCardRateStructure/>
         },
         {
           path: "/commissionStructure",
@@ -199,7 +207,12 @@ function App() {
           element: <TransactionReport />,
         },
         {
-          path: "/viewReport",
+          path: "/transactionReport/addTransactionReport",
+          element: <AddTransactionStructure/>
+
+        },
+        {
+          path: "/transactionReport/addTransactionReport/viewReport",
           element: <ViewReport />,
         },
         /*Reports SideBar List************************/
