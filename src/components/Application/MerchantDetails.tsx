@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { LoadButton } from "../LoadButton";
 import { addApplication } from "../../pages/Applications/apiFunc/appApiFunc";
 import { useQueryClient } from "react-query";
+import CustomText from "../CustomText";
 
 interface MerchantDetailsProps {
   disableStyles?: boolean;
@@ -26,7 +27,11 @@ type keyImg = 'outDoorPremisesPic' |
   'homeDrivingLicensePic' |
   'homeBankStatement' |
   'homeBankLetter' |
-  'alternativeDoc'
+  'alternativeDoc' |
+  'regUtilityBillPic' |
+  'regBusinessRatePic' |
+  'regLeaseAgreementPic'
+
 export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
   disableStyles = false,
   appId,
@@ -52,6 +57,16 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
       country: '',
       postalCode: '',
       remark: '',
+      //register addressFields
+      regAdd1: '',
+      regAdd2: '',
+      regCity: '',
+      regCounty: '',
+      regCountry: '',
+      regPostalCode: '',
+      regUtilityBillPic: [],
+      regBusinessRatePic: [],
+      regLeaseAgreementPic: [],
       //files
       outDoorPremisesPic: [],
       inDoorPremisesPic: [],
@@ -77,6 +92,9 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         homeBankStatement,
         homeBankLetter,
         alternativeDoc,
+        regUtilityBillPic,
+        regBusinessRatePic,
+        regLeaseAgreementPic,
         ...merchantTradingAdd
       } = values;
       try {
@@ -120,6 +138,16 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         alternativeDoc?.length > 0 && alternativeDoc?.forEach((el) => {
           formData.append('alternativeDoc', el)
         });
+        //
+        regUtilityBillPic?.length > 0 && regUtilityBillPic?.forEach((el) => {
+          formData.append('regUtilityBillPic', el)
+        });
+        regBusinessRatePic?.length > 0 && regBusinessRatePic?.forEach((el) => {
+          formData.append('regBusinessRatePic', el)
+        });
+        regLeaseAgreementPic?.length > 0 && regLeaseAgreementPic?.forEach((el) => {
+          formData.append('regLeaseAgreementPic', el)
+        });
 
         let a = await addApplication({
           data: formData,
@@ -127,7 +155,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
           step: '3'
         })
         // refetch();
-        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
+        await queryClient.setQueryData(['useGetAppDetailById', appId], (x: any) => {
           let temp = { ...x, ...a.data }
           return temp
         })
@@ -152,6 +180,12 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         country: merchantTradingAdd?.country,
         postalCode: merchantTradingAdd?.postalCode,
         remark: merchantTradingAdd?.remark,
+        regAdd1: merchantTradingAdd?.regAdd1,
+        regAdd2: merchantTradingAdd?.regAdd2,
+        regCity: merchantTradingAdd?.regCity,
+        regCounty: merchantTradingAdd?.regCounty,
+        regCountry: merchantTradingAdd?.regCountry,
+        regPostalCode: merchantTradingAdd?.regPostalCode,
       })
       let tempEdit = JSON.parse(appDetail?.reviewFields || '{}')
       setIsDisable(tempEdit)
@@ -175,7 +209,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
       return false;
     }
   }
-  console.log('fieldDisable', fieldDisable('address1'))
+  console.log('values', values)
   return (
     <Box
       sx={
@@ -198,7 +232,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </CommonHeader>
       )}
       <Grid container rowSpacing={4} columnSpacing={2} mt={disableStyles ? "none" : 2}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomTextInput
             label={"House No./Flat No."}
             placeholder="Enter House No./Flat No"
@@ -209,7 +243,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             disabled={fieldDisable('address1')}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomTextInput
             label={"Street Name/Building Name"}
             placeholder="Enter Street Name/Building Name"
@@ -222,7 +256,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
       </Grid>
       <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"City"}
             placeholder="Enter Your City"
@@ -233,7 +267,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             disabled={fieldDisable('city')}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"County"}
             placeholder="Enter Your County"
@@ -246,7 +280,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
       </Grid>
       <Grid container rowSpacing={4} columnSpacing={2} mt={1}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Country"}
             placeholder="Enter Your Country"
@@ -257,7 +291,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             disabled={fieldDisable('country')}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={5}>
           <CustomTextInput
             label={"Post Code"}
             placeholder="Enter Your Post Code"
@@ -270,7 +304,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
         </Grid>
         {/* files */}
         <>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Premises(Outdoors)"
               placeholder="Upload Any Utility Document"
@@ -278,7 +312,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('outDoorPremisesPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Premises(Indoors)"
               placeholder="Upload Any Utility Document"
@@ -286,7 +320,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('inDoorPremisesPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of "
               placeholder="Upload Picture of Business Rate Pic"
@@ -294,7 +328,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('utilityBillPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Business Rate Pic"
               placeholder="Upload Picture of Business Rate Pic"
@@ -302,7 +336,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('businessRatePic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Lease Agreement Pic "
               placeholder="Upload Picture of Lease Agreement Pic"
@@ -310,7 +344,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('leaseAgreementPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Home Driving License Pic"
               placeholder="Upload Picture of Home Driving License Pic"
@@ -318,7 +352,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeUtilityBillPic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Home Driving License Pic"
               placeholder="Upload Picture of Home Driving License Pic"
@@ -326,7 +360,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeDrivingLicensePic')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of  Home Bank Statement"
               placeholder="Upload Picture of home Bank Statement"
@@ -334,7 +368,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeBankStatement')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Home Bank Letter"
               placeholder="Upload Picture of Home Bank Letter"
@@ -342,7 +376,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
               disabled={fieldDisable('homeBankLetter')}
             />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={10}>
             <CustomFileInput
               label="Upload Picture of Alternative Doc"
               placeholder="Upload Picture of Alternative Doc"
@@ -351,7 +385,7 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             />
           </Grid>
         </>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={10}>
           <CustomTextInput
             label={"Remarks"}
             placeholder="Remarks"
@@ -362,6 +396,112 @@ export const MerchantDetails: React.FC<MerchantDetailsProps> = ({
             disabled={fieldDisable('remark')}
           />
         </Grid>
+        {/* registered address */}
+        <Grid item xs={12} md={8}>
+          <CustomText
+            text="Registered Address"
+            style={{
+              borderBottom: '1px solid',
+              display: "inline-block"
+            }}
+          />
+        </Grid>
+        <Grid
+          container
+          rowSpacing={4}
+          columnSpacing={2}
+          mt={disableStyles ? "none" : 2}
+        >
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"Registered House No./Flat No."}
+              placeholder="Enter House No./Flat No."
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.regAdd1}
+              name="regAdd1"
+              disabled={fieldDisable('regAdd1')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={" Registered Street Name/Building Name"}
+              placeholder="Enter Street Name/Building Name"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.regAdd2}
+              name="regAdd2"
+              disabled={fieldDisable('regAdd2')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"City"}
+              placeholder="Enter City"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.regCity}
+              name="regCity"
+              disabled={fieldDisable('regCity')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"County"}
+              placeholder="Enter County"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.regCounty}
+              name="regCounty"
+              disabled={fieldDisable('regCounty')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"Country"}
+              placeholder="Enter Country"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.regCountry}
+              name="regCountry"
+              disabled={fieldDisable('regCountry')}
+            />
+          </Grid>
+          <Grid item xs={12} md={5}>
+            <CustomTextInput
+              label={"Postal Code"}
+              placeholder="Enter Postal Code"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.regPostalCode}
+              name="regPostalCode"
+              disabled={fieldDisable('regPostalCode')}
+            />
+          </Grid>
+        </Grid>
+        <Grid item xs={12} md={10}>
+          <CustomFileInput
+            label="Home Utility Bill Pic"
+            onChange={(e) => onImageChange(e, 'regUtilityBillPic')}
+            disabled={fieldDisable('regUtilityBillPic')}
+          />
+        </Grid>
+        <Grid item xs={12} md={10}>
+          <CustomFileInput
+            label="Home Business Rate Pic"
+            onChange={(e) => onImageChange(e, 'regBusinessRatePic')}
+            disabled={fieldDisable('regBusinessRatePic')}
+          />
+        </Grid>
+        <Grid item xs={12} md={10}>
+          <CustomFileInput
+            label="Home Lease Agreement Pic"
+            onChange={(e) => onImageChange(e, 'regLeaseAgreementPic')}
+            disabled={fieldDisable('regLeaseAgreementPic')}
+          />
+        </Grid>
+
+        {/*  */}
 
         <Grid item xs={12} md={8}>
           <LoadButton

@@ -54,7 +54,7 @@ const SelectAquirer: React.FC<SelectAquirerProps> = ({
         });
         setAppId(a?.data?._id);
         navigate(".", { state: a?.data })
-        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
+        await queryClient.setQueryData(['useGetAppDetailById', appId], (x: any) => {
           let temp = { ...x, ...a?.data }
           return temp
         })

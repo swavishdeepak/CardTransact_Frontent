@@ -59,14 +59,14 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
           step: '4'
         })
         console.log('addApplication@', a)
-        await queryClient.setQueryData(['acquirer', appId], (x: any) => {
+        await queryClient.setQueryData(['useGetAppDetailById', appId], (x: any) => {
           let temp = { ...x, ...a.data }
           return temp
         });
-        queryClient.invalidateQueries({
-          queryKey: ['application'],
-        });
-        navigate("/viewApplications")
+        // queryClient.invalidateQueries({
+        //   queryKey: ['application'],
+        // });
+        // navigate("/viewApplications")
       }
 
       catch (err) {
@@ -205,7 +205,7 @@ export const BankInformation: React.FC<BankInformationProps> = ({ disableStyles 
             }}
             loading={isLoading}
           >
-            Submit
+            Save
           </LoadButton>
         </Grid>
       </Grid>
