@@ -48,7 +48,7 @@ const EmployeesDetails = () => {
     navigate(`/addEmployee?id=${id}`);
   };
 
-  console.log("empUpdateData",empUpdateData)
+  console.log("empUpdateData", empUpdateData);
 
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
@@ -60,7 +60,9 @@ const EmployeesDetails = () => {
             statusColor={empStatusColorObj[data?.editStatus]}
             header={"Updating Employee Details"}
           >
-            <ConfirmEmpUpdate id={id} />
+            {verifiedUser?.data?.role === "sup_admin" && (
+              <ConfirmEmpUpdate id={id} />
+            )}
           </CommonHeader>
           <EmpDetails employee={empUpdateData} />
         </CustomBox>
@@ -72,10 +74,48 @@ const EmployeesDetails = () => {
           header={"EMPLOYEE DETAILS"}
         >
           <Box sx={{ display: "flex", gap: 1 }}>
-            {data?.status !== "new" ? (
+            {data?.status ? (
+              verifiedUser?.data?.role === "sup_admin" ? (
+                data?.status !== "new" ? (
+                  <>
+                    <CustomButton
+                      label={"Delete"}
+                      onClick={handleDeleteOpen}
+                      hoverColor={linkColor}
+                      style={{
+                        backgroundColor: `${linkColor}`,
+                        color: "#fff",
+                      }}
+                    />
+                    <CustomButton
+                      label={"Edit"}
+                      style={{
+                        backgroundColor: "#fff",
+                        color: `${linkColor}`,
+                        border: `1px solid ${linkColor}`,
+                      }}
+                      onClick={handleEdit}
+                    />
+                  </>
+                ) : (
+                  <ApprvRejtEmp id={id} refetch={refetch} />
+                )
+              ) : data?.status !== "new" ? (
+                <CustomButton
+                  label={"Edit Request"}
+                  style={{
+                    backgroundColor: "#fff",
+                    color: `${linkColor}`,
+                    border: `1px solid ${linkColor}`,
+                  }}
+                  onClick={handleEdit}
+                />
+              ) : null
+            ) : null}
+            {/* {data?.status !== "new" ? (
               <>
                 {verifiedUser?.data?.role !== "sup_admin" &&
-                  !verifiedUser?.data?.isDeleteReq  && (
+                  !verifiedUser?.data?.isDeleteReq && (
                     <CustomButton
                       label={"Delete Request"}
                       hoverColor={linkColor}
@@ -109,11 +149,11 @@ const EmployeesDetails = () => {
               </>
             ) : (
               <ApprvRejtEmp id={id} refetch={refetch} />
-            )}
+            )} */}
           </Box>
         </CommonHeader>
         <EmpDetails employee={data} />
-        <EmpRemarkUpdateDetails/>
+        <EmpRemarkUpdateDetails />
       </CustomBox>
       <ConfirmDialog
         open={openDelete}

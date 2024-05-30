@@ -142,6 +142,16 @@ const UserDetails = ({ user, tierObj = {} }: { user?: any; tierObj?: any }) => {
             </Grid>
           </>
         )}
+        {user?.address?.county && (
+          <>
+            <Grid item xs={2}>
+              <DetailsSubTitle title={"County"} />
+            </Grid>
+            <Grid item xs={10}>
+              <DetailsSubTitleName name={user?.address?.county} />
+            </Grid>
+          </>
+        )}
 
         {/* <Grid item xs={2}>
           <DetailsSubTitle title={"County"} />

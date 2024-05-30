@@ -50,10 +50,6 @@ export const agentAppRejById = ({ id, status }) => {
     status,
   });
 
-  
-
-
-
   // try {
   //   const { data } = await API_AXIOS.get(
   //     `${Apis.addAgentReqApproveRejectById}/${id}`
@@ -65,10 +61,12 @@ export const agentAppRejById = ({ id, status }) => {
   // }
 };
 
+export const agentMoveToRecycleById = (id) => {
+  return API_AXIOS.post(`${Apis.agentMoveToRecycleById}/${id}`);
+};
+
 export const employeeAppRejById = ({ id, status }) => {
   return API_AXIOS.post(`${Apis.addEmpReqApproveRejectById}/${id}`, {
     status,
   });
-
-}
-
+};

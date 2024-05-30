@@ -243,8 +243,7 @@ const More = (params: any) => {
         >
           <MenuItem>Edit</MenuItem>
         </Link>
-        <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
-        {/* delete Request */}
+        {/* <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
         <ConfirmDialog
           open={openDelete}
           title={"Confirmation"}
@@ -252,7 +251,7 @@ const More = (params: any) => {
           handleClose={() => setOpenDelete(false)}
         >
           <DeleteRequest setOpenDelete={setOpenDelete} />
-        </ConfirmDialog>
+        </ConfirmDialog> */}
       </Menu>
     </>
   );

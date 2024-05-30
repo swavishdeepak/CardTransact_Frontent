@@ -16,6 +16,7 @@ import { API_AXIOS } from "../../http/interceptor";
 import Apis from "../../utils/apis";
 import ConfirmUpdate from "../../components/User/ConfirmUpdate";
 import {
+  agentMoveToRecycleById,
   confirmUpdate,
   deleteAgentById,
   deleteAgentRequestById,
@@ -65,11 +66,23 @@ const AgentDetails = () => {
     try {
       const { data } = await deleteAgentById(id);
       remove();
-      toast.success(data?.message)
+      toast.success(data?.message);
       navigate("/viewAgents");
     } catch (err) {
       console.log(err);
       toast.error(err.reponse?.data?.message);
+    }
+  };
+
+  const handleMoveRecycle = async () => {
+    try {
+      const { data } = await agentMoveToRecycleById(id);
+      refetch();
+      toast.success(data?.message);
+      navigate("/viewAgents");
+    } catch (err) {
+      console.log("handleRecycle", err);
+      toast.error(err.response?.data?.message);
     }
   };
 
@@ -83,7 +96,7 @@ const AgentDetails = () => {
             statusColor={userStatusColorObj[data?.editStatus]}
             header={"Updating Details"}
           >
-            <ConfirmUpdate id={id} />
+            {auth?.role === "sup_admin" && <ConfirmUpdate id={id} />}
           </CommonHeader>
           <UserDetails user={updatingData} tierObj={tierObj} />
         </CustomBox>
@@ -94,43 +107,57 @@ const AgentDetails = () => {
           statusColor={userStatusColorObj[data?.status]}
           header={"AGENT DETAILS"}
         >
-          {data?.status !== "new" ? (
-            <Box sx={{ display: "flex", gap: 1 }}>
-              {auth?.role === "sup_admin" ? (
-                <CustomButton
-                  onClick={handleDeleteOpen}
-                  label={"Delete"}
-                  hoverColor={`${Colors.LinkColor}`}
-                  style={{
-                    backgroundColor: `${Colors.LinkColor}`,
-                    color: "#fff",
-                  }}
-                />
-              ) : !data?.isDeleteReq ? (
-                <CustomButton
-                  onClick={() => setOpenDeleteReq((state) => !state)}
-                  label={"Delete Request"}
-                  hoverColor={`${Colors.LinkColor}`}
-                  style={{
-                    backgroundColor: `${Colors.LinkColor}`,
-                    color: "#fff",
-                  }}
-                />
-              ) : null}
+          {data?.status ? (
+            data?.status !== "new" ? (
+              <Box sx={{ display: "flex", gap: 1 }}>
+                {auth?.role === "sup_admin" ? (
+                  <>
+                    {/* <CustomButton
+                      onClick={handleMoveRecycle}
+                      label={"Move To Trash"}
+                      hoverColor={`${Colors.LinkColor}`}
+                      style={{
+                        backgroundColor: `${Colors.LinkColor}`,
+                        color: "#fff",
+                      }}
+                    /> */}
+                    <CustomButton
+                      onClick={handleDeleteOpen}
+                      label={"Delete"}
+                      hoverColor={`${Colors.LinkColor}`}
+                      style={{
+                        backgroundColor: `${Colors.LinkColor}`,
+                        color: "#fff",
+                      }}
+                    />
+                  </>
+                ) : !data?.isDeleteReq ? (
+                  <CustomButton
+                    onClick={() => setOpenDeleteReq((state) => !state)}
+                    label={"Delete Request"}
+                    hoverColor={`${Colors.LinkColor}`}
+                    style={{
+                      backgroundColor: `${Colors.LinkColor}`,
+                      color: "#fff",
+                    }}
+                  />
+                ) : null}
 
-              <CustomButton
-                label={"Edit"}
-                style={{
-                  backgroundColor: "#fff",
-                  color: `${Colors.LinkColor}`,
-                  border: `1px solid ${Colors.LinkColor}`,
-                }}
-                onClick={handelEdit}
-              />
-            </Box>
-          ) : (
-            <ApprvRejtAgent id={id} refetch={refetch} />
-          )}
+                <CustomButton
+                  label={"Edit"}
+                  style={{
+                    backgroundColor: "#fff",
+                    color: `${Colors.LinkColor}`,
+                    border: `1px solid ${Colors.LinkColor}`,
+                  }}
+                  onClick={handelEdit}
+                />
+              </Box>
+            ) : auth?.role === "sup_admin" ? (
+              <ApprvRejtAgent id={id} refetch={refetch} />
+            ) : null
+          ) : null}
+          {}
         </CommonHeader>
         <UserDetails user={data} tierObj={tierObj} />
 

@@ -37,91 +37,95 @@ const AddAgents = () => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   // const [agent, setAgent] = useState({});
-  const { values, handleChange, handleSubmit, setValues, initialValues } =
-    useFormik({
-      initialValues: {
-        name: "",
-        phoneNumber: "",
-        email: "",
-        salesType: "company",
-        tier: "",
-        companyName: "",
-        manager: "",
-        address: {
-          address1: "",
-          address2: "",
-          city: "",
-          county: "",
-          country: "",
-          postalCode: "",
-        },
-        bankInfo: {
-          bankName: "",
-          nameOnBankAcc: "",
-          sortCode: "",
-          AccNumb: "",
-        },
+  const [disableCompany, setDisableComplany] = useState(false);
+  const {
+    values,
+    handleChange,
+    handleSubmit,
+    setValues,
+    setFieldValue,
+    initialValues,
+  } = useFormik({
+    initialValues: {
+      name: "",
+      phoneNumber: "",
+      email: "",
+      salesType: "company",
+      tier: "",
+      companyName: "",
+      manager: "",
+      address: {
+        address1: "",
+        address2: "",
+        city: "",
+        county: "",
+        country: "",
+        postalCode: "",
       },
-      onSubmit: async (values) => {
-        setLoading(true);
+      bankInfo: {
+        bankName: "",
+        nameOnBankAcc: "",
+        sortCode: "",
+        AccNumb: "",
+      },
+    },
+    onSubmit: async (values) => {
+      setLoading(true);
 
-        try {
-          if (id) {
-            const changedValues = getFilteredObject(user, values);
-            // console.log(changedValues)
-            // const changedValues = {};
+      try {
+        if (id) {
+          const changedValues = getFilteredObject(user, values);
+          // console.log(changedValues)
+          // const changedValues = {};
 
-            // // Recursive function to traverse nested objects
-            // function compareObjects(initial, current, path = "") {
-            //   for (const key in initial) {
-            //     if (
-            //       initial.hasOwnProperty(key) &&
-            //       current.hasOwnProperty(key)
-            //     ) {
-            //       const newPath = path ? `${path}.${key}` : key;
-            //       if (
-            //         typeof initial[key] === "object" &&
-            //         initial[key] !== null
-            //       ) {
-            //         compareObjects(initial[key], current[key], newPath);
-            //       } else {
-            //         if (initial[key] !== current[key]) {
-            //           changedValues[newPath] = current[key];
-            //         }
-            //       }
-            //     }
-            //   }
-            // }
+          // // Recursive function to traverse nested objects
+          // function compareObjects(initial, current, path = "") {
+          //   for (const key in initial) {
+          //     if (
+          //       initial.hasOwnProperty(key) &&
+          //       current.hasOwnProperty(key)
+          //     ) {
+          //       const newPath = path ? `${path}.${key}` : key;
+          //       if (
+          //         typeof initial[key] === "object" &&
+          //         initial[key] !== null
+          //       ) {
+          //         compareObjects(initial[key], current[key], newPath);
+          //       } else {
+          //         if (initial[key] !== current[key]) {
+          //           changedValues[newPath] = current[key];
+          //         }
+          //       }
+          //     }
+          //   }
+          // }
 
-            // compareObjects(user, values);
-            // const formattedValues = formatChangedValues(changedValues);
+          // compareObjects(user, values);
+          // const formattedValues = formatChangedValues(changedValues);
 
-            const formData = new FormData();
+          const formData = new FormData();
 
-            formData.append("data", JSON.stringify(changedValues));
-            const { data } = await API_AXIOS_MULTIPART.post(
-              `${Apis.editRequestAgentById}/${id}`,
-              formData
-            );
-            toast.success(data?.message)
-          } else {
-            const formData = new FormData();
+          formData.append("data", JSON.stringify(changedValues));
+          const { data } = await API_AXIOS_MULTIPART.post(
+            `${Apis.editRequestAgentById}/${id}`,
+            formData
+          );
+          toast.success(data?.message);
+        } else {
+          const formData = new FormData();
 
-            formData.append("data", JSON.stringify(values));
-            const { data } = await API_AXIOS_MULTIPART.post(
-              Apis.agent,
-              formData
-            );
-          }
-          refetch();
-          navigate("/viewAgents");
-        } catch (err) {
-          toast.error(err.response?.data?.message);
-          console.log(err);
+          formData.append("data", JSON.stringify(values));
+          const { data } = await API_AXIOS_MULTIPART.post(Apis.agent, formData);
         }
-        setLoading(false);
-      },
-    });
+        refetch();
+        navigate("/viewAgents");
+      } catch (err) {
+        toast.error(err.response?.data?.message);
+        console.log(err);
+      }
+      setLoading(false);
+    },
+  });
 
   const getAgent = async () => {
     try {
@@ -236,7 +240,15 @@ const AddAgents = () => {
                 <CustomRadio
                   label={"Is SalesPerson From a Company or Individual"}
                   value={values.salesType}
-                  handleChange={handleChange}
+                  handleChange={(e) => {
+                    if (e.target.value === "individual") {
+                      setDisableComplany(true);
+                      setFieldValue("companyName", "");
+                    } else {
+                      setDisableComplany(false);
+                    }
+                    handleChange(e);
+                  }}
                   name="salesType"
                   options={[
                     { value: "company", label: "Company" },
@@ -247,6 +259,7 @@ const AddAgents = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <CustomTextInput
+                disabled={disableCompany}
                 value={values.companyName}
                 onChange={handleChange}
                 name="companyName"
