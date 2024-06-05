@@ -35,8 +35,9 @@ export const getAppDetailById = (id) => {
     });
 };
 
-export const getApplications = () => {
-  return API_AXIOS.get(`${Apis.allApplications}`)
+export const getApplications = (page = 0) => {
+  console.log('pageJaved', page)
+  return API_AXIOS.get(`${Apis.allApplications}?page=${page}`)
     .then((res) => {
       return res.data.data;
     })

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Menu, MenuItem, Typography } from "@mui/material";
 import { Header } from "../../components/Dashboard/Header";
 import Table from "../../components/Table";
@@ -117,15 +117,17 @@ const ViewApplication: React.FC = () => {
       flex: 1,
     },
   ];
-
-  const navigate = useNavigate();
-  const { data, isLoading } = useGetApplications();
-  //
+  //for page
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 10,
   });
-  const [rowCountState, setRowCountState] = useState(0);
+
+  //
+  const navigate = useNavigate();
+  const { data, isFetching } = useGetApplications(paginationModel?.page + 1);
+  //
+
   //
   const handleOpenDelete = () => {
     setOpenDelete(true);
@@ -143,50 +145,17 @@ const ViewApplication: React.FC = () => {
   return (
     <Box sx={{ marginTop: "2rem", width: "100%" }}>
       <Header />
-      {/* <Table
-        columns={columns}
-        rows={data}
-        title="All Applications"
-        getRowId={(row: any) => row._id}
-      /> */}
+
       <TableServer
         columns={columns}
-        rows={data}
+        rows={data?.data}
         title="All Applications"
         getRowId={(row: any) => row._id}
-        rowCountState={rowCountState}
+        rowCountState={data?.pagination?.totalItem}
         paginationModel={paginationModel}
         setPaginationModel={setPaginationModel}
-        loading={isLoading}
+        loading={isFetching}
       />
-
-      {/* <div
-        style={{ display: "flex", gap: 10, marginBottom: 10 }}
-      >
-        <p style={{ width: 30 }}>SN.</p>
-        <p style={{ width: 100 }}>salesPerson</p>
-        <p style={{ width: 100 }}>Acquirer</p>
-        <p style={{ width: 100 }}>Trading name</p>
-        <p style={{ width: 100 }}>Status</p>
-        <button>Edit</button>
-        <button>View</button>
-        <button>delete</button>
-      </div>
-      {data?.map((el, i) => {
-        return <div
-          style={{ display: "flex", gap: 10, marginBottom: 10 }}
-          key={el?._id}
-        >
-          <p style={{ width: 30 }}>{++i}.</p>
-          <p style={{ width: 100 }}>{el?.salesPerson?.name ?? '--'}</p>
-          <p style={{ width: 100 }}>{el?.acquirer?.name ?? '--'}</p>
-          <p style={{ width: 100 }}>{el?.merchantInfo?.tradingName ?? '--'}</p>
-          <p style={{ width: 100 }}>{el?.status ?? '--'}</p>
-          <button onClick={() => navToEdit(el)}>Edit</button>
-          <button onClick={() => navToDetail(el)}>View</button>
-          <button>delete</button>
-        </div>
-      })} */}
     </Box>
   );
 };

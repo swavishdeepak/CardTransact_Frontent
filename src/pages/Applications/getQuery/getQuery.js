@@ -76,10 +76,12 @@ export const useGetAppDetailById = (id) => {
     });
 };
 // getApplications
-export const useGetApplications = () => {
+export const useGetApplications = (page) => {
     return useQuery({
-        queryKey: ['application'],
-        queryFn: getApplications,
-        staleTime: 1000 * 60 * 60
+        queryKey: ['application', page],
+        queryFn: () => getApplications(page),
+        staleTime: 1000 * 60 * 60,
+        // enabled: !!page,
+        keepPreviousData: true
     });
 };

@@ -1,6 +1,7 @@
- //export let baseURL = process.env.REACT_APP_BASE_URL;
- let baseURL = `http://10.5.50.119:8000/api/`;
-// let baseURL = `http://192.168.0.108:8000/api/`;
+//export let baseURL = process.env.REACT_APP_BASE_URL;
+//  let baseURL = `http://10.5.50.119:8000/api`;
+// let baseURL = `http://192.168.0.108:8000/api`;
+let baseURL = `http://localhost:8000/api`
 
 const Apis = {
   baseURL,
@@ -15,7 +16,7 @@ const Apis = {
   editRequestAgentById: baseURL + "/editRequestAgentById",
   editAgentReqApproveRejectById: baseURL + "/editAgentReqApproveRejectById",
   deleteAgentById: `${baseURL}/deleteAgentById`,
-  deleteAgentRequestById: `${baseURL}/deleteAgentRequestById` ,
+  deleteAgentRequestById: `${baseURL}/deleteAgentRequestById`,
   getEmpDetailsById: `${baseURL}/emp/getEmpById`,
   deleteEmpReq: `${baseURL}/emp/deleteEmpRequestById`,
   deleteEmpById: `${baseURL}/emp/deleteEmpById`,
